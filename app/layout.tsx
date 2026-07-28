@@ -26,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "souvenirs partagés",
       "questions de couple",
       "jeux pour couple à distance",
+      "mode spicy couple privé",
     ],
     authors: [{ name: "Nearly" }],
     creator: "Nearly",

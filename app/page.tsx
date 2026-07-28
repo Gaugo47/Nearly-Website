@@ -47,6 +47,11 @@ const faqs = [
       "Non. L’espace est privé. La localisation est optionnelle et le partage en direct ne démarre que lorsque vous l’activez. Les recommandations n’utilisent jamais vos messages, photos ou notes privées.",
   },
   {
+    question: "Comment fonctionne le mode Spicy de Nearly ?",
+    answer:
+      "Réservé aux adultes, le mode Spicy ouvre un espace complice uniquement après une activation consentie. Le coffre privé est protégé par un code secret et son déverrouillage est temporaire. Chacun garde toujours le droit de passer.",
+  },
+  {
     question: "Nearly est-elle disponible sur iPhone et Android ?",
     answer:
       "Nearly est conçue pour iOS et Android. Les liens de téléchargement seront ajoutés ici dès l’ouverture officielle des fiches App Store et Google Play.",
@@ -74,6 +79,7 @@ const structuredData = {
         "Carte de souvenirs",
         "Idées personnalisées",
         "Compagnon virtuel partagé",
+        "Mode Spicy privé, consenti et protégé par code",
       ],
       offers: {
         "@type": "Offer",
@@ -112,6 +118,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#experience">L’expérience</a>
           <a href="#pour-qui">Pour qui ?</a>
+          <a href="#spicy">Mode Spicy</a>
           <a href="#confidentialite">Confidentialité</a>
         </div>
         <a className="nav-cta" href="#telecharger">
@@ -241,6 +248,33 @@ export default function Home() {
             <p>Des nouvelles douces, des souvenirs communs et des rendez-vous qui rapprochent toutes les générations.</p>
             <span className="audience-tag">Rassurant · vivant</span>
           </article>
+        </div>
+      </section>
+
+      <section className="spicy" id="spicy">
+        <div className="spicy-copy">
+          <p className="eyebrow eyebrow--spicy"><span /> Mode Spicy · 18+</p>
+          <h2>Votre intimité.<br /><em>Vos règles.</em></h2>
+          <p className="spicy-intro">
+            Un terrain de jeu complice, suggestif et toujours consenti. Nearly
+            vous laisse explorer à votre rythme, dans un espace séparé du reste
+            de l’application.
+          </p>
+          <div className="spicy-principles">
+            <div><span>01</span><strong>Consentement partagé</strong><p>Le mode ne s’active que lorsque chacun est d’accord.</p></div>
+            <div><span>02</span><strong>Coffre sous code secret</strong><p>Les contenus privés restent verrouillés et l’accès expire automatiquement.</p></div>
+            <div><span>03</span><strong>Le droit de passer</strong><p>Aucune pression : vos envies et vos limites restent prioritaires.</p></div>
+          </div>
+        </div>
+        <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
+          <div className="spicy-glow" />
+          <div className="spicy-phone spicy-phone--vault">
+            <img src="/media/app-spicy-vault.png" alt="Coffre privé du mode Spicy protégé par code secret" loading="lazy" />
+          </div>
+          <div className="spicy-phone spicy-phone--home">
+            <img src="/media/app-spicy-home.png" alt="Accueil consenti du mode Spicy de Nearly" loading="lazy" />
+          </div>
+          <span className="spicy-chip">✓ Privé · consenti · temporaire</span>
         </div>
       </section>
 

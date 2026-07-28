@@ -23,6 +23,7 @@ Nearly aide les couples, les meilleurs amis et les familles à entretenir leur l
 - Mini-jeux, défis et Party Lab pour les groupes d’amis.
 - Idées personnalisées selon le type de lien et les centres d’intérêt choisis.
 - Compagnon commun qui progresse grâce aux interactions humaines, sans punition ni culpabilisation.
+- Mode Spicy réservé aux adultes : activation consentie, droit de passer et coffre privé protégé par code secret temporaire.
 - Modes visuels et éditoriaux adaptés aux couples, amis et familles.
 
 ## Vie privée
