@@ -282,9 +282,8 @@ export default function Home() {
             <figcaption>Party Lab</figcaption>
           </figure>
           <figure className="party-device party-device--photos">
-            <div className="party-screen party-photo-screen">
-              <img className="party-screen-image" src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
-              <img className="party-selfie" src="/media/party-selfie.webp" alt="" aria-hidden="true" loading="lazy" />
+            <div className="party-screen">
+              <img src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
             </div>
             <figcaption>Photos de soirée</figcaption>
           </figure>

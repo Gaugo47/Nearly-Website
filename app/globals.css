@@ -342,7 +342,7 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
   background: #040616;
   box-shadow: 0 45px 95px rgba(0, 0, 0, .48);
 }
-.party-screen > img:not(.party-selfie) { width: 100%; height: 100%; border-radius: 37px; object-fit: cover; object-position: top; }
+.party-screen > img { width: 100%; height: 100%; border-radius: 37px; object-fit: cover; object-position: top; }
 .party-device figcaption {
   width: max-content;
   margin: 16px auto 0;
@@ -361,17 +361,6 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
 .party-device--photos { z-index: 3; width: 294px; transform: translate(-50%, -52%); }
 .party-device--photos .party-screen { height: 655px; }
 .party-device--expenses { z-index: 2; transform: translate(18%, -45%) rotate(8deg); opacity: .86; }
-.party-selfie {
-  position: absolute;
-  z-index: 2;
-  left: 69.6%;
-  top: 57.9%;
-  width: 20.2%;
-  height: 12.55%;
-  border-radius: 8px;
-  object-fit: cover;
-  object-position: center;
-}
 .party-chip {
   position: absolute;
   z-index: 5;
