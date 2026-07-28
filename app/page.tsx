@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "Nearly, c’est quoi exactement ?",
     answer:
-      "Nearly est une application relationnelle privée pour rester proche de son couple, de ses meilleurs amis ou de sa famille, même à distance. Elle réunit des rituels, questions, souvenirs, jeux, idées, événements et un compagnon partagé.",
+      "Nearly est le hub relationnel privé de tous les liens qui comptent : couple, meilleurs amis et famille. Chaque relation dispose de son propre espace pour partager des rituels, questions, souvenirs, jeux, idées et événements, afin de se sentir proche malgré la distance.",
   },
   {
     question: "Est-ce seulement une application pour les couples à distance ?",
@@ -73,7 +73,7 @@ const structuredData = {
       operatingSystem: "iOS, Android",
       inLanguage: ["fr", "en"],
       description:
-        "Application relationnelle privée pour les couples, amis et familles : questions, rituels, souvenirs, jeux, calendrier, idées et compagnon partagé.",
+        "Hub relationnel privé qui réunit les couples, amis et familles pour rester proches malgré la distance grâce aux questions, rituels, souvenirs, jeux et moments partagés.",
       image: "/media/nearly-icon.png",
       featureList: [
         "Question du jour",
@@ -137,16 +137,20 @@ export default function Home() {
         <div className="hero-orb hero-orb--one" />
         <div className="hero-orb hero-orb--two" />
         <div className="hero-copy">
-          <p className="eyebrow"><span /> L’app qui prend soin de vos liens</p>
+          <p className="eyebrow"><span /> Le hub privé de toutes vos relations</p>
           <h1>
-            La distance sépare les journées.
-            <em> Pas votre lien.</em>
+            Tous ceux qui comptent.
+            <em> Toujours plus proches.</em>
           </h1>
           <p className="hero-lede">
-            Nearly crée un espace privé où les couples, amis et familles
-            transforment les petits gestes en souvenirs, rituels et moments
-            vraiment partagés.
+            Nearly réunit votre couple, vos meilleurs amis et votre famille
+            dans un seul hub privé. Chaque relation garde son espace, ses
+            souvenirs et ses rituels pour se sentir proche malgré la distance.
           </p>
+          <div className="hub-promise" aria-label="La promesse du hub Nearly">
+            <strong>Un seul hub</strong>
+            <span>Un espace privé pour chaque relation qui compte.</span>
+          </div>
           <div className="hero-actions">
             <a className="button button--primary" href="#experience">
               Voir Nearly en action <ArrowIcon />
@@ -183,18 +187,19 @@ export default function Home() {
       </section>
 
       <section className="manifesto" aria-label="La promesse Nearly">
-        <p>Pas un réseau social.</p>
-        <p>Pas une messagerie de plus.</p>
-        <strong>Votre endroit à vous.</strong>
+        <p>Un seul hub.</p>
+        <p>Un espace pour chaque relation.</p>
+        <strong>Proches, malgré la distance.</strong>
       </section>
 
       <section className="experience section" id="experience">
         <div className="section-heading">
-          <p className="eyebrow"><span /> Ce qui vous rapproche</p>
-          <h2>Des petites attentions.<br /><em>De vrais souvenirs.</em></h2>
+          <p className="eyebrow"><span /> Tout votre lien, au même endroit</p>
+          <h2>Tout ce qui compte.<br /><em>Dans un même hub.</em></h2>
           <p>
-            Nearly donne un rythme doux à votre relation. On ouvre l’app pour
-            partager quelque chose, jamais pour combler un fil infini.
+            Questions, souvenirs, retrouvailles, jeux et petites attentions :
+            Nearly rassemble ce qui nourrit chaque relation, sans fil infini
+            et sans remplacer vos conversations.
           </p>
         </div>
         <div className="feature-grid">

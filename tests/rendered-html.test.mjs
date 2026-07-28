@@ -28,7 +28,8 @@ test("server-renders the Nearly landing page and SEO content", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>Nearly — Proches, même à distance<\/title>/i);
-  assert.match(html, /La distance sépare les journées/);
+  assert.match(html, /Tous ceux qui comptent/);
+  assert.match(html, /Le hub privé de toutes vos relations/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /FAQPage/);
   assert.match(html, /https:\/\/nearly\.example\/og\.png/);
@@ -38,6 +39,7 @@ test("server-renders the Nearly landing page and SEO content", async () => {
 test("ships an AI-readable product summary", async () => {
   const llms = await readFile(new URL("../public/llms.txt", import.meta.url), "utf8");
   assert.match(llms, /^# Nearly/m);
-  assert.match(llms, /application relationnelle privée/i);
+  assert.match(llms, /hub relationnel privé/i);
+  assert.match(llms, /relations qui comptent/i);
   assert.match(llms, /Vie privée/);
 });

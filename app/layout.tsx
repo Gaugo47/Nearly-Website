@@ -15,11 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s | Nearly",
     },
     description:
-      "Nearly est l’application relationnelle privée pour les couples, amis et familles : questions, rituels, souvenirs, jeux et compagnon partagé.",
+      "Nearly est le hub relationnel privé des couples, amis et familles pour se sentir proches malgré la distance : rituels, souvenirs, jeux et moments partagés.",
     applicationName: "Nearly",
     keywords: [
       "application couple à distance",
       "application relationnelle",
+      "hub relationnel privé",
+      "hub pour couple amis famille",
       "rester proche à distance",
       "application couple",
       "application amis",
@@ -42,14 +44,14 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Nearly",
       title: "Nearly — Proches, même à distance",
       description:
-        "Un espace privé où les couples, amis et familles transforment les petits gestes en vrais moments partagés.",
+        "Le hub privé qui réunit votre couple, vos meilleurs amis et votre famille pour rester proches malgré la distance.",
       images: [{ url: `${origin}/og.png`, width: 1536, height: 902, alt: "Nearly — Proches, même à distance" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "Nearly — Proches, même à distance",
       description:
-        "Rituels, souvenirs, jeux et petites attentions pour prendre soin de vos liens, où que vous soyez.",
+        "Un seul hub privé pour prendre soin de votre couple, de vos amis et de votre famille, où que vous soyez.",
       images: [`${origin}/og.png`],
     },
     icons: {

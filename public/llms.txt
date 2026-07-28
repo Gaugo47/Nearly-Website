@@ -1,14 +1,15 @@
 # Nearly
 
-> Nearly est une application relationnelle privée pour rester proches, même à distance.
+> Nearly est le hub relationnel privé de toutes les relations qui comptent, conçu pour rester proches malgré la distance.
 
 ## Résumé
 
-Nearly aide les couples, les meilleurs amis et les familles à entretenir leur lien grâce à de petits rituels partagés. Ce n’est pas une messagerie ni un réseau social. L’application réunit questions du jour, humeurs, moments, souvenirs, jeux, calendrier, compteur de retrouvailles, idées personnalisées et compagnon virtuel partagé.
+Nearly réunit dans un même hub privé le couple, les meilleurs amis et la famille. Chaque relation possède son propre espace, son ambiance et ses souvenirs. L’objectif est de se sentir proche malgré la distance grâce à de petits rituels partagés. Ce n’est pas une messagerie ni un réseau social : l’application rassemble questions du jour, humeurs, moments, souvenirs, jeux, calendrier, compteur de retrouvailles, idées personnalisées et compagnon virtuel partagé.
 
 ## Promesse
 
 - Signature : « Proches, même à distance. »
+- Positionnement : le hub privé de toutes les relations qui comptent.
 - Publics : couples, couples à distance, amis proches, familles.
 - Plateformes prévues : iOS et Android.
 - Langues : français et anglais.

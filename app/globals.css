@@ -126,6 +126,28 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
   font-size: clamp(17px, 1.6vw, 21px);
   line-height: 1.62;
 }
+.hub-promise {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: -8px 0 28px;
+  padding: 10px 14px 10px 11px;
+  border: 1px solid rgba(85, 48, 121, .14);
+  border-radius: 999px;
+  color: #6f6478;
+  background: rgba(255,255,255,.5);
+  font-size: 12px;
+}
+.hub-promise strong {
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: white;
+  background: var(--plum-deep);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .button {
   display: inline-flex;
@@ -521,6 +543,7 @@ footer a:hover { color: white; }
   .hero { min-height: auto; grid-template-columns: 1fr; padding-top: 170px; text-align: center; }
   .hero-copy { margin: 0 auto; padding-left: 0; }
   .hero-copy .eyebrow, .hero-actions, .audience-row { justify-content: center; }
+  .hub-promise { margin-left: auto; margin-right: auto; }
   .hero-visual { margin: 0 auto; width: min(650px, 100%); }
   .feature-grid { grid-template-columns: 1fr; }
   .feature-card { min-height: 550px; }
@@ -546,6 +569,7 @@ footer a:hover { color: white; }
   h1 { font-size: clamp(58px, 18vw, 82px); }
   .hero-lede { font-size: 16px; }
   .hero-actions { flex-direction: column; gap: 18px; }
+  .hub-promise { width: 100%; justify-content: center; border-radius: 20px; }
   .audience-row { margin-top: 34px; font-size: 9px; gap: 8px; }
   .hero-visual { height: 610px; }
   .hero-visual::before { width: 430px; height: 430px; }
