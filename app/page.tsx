@@ -52,6 +52,11 @@ const faqs = [
       "Réservé aux adultes, le mode Spicy ouvre un espace complice uniquement après une activation consentie. Le coffre privé est protégé par un code secret et son déverrouillage est temporaire. Chacun garde toujours le droit de passer.",
   },
   {
+    question: "Que contient le Party Mode pour les groupes d’amis ?",
+    answer:
+      "Le Party Mode réunit des jeux de soirée, un coffre photo privé et des frais partagés dans le même espace. La bande peut lancer un défi, conserver ses selfies et équilibrer les dépenses sans quitter Nearly.",
+  },
+  {
     question: "Nearly est-elle disponible sur iPhone et Android ?",
     answer:
       "Nearly est conçue pour iOS et Android. Les liens de téléchargement seront ajoutés ici dès l’ouverture officielle des fiches App Store et Google Play.",
@@ -79,6 +84,7 @@ const structuredData = {
         "Carte de souvenirs",
         "Idées personnalisées",
         "Compagnon virtuel partagé",
+        "Party Mode entre amis avec jeux, photos privées et frais partagés",
         "Mode Spicy privé, consenti et protégé par code",
       ],
       offers: {
@@ -118,6 +124,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#experience">L’expérience</a>
           <a href="#pour-qui">Pour qui ?</a>
+          <a href="#party-mode">Party Mode</a>
           <a href="#spicy">Mode Spicy</a>
           <a href="#confidentialite">Confidentialité</a>
         </div>
@@ -240,6 +247,7 @@ export default function Home() {
             <span className="audience-kicker">La bande</span>
             <h3>Pour les amis</h3>
             <p>Des défis, des photos, des idées et un Party Lab pour continuer à créer des histoires, même quand les agendas débordent.</p>
+            <a className="audience-link" href="#party-mode">Découvrir le Party Mode <ArrowIcon /></a>
             <span className="audience-tag">Fun · spontané</span>
           </article>
           <article className="audience-card audience-card--family">
@@ -248,6 +256,45 @@ export default function Home() {
             <p>Des nouvelles douces, des souvenirs communs et des rendez-vous qui rapprochent toutes les générations.</p>
             <span className="audience-tag">Rassurant · vivant</span>
           </article>
+        </div>
+      </section>
+
+      <section className="party-showcase" id="party-mode">
+        <div className="party-copy">
+          <p className="eyebrow eyebrow--party"><span /> Party Mode · Entre amis</p>
+          <h2>Le chaos de la soirée.<br /><em>Les souvenirs en plus.</em></h2>
+          <p className="party-intro">
+            Nearly rassemble tout ce qui fait une bonne soirée : des jeux pour
+            lancer l’ambiance, un coffre photo privé et des comptes justes,
+            sans calcul mental au petit matin.
+          </p>
+          <div className="party-features">
+            <div><span>01</span><strong>Choisissez votre chaos</strong><p>Party Lab propose des défis, des gages et des questions adaptés à la bande.</p></div>
+            <div><span>02</span><strong>Gardez les vrais souvenirs</strong><p>Les selfies de la soirée restent dans votre espace privé, entre invités.</p></div>
+            <div><span>03</span><strong>Partagez, sans prise de tête</strong><p>Ajoutez les dépenses et Nearly indique simplement qui rembourse qui.</p></div>
+          </div>
+        </div>
+        <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
+          <figure className="party-device party-device--lab">
+            <div className="party-screen">
+              <img src="/media/app-party-lab.png" alt="Jeux et défis du Party Lab de Nearly" loading="lazy" />
+            </div>
+            <figcaption>Party Lab</figcaption>
+          </figure>
+          <figure className="party-device party-device--photos">
+            <div className="party-screen party-photo-screen">
+              <img className="party-screen-image" src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
+              <img className="party-selfie" src="/media/party-selfie.webp" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <figcaption>Photos de soirée</figcaption>
+          </figure>
+          <figure className="party-device party-device--expenses">
+            <div className="party-screen">
+              <img src="/media/app-party-expenses.png" alt="Répartition des frais partagés entre amis dans Nearly" loading="lazy" />
+            </div>
+            <figcaption>Frais partagés</figcaption>
+          </figure>
+          <span className="party-chip">● Espace privé à la bande</span>
         </div>
       </section>
 

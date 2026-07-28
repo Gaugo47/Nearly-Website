@@ -21,6 +21,7 @@ Nearly aide les couples, les meilleurs amis et les familles à entretenir leur l
 - Moments, souvenirs, carte de souvenirs et capsules temporelles.
 - Calendrier partagé, événements et compteur de retrouvailles.
 - Mini-jeux, défis et Party Lab pour les groupes d’amis.
+- Party Mode entre amis avec jeux de soirée, coffre de photos privé et répartition des frais partagés.
 - Idées personnalisées selon le type de lien et les centres d’intérêt choisis.
 - Compagnon commun qui progresse grâce aux interactions humaines, sans punition ni culpabilisation.
 - Mode Spicy réservé aux adultes : activation consentie, droit de passer et coffre privé protégé par code secret temporaire.

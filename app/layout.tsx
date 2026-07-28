@@ -23,6 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
       "rester proche à distance",
       "application couple",
       "application amis",
+      "party mode amis",
+      "application soirée entre amis",
       "souvenirs partagés",
       "questions de couple",
       "jeux pour couple à distance",
