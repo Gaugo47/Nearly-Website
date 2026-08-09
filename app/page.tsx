@@ -44,9 +44,9 @@ const faqs = [
       "Nearly ne cherche pas à remplacer vos messages. L’application transforme les petits gestes en expériences communes : répondre à une question, préparer des retrouvailles, conserver un souvenir, lancer un jeu ou faire grandir votre compagnon.",
   },
   {
-    question: "Mes souvenirs et ma position sont-ils publics ?",
+    question: "Comment Nearly protège mes conversations et mes photos ?",
     answer:
-      "Non. L’espace est privé. La localisation est optionnelle et le partage en direct ne démarre que lorsque vous l’activez. Les recommandations n’utilisent jamais vos messages, photos ou notes privées.",
+      "Les conversations et les photos partagées dans Nearly sont entièrement chiffrées. Dans les modes Party et Spicy, un filtre anti-capture bloque aussi les screenshots afin que les contenus sensibles restent dans l’espace où ils ont été partagés.",
   },
   {
     question: "Comment fonctionne le mode Spicy de Nearly ?",
@@ -86,6 +86,8 @@ const structuredData = {
         "Carte de souvenirs",
         "Idées personnalisées",
         "Compagnon virtuel partagé",
+        "Conversations et photos entièrement chiffrées",
+        "Filtre anti-screenshot dans les modes Party et Spicy",
         "Party Mode entre amis avec jeux, photos privées et frais partagés",
         "Mode Spicy privé, consenti et protégé par code",
       ],
@@ -129,7 +131,7 @@ export default function Home() {
           <a href="#tester-un-jeu">Tester un jeu</a>
           <a href="#party-mode">Party Mode</a>
           <a href="#spicy">Mode Spicy</a>
-          <a href="#confidentialite">Confidentialité</a>
+          <a href="#securite">Sécurité</a>
         </div>
         <a className="nav-cta" href="#telecharger">
           Découvrir <ArrowIcon />
@@ -350,24 +352,43 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="privacy" id="confidentialite">
+      <section className="privacy" id="securite">
         <div className="privacy-visual">
           <div className="privacy-halo" />
-          <img src="/media/nearly-icon.png" alt="Icône Nearly" loading="lazy" />
-          <span className="lock-chip">● Espace privé</span>
+          <div className="security-core" aria-label="Protection active de votre espace Nearly">
+            <span className="security-core__icon" aria-hidden="true">◆</span>
+            <small>Protection active</small>
+            <strong>Votre espace<br />reste le vôtre.</strong>
+            <span className="security-core__status"><i /> Sécurisé</span>
+          </div>
+          <div className="security-float security-float--messages">
+            <span aria-hidden="true">✓</span>
+            <div><small>Conversations</small><strong>Entièrement chiffrées</strong></div>
+          </div>
+          <div className="security-float security-float--photos">
+            <span aria-hidden="true">✓</span>
+            <div><small>Photos privées</small><strong>Entièrement chiffrées</strong></div>
+          </div>
+          <div className="security-float security-float--capture">
+            <span aria-hidden="true">⊘</span>
+            <div><small>Party &amp; Spicy</small><strong>Screenshot bloqué</strong></div>
+          </div>
+          <span className="lock-chip">● Sécurité prioritaire</span>
         </div>
         <div className="privacy-copy">
-          <p className="eyebrow eyebrow--light"><span /> Privé par nature</p>
-          <h2>Ce qui est à vous<br /><em>reste à vous.</em></h2>
+          <p className="eyebrow eyebrow--light"><span /> La sécurité avant tout</p>
+          <h2>Votre intimité.<br /><em>Entièrement protégée.</em></h2>
           <p className="privacy-intro">
-            Nearly est pensé comme un cocon partagé, pas comme une vitrine.
-            Vous choisissez ce qui entre dans votre espace et avec qui.
+            Nearly protège les échanges les plus personnels dès leur partage.
+            Vos conversations, vos photos et vos moments sensibles restent
+            entre les personnes que vous avez choisies.
           </p>
           <div className="privacy-points">
-            <div><strong>Localisation à la demande</strong><span>Le partage en direct est optionnel et explicite.</span></div>
-            <div><strong>Contenus privés exclus</strong><span>Messages, photos et notes ne servent jamais aux recommandations.</span></div>
-            <div><strong>Une expérience sans pression</strong><span>Pas de score négatif, pas de culpabilisation, jamais.</span></div>
+            <div><span className="privacy-number">01</span><strong>Conversations chiffrées</strong><span>Chaque conversation est entièrement chiffrée pour rester privée.</span></div>
+            <div><span className="privacy-number">02</span><strong>Photos chiffrées</strong><span>Les photos partagées bénéficient du même niveau de protection.</span></div>
+            <div><span className="privacy-number">03</span><strong>Filtre anti-screenshot</strong><span>Les captures d’écran sont bloquées dans les modes Party et Spicy.</span></div>
           </div>
+          <p className="security-note"><span aria-hidden="true">✓</span> La sécurité n’est pas une option ajoutée après coup. Elle fait partie de Nearly dès le départ.</p>
         </div>
       </section>
 
@@ -401,7 +422,7 @@ export default function Home() {
         <a className="brand brand--footer" href="#top"><img src="/media/nearly-logo.png" alt="Nearly" /></a>
         <p>Proches, même à distance.</p>
         <div>
-          <a href="#confidentialite">Confidentialité</a>
+          <a href="#securite">Sécurité</a>
           <a href="#faq">FAQ</a>
           <span>© 2026 Nearly</span>
         </div>

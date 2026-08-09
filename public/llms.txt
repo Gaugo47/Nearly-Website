@@ -35,6 +35,12 @@ Nearly réunit dans un même hub privé le couple, les meilleurs amis et la fami
 - Les messages, photos, notes et contenus privés ne servent jamais aux recommandations.
 - Les recommandations sont désactivées par défaut et reposent sur un consentement distinct.
 
+## Sécurité
+
+- Les conversations et les photos partagées dans Nearly sont entièrement chiffrées.
+- Un filtre anti-screenshot bloque les captures d’écran dans les modes Party et Spicy.
+- La sécurité est intégrée à l’expérience dès sa conception et protège les moments les plus sensibles.
+
 ## Source canonique
 
 La page d’accueil du site Nearly est la source canonique pour la présentation publique du produit.
