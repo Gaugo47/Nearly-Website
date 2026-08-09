@@ -377,7 +377,7 @@ export default function Home() {
         <div className="privacy-visual">
           <div className="privacy-halo" />
           <div className="security-core" aria-label="Protection active de votre espace Nearly">
-            <span className="security-core__icon" aria-hidden="true">◆</span>
+            <span className="security-core__icon security-core__icon--lock" aria-hidden="true"><i /></span>
             <small>Protection active</small>
             <strong>Votre espace<br />reste le vôtre.</strong>
             <span className="security-core__status"><i /> Sécurisé</span>

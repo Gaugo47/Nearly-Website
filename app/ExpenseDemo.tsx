@@ -123,7 +123,7 @@ export default function ExpenseDemo() {
   const [participants, setParticipants] = useState<string[]>([]);
   const [displayRate, setDisplayRate] = useState(1);
   const [displayRateDate, setDisplayRateDate] = useState("");
-  const [rateLoading, setRateLoading] = useState(false);
+  const [rateLoading, setRateLoading] = useState(true);
   const [adding, setAdding] = useState(false);
   const [notice, setNotice] = useState("Créez au moins deux personnes pour commencer.");
   const [formError, setFormError] = useState("");
@@ -301,6 +301,28 @@ export default function ExpenseDemo() {
         {trialStatus === "error" && <button type="button" onClick={() => void claimTrial(localStorage.getItem(VISITOR_KEY) || crypto.randomUUID())}>Réessayer</button>}
         {trialStatus === "blocked" && <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>}
         <small>Votre IP est transformée en empreinte irréversible et n’est jamais stockée en clair.</small>
+      </div>
+    );
+  }
+
+  if (state.expenses.length >= MAX_TRIAL_EXPENSES) {
+    return (
+      <div className="expense-trial-complete" aria-live="polite">
+        <div className="expense-trial-complete__icon" aria-hidden="true">✓</div>
+        <p className="expense-step">Essai terminé · 3 frais sur 3</p>
+        <h3>Vous avez testé l’essentiel.<br /><em>Passez à la vraie vie.</em></h3>
+        <p>
+          Votre essai est maintenant verrouillé. Téléchargez Nearly pour ajouter
+          autant de frais que nécessaire, inviter vos vrais proches et garder
+          vos comptes synchronisés en direct.
+        </p>
+        <div className="expense-trial-complete__stats" aria-label="Résumé de votre essai">
+          <span><strong>3</strong> frais calculés</span>
+          <span><strong>{state.members.length}</strong> participants créés</span>
+          <span><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong> total testé</span>
+        </div>
+        <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>
+        <small>Disponible bientôt sur iOS et Android.</small>
       </div>
     );
   }
