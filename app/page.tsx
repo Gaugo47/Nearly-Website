@@ -46,17 +46,17 @@ const faqs = [
   {
     question: "Comment Nearly protège mes conversations et mes photos ?",
     answer:
-      "Les conversations et les photos partagées dans Nearly sont entièrement chiffrées. Dans les modes Party et Spicy, un filtre anti-capture bloque aussi les screenshots afin que les contenus sensibles restent dans l’espace où ils ont été partagés.",
+      "Les conversations et les photos partagées dans Nearly sont entièrement chiffrées. Dans les modes Party et Spicy, les photos sont placées dans des coffres-forts verrouillés avant tout accès. Un filtre anti-capture bloque aussi les screenshots afin que les contenus sensibles restent dans l’espace où ils ont été partagés.",
   },
   {
     question: "Comment fonctionne le mode Spicy de Nearly ?",
     answer:
-      "Réservé aux adultes, le mode Spicy ouvre un espace complice uniquement après une activation consentie. Le coffre privé est protégé par un code secret et son déverrouillage est temporaire. Chacun garde toujours le droit de passer.",
+      "Réservé aux adultes, le mode Spicy ouvre un espace complice uniquement après une activation consentie. Son coffre-fort photo doit être déverrouillé par code secret avant tout accès et son ouverture est temporaire. Chacun garde toujours le droit de passer.",
   },
   {
     question: "Que contient le Party Mode pour les groupes d’amis ?",
     answer:
-      "Le Party Mode réunit des jeux de soirée, un coffre photo privé et des frais partagés dans le même espace. La bande peut lancer un défi, conserver ses selfies et équilibrer les dépenses sans quitter Nearly.",
+      "Le Party Mode réunit des jeux de soirée, un coffre-fort photo verrouillé et des frais partagés dans le même espace. Le coffre doit être déverrouillé avant d’accéder aux photos de la soirée.",
   },
   {
     question: "Nearly est-elle disponible sur iPhone et Android ?",
@@ -87,6 +87,7 @@ const structuredData = {
         "Idées personnalisées",
         "Compagnon virtuel partagé",
         "Conversations et photos entièrement chiffrées",
+        "Coffres-forts photo verrouillés dans les modes Party et Spicy",
         "Filtre anti-screenshot dans les modes Party et Spicy",
         "Party Mode entre amis avec jeux, photos privées et frais partagés",
         "Mode Spicy privé, consenti et protégé par code",
@@ -293,12 +294,12 @@ export default function Home() {
           <h2>Le chaos de la soirée.<br /><em>Les souvenirs en plus.</em></h2>
           <p className="party-intro">
             Nearly rassemble tout ce qui fait une bonne soirée : des jeux pour
-            lancer l’ambiance, un coffre photo privé et des comptes justes,
+            lancer l’ambiance, un coffre-fort photo verrouillé et des comptes justes,
             sans calcul mental au petit matin.
           </p>
           <div className="party-features">
             <div><span>01</span><strong>Choisissez votre chaos</strong><p>Party Lab propose des défis, des gages et des questions adaptés à la bande.</p></div>
-            <div><span>02</span><strong>Gardez les vrais souvenirs</strong><p>Les selfies de la soirée restent dans votre espace privé, entre invités.</p></div>
+            <div><span>02</span><strong>Déverrouillez le coffre photo</strong><p>Le coffre doit être ouvert avant tout accès aux selfies privés de la soirée.</p></div>
             <div><span>03</span><strong>Partagez, sans prise de tête</strong><p>Ajoutez les dépenses et Nearly indique simplement qui rembourse qui.</p></div>
           </div>
         </div>
@@ -313,7 +314,7 @@ export default function Home() {
             <div className="party-screen">
               <img src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
             </div>
-            <figcaption>Photos de soirée</figcaption>
+            <figcaption>Coffre photo</figcaption>
           </figure>
           <figure className="party-device party-device--expenses">
             <div className="party-screen">
@@ -336,7 +337,7 @@ export default function Home() {
           </p>
           <div className="spicy-principles">
             <div><span>01</span><strong>Consentement partagé</strong><p>Le mode ne s’active que lorsque chacun est d’accord.</p></div>
-            <div><span>02</span><strong>Coffre sous code secret</strong><p>Les contenus privés restent verrouillés et l’accès expire automatiquement.</p></div>
+            <div><span>02</span><strong>Coffre photo sous code</strong><p>Les photos restent verrouillées avant l’accès et le déverrouillage expire automatiquement.</p></div>
             <div><span>03</span><strong>Le droit de passer</strong><p>Aucune pression : vos envies et vos limites restent prioritaires.</p></div>
           </div>
         </div>
@@ -366,8 +367,8 @@ export default function Home() {
             <div><small>Conversations</small><strong>Entièrement chiffrées</strong></div>
           </div>
           <div className="security-float security-float--photos">
-            <span aria-hidden="true">✓</span>
-            <div><small>Photos privées</small><strong>Entièrement chiffrées</strong></div>
+            <span aria-hidden="true">◆</span>
+            <div><small>Party &amp; Spicy</small><strong>Coffres photo verrouillés</strong></div>
           </div>
           <div className="security-float security-float--capture">
             <span aria-hidden="true">⊘</span>
@@ -386,7 +387,8 @@ export default function Home() {
           <div className="privacy-points">
             <div><span className="privacy-number">01</span><strong>Conversations chiffrées</strong><span>Chaque conversation est entièrement chiffrée pour rester privée.</span></div>
             <div><span className="privacy-number">02</span><strong>Photos chiffrées</strong><span>Les photos partagées bénéficient du même niveau de protection.</span></div>
-            <div><span className="privacy-number">03</span><strong>Filtre anti-screenshot</strong><span>Les captures d’écran sont bloquées dans les modes Party et Spicy.</span></div>
+            <div><span className="privacy-number">03</span><strong>Coffres-forts photo</strong><span>Dans Party et Spicy, le coffre doit être déverrouillé avant d’afficher les photos.</span></div>
+            <div><span className="privacy-number">04</span><strong>Filtre anti-screenshot</strong><span>Les captures d’écran sont bloquées dans les modes Party et Spicy.</span></div>
           </div>
           <p className="security-note"><span aria-hidden="true">✓</span> La sécurité n’est pas une option ajoutée après coup. Elle fait partie de Nearly dès le départ.</p>
         </div>

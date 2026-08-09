@@ -38,6 +38,7 @@ Nearly réunit dans un même hub privé le couple, les meilleurs amis et la fami
 ## Sécurité
 
 - Les conversations et les photos partagées dans Nearly sont entièrement chiffrées.
+- Les modes Party et Spicy possèdent chacun un coffre-fort photo qui doit être déverrouillé avant tout accès aux images.
 - Un filtre anti-screenshot bloque les captures d’écran dans les modes Party et Spicy.
 - La sécurité est intégrée à l’expérience dès sa conception et protège les moments les plus sensibles.
 
