@@ -30,6 +30,8 @@ test("server-renders the Nearly landing page and SEO content", async () => {
   assert.match(html, /<title>Nearly — Proches, même à distance<\/title>/i);
   assert.match(html, /Tous ceux qui comptent/);
   assert.match(html, /Le hub privé de toutes vos relations/);
+  assert.match(html, /Les bons comptes/);
+  assert.match(html, /Nouvelle dépense/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /FAQPage/);
   assert.match(html, /https:\/\/nearly\.example\/og\.png/);

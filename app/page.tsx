@@ -1,4 +1,5 @@
 import GameMatch from "./GameMatch";
+import ExpenseDemo from "./ExpenseDemo";
 
 const features = [
   {
@@ -323,6 +324,25 @@ export default function Home() {
             <figcaption>Frais partagés</figcaption>
           </figure>
           <span className="party-chip">● Espace privé à la bande</span>
+        </div>
+      </section>
+
+      <section className="expense-taster section" id="frais-partages">
+        <div className="expense-taster__heading">
+          <div>
+            <p className="eyebrow"><span /> Frais partagés · Démo</p>
+            <h2>Les bons comptes.<br /><em>Sans calcul mental.</em></h2>
+          </div>
+          <p>
+            Ajoutez une dépense comme dans Nearly : choisissez qui a payé et
+            pour qui. Les soldes et les remboursements se recalculent
+            instantanément, au centime près.
+          </p>
+        </div>
+        <ExpenseDemo />
+        <div className="expense-taster__cta">
+          <span>Dans l’app : devises multiples, historique partagé et mises à jour en direct.</span>
+          <a className="button button--primary" href="#telecharger">Télécharger Nearly <ArrowIcon /></a>
         </div>
       </section>
 
