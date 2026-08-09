@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
+async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("https://nearly.example/", {
+    new Request(`https://nearly.example${path}`, {
       headers: {
         accept: "text/html",
         host: "nearly.example",
@@ -40,6 +40,16 @@ test("server-renders the Nearly landing page and SEO content", async () => {
   assert.match(html, /FAQPage/);
   assert.match(html, /https:\/\/nearly\.example\/og\.png/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|Your site is taking shape/i);
+});
+
+test("server-renders the searchable tool pages", async () => {
+  const calculator = await render("/calculateur-remboursement");
+  assert.equal(calculator.status, 200);
+  assert.match(await calculator.text(), /Calculateur de remboursement entre amis/);
+
+  const questions = await render("/questions-couple");
+  assert.equal(questions.status, 200);
+  assert.match(await questions.text(), /Questions à se poser en couple/);
 });
 
 test("ships an AI-readable product summary", async () => {

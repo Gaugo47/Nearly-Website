@@ -299,7 +299,7 @@ export default function ExpenseDemo() {
           : "L’interface s’ouvre automatiquement, sans compte et sans bouton intermédiaire."}</p>
         {trialStatus === "starting" && <div className="expense-trial-loading"><span /><span /><span /><small>Préparation automatique…</small></div>}
         {trialStatus === "error" && <button type="button" onClick={() => void claimTrial(localStorage.getItem(VISITOR_KEY) || crypto.randomUUID())}>Réessayer</button>}
-        {trialStatus === "blocked" && <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>}
+        {trialStatus === "blocked" && <a className="button button--primary" href="/#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>}
         <small>Votre IP est transformée en empreinte irréversible et n’est jamais stockée en clair.</small>
       </div>
     );
@@ -321,7 +321,7 @@ export default function ExpenseDemo() {
           <span><strong>{state.members.length}</strong> participants créés</span>
           <span><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong> total testé</span>
         </div>
-        <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>
+        <a className="button button--primary" href="/#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>
         <small>Disponible bientôt sur iOS et Android.</small>
       </div>
     );

@@ -129,6 +129,8 @@ export default function Home() {
         </a>
         <div className="nav-links">
           <a href="#experience">L’expérience</a>
+          <a href="/questions-couple">Questions couple</a>
+          <a href="/calculateur-remboursement">Calculateur</a>
           <a href="#pour-qui">Pour qui ?</a>
           <a href="#tester-un-jeu">Tester un jeu</a>
           <a href="#party-mode">Party Mode</a>
