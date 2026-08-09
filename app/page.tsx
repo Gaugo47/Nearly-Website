@@ -441,7 +441,9 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="footer-wordmark" href="#top" aria-label="Nearly, retour en haut">Nearly</a>
+        <a className="footer-logo" href="#top" aria-label="Nearly, retour en haut">
+          <img src="/media/nearly-app-icon-liquid-glass-v2.png" alt="Nearly" />
+        </a>
         <p>Proches, même à distance.</p>
         <div>
           <a href="#securite">Sécurité</a>

@@ -34,7 +34,8 @@ test("server-renders the Nearly landing page and SEO content", async () => {
   assert.match(html, /Préparation automatique/);
   assert.match(html, /sans bouton intermédiaire/);
   assert.match(html, /security-core__icon--lock/);
-  assert.match(html, /footer-wordmark/);
+  assert.match(html, /footer-logo/);
+  assert.match(html, /nearly-app-icon-liquid-glass-v2\.png/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /FAQPage/);
   assert.match(html, /https:\/\/nearly\.example\/og\.png/);
