@@ -88,6 +88,10 @@ export async function PUT(request: Request) {
     if (!validVisitorId(payload.visitorId) || !payload.state || typeof payload.state !== "object" || Array.isArray(payload.state)) {
       return Response.json({ error: "Données d’essai invalides." }, { status: 400 });
     }
+    const trialState = payload.state as { expenses?: unknown };
+    if (!Array.isArray(trialState.expenses) || trialState.expenses.length > 3) {
+      return Response.json({ error: "L’essai est limité à 3 frais." }, { status: 422 });
+    }
 
     const stateJson = JSON.stringify(payload.state);
     if (new TextEncoder().encode(stateJson).byteLength > MAX_STATE_BYTES) {

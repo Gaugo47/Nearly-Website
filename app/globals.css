@@ -539,6 +539,12 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
 .expense-trial-gate > button:disabled { justify-content: center; opacity: .65; }
 .expense-trial-gate > small { max-width: 550px; margin-top: 22px; color: #718068; font-size: 9px; line-height: 1.5; }
 .expense-trial-gate .button { padding: 15px 20px; font-size: 10px; }
+.expense-trial-loading { min-width: 270px; min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 0 18px; border: 1px solid rgba(163,230,53,.2); border-radius: 14px; color: #c3d1b8; background: rgba(163,230,53,.06); }
+.expense-trial-loading > span { width: 6px; height: 6px; border-radius: 50%; background: #a3e635; animation: trial-loading 1.1s ease-in-out infinite; }
+.expense-trial-loading > span:nth-child(2) { animation-delay: .14s; }
+.expense-trial-loading > span:nth-child(3) { animation-delay: .28s; }
+.expense-trial-loading small { margin-left: 7px; font-size: 9px; font-weight: 800; }
+@keyframes trial-loading { 0%, 70%, 100% { opacity: .28; transform: translateY(0); } 35% { opacity: 1; transform: translateY(-3px); } }
 .expense-save-state { color: #8fa281; }
 .expense-save-state--saving { color: #c6d5b9; }
 .expense-save-state--error { color: #f0a6ab; }
@@ -564,6 +570,8 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
 .expense-currencies button.is-selected small { color: #a3e635; }
 .expense-rate-hint { margin: 9px 0 0; color: #7f8e75; font-size: 8px; line-height: 1.4; }
 .expense-form-error { margin: -8px 0 12px; color: #f0a6ab; font-size: 9px; line-height: 1.4; }
+.expense-limit-note { display: flex; align-items: flex-start; gap: 8px; margin: -8px 0 15px; padding: 10px 11px; border: 1px solid rgba(163,230,53,.18); border-radius: 11px; color: #aebda2; background: rgba(163,230,53,.06); font-size: 8px; line-height: 1.45; }
+.expense-limit-note > span { color: #a3e635; font-weight: 900; }
 
 .expense-ledger { padding: clamp(28px, 4vw, 54px); background: #fffefb; }
 .expense-ledger-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
@@ -918,4 +926,5 @@ footer a:hover { color: white; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .game-match__question, .game-result { animation: none; }
+  .expense-trial-loading > span { animation: none; opacity: .65; }
 }

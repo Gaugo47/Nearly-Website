@@ -30,6 +30,7 @@ const CURRENCIES: Array<{ code: CurrencyCode; symbol: string; label: string }> =
 const CURRENCY_CODES = new Set(CURRENCIES.map((currency) => currency.code));
 const EMPTY_STATE: TrialState = { members: [], expenses: [], repayments: [], displayCurrency: "EUR" };
 const VISITOR_KEY = "nearly-expense-trial-visitor-v1";
+const MAX_TRIAL_EXPENSES = 3;
 
 function money(amount: number, currency: CurrencyCode) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency, minimumFractionDigits: 2 }).format(amount / 100);
@@ -55,7 +56,7 @@ function normalizeState(value: unknown): TrialState {
       && Number.isInteger(expense.amount) && Number.isInteger(expense.amountBase)
       && CURRENCY_CODES.has(expense.currency) && memberIds.has(expense.paidBy)
       && Array.isArray(expense.participants) && expense.participants.every((id) => memberIds.has(id)),
-    )).slice(0, 100)
+    )).slice(0, MAX_TRIAL_EXPENSES)
     : [];
   const repayments = Array.isArray(candidate.repayments)
     ? candidate.repayments.filter((repayment): repayment is Repayment => Boolean(
@@ -110,7 +111,7 @@ async function fetchRate(base: CurrencyCode, quote: CurrencyCode) {
 }
 
 export default function ExpenseDemo() {
-  const [trialStatus, setTrialStatus] = useState<"idle" | "starting" | "active" | "blocked" | "error">("idle");
+  const [trialStatus, setTrialStatus] = useState<"starting" | "active" | "blocked" | "error">("starting");
   const [trialId, setTrialId] = useState("");
   const [state, setState] = useState<TrialState>(EMPTY_STATE);
   const [saveStatus, setSaveStatus] = useState<"saved" | "saving" | "error">("saved");
@@ -154,8 +155,8 @@ export default function ExpenseDemo() {
   }
 
   useEffect(() => {
-    const existing = localStorage.getItem(VISITOR_KEY);
-    if (existing) void claimTrial(existing);
+    const visitorId = localStorage.getItem(VISITOR_KEY) || crypto.randomUUID();
+    void claimTrial(visitorId);
   }, []);
 
   useEffect(() => {
@@ -196,11 +197,6 @@ export default function ExpenseDemo() {
 
   function username(id: string) {
     return state.members.find((member) => member.id === id)?.username ?? "inconnu";
-  }
-
-  function beginTrial() {
-    const visitorId = localStorage.getItem(VISITOR_KEY) || crypto.randomUUID();
-    void claimTrial(visitorId);
   }
 
   function addPerson(event: FormEvent<HTMLFormElement>) {
@@ -246,8 +242,8 @@ export default function ExpenseDemo() {
   async function addExpense(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!title.trim() || !parsedAmount || !paidBy || !participants.length || adding) return;
-    if (state.expenses.length >= 100) {
-      setFormError("La limite de 100 dépenses pour cet essai est atteinte.");
+    if (state.expenses.length >= MAX_TRIAL_EXPENSES) {
+      setFormError("La limite de 3 frais pour cet essai est atteinte. Supprimez-en un pour continuer à tester.");
       return;
     }
     setAdding(true);
@@ -296,14 +292,13 @@ export default function ExpenseDemo() {
     return (
       <div className="expense-trial-gate">
         <div className="expense-trial-gate__icon" aria-hidden="true">◎</div>
-        <p className="expense-step">Essai complet · Une fois par visiteur</p>
-        <h3>{trialStatus === "blocked" ? "Votre essai a déjà été utilisé." : "Testez toute l’expérience."}</h3>
+        <p className="expense-step">Essai automatique · Une fois par visiteur</p>
+        <h3>{trialStatus === "blocked" ? "Votre essai a déjà été utilisé." : "Votre espace se prépare."}</h3>
         <p>{trialStatus === "blocked"
           ? "Un essai a déjà été démarré depuis cette connexion. Retrouvez l’expérience complète dans l’application Nearly."
-          : "Créez vos participants, ajoutez des dépenses dans cinq devises et réglez les remboursements. Aucun compte n’est nécessaire."}</p>
-        {trialStatus === "idle" && <button type="button" onClick={beginTrial}>Démarrer mon essai unique <span aria-hidden="true">→</span></button>}
-        {trialStatus === "starting" && <button type="button" disabled>Préparation de votre espace…</button>}
-        {trialStatus === "error" && <button type="button" onClick={beginTrial}>Réessayer</button>}
+          : "L’interface s’ouvre automatiquement, sans compte et sans bouton intermédiaire."}</p>
+        {trialStatus === "starting" && <div className="expense-trial-loading"><span /><span /><span /><small>Préparation automatique…</small></div>}
+        {trialStatus === "error" && <button type="button" onClick={() => void claimTrial(localStorage.getItem(VISITOR_KEY) || crypto.randomUUID())}>Réessayer</button>}
         {trialStatus === "blocked" && <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>}
         <small>Votre IP est transformée en empreinte irréversible et n’est jamais stockée en clair.</small>
       </div>
@@ -314,7 +309,7 @@ export default function ExpenseDemo() {
     <div className="expense-demo expense-demo--complete">
       <div className="expense-form">
         <div className="expense-demo__bar">
-          <div><span className="expense-demo__dot" /> Essai actif</div>
+          <div><span className="expense-demo__dot" /> Essai actif · {state.expenses.length}/{MAX_TRIAL_EXPENSES} frais</div>
           <span className={`expense-save-state expense-save-state--${saveStatus}`}>{saveStatus === "saving" ? "Sauvegarde…" : saveStatus === "error" ? "Non sauvegardé" : "Sauvegardé"}</span>
         </div>
 
@@ -357,8 +352,9 @@ export default function ExpenseDemo() {
             </div>
           </fieldset>
           <p className="expense-split-hint">Répartition équitable, au centime près.</p>
+          {state.expenses.length >= MAX_TRIAL_EXPENSES && <p className="expense-limit-note"><span>✓</span> Les 3 frais de l’essai ont été utilisés. Supprimez un frais dans l’historique pour en tester un autre.</p>}
           {formError && <p className="expense-form-error" role="alert">{formError}</p>}
-          <button className="expense-submit" type="submit" disabled={state.members.length < 2 || !title.trim() || !parsedAmount || !paidBy || !participants.length || adding}>{adding ? "Conversion en cours…" : "Ajouter et recalculer"}<span aria-hidden="true">→</span></button>
+          <button className="expense-submit" type="submit" disabled={state.expenses.length >= MAX_TRIAL_EXPENSES || state.members.length < 2 || !title.trim() || !parsedAmount || !paidBy || !participants.length || adding}>{state.expenses.length >= MAX_TRIAL_EXPENSES ? "Limite de 3 frais atteinte" : adding ? "Conversion en cours…" : "Ajouter et recalculer"}<span aria-hidden="true">→</span></button>
         </form>
       </div>
 
@@ -369,7 +365,7 @@ export default function ExpenseDemo() {
         </div>
         <div className="expense-total">
           <span aria-hidden="true">◎</span>
-          <div><small>Total du groupe</small><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong><p>{state.expenses.length} dépenses · {state.displayCurrency}{displayRateDate ? ` · taux du ${new Date(displayRateDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}` : ""}</p></div>
+          <div><small>Total du groupe</small><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong><p>{state.expenses.length}/{MAX_TRIAL_EXPENSES} frais · {state.displayCurrency}{displayRateDate ? ` · taux du ${new Date(displayRateDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}` : ""}</p></div>
         </div>
 
         <div className="expense-ledger__heading"><p className="expense-step">Soldes</p><span>positif = à recevoir</span></div>

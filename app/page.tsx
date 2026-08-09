@@ -334,7 +334,7 @@ export default function Home() {
             <h2>Les bons comptes.<br /><em>Sans calcul mental.</em></h2>
           </div>
           <p>
-            Ajoutez une dépense comme dans Nearly : choisissez qui a payé et
+            Ajoutez jusqu’à trois frais comme dans Nearly : choisissez qui a payé et
             pour qui. Les soldes et les remboursements se recalculent
             instantanément, au centime près.
           </p>
