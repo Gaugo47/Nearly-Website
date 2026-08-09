@@ -1,3 +1,5 @@
+import GameMatch from "./GameMatch";
+
 const features = [
   {
     number: "01",
@@ -124,6 +126,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#experience">L’expérience</a>
           <a href="#pour-qui">Pour qui ?</a>
+          <a href="#tester-un-jeu">Tester un jeu</a>
           <a href="#party-mode">Party Mode</a>
           <a href="#spicy">Mode Spicy</a>
           <a href="#confidentialite">Confidentialité</a>
@@ -262,6 +265,24 @@ export default function Home() {
             <span className="audience-tag">Rassurant · vivant</span>
           </article>
         </div>
+      </section>
+
+      <section className="game-taster section" id="tester-un-jeu">
+        <div className="game-taster__intro">
+          <p className="eyebrow"><span /> Un avant-goût de Nearly</p>
+          <h2>Quel jeu est fait<br />pour <em>vous&nbsp;?</em></h2>
+          <p>
+            Trois questions, trente secondes et zéro mauvaise réponse.
+            Découvrez le jeu Nearly qui correspond le mieux à votre façon
+            d’être ensemble.
+          </p>
+          <div className="game-taster__facts" aria-label="Informations sur le test">
+            <span><strong>03</strong> questions</span>
+            <span><strong>30</strong> secondes</span>
+            <span><strong>01</strong> jeu pour vous</span>
+          </div>
+        </div>
+        <GameMatch />
       </section>
 
       <section className="party-showcase" id="party-mode">
