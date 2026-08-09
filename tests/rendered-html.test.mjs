@@ -49,7 +49,9 @@ test("server-renders the searchable tool pages", async () => {
 
   const questions = await render("/questions-couple");
   assert.equal(questions.status, 200);
-  assert.match(await questions.text(), /Questions à se poser en couple/);
+  const questionsHtml = await questions.text();
+  assert.match(questionsHtml, /Questions à se poser en couple/);
+  assert.match(questionsHtml, /quatre questions par visiteur/);
 });
 
 test("ships an AI-readable product summary", async () => {

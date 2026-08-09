@@ -27,11 +27,11 @@ export default function QuestionsCouplePage() {
         <p className="eyebrow"><span /> Outil gratuit · À deux</p>
         <h1>Questions à se poser<br />en <em>couple.</em></h1>
         <p>Une bonne question peut créer un vrai moment. Piochez une question, prenez le temps d’y répondre et laissez la conversation vous emmener.</p>
-        <div className="tool-hero__facts"><span><strong>10</strong> questions à piocher</span><span><strong>5</strong> minutes pour vous</span><span><strong>∞</strong> façons de répondre</span></div>
+        <div className="tool-hero__facts"><span><strong>04</strong> questions à tester</span><span><strong>5</strong> minutes pour vous</span><span><strong>∞</strong> façons de répondre</span></div>
       </header>
 
       <section className="question-tool-section" aria-labelledby="question-du-jour">
-        <div className="tool-section-heading"><p className="eyebrow"><span /> Piochez une question</p><h2 id="question-du-jour">Un moment pour<br /><em>vous deux.</em></h2><p>Il n’y a aucune bonne réponse : laissez les silences, les anecdotes et les détours faire leur travail.</p></div>
+        <div className="tool-section-heading"><p className="eyebrow"><span /> Piochez une question</p><h2 id="question-du-jour">Un moment pour<br /><em>vous deux.</em></h2><p>Il n’y a aucune bonne réponse : laissez les silences, les anecdotes et les détours faire leur travail. L’essai permet de découvrir quatre questions par visiteur.</p></div>
         <CoupleQuestions />
       </section>
 

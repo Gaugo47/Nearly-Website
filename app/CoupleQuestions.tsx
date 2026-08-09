@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const questions = [
   { category: "Se redécouvrir", text: "Quel petit détail chez moi te fait toujours sourire ?" },
@@ -16,19 +16,46 @@ const questions = [
 ];
 
 export default function CoupleQuestions() {
-  const [index, setIndex] = useState(0);
-  const question = questions[index];
+  const [index, setIndex] = useState<number | null>(null);
+  const [seen, setSeen] = useState(0);
+  const [status, setStatus] = useState<"loading" | "active" | "complete" | "error">("loading");
+
+  async function drawQuestion() {
+    setStatus("loading");
+    try {
+      const response = await fetch("/api/couple-questions", { method: "POST" });
+      const payload = await response.json() as { questionIndex?: number; remaining?: number; error?: string };
+      if (response.status === 429) {
+        setStatus("complete");
+        return;
+      }
+      if (!response.ok || typeof payload.questionIndex !== "number" || typeof payload.remaining !== "number") {
+        throw new Error(payload.error || "Impossible de piocher une question.");
+      }
+      setIndex(payload.questionIndex % questions.length);
+      setSeen(4 - payload.remaining);
+      setStatus("active");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  useEffect(() => { void drawQuestion(); }, []);
+  const question = index === null ? null : questions[index];
 
   return (
     <div className="couple-deck" aria-live="polite">
       <div className="couple-deck__topline">
-        <span>Question {index + 1} / {questions.length}</span>
-        <span>{question.category}</span>
+        <span>{status === "active" ? `Question ${seen} / 4` : "Essai de questions"}</span>
+        <span>{question?.category || "Nearly"}</span>
       </div>
-      <p>“{question.text}”</p>
-      <button type="button" onClick={() => setIndex((current) => (current + 1) % questions.length)}>
-        Une autre question <span aria-hidden="true">→</span>
-      </button>
+      {status === "complete" ? <p>Vous avez utilisé vos quatre questions. Retrouvez un nouveau rituel chaque jour dans Nearly.</p>
+        : status === "error" ? <p>Le tirage est momentanément indisponible. Réessayez dans un instant.</p>
+          : <p>{question ? `“${question.text}”` : "Votre première question arrive…"}</p>}
+      {status === "active" && seen < 4 && <button type="button" onClick={() => void drawQuestion()}>Une autre question <span aria-hidden="true">→</span></button>}
+      {status === "active" && seen === 4 && <a className="couple-deck__cta" href="/#telecharger">Découvrir Nearly <span aria-hidden="true">↗</span></a>}
+      {status === "complete" && <a className="couple-deck__cta" href="/#telecharger">Découvrir Nearly <span aria-hidden="true">↗</span></a>}
+      {status === "error" && <button type="button" onClick={() => void drawQuestion()}>Réessayer <span aria-hidden="true">→</span></button>}
     </div>
   );
 }
