@@ -341,7 +341,7 @@ export default function Home() {
         </div>
         <ExpenseDemo />
         <div className="expense-taster__cta">
-          <span>Dans l’app : devises multiples, historique partagé et mises à jour en direct.</span>
+          <span>Sur le web, créez vos participants sans compte. Dans l’app, vos vrais espaces se synchronisent en direct.</span>
           <a className="button button--primary" href="#telecharger">Télécharger Nearly <ArrowIcon /></a>
         </div>
       </section>
