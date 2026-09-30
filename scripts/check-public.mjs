@@ -17,7 +17,7 @@ function inspect(label, data) {
 }
 const history = process.argv.includes("--history");
 if (history) {
-  const objects = git("rev-list", "--objects", "--all").trim().split("\n");
+  const objects = git("rev-list", "--objects", "--branches", "--tags", "--remotes").trim().split("\n");
   let blobs = 0;
   for (const line of objects) {
     const [oid, ...parts] = line.split(" "); const name = parts.join(" ");
@@ -26,7 +26,7 @@ if (history) {
     if (forbidden.test(name)) { console.error(`History ${oid.slice(0, 12)} ${name}: private path`); failures++; }
     inspect(`History ${oid.slice(0, 12)} ${name}`, git("cat-file", "blob", oid));
   }
-  const commits = git("log", "--all", "--format=%H%x09%ae%x09%ce").trim().split("\n");
+  const commits = git("log", "--branches", "--tags", "--remotes", "--format=%H%x09%ae%x09%ce").trim().split("\n");
   const privateEmails = commits.filter((line) => line.split("\t").slice(1).some((email) => !email.endsWith("@users.noreply.github.com")));
   if (privateEmails.length) { console.error(`${privateEmails.length} commits contain personal author/committer email addresses (redacted).`); failures++; }
   console.log(`Inspected ${blobs} historical blobs and ${commits.length} commits.`);

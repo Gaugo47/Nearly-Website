@@ -56,7 +56,7 @@ node scripts/check-public.mjs --history
 npm audit
 ```
 
-Le premier contrôle analyse les sources et l’export ; le second examine tous les objets Git accessibles et les adresses des auteurs. Il signale les valeurs sans les afficher. Ce contrôle ciblé ne garantit pas l’absence de tout secret imaginable.
+Le premier contrôle analyse les sources et l’export ; le second examine les objets des branches, étiquettes et références distantes ainsi que les adresses des auteurs (les captures locales privées de Codex sont exclues). Il signale les valeurs sans les afficher. Ce contrôle ciblé ne garantit pas l’absence de tout secret imaginable.
 
 Un nettoyage des fichiers actuels ne supprime pas l’historique. Avant de rendre le dépôt public, publier l’historique assaini préparé, vérifier toutes les branches et étiquettes distantes, puis activer les contrôles GitHub disponibles (secret scanning et Dependabot). Ne jamais envoyer la sauvegarde privée de l’ancien historique. Si un secret réel a été publié antérieurement, le révoquer auprès de son fournisseur.
 
