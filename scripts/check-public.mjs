@@ -27,7 +27,7 @@ if (history) {
     inspect(`History ${oid.slice(0, 12)} ${name}`, git("cat-file", "blob", oid));
   }
   const commits = git("log", "--branches", "--tags", "--remotes", "--format=%H%x09%ae%x09%ce").trim().split("\n");
-  const privateEmails = commits.filter((line) => line.split("\t").slice(1).some((email) => !email.endsWith("@users.noreply.github.com")));
+  const privateEmails = commits.filter((line) => line.split("\t").slice(1).some((email) => !email.endsWith("@users.noreply.github.com") && email !== "noreply@github.com"));
   if (privateEmails.length) { console.error(`${privateEmails.length} commits contain personal author/committer email addresses (redacted).`); failures++; }
   console.log(`Inspected ${blobs} historical blobs and ${commits.length} commits.`);
 } else {
