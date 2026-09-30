@@ -21,5 +21,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...["/conditions-liste-attente", "/confidentialite", "/mentions-legales"].map((path) => ({
+      url: `${siteUrl}${path}`,
+      lastModified: new Date("2026-09-30"),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 }

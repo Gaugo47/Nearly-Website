@@ -40,3 +40,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# n8n local data (personal data: waitlist CSV)
+/n8n/data/
+.dev.vars

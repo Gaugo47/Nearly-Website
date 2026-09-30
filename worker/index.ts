@@ -6,6 +6,8 @@ import { setRuntimeEnv } from "../db";
 interface Env {
   ASSETS: Fetcher;
   DB: D1Database;
+  N8N_WAITLIST_WEBHOOK_URL?: string;
+  N8N_WAITLIST_TOKEN?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {

@@ -1,0 +1,21 @@
+# Instance n8n auto-hébergée pour la liste d'attente Nearly.
+# Démarrage : docker compose -f n8n/docker-compose.yml up -d  → http://localhost:5678
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      GENERIC_TIMEZONE: Europe/Paris
+      TZ: Europe/Paris
+      # Le workflow ne lit et n'écrit que dans ce dossier.
+      N8N_RESTRICT_FILE_ACCESS_TO: /home/node/.n8n-files
+      # RGPD : les exécutions en erreur (qui contiennent des e-mails) sont effacées après 7 jours.
+      EXECUTIONS_DATA_PRUNE: "true"
+      EXECUTIONS_DATA_MAX_AGE: "168"
+      # À renseigner en production (URL publique HTTPS de l'instance) :
+      # WEBHOOK_URL: https://n8n.votre-domaine.fr/
+    volumes:
+      - ./data/n8n:/home/node/.n8n
+      - ./data/files:/home/node/.n8n-files

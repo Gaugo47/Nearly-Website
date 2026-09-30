@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Fragments de nœuds Code n8n (return et await de premier niveau), testés par n8n/workflow.test.mjs.
+    "n8n/src/**",
   ]),
 ]);
 

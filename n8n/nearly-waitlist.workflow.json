@@ -1,0 +1,411 @@
+{
+  "name": "Nearly – Liste d’attente (CSV)",
+  "nodes": [
+    {
+      "id": "a2fb80d5-1a23-4e11-a8c5-bb83be348bde",
+      "name": "Webhook inscription",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nearly-waitlist",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "ca9934cd-edbe-43eb-a5fc-3a389a737967",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "364b7133-d3d2-4cdf-a75b-2656a8d03034",
+          "name": "Nearly – jeton du site"
+        }
+      }
+    },
+    {
+      "id": "81c55c72-1f1a-437f-a769-1e6689a5af5e",
+      "name": "Lire le CSV",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "fileSelector": "/home/node/.n8n-files/nearly-waitlist.csv",
+        "options": {}
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "id": "ceb376df-a2e5-4b92-a9a1-7ac9f5ebf406",
+      "name": "Traiter la demande",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Helpers CSV partagés : injectés en tête de chaque nœud Code par build-workflow.mjs.\nconst CSV_FILE_NAME = 'nearly-waitlist.csv';\nconst DELIMITER = ',';\nconst COLUMNS = [\n  'created_at',\n  'updated_at',\n  'email',\n  'reason',\n  'reason_label',\n  'expectations',\n  'consent_launch',\n  'consent_feedback',\n  'policy_version',\n  'consent_at',\n  'source',\n];\n\nfunction parseCsv(text) {\n  const rows = [];\n  let row = [];\n  let field = '';\n  let quoted = false;\n  const input = text.replace(/^﻿/, '');\n  for (let i = 0; i < input.length; i++) {\n    const char = input[i];\n    if (quoted) {\n      if (char !== '\"') field += char;\n      else if (input[i + 1] === '\"') { field += '\"'; i++; }\n      else quoted = false;\n    } else if (char === '\"') {\n      quoted = true;\n    } else if (char === DELIMITER) {\n      row.push(field);\n      field = '';\n    } else if (char === '\\n' || char === '\\r') {\n      if (char === '\\r' && input[i + 1] === '\\n') i++;\n      row.push(field);\n      rows.push(row);\n      row = [];\n      field = '';\n    } else {\n      field += char;\n    }\n  }\n  if (field !== '' || row.length) {\n    row.push(field);\n    rows.push(row);\n  }\n  return rows.filter((cells) => cells.some((cell) => cell !== ''));\n}\n\n// Une ligne par e-mail : si deux inscriptions simultanées ont créé un doublon, la plus récente l'emporte.\nfunction readRecords(text) {\n  const [header, ...lines] = parseCsv(text);\n  if (!header) return [];\n  const byEmail = new Map();\n  for (const line of lines) {\n    const record = Object.fromEntries(header.map((name, index) => [name, line[index] ?? '']));\n    if (!record.email) continue;\n    const previous = byEmail.get(record.email);\n    byEmail.set(record.email, previous ? { ...record, created_at: previous.created_at } : record);\n  }\n  return [...byEmail.values()];\n}\n\n// Préfixe les cellules qui ressemblent à une formule pour empêcher l'injection CSV dans Excel/Sheets.\nfunction csvCell(value) {\n  let text = value == null ? '' : String(value);\n  if (/^[=+\\-@\\t\\r]/.test(text)) text = \"'\" + text;\n  return /[\"\\r\\n]/.test(text) || text.includes(DELIMITER) ? '\"' + text.replace(/\"/g, '\"\"') + '\"' : text;\n}\n\nfunction csvLine(record) {\n  return COLUMNS.map((column) => csvCell(record[column])).join(DELIMITER) + '\\r\\n';\n}\n\nfunction toCsv(records) {\n  return '﻿' + COLUMNS.join(DELIMITER) + '\\r\\n' + records.map(csvLine).join('');\n}\n\nfunction csvBinary(text) {\n  return {\n    data: Buffer.from(text, 'utf8').toString('base64'),\n    mimeType: 'text/csv',\n    fileName: CSV_FILE_NAME,\n    fileExtension: 'csv',\n  };\n}\n\n// Retourne le contenu du CSV lu par le nœud précédent, ou null si le fichier n'existe pas encore.\nasync function loadExistingCsv(context, items) {\n  const index = items.findIndex((item) => item.binary && item.binary.data);\n  if (index === -1) return null;\n  const buffer = await context.helpers.getBinaryDataBuffer(index, 'data');\n  return buffer.toString('utf8');\n}\n\n// Nœud « Traiter la demande » : valide la requête du site puis inscrit, met à jour ou supprime la ligne du CSV.\nconst EXPECTATIONS_MAX = 600;\nconst EMAIL_PATTERN = /^(?![=+\\-@])[^\\s@\"<>()[\\]\\\\,;:]+@[^\\s@\"<>()[\\]\\\\,;:]+\\.[a-z]{2,}$/i;\nconst now = new Date().toISOString();\nconst request = $('Webhook inscription').first().json.body || {};\n\nfunction respond(statusCode, response, file) {\n  const json = { statusCode, response, write: Boolean(file) };\n  if (!file) return [{ json }];\n  return [{ json: { ...json, append: file.append }, binary: { data: csvBinary(file.text) } }];\n}\n\nfunction shortText(value, max) {\n  return typeof value === 'string' ? value.trim().slice(0, max) : '';\n}\n\nconst action = request.action;\nconst email = typeof request.email === 'string' ? request.email.trim().toLowerCase() : '';\nif (!['subscribe', 'unsubscribe'].includes(action) || email.length > 254 || !EMAIL_PATTERN.test(email)) {\n  return respond(400, { ok: false, error: 'invalid_request' });\n}\n\nconst existingText = await loadExistingCsv(this, $input.all());\nconst hasHeader = existingText !== null && parseCsv(existingText).length > 0;\nconst records = hasHeader ? readRecords(existingText) : [];\nconst current = records.find((record) => record.email === email);\n\nif (action === 'unsubscribe') {\n  // Réponse identique que l'adresse soit inscrite ou non.\n  if (!current) return respond(200, { ok: true });\n  return respond(200, { ok: true }, { append: false, text: toCsv(records.filter((record) => record.email !== email)) });\n}\n\nconst expectations = typeof request.expectations === 'string' ? request.expectations.trim() : '';\nconst validReason = typeof request.reason === 'string' && /^[a-z][a-z-]{1,29}$/.test(request.reason);\nif (!validReason || request.consentLaunch !== true || expectations.length > EXPECTATIONS_MAX) {\n  return respond(400, { ok: false, error: 'invalid_request' });\n}\n\nconst consentAt = typeof request.consentAt === 'string' && !Number.isNaN(Date.parse(request.consentAt))\n  ? new Date(request.consentAt).toISOString()\n  : now;\n\nconst record = {\n  created_at: current ? current.created_at : now,\n  updated_at: now,\n  email,\n  reason: request.reason,\n  reason_label: shortText(request.reasonLabel, 60) || request.reason,\n  expectations,\n  consent_launch: 'oui',\n  consent_feedback: request.consentFeedback === true ? 'oui' : 'non',\n  policy_version: shortText(request.policyVersion, 20),\n  consent_at: consentAt,\n  source: shortText(request.source, 40) || 'site-web',\n};\n\n// Nouvelle adresse dans un fichier existant : simple ajout en fin de fichier.\nif (!current && hasHeader) {\n  return respond(201, { ok: true }, { append: true, text: csvLine(record) });\n}\n\nconst nextRecords = current ? records.map((item) => (item.email === email ? record : item)) : [record];\nreturn respond(current ? 200 : 201, { ok: true }, { append: false, text: toCsv(nextRecords) });\n"
+      }
+    },
+    {
+      "id": "c9410a7b-6a2a-43a0-a910-a1e8770d0e8e",
+      "name": "Fichier à écrire ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "159befb2-e2cf-4e26-a678-a094dc3f8054",
+              "leftValue": "={{ $json.write }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "670ce14a-ae7e-4601-ab49-d52e3cee9845",
+      "name": "Écrire le CSV",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        960,
+        -100
+      ],
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/node/.n8n-files/nearly-waitlist.csv",
+        "dataPropertyName": "data",
+        "options": {
+          "append": "={{ $('Traiter la demande').first().json.append }}"
+        }
+      }
+    },
+    {
+      "id": "eeda6d71-b1bc-4fd7-a082-c2ca6470d0ca",
+      "name": "Répondre au site",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $('Traiter la demande').first().json.response }}",
+        "options": {
+          "responseCode": "={{ $('Traiter la demande').first().json.statusCode }}"
+        }
+      }
+    },
+    {
+      "id": "61651c4f-ff2a-475c-a1bb-33e45db46335",
+      "name": "Chaque nuit à 3 h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        320
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "d4af5590-1def-49d7-a695-bcf13cf2e6da",
+      "name": "Lire le CSV (purge)",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        240,
+        320
+      ],
+      "parameters": {
+        "fileSelector": "/home/node/.n8n-files/nearly-waitlist.csv",
+        "options": {}
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "id": "b5ae2499-82fe-4d9b-ac08-098813f57aa7",
+      "name": "Supprimer les inscriptions expirées",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        320
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Helpers CSV partagés : injectés en tête de chaque nœud Code par build-workflow.mjs.\nconst CSV_FILE_NAME = 'nearly-waitlist.csv';\nconst DELIMITER = ',';\nconst COLUMNS = [\n  'created_at',\n  'updated_at',\n  'email',\n  'reason',\n  'reason_label',\n  'expectations',\n  'consent_launch',\n  'consent_feedback',\n  'policy_version',\n  'consent_at',\n  'source',\n];\n\nfunction parseCsv(text) {\n  const rows = [];\n  let row = [];\n  let field = '';\n  let quoted = false;\n  const input = text.replace(/^﻿/, '');\n  for (let i = 0; i < input.length; i++) {\n    const char = input[i];\n    if (quoted) {\n      if (char !== '\"') field += char;\n      else if (input[i + 1] === '\"') { field += '\"'; i++; }\n      else quoted = false;\n    } else if (char === '\"') {\n      quoted = true;\n    } else if (char === DELIMITER) {\n      row.push(field);\n      field = '';\n    } else if (char === '\\n' || char === '\\r') {\n      if (char === '\\r' && input[i + 1] === '\\n') i++;\n      row.push(field);\n      rows.push(row);\n      row = [];\n      field = '';\n    } else {\n      field += char;\n    }\n  }\n  if (field !== '' || row.length) {\n    row.push(field);\n    rows.push(row);\n  }\n  return rows.filter((cells) => cells.some((cell) => cell !== ''));\n}\n\n// Une ligne par e-mail : si deux inscriptions simultanées ont créé un doublon, la plus récente l'emporte.\nfunction readRecords(text) {\n  const [header, ...lines] = parseCsv(text);\n  if (!header) return [];\n  const byEmail = new Map();\n  for (const line of lines) {\n    const record = Object.fromEntries(header.map((name, index) => [name, line[index] ?? '']));\n    if (!record.email) continue;\n    const previous = byEmail.get(record.email);\n    byEmail.set(record.email, previous ? { ...record, created_at: previous.created_at } : record);\n  }\n  return [...byEmail.values()];\n}\n\n// Préfixe les cellules qui ressemblent à une formule pour empêcher l'injection CSV dans Excel/Sheets.\nfunction csvCell(value) {\n  let text = value == null ? '' : String(value);\n  if (/^[=+\\-@\\t\\r]/.test(text)) text = \"'\" + text;\n  return /[\"\\r\\n]/.test(text) || text.includes(DELIMITER) ? '\"' + text.replace(/\"/g, '\"\"') + '\"' : text;\n}\n\nfunction csvLine(record) {\n  return COLUMNS.map((column) => csvCell(record[column])).join(DELIMITER) + '\\r\\n';\n}\n\nfunction toCsv(records) {\n  return '﻿' + COLUMNS.join(DELIMITER) + '\\r\\n' + records.map(csvLine).join('');\n}\n\nfunction csvBinary(text) {\n  return {\n    data: Buffer.from(text, 'utf8').toString('base64'),\n    mimeType: 'text/csv',\n    fileName: CSV_FILE_NAME,\n    fileExtension: 'csv',\n  };\n}\n\n// Retourne le contenu du CSV lu par le nœud précédent, ou null si le fichier n'existe pas encore.\nasync function loadExistingCsv(context, items) {\n  const index = items.findIndex((item) => item.binary && item.binary.data);\n  if (index === -1) return null;\n  const buffer = await context.helpers.getBinaryDataBuffer(index, 'data');\n  return buffer.toString('utf8');\n}\n\n// Nœud « Supprimer les inscriptions expirées » : applique la durée de conservation annoncée dans la politique de confidentialité.\nconst RETENTION_MONTHS = 36;\n\nconst existingText = await loadExistingCsv(this, $input.all());\nif (!existingText) return [];\n\nconst limit = new Date();\nlimit.setMonth(limit.getMonth() - RETENTION_MONTHS);\n\nconst records = readRecords(existingText);\nconst kept = records.filter((record) => {\n  const lastConsent = Date.parse(record.updated_at || record.created_at);\n  return Number.isNaN(lastConsent) || lastConsent >= limit.getTime();\n});\n\n// Rien à supprimer : on n'écrit pas le fichier.\nif (kept.length === records.length) return [];\n\nreturn [{\n  json: { removed: records.length - kept.length, kept: kept.length },\n  binary: { data: csvBinary(toCsv(kept)) },\n}];\n"
+      }
+    },
+    {
+      "id": "ed39391e-d75b-4752-a22e-5aeded675015",
+      "name": "Réécrire le CSV (purge)",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        720,
+        320
+      ],
+      "parameters": {
+        "operation": "write",
+        "fileName": "/home/node/.n8n-files/nearly-waitlist.csv",
+        "dataPropertyName": "data",
+        "options": {
+          "append": false
+        }
+      }
+    },
+    {
+      "id": "49fa7bf8-cc24-4625-a50a-0a5574c14e87",
+      "name": "Webhook export",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        600
+      ],
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "nearly-waitlist-export",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "35d27353-11a2-462f-ad9e-e537a29e2456",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "b58a102a-0ec9-442d-ae1b-9afbbb6a7c85",
+          "name": "Nearly – jeton d’export"
+        }
+      }
+    },
+    {
+      "id": "681df6a0-2cff-42c5-a183-b173827ea206",
+      "name": "Lire le CSV (export)",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        600
+      ],
+      "parameters": {
+        "fileSelector": "/home/node/.n8n-files/nearly-waitlist.csv",
+        "options": {}
+      }
+    },
+    {
+      "id": "328c70f7-f033-4efc-a9ec-f6f025c6d147",
+      "name": "Télécharger le CSV",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        600
+      ],
+      "parameters": {
+        "respondWith": "binary",
+        "responseDataSource": "set",
+        "inputFieldName": "data",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/csv; charset=utf-8"
+              },
+              {
+                "name": "Content-Disposition",
+                "value": "attachment; filename=\"nearly-waitlist.csv\""
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "8ec83463-d0d5-4451-a5e7-6e52180c2221",
+      "name": "À lire",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -300
+      ],
+      "parameters": {
+        "width": 620,
+        "height": 240,
+        "content": "## Liste d’attente Nearly\n1. Créez deux identifiants **Header Auth** : nom d’en-tête `X-Nearly-Token`, valeur = un long secret (site / export).\n2. Sélectionnez-les dans « Webhook inscription » et « Webhook export ».\n3. Le CSV est écrit dans `/home/node/.n8n-files/nearly-waitlist.csv` (montez ce dossier en volume Docker).\n4. Activez le workflow puis copiez l’URL de production du webhook dans `N8N_WAITLIST_WEBHOOK_URL` côté site.\nLes exécutions réussies ne sont pas conservées (RGPD) : voir Paramètres du workflow."
+      }
+    }
+  ],
+  "connections": {
+    "Webhook inscription": {
+      "main": [
+        [
+          {
+            "node": "Lire le CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire le CSV": {
+      "main": [
+        [
+          {
+            "node": "Traiter la demande",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Traiter la demande": {
+      "main": [
+        [
+          {
+            "node": "Fichier à écrire ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fichier à écrire ?": {
+      "main": [
+        [
+          {
+            "node": "Écrire le CSV",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Répondre au site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Écrire le CSV": {
+      "main": [
+        [
+          {
+            "node": "Répondre au site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chaque nuit à 3 h": {
+      "main": [
+        [
+          {
+            "node": "Lire le CSV (purge)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire le CSV (purge)": {
+      "main": [
+        [
+          {
+            "node": "Supprimer les inscriptions expirées",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supprimer les inscriptions expirées": {
+      "main": [
+        [
+          {
+            "node": "Réécrire le CSV (purge)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook export": {
+      "main": [
+        [
+          {
+            "node": "Lire le CSV (export)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire le CSV (export)": {
+      "main": [
+        [
+          {
+            "node": "Télécharger le CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "all",
+    "saveManualExecutions": false,
+    "timezone": "Europe/Paris"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

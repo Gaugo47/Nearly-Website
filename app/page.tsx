@@ -1,5 +1,6 @@
 import GameMatch from "./GameMatch";
 import ExpenseDemo from "./ExpenseDemo";
+import WaitlistForm from "./WaitlistForm";
 
 const features = [
   {
@@ -62,7 +63,7 @@ const faqs = [
   {
     question: "Nearly est-elle disponible sur iPhone et Android ?",
     answer:
-      "Nearly est conçue pour iOS et Android. Les liens de téléchargement seront ajoutés ici dès l’ouverture officielle des fiches App Store et Google Play.",
+      "Nearly est conçue pour iOS et Android. Les liens de téléchargement seront ajoutés ici dès l’ouverture officielle des fiches App Store et Google Play. Rejoignez la liste d’attente pour être prévenu·e en premier du lancement.",
   },
 ];
 
@@ -137,8 +138,8 @@ export default function Home() {
           <a href="#spicy">Mode Spicy</a>
           <a href="#securite">Sécurité</a>
         </div>
-        <a className="nav-cta" href="#telecharger">
-          Découvrir <ArrowIcon />
+        <a className="nav-cta" href="#liste-attente">
+          Liste d’attente <ArrowIcon />
         </a>
       </nav>
 
@@ -161,8 +162,8 @@ export default function Home() {
             <span>Un espace privé pour chaque relation qui compte.</span>
           </div>
           <div className="hero-actions">
-            <a className="button button--primary" href="#experience">
-              Voir Nearly en action <ArrowIcon />
+            <a className="button button--primary" href="#liste-attente">
+              Rejoindre la liste d’attente <ArrowIcon />
             </a>
             <span className="launch-note">
               <span className="pulse" /> Bientôt sur iOS &amp; Android
@@ -193,6 +194,24 @@ export default function Home() {
             <div><small>Mochi est fier</small><strong>+25 pour votre lien</strong></div>
           </div>
         </div>
+      </section>
+
+      <section className="waitlist" id="liste-attente" aria-labelledby="liste-attente-titre">
+        <div className="waitlist-copy">
+          <p className="eyebrow"><span /> Liste d’attente · Accès anticipé</p>
+          <h2 id="liste-attente-titre">Soyez parmi<br />les <em>premiers.</em></h2>
+          <p className="waitlist-intro">
+            Nearly ouvre bientôt sur iOS et Android. Laissez votre e-mail et
+            dites-nous ce que vous en attendez : vos réponses nous aident à
+            construire l’application qui vous ressemble.
+          </p>
+          <ul className="waitlist-perks">
+            <li><span>01</span><div><strong>Prévenu·e en premier</strong><p>Un e-mail le jour du lancement, avant l’ouverture au grand public.</p></div></li>
+            <li><span>02</span><div><strong>Votre avis compte</strong><p>Vos attentes orientent directement les prochaines fonctionnalités.</p></div></li>
+            <li><span>03</span><div><strong>Zéro spam, zéro revente</strong><p>Uniquement des nouvelles de Nearly, et une désinscription en un clic.</p></div></li>
+          </ul>
+        </div>
+        <WaitlistForm />
       </section>
 
       <section className="manifesto" aria-label="La promesse Nearly">
@@ -436,6 +455,7 @@ export default function Home() {
         <p className="eyebrow eyebrow--light"><span /> La suite commence ici</p>
         <h2>La distance est réelle.<br /><em>Votre proximité aussi.</em></h2>
         <p>Nearly arrive bientôt sur iPhone et Android.</p>
+        <a className="button final-cta__join" href="#liste-attente">Rejoindre la liste d’attente <ArrowIcon /></a>
         <div className="store-row" aria-label="Plateformes bientôt disponibles">
           <div className="store-badge"><span>●</span><div><small>Bientôt sur</small><strong>l’App Store</strong></div></div>
           <div className="store-badge"><span>▶</span><div><small>Bientôt sur</small><strong>Google Play</strong></div></div>
@@ -448,8 +468,10 @@ export default function Home() {
         </a>
         <p>Proches, même à distance.</p>
         <div>
-          <a href="#securite">Sécurité</a>
           <a href="#faq">FAQ</a>
+          <a href="/conditions-liste-attente">Conditions</a>
+          <a href="/confidentialite">Confidentialité</a>
+          <a href="/mentions-legales">Mentions légales</a>
           <span>© 2026 Nearly</span>
         </div>
       </footer>

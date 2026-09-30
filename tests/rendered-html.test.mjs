@@ -61,3 +61,84 @@ test("ships an AI-readable product summary", async () => {
   assert.match(llms, /relations qui comptent/i);
   assert.match(llms, /Vie privée/);
 });
+
+async function callWaitlist(method, body, env = {}) {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${Math.random()}`);
+  const { default: worker } = await import(workerUrl.href);
+  return worker.fetch(
+    new Request("https://nearly.example/api/waitlist", {
+      method,
+      headers: { "content-type": "application/json", host: "nearly.example" },
+      body: JSON.stringify(body),
+    }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) }, ...env },
+    { waitUntil() {}, passThroughOnException() {} },
+  );
+}
+
+const n8nEnv = { N8N_WAITLIST_WEBHOOK_URL: "https://n8n.example/webhook/nearly-waitlist", N8N_WAITLIST_TOKEN: "secret-test" };
+const validSignup = { email: " Alice@Exemple.fr", reason: "couple-distance", expectations: "Des rituels", consentLaunch: true, consentFeedback: true, startedAt: 0 };
+
+test("renders the waitlist form at the top of the landing page", async () => {
+  const html = await (await render()).text();
+  const waitlistIndex = html.indexOf('id="liste-attente"');
+  assert.ok(waitlistIndex > 0 && waitlistIndex < html.indexOf('id="experience"'));
+  assert.match(html, /Rejoindre la liste d’attente/);
+  assert.match(html, /name="consentLaunch"/);
+  assert.match(html, /href="\/confidentialite"/);
+  assert.match(html, /href="\/conditions-liste-attente"/);
+});
+
+test("renders the legal pages", async () => {
+  for (const [path, text] of [
+    ["/confidentialite", /Politique de/],
+    ["/conditions-liste-attente", /Conditions de la/],
+    ["/mentions-legales", /Mentions/],
+  ]) {
+    const response = await render(path);
+    assert.equal(response.status, 200, path);
+    assert.match(await response.text(), text);
+  }
+  assert.match(await (await render("/confidentialite")).text(), /id="desinscription"/);
+});
+
+test("forwards a valid waitlist signup to n8n with the shared token", async (t) => {
+  const calls = [];
+  t.mock.method(globalThis, "fetch", async (url, init) => {
+    calls.push({ url: String(url), init });
+    return Response.json({ ok: true }, { status: 201 });
+  });
+
+  const response = await callWaitlist("POST", validSignup, n8nEnv);
+  assert.equal(response.status, 201);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url, n8nEnv.N8N_WAITLIST_WEBHOOK_URL);
+  assert.equal(calls[0].init.headers["x-nearly-token"], "secret-test");
+  const sent = JSON.parse(calls[0].init.body);
+  assert.equal(sent.action, "subscribe");
+  assert.equal(sent.email, "alice@exemple.fr");
+  assert.equal(sent.reasonLabel, "Couple à distance");
+  assert.equal(sent.consentFeedback, true);
+  assert.equal(sent.policyVersion, "2026-09-30");
+
+  const removed = await callWaitlist("DELETE", { email: "alice@exemple.fr" }, n8nEnv);
+  assert.equal(removed.status, 200);
+  assert.equal(JSON.parse(calls[1].init.body).action, "unsubscribe");
+});
+
+test("rejects invalid signups and silently drops bots", async (t) => {
+  const fetchMock = t.mock.method(globalThis, "fetch", async () => Response.json({ ok: true }));
+
+  assert.equal((await callWaitlist("POST", { ...validSignup, email: "nope" }, n8nEnv)).status, 400);
+  assert.equal((await callWaitlist("POST", { ...validSignup, reason: "autre" }, n8nEnv)).status, 400);
+  assert.equal((await callWaitlist("POST", { ...validSignup, consentLaunch: false }, n8nEnv)).status, 400);
+  assert.equal((await callWaitlist("POST", { ...validSignup, expectations: "x".repeat(601) }, n8nEnv)).status, 400);
+
+  const bot = await callWaitlist("POST", { ...validSignup, website: "https://spam.example" }, n8nEnv);
+  assert.equal(bot.status, 200);
+  assert.deepEqual(await bot.json(), { joined: true });
+  assert.equal(fetchMock.mock.callCount(), 0);
+
+  assert.equal((await callWaitlist("POST", validSignup)).status, 503);
+});
