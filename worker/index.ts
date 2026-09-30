@@ -2,6 +2,7 @@
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 import { setRuntimeEnv } from "../db";
+import { purgeExpiredDemoDataInBackground } from "../db/retention";
 
 interface Env {
   ASSETS: Fetcher;
@@ -31,6 +32,7 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     setRuntimeEnv(env);
+    purgeExpiredDemoDataInBackground(env.DB, (promise) => ctx.waitUntil(promise));
     const url = new URL(request.url);
 
     if (url.pathname === "/_vinext/image") {

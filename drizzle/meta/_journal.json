@@ -15,6 +15,13 @@
       "when": 1786296840379,
       "tag": "0001_nebulous_bill_hollister",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790782532553,
+      "tag": "0002_demo_retention_indexes",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const expenseTrials = sqliteTable("expense_trials", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -11,6 +11,7 @@ export const expenseTrials = sqliteTable("expense_trials", {
 }, (table) => [
   uniqueIndex("idx_expense_trials_visitor_hash").on(table.visitorHash),
   uniqueIndex("idx_expense_trials_ip_hash").on(table.ipHash),
+  index("idx_expense_trials_last_seen_at").on(table.lastSeenAt),
 ]);
 
 export const coupleQuestionTrials = sqliteTable("couple_question_trials", {
@@ -21,4 +22,5 @@ export const coupleQuestionTrials = sqliteTable("couple_question_trials", {
   lastSeenAt: text("last_seen_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 }, (table) => [
   uniqueIndex("idx_couple_question_trials_ip_hash").on(table.ipHash),
+  index("idx_couple_question_trials_last_seen_at").on(table.lastSeenAt),
 ]);

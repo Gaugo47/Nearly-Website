@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { readdir, readFile } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 async function render(path = "/") {
@@ -141,4 +143,84 @@ test("rejects invalid signups and silently drops bots", async (t) => {
   assert.equal(fetchMock.mock.callCount(), 0);
 
   assert.equal((await callWaitlist("POST", validSignup)).status, 503);
+});
+
+async function createTestD1() {
+  const db = new DatabaseSync(":memory:");
+  const migrations = new URL("../drizzle/", import.meta.url);
+  for (const file of (await readdir(migrations)).filter((name) => name.endsWith(".sql")).sort()) {
+    db.exec((await readFile(new URL(file, migrations), "utf8")).replaceAll("--> statement-breakpoint", ""));
+  }
+  const statement = (sql, params = []) => ({
+    bind: (...next) => statement(sql, next),
+    first: async () => db.prepare(sql).get(...params) ?? null,
+    all: async () => ({ results: db.prepare(sql).all(...params) }),
+    run: async () => ({ meta: { changes: Number(db.prepare(sql).run(...params).changes) } }),
+  });
+  return {
+    db,
+    prepare: (sql) => statement(sql),
+    batch: async (statements) => Promise.all(statements.map((item) => item.run())),
+  };
+}
+
+function trialHash(namespace, value) {
+  return createHash("sha256").update(`${namespace}:v1:${value}`).digest("hex");
+}
+
+async function callWorker(path, env, init = {}) {
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${Math.random()}`);
+  const { default: worker } = await import(workerUrl.href);
+  const pending = [];
+  const response = await worker.fetch(
+    new Request(`https://nearly.example${path}`, { ...init, headers: { host: "nearly.example", ...init.headers } }),
+    { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) }, ...env },
+    { waitUntil(promise) { pending.push(promise); }, passThroughOnException() {} },
+  );
+  await Promise.all(pending);
+  return response;
+}
+
+test("purges demo data unused for more than 12 months", async () => {
+  const DB = await createTestD1();
+  DB.db.exec(`
+    INSERT INTO expense_trials (visitor_hash, ip_hash, state_json, last_seen_at) VALUES
+      ('old-visitor', 'old-ip', '{"participants":["Alice"]}', datetime('now', '-12 months', '-1 day')),
+      ('recent-visitor', 'recent-ip', '{"participants":["Bob"]}', datetime('now', '-11 months'));
+    INSERT INTO couple_question_trials (ip_hash, question_count, last_seen_at) VALUES
+      ('old-ip', 4, datetime('now', '-13 months')),
+      ('recent-ip', 4, datetime('now', '-11 months'));
+  `);
+
+  // Any page view schedules the purge in the background, even if nobody uses the demos.
+  assert.equal((await callWorker("/", { DB })).status, 200);
+  assert.deepEqual(DB.db.prepare("SELECT visitor_hash FROM expense_trials").all().map((row) => row.visitor_hash), ["recent-visitor"]);
+  assert.deepEqual(DB.db.prepare("SELECT ip_hash FROM couple_question_trials").all().map((row) => row.ip_hash), ["recent-ip"]);
+});
+
+test("demo endpoints purge expired trials before checking quotas", async () => {
+  const DB = await createTestD1();
+  const expiredIp = "203.0.113.7";
+  const activeIp = "203.0.113.8";
+  DB.db.prepare(`INSERT INTO couple_question_trials (ip_hash, question_count, last_seen_at) VALUES
+    (?, 4, datetime('now', '-13 months')), (?, 4, datetime('now', '-1 day'))`)
+    .run(trialHash("nearly-couple-questions", `ip:${expiredIp}`), trialHash("nearly-couple-questions", `ip:${activeIp}`));
+  DB.db.prepare(`INSERT INTO expense_trials (visitor_hash, ip_hash, last_seen_at) VALUES
+    ('old-visitor', ?, datetime('now', '-13 months')), ('recent-visitor', ?, datetime('now', '-1 day'))`)
+    .run(trialHash("nearly-expense-trial", `ip:${expiredIp}`), trialHash("nearly-expense-trial", `ip:${activeIp}`));
+
+  const draw = (ip) => callWorker("/api/couple-questions", { DB }, { method: "POST", headers: { "cf-connecting-ip": ip } });
+  const renewed = await draw(expiredIp);
+  assert.equal(renewed.status, 200);
+  assert.equal((await renewed.json()).remaining, 3);
+  assert.equal((await draw(activeIp)).status, 429);
+
+  const startTrial = (ip) => callWorker("/api/expense-trial", { DB }, {
+    method: "POST",
+    headers: { "cf-connecting-ip": ip, "content-type": "application/json" },
+    body: JSON.stringify({ visitorId: `visitor-${ip.replaceAll(".", "-")}-0000` }),
+  });
+  assert.equal((await startTrial(expiredIp)).status, 201);
+  assert.equal((await startTrial(activeIp)).status, 409);
 });

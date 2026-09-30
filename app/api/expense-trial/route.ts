@@ -1,4 +1,5 @@
 import { getD1 } from "../../../db";
+import { purgeExpiredDemoData } from "../../../db/retention";
 
 const MAX_STATE_BYTES = 200_000;
 
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
     const visitorHash = await digest(`visitor:${payload.visitorId}`);
     const ipHash = await digest(`ip:${getClientIp(request)}`);
     const d1 = getD1();
+    await purgeExpiredDemoData(d1);
     const existingVisitor = await d1
       .prepare("SELECT state_json FROM expense_trials WHERE visitor_hash = ? LIMIT 1")
       .bind(visitorHash)

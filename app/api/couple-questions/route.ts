@@ -1,4 +1,5 @@
 import { getD1 } from "../../../db";
+import { purgeExpiredDemoData } from "../../../db/retention";
 
 const MAX_QUESTIONS = 4;
 
@@ -19,7 +20,9 @@ type DrawRow = { question_count: number };
 export async function POST(request: Request) {
   try {
     const ipHash = await digest(`ip:${getClientIp(request)}`);
-    const result = await getD1()
+    const d1 = getD1();
+    await purgeExpiredDemoData(d1);
+    const result = await d1
       .prepare(`INSERT INTO couple_question_trials (ip_hash, question_count)
         VALUES (?, 1)
         ON CONFLICT(ip_hash) DO UPDATE SET
