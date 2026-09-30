@@ -2,9 +2,9 @@
 
 ```
 Formulaire (#liste-attente)
-   │  POST /api/waitlist (validation, anti-robots)
+   │  POST HTTPS vers la passerelle externe (validation, anti-robots)
    ▼
-Serveur du site ── POST + en-tête X-Nearly-Token ──▶ Webhook n8n « nearly-waitlist »
+Passerelle n8n/gateway.mjs ── POST + en-tête X-Nearly-Token ──▶ Webhook n8n « nearly-waitlist »
                                                        │
                                   Lire le CSV → Traiter la demande → Écrire le CSV → Réponse
                                                        │
@@ -37,12 +37,20 @@ Le workflow lit et écrit un fichier sur le disque : il faut une instance n8n **
    - `Nearly – jeton d’export` : Name `X-Nearly-Token`, Value = un **autre** secret.
    Les sélectionner dans les nœuds « Webhook inscription » et « Webhook export ».
 4. Activer le workflow et copier l'**URL de production** du nœud « Webhook inscription ».
-5. Configurer le site (variables d'environnement / secrets de l'hébergeur ; en local, un fichier `.dev.vars` à la racine) :
+5. Héberger `n8n/gateway.mjs` sur un serveur Node.js séparé, derrière un reverse proxy HTTPS. Le serveur GitHub Pages ne peut pas exécuter cette passerelle.
+   Variables privées sur CE serveur (jamais des variables `NEXT_PUBLIC_*`, jamais dans le dépôt) :
    ```
+   WAITLIST_ALLOWED_ORIGIN=https://gaugo47.github.io
    N8N_WAITLIST_WEBHOOK_URL=https://n8n.votre-domaine.fr/webhook/nearly-waitlist
    N8N_WAITLIST_TOKEN=<secret du jeton du site>
+   PORT=8787
    ```
-   Sans ces variables, le formulaire affiche « momentanément indisponible » et rien n'est transmis.
+   Démarrer avec `node n8n/gateway.mjs`. Le processus écoute uniquement sur `127.0.0.1`.
+   Le reverse proxy doit exposer `/waitlist` en HTTPS, limiter les requêtes et la taille des corps. La passerelle valide l’origine, les champs et les consentements ; son limiteur en mémoire est adapté à une seule instance. CORS ne remplace pas une protection anti-abus au niveau du proxy.
+6. Configurer la variable PUBLIQUE `WAITLIST_API_URL` dans GitHub Actions avec l’URL de cette passerelle, par exemple `https://inscriptions.votre-domaine.fr/waitlist`. Compléter toutes les variables d’éditeur et `WAITLIST_HOST` décrites dans le README principal, puis reconstruire le site.
+   Tant que cette configuration est absente, le site ne présente aucun champ de collecte.
+
+Le webhook d’export n’est jamais exposé via la passerelle. Les données CSV, identifiants n8n, sauvegardes et journaux restent hors du dépôt public.
 
 Télécharger le CSV :
 

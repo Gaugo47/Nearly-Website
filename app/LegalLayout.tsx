@@ -1,3 +1,5 @@
+
+import { sitePath } from "./site";
 import type { ReactNode } from "react";
 import { legal } from "./legal";
 
@@ -19,13 +21,13 @@ export default function LegalLayout({ current, eyebrow, title, intro, children }
   return (
     <main className="tool-page legal-page">
       <nav className="tool-nav" aria-label="Navigation Nearly">
-        <a className="tool-nav__brand" href="/" aria-label="Nearly, accueil"><img src="/media/nearly-app-icon-liquid-glass-v2.png" alt="Nearly" /></a>
+        <a className="tool-nav__brand" href={sitePath("/")} aria-label="Nearly, accueil"><img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" /></a>
         <div>
           {legalLinks.map((link) => (
-            <a key={link.href} href={link.href} aria-current={link.href === current ? "page" : undefined}>{link.label}</a>
+            <a key={link.href} href={sitePath(link.href)} aria-current={link.href === current ? "page" : undefined}>{link.label}</a>
           ))}
         </div>
-        <a className="tool-nav__back" href="/#liste-attente">Liste d’attente <span aria-hidden="true">↗</span></a>
+        <a className="tool-nav__back" href={sitePath("/#liste-attente")}>Liste d’attente <span aria-hidden="true">↗</span></a>
       </nav>
 
       <header className="legal-hero">
@@ -38,7 +40,7 @@ export default function LegalLayout({ current, eyebrow, title, intro, children }
       <article className="legal-body">{children}</article>
 
       <footer className="legal-footer">
-        <a href="/">← Retour à Nearly</a>
+        <a href={sitePath("/")}>← Retour à Nearly</a>
         <span>Une question sur vos données ? <strong>{legal.contactEmail}</strong></span>
       </footer>
     </main>

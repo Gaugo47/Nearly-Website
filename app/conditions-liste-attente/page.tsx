@@ -1,3 +1,5 @@
+
+import { absoluteUrl, sitePath } from "../site";
 import type { Metadata } from "next";
 import LegalLayout from "../LegalLayout";
 import { legal } from "../legal";
@@ -5,7 +7,7 @@ import { legal } from "../legal";
 export const metadata: Metadata = {
   title: "Conditions de la liste d’attente",
   description: "Les règles simples de la liste d’attente Nearly : inscription gratuite, sans engagement, désinscription à tout moment.",
-  alternates: { canonical: "/conditions-liste-attente" },
+  alternates: { canonical: absoluteUrl("/conditions-liste-attente/") },
 };
 
 export default function WaitlistTermsPage() {
@@ -66,10 +68,10 @@ export default function WaitlistTermsPage() {
       <section>
         <h2>6. Désinscription et fin de la liste</h2>
         <p>
-          Vous pouvez quitter la liste à tout moment, sans justification, depuis la <a href="/confidentialite#desinscription">page confidentialité</a>,
+          Vous pouvez quitter la liste à tout moment, sans justification, depuis la <a href={sitePath("/confidentialite#desinscription")}>page confidentialité</a>,
           via le lien présent dans nos e-mails ou en écrivant à <strong>{legal.contactEmail}</strong>. Nous pouvons clore la liste d’attente, notamment
           après le lancement, ou retirer une inscription manifestement fausse, automatisée ou abusive. Les données sont alors supprimées selon la
-          {" "}<a href="/confidentialite">politique de confidentialité</a>.
+          {" "}<a href={sitePath("/confidentialite")}>politique de confidentialité</a>.
         </p>
       </section>
 
@@ -85,7 +87,7 @@ export default function WaitlistTermsPage() {
       <section>
         <h2>8. Données personnelles</h2>
         <p>
-          Le traitement de vos données est détaillé dans la <a href="/confidentialite">politique de confidentialité</a> : ce que nous collectons, pourquoi,
+          Le traitement de vos données est détaillé dans la <a href={sitePath("/confidentialite")}>politique de confidentialité</a> : ce que nous collectons, pourquoi,
           combien de temps (au plus {legal.retentionMonths} mois) et comment exercer vos droits.
         </p>
       </section>

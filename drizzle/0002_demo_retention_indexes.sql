@@ -1,2 +1,0 @@
-CREATE INDEX `idx_couple_question_trials_last_seen_at` ON `couple_question_trials` (`last_seen_at`);--> statement-breakpoint
-CREATE INDEX `idx_expense_trials_last_seen_at` ON `expense_trials` (`last_seen_at`);

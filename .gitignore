@@ -44,3 +44,19 @@ next-env.d.ts
 # n8n local data (personal data: waitlist CSV)
 /n8n/data/
 .dev.vars
+
+# Local assistants, hosting identifiers, private backups and personal exports
+/.claude/
+/.codex/
+/.agents/
+/.openai/
+*.tsbuildinfo
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db
+*.csv
+*.har
+*.log
+!/.env.example

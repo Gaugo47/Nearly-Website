@@ -1,12 +1,14 @@
+import { absoluteUrl } from "../site";
 import type { Metadata } from "next";
 import LegalLayout from "../LegalLayout";
 import WaitlistUnsubscribe from "../WaitlistUnsubscribe";
+import { waitlistEndpoint } from "../site";
 import { legal } from "../legal";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: "Comment Nearly collecte, utilise et protège les données de la liste d’attente et du site, conformément au RGPD.",
-  alternates: { canonical: "/confidentialite" },
+  alternates: { canonical: absoluteUrl("/confidentialite/") },
 };
 
 const retentionYears = legal.retentionMonths / 12;
@@ -19,6 +21,7 @@ export default function PrivacyPage() {
       title={<>Politique de<br /><em>confidentialité.</em></>}
       intro="Nous collectons le strict nécessaire, nous l’utilisons uniquement pour ce que nous annonçons ici, et vous gardez la main à tout moment."
     >
+      {!waitlistEndpoint && <p className="legal-callout">La liste d’attente est actuellement désactivée. Les traitements d’inscription décrits ci-dessous ne seront activés qu’à son ouverture.</p>}
       <section className="legal-summary" aria-label="L’essentiel">
         <div><strong>Le strict minimum</strong><span>Un e-mail, votre motivation et, si vous le souhaitez, vos attentes.</span></div>
         <div><strong>Aucune revente</strong><span>Vos données ne sont ni vendues, ni louées, ni utilisées pour de la publicité.</span></div>
@@ -61,16 +64,16 @@ export default function PrivacyPage() {
             <span role="cell">Jusqu’au retrait de ce consentement ou à la désinscription.</span>
           </div>
           <div role="row">
-            <span role="cell"><strong>Démos du site</strong> (frais partagés, questions de couple) : limiter chaque essai et éviter les abus.</span>
-            <span role="cell">Empreinte irréversible (hachage SHA-256) de l’adresse IP, identifiant aléatoire de navigateur, contenu saisi dans la démo.</span>
-            <span role="cell">Intérêt légitime à protéger le service (art. 6.1.f RGPD).</span>
-            <span role="cell">12 mois après le dernier usage, puis suppression automatique (l’essai redevient alors disponible).</span>
+            <span role="cell"><strong>Démos du site</strong> (frais partagés, questions de couple) : faire fonctionner les essais dans votre navigateur.</span>
+            <span role="cell">Prénoms ou pseudonymes, dépenses et questions tirées, conservés uniquement dans le stockage de session de votre navigateur. Aucune empreinte IP créée par Nearly.</span>
+            <span role="cell">Fonctionnement de la démonstration demandée.</span>
+            <span role="cell">Jusqu’à la fermeture de l’onglet ou à l’effacement du stockage de session. Le navigateur peut restaurer cette session après un redémarrage.</span>
           </div>
           <div role="row">
             <span role="cell"><strong>Sécurité et hébergement</strong> : faire fonctionner le site et détecter les attaques.</span>
             <span role="cell">Journaux techniques (adresse IP, navigateur, date, page demandée).</span>
             <span role="cell">Intérêt légitime (art. 6.1.f RGPD).</span>
-            <span role="cell">Selon la politique de l’hébergeur, 12 mois au maximum.</span>
+            <span role="cell">Selon la politique de confidentialité de GitHub, hébergeur du site.</span>
           </div>
         </div>
         <p>
@@ -83,7 +86,7 @@ export default function PrivacyPage() {
       <section>
         <h2>3. Comment vos données circulent-elles ?</h2>
         <p>
-          Lorsque vous validez le formulaire, vos réponses sont transmises en connexion chiffrée (HTTPS) au serveur du site, qui les vérifie puis
+          Lorsque vous validez le formulaire, vos réponses sont transmises en connexion chiffrée (HTTPS) à un service externe de liste d’attente, qui les vérifie puis
           les envoie à notre outil d’automatisation <strong>n8n</strong>, protégé par un jeton secret. n8n enregistre l’inscription dans un fichier
           CSV stocké sur un serveur privé, non accessible publiquement et consulté uniquement par l’équipe {legal.productName}.
           Une désinscription supprime la ligne correspondante de ce fichier, et une tâche quotidienne efface automatiquement les inscriptions
@@ -109,7 +112,7 @@ export default function PrivacyPage() {
       <section>
         <h2>5. Comment sont-elles protégées ?</h2>
         <p>
-          Chiffrement des échanges (HTTPS), jeton secret entre le site et n8n, validation stricte des données reçues, filtrage des robots,
+          Chiffrement des échanges (HTTPS), jeton secret entre le service de liste d’attente et n8n, validation stricte des données reçues, filtrage des robots,
           accès au fichier restreint à l’équipe et minimisation : nous ne conservons ni votre nom, ni votre adresse IP avec votre inscription.
         </p>
       </section>
@@ -142,10 +145,10 @@ export default function PrivacyPage() {
       <section>
         <h2>7. Cookies et traceurs</h2>
         <p>
-          Le site n’utilise <strong>aucun cookie publicitaire ni outil de mesure d’audience</strong>. La démo des frais partagés enregistre seulement un
-          identifiant aléatoire dans le stockage local de votre navigateur pour retrouver votre essai : ce traceur est strictement nécessaire au
-          service que vous demandez et n’exige donc pas de consentement (article 82 de la loi Informatique et Libertés). Vous pouvez l’effacer à tout
-          moment depuis les réglages de votre navigateur.
+          Le site n’utilise <strong>aucun cookie publicitaire ni outil de mesure d’audience</strong>. Les démonstrations utilisent le stockage de
+          session de votre navigateur pour retrouver les données dans le même onglet. Elles ne sont pas envoyées à Nearly ; vous pouvez les
+          effacer depuis les réglages du navigateur. Pour une conversion de devises, le navigateur interroge <a href="https://frankfurter.dev/" target="_blank" rel="noopener noreferrer">Frankfurter</a> :
+          le fournisseur reçoit les codes de devises et les informations techniques de connexion, mais aucun prénom ni aucune dépense.
         </p>
       </section>
 

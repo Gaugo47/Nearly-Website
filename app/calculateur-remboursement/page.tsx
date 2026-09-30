@@ -1,19 +1,21 @@
+
+import { absoluteUrl, sitePath } from "../site";
 import type { Metadata } from "next";
 import ExpenseDemo from "../ExpenseDemo";
 
 export const metadata: Metadata = {
   title: "Calculateur de remboursement entre amis",
   description: "Calculez gratuitement qui doit rembourser qui après une sortie, un week-end ou des vacances. Ajoutez vos frais et obtenez les remboursements à faire.",
-  alternates: { canonical: "/calculateur-remboursement" },
+  alternates: { canonical: absoluteUrl("/calculateur-remboursement/") },
 };
 
 export default function CalculateurRemboursementPage() {
   return (
     <main className="tool-page">
       <nav className="tool-nav" aria-label="Navigation Nearly">
-        <a className="tool-nav__brand" href="/" aria-label="Nearly, accueil"><img src="/media/nearly-app-icon-liquid-glass-v2.png" alt="Nearly" /></a>
-        <div><a href="/questions-couple">Questions couple</a><a href="/calculateur-remboursement" aria-current="page">Calculateur</a></div>
-        <a className="tool-nav__back" href="/#frais-partages">Découvrir Nearly <span aria-hidden="true">↗</span></a>
+        <a className="tool-nav__brand" href={sitePath("/")} aria-label="Nearly, accueil"><img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" /></a>
+        <div><a href={sitePath("/questions-couple")}>Questions couple</a><a href={sitePath("/calculateur-remboursement")} aria-current="page">Calculateur</a></div>
+        <a className="tool-nav__back" href={sitePath("/#frais-partages")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>
       </nav>
 
       <header className="tool-hero tool-hero--expense">
@@ -38,7 +40,7 @@ export default function CalculateurRemboursementPage() {
         <p className="eyebrow eyebrow--light"><span /> La suite dans Nearly</p>
         <h2>Pour les vrais groupes,<br /><em>sans limite.</em></h2>
         <p>Dans Nearly, vos frais restent synchronisés avec votre groupe, autant de dépenses que nécessaire. Et vous retrouvez aussi les jeux, les souvenirs et votre espace privé.</p>
-        <a className="button button--primary" href="/#telecharger">Découvrir Nearly <span aria-hidden="true">↗</span></a>
+        <a className="button button--primary" href={sitePath("/#telecharger")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>
       </section>
     </main>
   );

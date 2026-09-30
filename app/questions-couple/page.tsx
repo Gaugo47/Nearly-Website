@@ -1,10 +1,12 @@
+
+import { absoluteUrl, sitePath } from "../site";
 import type { Metadata } from "next";
 import CoupleQuestions from "../CoupleQuestions";
 
 export const metadata: Metadata = {
   title: "Questions à se poser en couple",
   description: "Des questions à se poser en couple pour rire, se redécouvrir, se rapprocher et nourrir la complicité, même à distance.",
-  alternates: { canonical: "/questions-couple" },
+  alternates: { canonical: absoluteUrl("/questions-couple/") },
 };
 
 const themes = [
@@ -18,9 +20,9 @@ export default function QuestionsCouplePage() {
   return (
     <main className="tool-page">
       <nav className="tool-nav" aria-label="Navigation Nearly">
-        <a className="tool-nav__brand" href="/" aria-label="Nearly, accueil"><img src="/media/nearly-app-icon-liquid-glass-v2.png" alt="Nearly" /></a>
-        <div><a href="/questions-couple" aria-current="page">Questions couple</a><a href="/calculateur-remboursement">Calculateur</a></div>
-        <a className="tool-nav__back" href="/#tester-un-jeu">Découvrir Nearly <span aria-hidden="true">↗</span></a>
+        <a className="tool-nav__brand" href={sitePath("/")} aria-label="Nearly, accueil"><img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" /></a>
+        <div><a href={sitePath("/questions-couple")} aria-current="page">Questions couple</a><a href={sitePath("/calculateur-remboursement")}>Calculateur</a></div>
+        <a className="tool-nav__back" href={sitePath("/#tester-un-jeu")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>
       </nav>
 
       <header className="tool-hero tool-hero--questions">
@@ -31,7 +33,7 @@ export default function QuestionsCouplePage() {
       </header>
 
       <section className="question-tool-section" aria-labelledby="question-du-jour">
-        <div className="tool-section-heading"><p className="eyebrow"><span /> Piochez une question</p><h2 id="question-du-jour">Un moment pour<br /><em>vous deux.</em></h2><p>Il n’y a aucune bonne réponse : laissez les silences, les anecdotes et les détours faire leur travail. L’essai permet de découvrir quatre questions par visiteur.</p></div>
+        <div className="tool-section-heading"><p className="eyebrow"><span /> Piochez une question</p><h2 id="question-du-jour">Un moment pour<br /><em>vous deux.</em></h2><p>Il n’y a aucune bonne réponse : laissez les silences, les anecdotes et les détours faire leur travail. L’essai permet de découvrir quatre questions par session de navigateur.</p></div>
         <CoupleQuestions />
       </section>
 
@@ -43,7 +45,7 @@ export default function QuestionsCouplePage() {
         <p className="eyebrow eyebrow--light"><span /> La suite dans Nearly</p>
         <h2>Une nouvelle question,<br /><em>chaque jour.</em></h2>
         <p>Nearly transforme ces instants en rituels partagés : questions, jeux de complicité, souvenirs et attentions pour rester proches, où que vous soyez.</p>
-        <div className="tool-conversion__actions"><a className="button button--primary" href="/#tester-un-jeu">Faire le test de jeu <span aria-hidden="true">↗</span></a><a href="/#telecharger">Découvrir Nearly</a></div>
+        <div className="tool-conversion__actions"><a className="button button--primary" href={sitePath("/#tester-un-jeu")}>Faire le test de jeu <span aria-hidden="true">↗</span></a><a href={sitePath("/#telecharger")}>Découvrir Nearly</a></div>
       </section>
     </main>
   );

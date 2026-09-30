@@ -1,3 +1,5 @@
+
+import { absoluteUrl, sitePath } from "../site";
 import type { Metadata } from "next";
 import LegalLayout from "../LegalLayout";
 import { legal } from "../legal";
@@ -5,7 +7,7 @@ import { legal } from "../legal";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Éditeur, hébergement et propriété intellectuelle du site Nearly.",
-  alternates: { canonical: "/mentions-legales" },
+  alternates: { canonical: absoluteUrl("/mentions-legales/") },
 };
 
 export default function LegalNoticePage() {
@@ -44,8 +46,8 @@ export default function LegalNoticePage() {
       <section>
         <h2>Données personnelles</h2>
         <p>
-          Le traitement des données collectées sur ce site est décrit dans la <a href="/confidentialite">politique de confidentialité</a>. La liste
-          d’attente est régie par ses propres <a href="/conditions-liste-attente">conditions</a>.
+          Le traitement des données collectées sur ce site est décrit dans la <a href={sitePath("/confidentialite")}>politique de confidentialité</a>. La liste
+          d’attente est régie par ses propres <a href={sitePath("/conditions-liste-attente")}>conditions</a>.
         </p>
       </section>
     </LegalLayout>

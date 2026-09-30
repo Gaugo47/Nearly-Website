@@ -1,5 +1,7 @@
 "use client";
 
+import { sitePath, waitlistEndpoint } from "./site";
+
 import { useRef, useState, type FormEvent } from "react";
 import { waitlistReasons, WAITLIST_EXPECTATIONS_MAX } from "./legal";
 
@@ -21,9 +23,11 @@ export default function WaitlistForm() {
     setInvalidField(null);
 
     try {
-      const response = await fetch("/api/waitlist", {
+      const response = await fetch(waitlistEndpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
+        credentials: "omit",
+        signal: AbortSignal.timeout(10000),
         body: JSON.stringify({
           email: data.get("email"),
           reason: data.get("reason"),
@@ -46,12 +50,16 @@ export default function WaitlistForm() {
     }
   }
 
+  if (!waitlistEndpoint) {
+    return <div className="waitlist-card" role="status"><h3>Nearly arrive bientôt.</h3><p>Les inscriptions ouvriront prochainement. Aucune adresse e-mail n’est collectée pour le moment.</p></div>;
+  }
+
   if (status === "joined") {
     return (
       <div className="waitlist-card waitlist-card--done" role="status">
         <span className="waitlist-done-mark" aria-hidden="true">✓</span>
         <h3>Vous êtes sur la liste.</h3>
-        <p>Merci ! Nous vous écrirons dès que Nearly ouvre ses portes. Vous pouvez vous désinscrire à tout moment depuis notre <a href="/confidentialite#desinscription">page confidentialité</a>.</p>
+        <p>Merci ! Nous vous écrirons dès que Nearly ouvre ses portes. Vous pouvez vous désinscrire à tout moment depuis notre <a href={sitePath("/confidentialite#desinscription")}>page confidentialité</a>.</p>
       </div>
     );
   }
@@ -113,7 +121,7 @@ export default function WaitlistForm() {
         <input type="checkbox" name="consentLaunch" required aria-invalid={invalidField === "consentLaunch" || undefined} />
         <span>
           J’accepte que Nearly utilise mon e-mail et mes réponses pour me prévenir du lancement et m’envoyer des nouvelles de la liste d’attente.
-          J’ai lu les <a href="/conditions-liste-attente">conditions</a> et la <a href="/confidentialite">politique de confidentialité</a>.
+          J’ai lu les <a href={sitePath("/conditions-liste-attente")}>conditions</a> et la <a href={sitePath("/confidentialite")}>politique de confidentialité</a>.
         </span>
       </label>
       <label className="waitlist-consent">

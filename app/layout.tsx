@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { headers } from "next/headers";
+import { siteUrl, sitePath, absoluteUrl } from "./site";
 import "./globals.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const incomingHeaders = await headers();
-  const host = incomingHeaders.get("x-forwarded-host") || incomingHeaders.get("host") || "localhost:3000";
-  const protocol = incomingHeaders.get("x-forwarded-proto") || (host.startsWith("localhost") ? "http" : "https");
-  const origin = `${protocol}://${host}`;
-
-  return {
-    metadataBase: new URL(origin),
+export const metadata: Metadata = {
+    metadataBase: new URL(`${siteUrl}/`),
     title: {
       default: "Nearly — Proches, même à distance",
       template: "%s | Nearly",
@@ -39,30 +33,29 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: "Nearly",
     publisher: "Nearly",
     category: "Lifestyle",
-    alternates: { canonical: origin },
+    alternates: { canonical: `${siteUrl}/` },
     openGraph: {
       type: "website",
-      url: origin,
+      url: `${siteUrl}/`,
       locale: "fr_FR",
       siteName: "Nearly",
       title: "Nearly — Proches, même à distance",
       description:
         "Le hub privé qui réunit votre couple, vos meilleurs amis et votre famille pour rester proches malgré la distance.",
-      images: [{ url: `${origin}/og.png`, width: 1536, height: 902, alt: "Nearly — Proches, même à distance" }],
+      images: [{ url: absoluteUrl("/og.png"), width: 1536, height: 902, alt: "Nearly — Proches, même à distance" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "Nearly — Proches, même à distance",
       description:
         "Un seul hub privé pour prendre soin de votre couple, de vos amis et de votre famille, où que vous soyez.",
-      images: [`${origin}/og.png`],
+      images: [absoluteUrl("/og.png")],
     },
     icons: {
-      icon: "/media/nearly-icon.png",
-      apple: "/media/nearly-icon.png",
+      icon: sitePath("/media/nearly-icon.png"),
+      apple: sitePath("/media/nearly-icon.png"),
     },
-  };
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",

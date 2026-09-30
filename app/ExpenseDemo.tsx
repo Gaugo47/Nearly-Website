@@ -1,5 +1,7 @@
 "use client";
 
+import { sitePath } from "./site";
+
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 
 type CurrencyCode = "EUR" | "USD" | "GBP" | "CHF" | "THB";
@@ -29,7 +31,7 @@ const CURRENCIES: Array<{ code: CurrencyCode; symbol: string; label: string }> =
 ];
 const CURRENCY_CODES = new Set(CURRENCIES.map((currency) => currency.code));
 const EMPTY_STATE: TrialState = { members: [], expenses: [], repayments: [], displayCurrency: "EUR" };
-const VISITOR_KEY = "nearly-expense-trial-visitor-v1";
+const STORAGE_KEY = "nearly-expenses-session-v2";
 const MAX_TRIAL_EXPENSES = 3;
 
 function money(amount: number, currency: CurrencyCode) {
@@ -53,15 +55,15 @@ function normalizeState(value: unknown): TrialState {
   const expenses = Array.isArray(candidate.expenses)
     ? candidate.expenses.filter((expense): expense is Expense => Boolean(
       expense && typeof expense.id === "string" && typeof expense.title === "string"
-      && Number.isInteger(expense.amount) && Number.isInteger(expense.amountBase)
+      && Number.isSafeInteger(expense.amount) && expense.amount > 0 && Number.isSafeInteger(expense.amountBase) && expense.amountBase > 0
       && CURRENCY_CODES.has(expense.currency) && memberIds.has(expense.paidBy)
-      && Array.isArray(expense.participants) && expense.participants.every((id) => memberIds.has(id)),
+      && Array.isArray(expense.participants) && expense.participants.length > 0 && expense.participants.every((id) => memberIds.has(id)),
     )).slice(0, MAX_TRIAL_EXPENSES)
     : [];
   const repayments = Array.isArray(candidate.repayments)
     ? candidate.repayments.filter((repayment): repayment is Repayment => Boolean(
       repayment && typeof repayment.id === "string" && memberIds.has(repayment.from)
-      && memberIds.has(repayment.to) && Number.isInteger(repayment.amount),
+      && memberIds.has(repayment.to) && Number.isSafeInteger(repayment.amount) && repayment.amount > 0,
     )).slice(0, 100)
     : [];
   const displayCurrency = CURRENCY_CODES.has(candidate.displayCurrency as CurrencyCode)
@@ -104,15 +106,16 @@ function calculateSettlements(balances: Record<string, number>): Settlement[] {
 }
 
 async function fetchRate(base: CurrencyCode, quote: CurrencyCode) {
-  const response = await fetch(`/api/exchange-rate?base=${base}&quote=${quote}`);
-  const payload = await response.json() as { rate?: number; date?: string; error?: string };
-  if (!response.ok || !payload.rate) throw new Error(payload.error || "Taux indisponible.");
-  return { rate: payload.rate, date: payload.date || new Date().toISOString().slice(0, 10) };
+  if (base === quote) return { rate: 1, date: new Date().toISOString().slice(0, 10) };
+  const response = await fetch(`https://api.frankfurter.dev/v1/latest?base=${base}&symbols=${quote}`, { signal: AbortSignal.timeout(5000), credentials: "omit" });
+  const payload = await response.json() as { rates?: Record<string, number>; date?: string };
+  const rate = Number(payload.rates?.[quote]);
+  if (!response.ok || !Number.isFinite(rate) || rate <= 0 || rate > 10_000) throw new Error("Taux de change temporairement indisponible. Réessayez ou choisissez l’euro.");
+  return { rate, date: payload.date || new Date().toISOString().slice(0, 10) };
 }
 
 export default function ExpenseDemo() {
-  const [trialStatus, setTrialStatus] = useState<"starting" | "active" | "blocked" | "error">("starting");
-  const [trialId, setTrialId] = useState("");
+  const [trialStatus, setTrialStatus] = useState<"starting" | "active">("starting");
   const [state, setState] = useState<TrialState>(EMPTY_STATE);
   const [saveStatus, setSaveStatus] = useState<"saved" | "saving" | "error">("saved");
   const [newPerson, setNewPerson] = useState("");
@@ -121,69 +124,43 @@ export default function ExpenseDemo() {
   const [currency, setCurrency] = useState<CurrencyCode>("EUR");
   const [paidBy, setPaidBy] = useState("");
   const [participants, setParticipants] = useState<string[]>([]);
-  const [displayRate, setDisplayRate] = useState(1);
+  const [displayRate, setDisplayRate] = useState<number | null>(1);
+  const [displayRateCurrency, setDisplayRateCurrency] = useState<CurrencyCode>("EUR");
   const [displayRateDate, setDisplayRateDate] = useState("");
   const [rateLoading, setRateLoading] = useState(true);
   const [adding, setAdding] = useState(false);
   const [notice, setNotice] = useState("Créez au moins deux personnes pour commencer.");
   const [formError, setFormError] = useState("");
 
-  async function claimTrial(visitorId: string) {
-    setTrialStatus("starting");
-    try {
-      const response = await fetch("/api/expense-trial", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ visitorId }),
-      });
-      const payload = await response.json() as { allowed?: boolean; resumed?: boolean; state?: unknown };
-      if (response.status === 409 || !payload.allowed) {
-        setTrialStatus("blocked");
-        return;
-      }
-      const next = normalizeState(payload.state);
-      setState(next);
-      setPaidBy(next.members[0]?.id || "");
-      setParticipants(next.members.map((member) => member.id));
-      setTrialId(visitorId);
-      localStorage.setItem(VISITOR_KEY, visitorId);
-      setNotice(payload.resumed ? "Votre essai a été repris là où vous l’aviez laissé." : "Ajoutez les personnes qui participent aux dépenses.");
-      setTrialStatus("active");
-    } catch {
-      setTrialStatus("error");
-    }
-  }
-
   useEffect(() => {
-    const visitorId = localStorage.getItem(VISITOR_KEY) || crypto.randomUUID();
-    void claimTrial(visitorId);
+    let next = EMPTY_STATE;
+    try { next = normalizeState(JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null")); } catch { /* Storage may be unavailable; the demo still works in memory. */ }
+    setState(next);
+    setPaidBy(next.members[0]?.id || "");
+    setParticipants(next.members.map((member) => member.id));
+    setTrialStatus("active");
+    setNotice("Ajoutez les personnes qui participent aux dépenses. Les données restent dans cet onglet.");
   }, []);
 
   useEffect(() => {
-    if (trialStatus !== "active" || !trialId) return;
+    if (trialStatus !== "active") return;
     setSaveStatus("saving");
-    const timeout = window.setTimeout(async () => {
-      try {
-        const response = await fetch("/api/expense-trial", {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ visitorId: trialId, state }),
-        });
-        setSaveStatus(response.ok ? "saved" : "error");
-      } catch {
-        setSaveStatus("error");
-      }
-    }, 500);
+    const timeout = window.setTimeout(() => {
+      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); setSaveStatus("saved"); }
+      catch { setSaveStatus("error"); }
+    }, 200);
     return () => window.clearTimeout(timeout);
-  }, [state, trialId, trialStatus]);
+  }, [state, trialStatus]);
 
   useEffect(() => {
     if (trialStatus !== "active") return;
     let cancelled = false;
     setRateLoading(true);
+    setDisplayRate(null);
+    setDisplayRateDate("");
     fetchRate("EUR", state.displayCurrency)
-      .then(({ rate, date }) => { if (!cancelled) { setDisplayRate(rate); setDisplayRateDate(date); } })
-      .catch(() => { if (!cancelled) { setDisplayRate(1); setFormError("Le taux d’affichage est temporairement indisponible."); } })
+      .then(({ rate, date }) => { if (!cancelled) { setDisplayRate(rate); setDisplayRateCurrency(state.displayCurrency); setDisplayRateDate(date); } })
+      .catch(() => { if (!cancelled) { setDisplayRate(null); setFormError("Le taux d’affichage est temporairement indisponible."); } })
       .finally(() => { if (!cancelled) setRateLoading(false); });
     return () => { cancelled = true; };
   }, [state.displayCurrency, trialStatus]);
@@ -192,8 +169,8 @@ export default function ExpenseDemo() {
   const settlements = useMemo(() => calculateSettlements(balances), [balances]);
   const totalBase = state.expenses.reduce((sum, expense) => sum + expense.amountBase, 0);
   const parsedAmount = parseAmount(amount);
-  const displayMinor = (baseMinor: number) => Math.round(baseMinor * displayRate);
-  const displayMoney = (baseMinor: number) => money(displayMinor(baseMinor), state.displayCurrency);
+  const displayMinor = (baseMinor: number) => Math.round(baseMinor * (displayRate ?? 1));
+  const displayMoney = (baseMinor: number) => displayRateCurrency !== state.displayCurrency ? "…" : displayRate === null ? "Taux indisponible" : money(displayMinor(baseMinor), state.displayCurrency);
 
   function username(id: string) {
     return state.members.find((member) => member.id === id)?.username ?? "inconnu";
@@ -292,15 +269,11 @@ export default function ExpenseDemo() {
     return (
       <div className="expense-trial-gate">
         <div className="expense-trial-gate__icon" aria-hidden="true">◎</div>
-        <p className="expense-step">Essai automatique · Une fois par visiteur</p>
-        <h3>{trialStatus === "blocked" ? "Votre essai a déjà été utilisé." : "Votre espace se prépare."}</h3>
-        <p>{trialStatus === "blocked"
-          ? "Un essai a déjà été démarré depuis cette connexion. Retrouvez l’expérience complète dans l’application Nearly."
-          : "L’interface s’ouvre automatiquement, sans compte et sans bouton intermédiaire."}</p>
-        {trialStatus === "starting" && <div className="expense-trial-loading"><span /><span /><span /><small>Préparation automatique…</small></div>}
-        {trialStatus === "error" && <button type="button" onClick={() => void claimTrial(localStorage.getItem(VISITOR_KEY) || crypto.randomUUID())}>Réessayer</button>}
-        {trialStatus === "blocked" && <a className="button button--primary" href="/#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>}
-        <small>Votre IP est transformée en empreinte irréversible et n’est jamais stockée en clair.</small>
+        <p className="expense-step">Essai automatique · Dans votre navigateur</p>
+        <h3>Votre espace se prépare.</h3>
+        <p>L’interface s’ouvre automatiquement, sans compte et sans bouton intermédiaire.</p>
+        <div className="expense-trial-loading"><span /><span /><span /><small>Préparation automatique…</small></div>
+        <small>Les prénoms et dépenses restent dans cet onglet. Aucune donnée de la démo n’est envoyée à Nearly.</small>
       </div>
     );
   }
@@ -321,7 +294,7 @@ export default function ExpenseDemo() {
           <span><strong>{state.members.length}</strong> participants créés</span>
           <span><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong> total testé</span>
         </div>
-        <a className="button button--primary" href="/#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>
+        <a className="button button--primary" href={sitePath("/#telecharger")}>Télécharger Nearly <span aria-hidden="true">↗</span></a>
         <small>Disponible bientôt sur iOS et Android.</small>
       </div>
     );
@@ -332,7 +305,7 @@ export default function ExpenseDemo() {
       <div className="expense-form">
         <div className="expense-demo__bar">
           <div><span className="expense-demo__dot" /> Essai actif · {state.expenses.length}/{MAX_TRIAL_EXPENSES} frais</div>
-          <span className={`expense-save-state expense-save-state--${saveStatus}`}>{saveStatus === "saving" ? "Sauvegarde…" : saveStatus === "error" ? "Non sauvegardé" : "Sauvegardé"}</span>
+          <span className={`expense-save-state expense-save-state--${saveStatus}`}>{saveStatus === "saving" ? "Sauvegarde…" : saveStatus === "error" ? "En mémoire" : "Dans cet onglet"}</span>
         </div>
 
         <form className="expense-member-form" onSubmit={addPerson}>
@@ -387,7 +360,7 @@ export default function ExpenseDemo() {
         </div>
         <div className="expense-total">
           <span aria-hidden="true">◎</span>
-          <div><small>Total du groupe</small><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong><p>{state.expenses.length}/{MAX_TRIAL_EXPENSES} frais · {state.displayCurrency}{displayRateDate ? ` · taux du ${new Date(displayRateDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}` : ""}</p></div>
+          <div><small>Total du groupe</small><strong>{rateLoading ? "…" : displayMoney(totalBase)}</strong><p>{state.expenses.length}/{MAX_TRIAL_EXPENSES} frais · {state.displayCurrency}{displayRateDate && displayRateCurrency === state.displayCurrency ? ` · taux du ${new Date(displayRateDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}` : ""}</p></div>
         </div>
 
         <div className="expense-ledger__heading"><p className="expense-step">Soldes</p><span>positif = à recevoir</span></div>

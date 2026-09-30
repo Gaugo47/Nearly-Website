@@ -1,14 +1,14 @@
 // Informations légales affichées dans les pages RGPD et le formulaire de liste d'attente.
-// Les valeurs entre crochets doivent être complétées avant la mise en ligne.
+// Les variables NEXT_PUBLIC_* sont publiées dans le site : aucun secret ici.
 export const legal = {
   productName: "Nearly",
-  controllerName: "[Nom et prénom ou raison sociale de l’éditeur]",
-  controllerStatus: "[Statut : particulier, auto-entrepreneur, SAS… et n° SIREN le cas échéant]",
-  controllerAddress: "[Adresse postale de l’éditeur]",
-  publicationDirector: "[Nom du directeur de la publication]",
-  contactEmail: "[adresse e-mail de contact RGPD]",
-  siteHost: "[Hébergeur du site : nom, adresse et téléphone]",
-  automationHost: "[Hébergeur de l’instance n8n : nom et pays]",
+  controllerName: process.env.NEXT_PUBLIC_PUBLISHER_NAME || "Éditeur à renseigner avant publication",
+  controllerStatus: process.env.NEXT_PUBLIC_PUBLISHER_STATUS || "Statut à renseigner avant publication",
+  controllerAddress: process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS || "Adresse à renseigner avant publication",
+  publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Direction de publication à renseigner",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Contact à renseigner avant publication",
+  siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
+  automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || "Non activé",
   policyVersion: "2026-09-30",
   lastUpdated: "30 septembre 2026",
   retentionMonths: 36,
@@ -25,3 +25,5 @@ export const waitlistReasons = [
 export type WaitlistReason = (typeof waitlistReasons)[number]["value"];
 
 export const WAITLIST_EXPECTATIONS_MAX = 600;
+
+export const legalReady = Boolean(process.env.NEXT_PUBLIC_PUBLISHER_NAME && process.env.NEXT_PUBLIC_PUBLISHER_STATUS && process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS && process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR && process.env.NEXT_PUBLIC_CONTACT_EMAIL && process.env.NEXT_PUBLIC_WAITLIST_HOST);

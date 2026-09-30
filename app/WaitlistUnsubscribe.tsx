@@ -1,5 +1,6 @@
 "use client";
 
+import { waitlistEndpoint } from "./site";
 import { useState, type FormEvent } from "react";
 
 export default function WaitlistUnsubscribe() {
@@ -11,9 +12,11 @@ export default function WaitlistUnsubscribe() {
     const email = new FormData(event.currentTarget).get("email");
     setStatus("sending");
     try {
-      const response = await fetch("/api/waitlist", {
+      const response = await fetch(waitlistEndpoint, {
         method: "DELETE",
         headers: { "content-type": "application/json" },
+        credentials: "omit",
+        signal: AbortSignal.timeout(10000),
         body: JSON.stringify({ email }),
       });
       const payload = await response.json() as { removed?: boolean; error?: string };
@@ -24,6 +27,8 @@ export default function WaitlistUnsubscribe() {
       setMessage(error instanceof Error && error.message ? error.message : "La demande n’a pas abouti. Réessayez dans un instant.");
     }
   }
+
+  if (!waitlistEndpoint) return <p>La liste d’attente n’est pas ouverte. Aucune inscription n’est collectée sur cette version du site.</p>;
 
   if (status === "done") {
     return <p className="legal-unsubscribe__done" role="status">✓ C’est fait. Si cette adresse figurait sur la liste d’attente, elle et les réponses associées ont été supprimées.</p>;

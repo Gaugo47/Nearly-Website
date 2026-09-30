@@ -1,98 +1,63 @@
-# vinext-starter
+# Nearly — site vitrine
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Site français de présentation de Nearly, avec questions de couple, calculateur de frais et pages légales. L’export Next.js est entièrement statique et compatible avec GitHub Pages, y compris sous `/Nearly-Website/`.
 
-## Prerequisites
+## Développement et vérification
 
-- Node.js `>=22.13.0`
+Node.js 22.13 ou supérieur, npm :
 
-## Quick Start
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
-npm run build
+npm run lint
+npm test
+npm run typecheck
+npm run check:public
 ```
 
-This starter does not use `wrangler.jsonc`.
+`npm run build` produit `out/`. `npm start` sert cet export sur `http://localhost:3000`. Pour prévisualiser exactement GitHub Pages, copier `.env.example` en `.env.local` avant de construire et définir aussi `NEXT_PUBLIC_BASE_PATH=/Nearly-Website` dans le terminal de prévisualisation. `.env.local` est ignoré.
 
-## Included Shape
+Le workflow vérifie automatiquement les modifications de `main` et les pull requests. **La publication est manuelle** : aucun push ne met le site en ligne.
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+## Publier sur GitHub Pages
 
-## Workspace Auth Headers
+1. Compléter les informations publiques de l’éditeur dans **Settings → Secrets and variables → Actions → Variables** : `PUBLISHER_NAME`, `PUBLISHER_STATUS`, `PUBLISHER_ADDRESS`, `PUBLICATION_DIRECTOR`, `CONTACT_EMAIL`. Ces valeurs apparaîtront sur le site et dans les artefacts ; utiliser les coordonnées professionnelles destinées à être publiques. Les obligations applicables à l’éditeur restent à vérifier avant publication.
+2. Dans **Settings → Pages → Build and deployment → Source**, sélectionner **GitHub Actions**.
+La publication est bloquée si les informations d’éditeur ci-dessus sont absentes ; une simple compilation reste possible.
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+3. Dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`.
+4. L’adresse par défaut est `https://gaugo47.github.io/Nearly-Website/`. Le workflow calcule le chemin à partir du nom du dépôt ; les images, liens, pages, sitemap et métadonnées utilisent ce chemin.
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+Pour un domaine personnalisé, configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://votre-domaine.fr` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
 
-Treat the full name as optional and fall back to email when it is absent:
+Références : [export statique Next.js](https://nextjs.org/docs/app/guides/static-exports), [publication par Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-```tsx
-import { headers } from "next/headers";
+## Démonstrations
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
+Les frais, pseudonymes et questions tirées restent dans le stockage de session de l’onglet, sans base de données et sans empreinte IP créée par Nearly. Les limites de trois frais et quatre questions sont des limites de démonstration côté navigateur. Effacer la session permet un nouvel essai. Les navigateurs peuvent restaurer une session après fermeture.
 
-  const displayName = fullName ?? email;
-  // ...
-}
+Les conversions de devises interrogent directement l’API publique Frankfurter. Aucun prénom ni montant n’est transmis à ce fournisseur. Le calcul en euros fonctionne sans service de taux ; une conversion indisponible affiche une erreur et ne substitue pas un taux fictif.
+
+## Liste d’attente (facultative)
+
+GitHub Pages ne peut pas recevoir ni conserver des inscriptions. Par défaut, le formulaire et la désinscription sont désactivés et aucune adresse n’est collectée.
+
+Pour ouvrir les inscriptions, héberger séparément la passerelle [n8n/gateway.mjs](n8n/gateway.mjs) et le workflow n8n décrit dans [n8n/README.md](n8n/README.md), puis définir `WAITLIST_API_URL` et `WAITLIST_HOST` en plus des informations légales. Le site n’active la collecte que si cette configuration publique est complète et l’URL en HTTPS.
+
+Les secrets `N8N_WAITLIST_TOKEN` et `N8N_WAITLIST_WEBHOOK_URL` appartiennent exclusivement au serveur de la passerelle. Ne jamais les placer dans GitHub Pages, dans le navigateur ou dans une variable `NEXT_PUBLIC_*`.
+
+## Publication du dépôt et confidentialité
+
+Les fichiers locaux des assistants, identifiants de l’ancien hébergement, bases, CSV, logs, fichiers d’environnement et sorties de compilation sont exclus. L’ancienne implémentation serveur est conservée uniquement dans `work/legacy-server/`, ignoré par Git.
+
+```sh
+npm run check:public
+node scripts/check-public.mjs --history
+npm audit
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+Le premier contrôle analyse les sources et l’export ; le second examine tous les objets Git accessibles et les adresses des auteurs. Il signale les valeurs sans les afficher. Ce contrôle ciblé ne garantit pas l’absence de tout secret imaginable.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+Un nettoyage des fichiers actuels ne supprime pas l’historique. Avant de rendre le dépôt public, publier l’historique assaini préparé, vérifier toutes les branches et étiquettes distantes, puis activer les contrôles GitHub disponibles (secret scanning et Dependabot). Ne jamais envoyer la sauvegarde privée de l’ancien historique. Si un secret réel a été publié antérieurement, le révoquer auprès de son fournisseur.
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Les visuels et textes Nearly restent soumis à leurs droits respectifs. Le dépôt ne fournit aucune licence générale de réutilisation.

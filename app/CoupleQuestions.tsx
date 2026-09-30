@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { sitePath } from "./site";
+
+import { useEffect, useRef, useState } from "react";
 
 const questions = [
   { category: "Se redécouvrir", text: "Quel petit détail chez moi te fait toujours sourire ?" },
@@ -18,29 +20,35 @@ const questions = [
 export default function CoupleQuestions() {
   const [index, setIndex] = useState<number | null>(null);
   const [seen, setSeen] = useState(0);
-  const [status, setStatus] = useState<"loading" | "active" | "complete" | "error">("loading");
+  const [status, setStatus] = useState<"loading" | "active" | "complete">("loading");
 
-  async function drawQuestion() {
-    setStatus("loading");
-    try {
-      const response = await fetch("/api/couple-questions", { method: "POST" });
-      const payload = await response.json() as { questionIndex?: number; remaining?: number; error?: string };
-      if (response.status === 429) {
-        setStatus("complete");
-        return;
-      }
-      if (!response.ok || typeof payload.questionIndex !== "number" || typeof payload.remaining !== "number") {
-        throw new Error(payload.error || "Impossible de piocher une question.");
-      }
-      setIndex(payload.questionIndex % questions.length);
-      setSeen(4 - payload.remaining);
-      setStatus("active");
-    } catch {
-      setStatus("error");
-    }
+  const drawn = useRef<number[]>([]);
+  const initialized = useRef(false);
+
+  function drawQuestion() {
+    const available = questions.map((_, i) => i).filter((i) => !drawn.current.includes(i));
+    if (drawn.current.length >= 4) { setStatus("complete"); return; }
+    const next = available[Math.floor(Math.random() * available.length)];
+    drawn.current = [...drawn.current, next];
+    try { sessionStorage.setItem("nearly-questions-session-v2", JSON.stringify(drawn.current)); } catch { /* Continue in memory. */ }
+    setIndex(next);
+    setSeen(drawn.current.length);
+    setStatus("active");
   }
 
-  useEffect(() => { void drawQuestion(); }, []);
+  useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+    try {
+      const saved: unknown = JSON.parse(sessionStorage.getItem("nearly-questions-session-v2") || "[]");
+      if (Array.isArray(saved) && saved.length <= 4 && saved.every((i) => Number.isInteger(i) && i >= 0 && i < questions.length) && new Set(saved).size === saved.length) drawn.current = saved;
+    } catch { /* Continue in memory. */ }
+    if (drawn.current.length) {
+      setIndex(drawn.current.at(-1)!);
+      setSeen(drawn.current.length);
+      setStatus("active");
+    } else drawQuestion();
+  }, []);
   const question = index === null ? null : questions[index];
 
   return (
@@ -50,12 +58,10 @@ export default function CoupleQuestions() {
         <span>{question?.category || "Nearly"}</span>
       </div>
       {status === "complete" ? <p>Vous avez utilisé vos quatre questions. Retrouvez un nouveau rituel chaque jour dans Nearly.</p>
-        : status === "error" ? <p>Le tirage est momentanément indisponible. Réessayez dans un instant.</p>
-          : <p>{question ? `“${question.text}”` : "Votre première question arrive…"}</p>}
+        : <p>{question ? `“${question.text}”` : "Votre première question arrive…"}</p>}
       {status === "active" && seen < 4 && <button type="button" onClick={() => void drawQuestion()}>Une autre question <span aria-hidden="true">→</span></button>}
-      {status === "active" && seen === 4 && <a className="couple-deck__cta" href="/#telecharger">Découvrir Nearly <span aria-hidden="true">↗</span></a>}
-      {status === "complete" && <a className="couple-deck__cta" href="/#telecharger">Découvrir Nearly <span aria-hidden="true">↗</span></a>}
-      {status === "error" && <button type="button" onClick={() => void drawQuestion()}>Réessayer <span aria-hidden="true">→</span></button>}
+      {status === "active" && seen === 4 && <a className="couple-deck__cta" href={sitePath("/#telecharger")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>}
+      {status === "complete" && <a className="couple-deck__cta" href={sitePath("/#telecharger")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>}
     </div>
   );
 }

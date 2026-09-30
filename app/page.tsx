@@ -1,3 +1,5 @@
+
+import { sitePath, absoluteUrl, waitlistEndpoint } from "./site";
 import GameMatch from "./GameMatch";
 import ExpenseDemo from "./ExpenseDemo";
 import WaitlistForm from "./WaitlistForm";
@@ -78,7 +80,7 @@ const structuredData = {
       inLanguage: ["fr", "en"],
       description:
         "Hub relationnel privé qui réunit les couples, amis et familles pour rester proches malgré la distance grâce aux questions, rituels, souvenirs, jeux et moments partagés.",
-      image: "/media/nearly-icon.png",
+      image: absoluteUrl("/media/nearly-icon.png"),
       featureList: [
         "Question du jour",
         "Humeurs partagées",
@@ -126,12 +128,12 @@ export default function Home() {
 
       <nav className="site-nav" aria-label="Navigation principale">
         <a className="brand" href="#top" aria-label="Nearly, retour en haut">
-          <img src="/media/nearly-logo.png" alt="Nearly" />
+          <img src={sitePath("/media/nearly-logo.png")} alt="Nearly" />
         </a>
         <div className="nav-links">
           <a href="#experience">L’expérience</a>
-          <a href="/questions-couple">Questions couple</a>
-          <a href="/calculateur-remboursement">Calculateur</a>
+          <a href={sitePath("/questions-couple")}>Questions couple</a>
+          <a href={sitePath("/calculateur-remboursement")}>Calculateur</a>
           <a href="#pour-qui">Pour qui ?</a>
           <a href="#tester-un-jeu">Tester un jeu</a>
           <a href="#party-mode">Party Mode</a>
@@ -187,7 +189,7 @@ export default function Home() {
           </div>
           <div className="phone phone--hero">
             <span className="phone-speaker" />
-            <img src="/media/app-accueil.png" alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" />
+            <img src={sitePath("/media/app-accueil.png")} alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" />
           </div>
           <div className="companion-chip">
             <span>✦</span>
@@ -239,7 +241,7 @@ export default function Home() {
                 <p>{feature.text}</p>
               </div>
               <div className="feature-phone">
-                <img src={feature.image} alt={feature.alt} loading="lazy" />
+                <img src={sitePath(feature.image)} alt={feature.alt} loading="lazy" />
               </div>
             </article>
           ))}
@@ -258,9 +260,9 @@ export default function Home() {
           </ul>
         </div>
         <div className="phone-fan" aria-label="Galerie d’écrans Nearly">
-          <div className="fan-phone fan-phone--left"><img src="/media/app-carte.png" alt="Carte des proches Nearly" loading="lazy" /></div>
-          <div className="fan-phone fan-phone--center"><img src="/media/app-idees.png" alt="Idées personnalisées dans Nearly" loading="lazy" /></div>
-          <div className="fan-phone fan-phone--right"><img src="/media/app-party.png" alt="Party Lab de Nearly" loading="lazy" /></div>
+          <div className="fan-phone fan-phone--left"><img src={sitePath("/media/app-carte.png")} alt="Carte des proches Nearly" loading="lazy" /></div>
+          <div className="fan-phone fan-phone--center"><img src={sitePath("/media/app-idees.png")} alt="Idées personnalisées dans Nearly" loading="lazy" /></div>
+          <div className="fan-phone fan-phone--right"><img src={sitePath("/media/app-party.png")} alt="Party Lab de Nearly" loading="lazy" /></div>
         </div>
       </section>
 
@@ -328,19 +330,19 @@ export default function Home() {
         <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
           <figure className="party-device party-device--lab">
             <div className="party-screen">
-              <img src="/media/app-party-lab.png" alt="Jeux et défis du Party Lab de Nearly" loading="lazy" />
+              <img src={sitePath("/media/app-party-lab.png")} alt="Jeux et défis du Party Lab de Nearly" loading="lazy" />
             </div>
             <figcaption>Party Lab</figcaption>
           </figure>
           <figure className="party-device party-device--photos">
             <div className="party-screen">
-              <img src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
+              <img src={sitePath("/media/app-party-photos.png")} alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
             </div>
             <figcaption>Coffre photo</figcaption>
           </figure>
           <figure className="party-device party-device--expenses">
             <div className="party-screen">
-              <img src="/media/app-party-expenses.png" alt="Répartition des frais partagés entre amis dans Nearly" loading="lazy" />
+              <img src={sitePath("/media/app-party-expenses.png")} alt="Répartition des frais partagés entre amis dans Nearly" loading="lazy" />
             </div>
             <figcaption>Frais partagés</figcaption>
           </figure>
@@ -385,10 +387,10 @@ export default function Home() {
         <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
           <div className="spicy-glow" />
           <div className="spicy-phone spicy-phone--vault">
-            <img src="/media/app-spicy-vault.png" alt="Coffre privé du mode Spicy protégé par code secret" loading="lazy" />
+            <img src={sitePath("/media/app-spicy-vault.png")} alt="Coffre privé du mode Spicy protégé par code secret" loading="lazy" />
           </div>
           <div className="spicy-phone spicy-phone--home">
-            <img src="/media/app-spicy-home.png" alt="Accueil consenti du mode Spicy de Nearly" loading="lazy" />
+            <img src={sitePath("/media/app-spicy-home.png")} alt="Accueil consenti du mode Spicy de Nearly" loading="lazy" />
           </div>
           <span className="spicy-chip">✓ Privé · consenti · temporaire</span>
         </div>
@@ -464,14 +466,14 @@ export default function Home() {
 
       <footer>
         <a className="footer-logo" href="#top" aria-label="Nearly, retour en haut">
-          <img src="/media/nearly-app-icon-liquid-glass-v2.png" alt="Nearly" />
+          <img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" />
         </a>
         <p>Proches, même à distance.</p>
         <div>
           <a href="#faq">FAQ</a>
-          <a href="/conditions-liste-attente">Conditions</a>
-          <a href="/confidentialite">Confidentialité</a>
-          <a href="/mentions-legales">Mentions légales</a>
+          <a href={sitePath("/conditions-liste-attente")}>Conditions</a>
+          <a href={sitePath("/confidentialite")}>Confidentialité</a>
+          <a href={sitePath("/mentions-legales")}>Mentions légales</a>
           <span>© 2026 Nearly</span>
         </div>
       </footer>
