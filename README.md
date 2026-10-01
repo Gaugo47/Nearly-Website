@@ -36,6 +36,10 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ## Démonstrations
 
+### Parcours du site
+
+L’accueil présente l’application et ses fonctionnalités, puis la FAQ et l’inscription à la liste d’attente. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.
+
 ### Captures de l’application
 
 Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Les onze nouvelles captures réelles du 1er octobre sont prises depuis `localhost:8081` en JPEG natif de 393 × 758 pixels. La barre d’état (59 pixels) et l’indicateur d’accueil (34 pixels) complètent le format d’écran 393 × 852 dans le composant `IPhoneMockup`. Le cadre garde ce rapport largeur/hauteur ; les captures ne sont pas étirées.

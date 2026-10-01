@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sitePath } from "./site";
 
 type GameKey = "questions" | "duo" | "party";
 
@@ -129,7 +130,7 @@ export default function GameMatch() {
             <h3>{result.title}</h3>
             <p>{result.description}</p>
             <div className="game-result__actions">
-              <a className="button button--primary" href="#telecharger">Télécharger Nearly <span aria-hidden="true">↗</span></a>
+              <a className="button button--primary" href={sitePath("/#liste-attente")}>Rejoindre Nearly <span aria-hidden="true">↗</span></a>
               <button type="button" onClick={restart}>Refaire le test</button>
             </div>
           </div>

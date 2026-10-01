@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: siteUrl,
-      lastModified: new Date("2026-07-28"),
+      lastModified: new Date("2026-10-01"),
       changeFrequency: "weekly",
       priority: 1,
     },
@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...["/outils/", "/tester-un-jeu/"].map(path => ({
+      url: `${siteUrl}${path}`,
+      lastModified: new Date("2026-10-01"),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     ...["/conditions-liste-attente", "/confidentialite", "/mentions-legales"].map((path) => ({
       url: `${siteUrl}${path}`,
       lastModified: new Date("2026-09-30"),

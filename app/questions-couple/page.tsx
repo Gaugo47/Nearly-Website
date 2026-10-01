@@ -1,6 +1,8 @@
 
 import { absoluteUrl, sitePath } from "../site";
 import type { Metadata } from "next";
+import SiteNav from "../SiteNav";
+import SiteFooter from "../SiteFooter";
 import CoupleQuestions from "../CoupleQuestions";
 
 export const metadata: Metadata = {
@@ -9,44 +11,25 @@ export const metadata: Metadata = {
   alternates: { canonical: absoluteUrl("/questions-couple/") },
 };
 
-const themes = [
-  ["Pour rire", "Des questions légères pour se surprendre et finir en fou rire."],
-  ["Pour se redécouvrir", "Les petits détails, souvenirs et envies qu’on oublie parfois de partager."],
-  ["Pour aller plus loin", "Des questions douces pour parler de ses besoins, de son rythme et de son lien."],
-  ["À distance", "Des pistes concrètes pour se sentir présent même quand les kilomètres s’en mêlent."],
-];
-
 export default function QuestionsCouplePage() {
   return (
-    <main className="tool-page">
-      <nav className="tool-nav" aria-label="Navigation Nearly">
-        <a className="tool-nav__brand" href={sitePath("/")} aria-label="Nearly, accueil"><img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" /></a>
-        <div><a href={sitePath("/questions-couple")} aria-current="page">Questions couple</a><a href={sitePath("/calculateur-remboursement")}>Calculateur</a></div>
-        <a className="tool-nav__back" href={sitePath("/#tester-un-jeu")}>Découvrir Nearly <span aria-hidden="true">↗</span></a>
-      </nav>
+    <main className="tool-page tool-page--focused">
+      <SiteNav current="tools" />
+      <div className="tool-breadcrumb"><a href={sitePath("/outils/")}>← Outils &amp; activités</a><span>Questions à deux</span></div>
 
       <header className="tool-hero tool-hero--questions">
         <p className="eyebrow"><span /> Outil gratuit · À deux</p>
         <h1>Questions à se poser<br />en <em>couple.</em></h1>
         <p>Une bonne question peut créer un vrai moment. Piochez une question, prenez le temps d’y répondre et laissez la conversation vous emmener.</p>
-        <div className="tool-hero__facts"><span><strong>04</strong> questions à tester</span><span><strong>5</strong> minutes pour vous</span><span><strong>∞</strong> façons de répondre</span></div>
       </header>
 
-      <section className="question-tool-section" aria-labelledby="question-du-jour">
-        <div className="tool-section-heading"><p className="eyebrow"><span /> Piochez une question</p><h2 id="question-du-jour">Un moment pour<br /><em>vous deux.</em></h2><p>Il n’y a aucune bonne réponse : laissez les silences, les anecdotes et les détours faire leur travail. L’essai permet de découvrir quatre questions par session de navigateur.</p></div>
+      <section className="tool-question-deck" aria-label="Quatre questions à essayer">
         <CoupleQuestions />
+        <p>Quatre questions par session. Prenez votre temps : chacun peut passer.</p>
       </section>
 
-      <section className="question-themes" aria-label="Thèmes de questions de couple">
-        {themes.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h2>{title}</h2><p>{text}</p></article>)}
-      </section>
-
-      <section className="tool-conversion tool-conversion--coral">
-        <p className="eyebrow eyebrow--light"><span /> La suite dans Nearly</p>
-        <h2>Une nouvelle question,<br /><em>chaque jour.</em></h2>
-        <p>Nearly transforme ces instants en rituels partagés : questions, jeux de complicité, souvenirs et attentions pour rester proches, où que vous soyez.</p>
-        <div className="tool-conversion__actions"><a className="button button--primary" href={sitePath("/#tester-un-jeu")}>Faire le test de jeu <span aria-hidden="true">↗</span></a><a href={sitePath("/#telecharger")}>Découvrir Nearly</a></div>
-      </section>
+      <aside className="tools-note"><p>Une nouvelle question chaque jour dans Nearly, avec vos jeux et vos souvenirs partagés.</p><a href={sitePath("/#experience")}>Découvrir l’application <span aria-hidden="true">↗</span></a></aside>
+      <SiteFooter />
     </main>
   );
 }
