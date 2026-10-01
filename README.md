@@ -23,10 +23,10 @@ Le workflow vérifie automatiquement les modifications de `main` et les pull req
 
 1. Compléter les informations publiques de l’éditeur dans **Settings → Secrets and variables → Actions → Variables** : `PUBLISHER_NAME`, `PUBLISHER_STATUS`, `PUBLISHER_ADDRESS`, `PUBLICATION_DIRECTOR`, `CONTACT_EMAIL`. Ces valeurs apparaîtront sur le site et dans les artefacts ; utiliser les coordonnées professionnelles destinées à être publiques. Les obligations applicables à l’éditeur restent à vérifier avant publication.
 2. Dans **Settings → Pages → Build and deployment → Source**, sélectionner **GitHub Actions**.
-La publication est bloquée si les informations d’éditeur ci-dessus sont absentes ; une simple compilation reste possible.
-
 3. Dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`.
 4. L’adresse par défaut est `https://gaugo47.github.io/Nearly-Website/`. Le workflow calcule le chemin à partir du nom du dépôt ; les images, liens, pages, sitemap et métadonnées utilisent ce chemin.
+
+La publication est bloquée si les informations d’éditeur ci-dessus sont absentes ; une simple compilation reste possible.
 
 Pour un domaine personnalisé, configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://votre-domaine.fr` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
 
@@ -58,6 +58,8 @@ npm audit
 
 Le premier contrôle analyse les sources et l’export ; le second examine les objets des branches, étiquettes et références distantes ainsi que les adresses des auteurs (les captures locales privées de Codex sont exclues). Il signale les valeurs sans les afficher. Ce contrôle ciblé ne garantit pas l’absence de tout secret imaginable.
 
-Un nettoyage des fichiers actuels ne supprime pas l’historique. Avant de rendre le dépôt public, publier l’historique assaini préparé, vérifier toutes les branches et étiquettes distantes, puis activer les contrôles GitHub disponibles (secret scanning et Dependabot). Ne jamais envoyer la sauvegarde privée de l’ancien historique. Si un secret réel a été publié antérieurement, le révoquer auprès de son fournisseur.
+L’historique assaini a été publié sur GitHub : les adresses personnelles des auteurs ont été remplacées par leurs adresses GitHub noreply et les fichiers d’hébergement privés ont été retirés. GitHub Support a confirmé la purge des anciens objets et des vues en cache ; la vérification du 1er octobre 2026 ne retrouve plus les trois anciens commits contrôlés. Dependabot est configuré.
+
+Utiliser l’historique actuel pour les prochains changements et conserver la sauvegarde de l’ancien historique hors du dépôt public. Les contrôles disponibles sur GitHub, notamment la détection de secrets, peuvent compléter les vérifications locales.
 
 Les visuels et textes Nearly restent soumis à leurs droits respectifs. Le dépôt ne fournit aucune licence générale de réutilisation.
