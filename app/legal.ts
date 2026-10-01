@@ -2,12 +2,12 @@
 // Les variables NEXT_PUBLIC_* sont publiées dans le site : aucun secret ici.
 export const legal = {
   productName: "Nearly",
-  controllerName: process.env.NEXT_PUBLIC_PUBLISHER_NAME || "Éditeur à renseigner avant publication",
-  controllerStatus: process.env.NEXT_PUBLIC_PUBLISHER_STATUS || "Statut à renseigner avant publication",
+  controllerName: process.env.NEXT_PUBLIC_PUBLISHER_NAME || "Non communiqué",
+  controllerStatus: process.env.NEXT_PUBLIC_PUBLISHER_STATUS || "Non communiqué",
   controllerSiret: process.env.NEXT_PUBLIC_PUBLISHER_SIRET || "",
-  controllerAddress: process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS || "Adresse à renseigner avant publication",
-  publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Direction de publication à renseigner",
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Contact à renseigner avant publication",
+  controllerAddress: process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS || "Adresse non communiquée",
+  publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Non communiqué",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Non communiqué",
   siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
   automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || "Non activé",
   policyVersion: "2026-10-01",

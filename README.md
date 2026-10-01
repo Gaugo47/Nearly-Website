@@ -26,7 +26,7 @@ Le workflow vérifie automatiquement les modifications de `main` et les pull req
 3. Dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`.
 4. L’adresse par défaut est `https://gaugo47.github.io/Nearly-Website/`. Le workflow calcule le chemin à partir du nom du dépôt ; les images, liens, pages, sitemap et métadonnées utilisent ce chemin.
 
-La publication est bloquée si les informations d’éditeur ci-dessus sont absentes ; une simple compilation reste possible.
+La vitrine peut être publiée avec des informations d’éditeur incomplètes : les champs absents sont affichés comme non communiqués. La configuration de la liste d’attente conserve ses contrôles avant ouverture.
 
 Le domaine final est `hellonearly.com`. Configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://hellonearly.com` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Suivre [les étapes OVH et GitHub](docs/publication-hellonearly.md) pour vérifier le domaine, configurer les DNS et le HTTPS. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
 

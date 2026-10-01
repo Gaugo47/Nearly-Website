@@ -16,7 +16,7 @@ export default function LegalNoticePage() {
       current="/mentions-legales"
       eyebrow="Informations légales"
       title={<>Mentions<br /><em>légales.</em></>}
-      intro="Les informations prévues par la loi pour la confiance dans l’économie numérique (LCEN)."
+      intro="Les informations disponibles sur l’éditeur et l’hébergement du site Nearly."
     >
       <section>
         <h2>Éditeur du site</h2>
