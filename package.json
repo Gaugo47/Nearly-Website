@@ -11,9 +11,9 @@
     "start": "node scripts/preview.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test tests/*.test.mjs n8n/workflow.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs n8n/*.test.mjs",
     "check:public": "node scripts/check-public.mjs",
-    "n8n:build": "node n8n/build-workflow.mjs"
+    "n8n:build": "node n8n/build-workflow.mjs && node n8n/build-sheets-workflow.mjs"
   },
   "dependencies": {
     "next": "16.3.8",

@@ -25,7 +25,7 @@ export default function PrivacyPage() {
       <section className="legal-summary" aria-label="L’essentiel">
         <div><strong>Le strict minimum</strong><span>Un e-mail, votre motivation et, si vous le souhaitez, vos attentes.</span></div>
         <div><strong>Aucune revente</strong><span>Vos données ne sont ni vendues, ni louées, ni utilisées pour de la publicité.</span></div>
-        <div><strong>Supprimées automatiquement</strong><span>Au plus tard {retentionYears} ans après l’inscription, ou dès votre désinscription.</span></div>
+        <div><strong>Effacées du tableau actif</strong><span>Au plus tard {retentionYears} ans après l’inscription, ou dès votre désinscription.</span></div>
       </section>
 
       <section>
@@ -87,11 +87,12 @@ export default function PrivacyPage() {
         <h2>3. Comment vos données circulent-elles ?</h2>
         <p>
           Lorsque vous validez le formulaire, vos réponses sont transmises en connexion chiffrée (HTTPS) directement à notre outil d’automatisation <strong>n8n</strong>.
-          Celui-ci vérifie les champs, les consentements et la preuve anti-robots avant toute inscription. n8n enregistre l’inscription dans un fichier
-          CSV stocké sur un serveur privé, non accessible publiquement et consulté uniquement par l’équipe {legal.productName}.
-          Une désinscription supprime la ligne correspondante de ce fichier, et une tâche quotidienne efface automatiquement les inscriptions
+          Celui-ci vérifie les champs, les consentements et la preuve anti-robots avant toute inscription. n8n enregistre l’inscription dans un tableau
+          Google Sheets privé, non accessible publiquement et consulté uniquement par l’équipe {legal.productName}.
+          Une désinscription efface les données de la ligne correspondante, et une tâche quotidienne efface automatiquement les inscriptions
           de plus de {legal.retentionMonths} mois.
         </p>
+        <p>Ces effacements concernent le tableau actif. Des versions antérieures peuvent subsister dans l’historique du prestataire ou les sauvegardes ; leur conservation est gérée séparément.</p>
       </section>
 
       <section>
@@ -99,7 +100,8 @@ export default function PrivacyPage() {
         <p>Seule l’équipe {legal.productName} a accès à vos données. Elles sont hébergées par des prestataires qui agissent uniquement sur nos instructions (sous-traitants au sens de l’article 28 du RGPD) :</p>
         <ul>
           <li><strong>Hébergement du site</strong> : {legal.siteHost}</li>
-          <li><strong>Automatisation et stockage de la liste</strong> : {legal.automationHost}</li>
+          <li><strong>Automatisation</strong> : {legal.automationHost}</li>
+          <li><strong>Stockage de la liste</strong> : Google Sheets (Google).</li>
           <li><strong>Protection anti-robots</strong> : Cloudflare Turnstile. La vérification reçoit des données techniques de connexion et un jeton temporaire ; les réponses du formulaire et votre e-mail ne sont pas transmis à Cloudflare par n8n.</li>
           <li><strong>Envoi des e-mails</strong> : le prestataire d’envoi retenu au lancement sera ajouté ici avant tout envoi.</li>
         </ul>
@@ -113,8 +115,8 @@ export default function PrivacyPage() {
       <section>
         <h2>5. Comment sont-elles protégées ?</h2>
         <p>
-          Chiffrement des échanges (HTTPS), jeton secret entre le service de liste d’attente et n8n, validation stricte des données reçues, filtrage des robots,
-          accès au fichier restreint à l’équipe et minimisation : nous ne conservons ni votre nom, ni votre adresse IP avec votre inscription.
+          Chiffrement des échanges (HTTPS), vérification anti-robots côté n8n, validation stricte des données reçues,
+          accès au tableau restreint à l’équipe et liens personnels de désinscription. Nous ne conservons ni votre nom, ni votre adresse IP avec votre inscription.
         </p>
       </section>
 

@@ -1,5 +1,7 @@
 # Formulaires GitHub Pages → n8n → CSV privé
 
+Cette page décrit la variante historique CSV. Pour le stockage Google Sheets retenu pour Nearly, suivre [SHEETS.md](SHEETS.md).
+
 Le navigateur appelle directement `POST /webhook/nearly-waitlist-public` sur l'instance n8n existante. Aucune passerelle ni hébergement supplémentaire.
 
 Le workflow `nearly-waitlist.workflow.json` est importé **non publié**. Il comporte :
