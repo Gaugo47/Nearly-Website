@@ -7,7 +7,7 @@ import { buildWorkflow, codeNodeSource } from "./build-workflow.mjs";
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
-async function runCodeNode(file, { csv = null, body = {}, headers = { origin: 'https://gaugo47.github.io' }, result = {} } = {}) {
+async function runCodeNode(file, { csv = null, body = {}, headers = { origin: 'https://hellonearly.com' }, result = {} } = {}) {
   const code = await codeNodeSource(file);
   const items = csv === null ? [{ json: {} }] : [{ json: {}, binary: { data: { data: Buffer.from(csv).toString("base64") } } }];
   const context = {
@@ -138,12 +138,15 @@ test("le workflow exporté est à jour et correctement câblé", async () => {
   assert.equal(workflow.settings.saveDataErrorExecution, "none");
   assert.equal(workflow.active, false);
   assert.equal(workflow.nodes.find((node) => node.name === 'Webhook inscription').parameters.authentication, 'none');
+  assert.equal(workflow.nodes.find((node) => node.name === 'Webhook inscription').parameters.options.allowedOrigins, 'https://hellonearly.com');
   assert.equal(workflow.nodes.find((node) => node.name === 'Webhook export').parameters.authentication, 'headerAuth');
 });
 
 test('refuse les origines, pièges robots et champs invalides avant accès au CSV', async () => {
   for (const [body, headers] of [
     [{ payload: JSON.stringify(signup()) }, { origin: 'https://attacker.test' }],
+    [{ payload: JSON.stringify(signup()) }, { origin: 'https://gaugo47.github.io' }],
+    [{ payload: JSON.stringify(signup()) }, { origin: 'https://www.hellonearly.com' }],
     [{ payload: '{' }], [{ payload: 'x'.repeat(8193) }],
     ...[{ website: 'bot' }, { startedAt: Date.now() }, { startedAt: null }, { challengeToken: '' }, { consentLaunch: false }, { reason: 'unknown' }, { managementToken: '' }, { expectations: 'x'.repeat(601) }].map((override) => [{ payload: JSON.stringify(signup(override)) }]),
   ]) {
@@ -161,11 +164,11 @@ test('refuse les origines, pièges robots et champs invalides avant accès au CS
 });
 
 test('Turnstile échoue fermé : succès, hostname et action doivent correspondre', async () => {
-  for (const result of [{}, { success: false }, { success: true, hostname: 'attacker.test', action: 'waitlist' }, { success: true, hostname: 'gaugo47.github.io', action: 'other' }]) {
+  for (const result of [{}, { success: false }, { success: true, hostname: 'attacker.test', action: 'waitlist' }, { success: true, hostname: 'hellonearly.com', action: 'other' }, { success: true, hostname: 'gaugo47.github.io', action: 'waitlist' }]) {
     const [output] = await runCodeNode('check-challenge.js', { result });
     assert.equal(output.json.allowed, false);
   }
-  const [output] = await runCodeNode('check-challenge.js', { body: signup(), result: { success: true, hostname: 'gaugo47.github.io', action: 'waitlist' } });
+  const [output] = await runCodeNode('check-challenge.js', { body: signup(), result: { success: true, hostname: 'hellonearly.com', action: 'waitlist' } });
   assert.equal(output.json.allowed, true);
 });
 

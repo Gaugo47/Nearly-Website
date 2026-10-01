@@ -28,7 +28,9 @@ Le workflow vérifie automatiquement les modifications de `main` et les pull req
 
 La publication est bloquée si les informations d’éditeur ci-dessus sont absentes ; une simple compilation reste possible.
 
-Pour un domaine personnalisé, configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://votre-domaine.fr` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
+Le domaine final est `hellonearly.com`. Configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://hellonearly.com` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Suivre [les étapes OVH et GitHub](docs/publication-hellonearly.md) pour vérifier le domaine, configurer les DNS et le HTTPS. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
+
+Le numéro SIRET public de l'éditeur peut être renseigné dans `PUBLISHER_SIRET` ; il est affiché dans les mentions légales. Les identifiants administratifs personnels et les secrets restent hors du site.
 
 Références : [export statique Next.js](https://nextjs.org/docs/app/guides/static-exports), [publication par Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 

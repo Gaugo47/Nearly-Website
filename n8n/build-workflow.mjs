@@ -5,7 +5,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
 const CSV_PATH = "/home/node/.n8n-files/nearly-waitlist.csv";
-const ALLOWED_ORIGIN = new URL(process.env.WAITLIST_ALLOWED_ORIGIN || "https://gaugo47.github.io").origin;
+const ALLOWED_ORIGIN = new URL(process.env.WAITLIST_ALLOWED_ORIGIN || "https://hellonearly.com").origin;
 const ALLOWED_HOSTNAME = new URL(ALLOWED_ORIGIN).hostname;
 const here = (path) => new URL(path, import.meta.url);
 
@@ -193,7 +193,6 @@ export async function buildWorkflow() {
       executionOrder: "v1",
       saveDataSuccessExecution: "none",
       saveDataErrorExecution: "none",
-      saveManualExecutions: false,
       saveManualExecutions: false,
       timezone: "Europe/Paris",
     },

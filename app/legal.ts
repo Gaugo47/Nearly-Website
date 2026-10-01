@@ -4,6 +4,7 @@ export const legal = {
   productName: "Nearly",
   controllerName: process.env.NEXT_PUBLIC_PUBLISHER_NAME || "Éditeur à renseigner avant publication",
   controllerStatus: process.env.NEXT_PUBLIC_PUBLISHER_STATUS || "Statut à renseigner avant publication",
+  controllerSiret: process.env.NEXT_PUBLIC_PUBLISHER_SIRET || "",
   controllerAddress: process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS || "Adresse à renseigner avant publication",
   publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Direction de publication à renseigner",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Contact à renseigner avant publication",

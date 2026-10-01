@@ -23,6 +23,7 @@ export default function LegalNoticePage() {
         <p>
           <strong>{legal.controllerName}</strong><br />
           {legal.controllerStatus}<br />
+          {legal.controllerSiret && <>SIRET : {legal.controllerSiret}<br /></>}
           {legal.controllerAddress}<br />
           Contact : <strong>{legal.contactEmail}</strong>
         </p>

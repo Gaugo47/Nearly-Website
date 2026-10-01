@@ -12,7 +12,7 @@ Le workflow `nearly-waitlist.workflow.json` est importé **non publié**. Il com
 
 ## Configurer Turnstile
 
-Créer un widget **Managed** dans [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), pour le hostname `gaugo47.github.io` (sans chemin). Pour un domaine personnalisé, ajouter son hostname et reconstruire le workflow avec `WAITLIST_ALLOWED_ORIGIN=https://votre-domaine.fr node n8n/build-workflow.mjs`.
+Créer un widget **Managed** dans [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), pour le hostname `hellonearly.com` (sans chemin). Le workflow vérifie par défaut cette origine exacte et ce hostname. `www.hellonearly.com` doit rediriger vers le domaine principal dans GitHub Pages. Pour des essais sur l'adresse GitHub, ajouter aussi `gaugo47.github.io` dans Turnstile et reconstruire le workflow avec `WAITLIST_ALLOWED_ORIGIN=https://gaugo47.github.io node n8n/build-workflow.mjs` ; ne pas mélanger le workflow d'essai avec celui du domaine final.
 
 1. La **site key**, publique, va dans la variable GitHub Actions `TURNSTILE_SITE_KEY`.
 2. La **secret key** reste dans n8n : créer un identifiant **Custom Auth**, nommé `Nearly – Turnstile`, avec ce JSON, en remplaçant la valeur directement dans n8n :
@@ -49,7 +49,7 @@ Inscription : `action: "subscribe"`, `email`, `reason`, `expectations`, `consent
 
 Désinscription : `action: "unsubscribe"`, `managementToken`. Aucun e-mail seul ne donne accès à cette action. Réponse identique pour un lien absent du CSV ou déjà supprimé : `200 { "ok": true }`. La suppression ne se produit que pour la ligne possédant le jeton.
 
-Le lien personnel a la forme `https://gaugo47.github.io/Nearly-Website/confidentialite/#token=<management_token>`. Le fragment n'est pas envoyé à GitHub ni dans le Referer. L'ouverture du lien affiche un bouton de confirmation et ne supprime rien automatiquement. Un reçu local permet de retrouver ce lien dans le même navigateur ; le visiteur peut également conserver le lien ou demander une suppression par e-mail.
+Le lien personnel a la forme `https://hellonearly.com/confidentialite/#token=<management_token>`. Le fragment n'est pas envoyé à GitHub ni dans le Referer. L'ouverture du lien affiche un bouton de confirmation et ne supprime rien automatiquement. Un reçu local permet de retrouver ce lien dans le même navigateur ; le visiteur peut également conserver le lien ou demander une suppression par e-mail.
 
 **Chaque e-mail envoyé ultérieurement doit inclure ce lien individuel**, issu du CSV privé. Ne jamais exposer l'export ni les jetons publiquement. Une adresse existante conserve ses réponses et son jeton initial ; une demande publique ne permet pas de les remplacer.
 
