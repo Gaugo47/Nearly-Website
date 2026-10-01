@@ -10,7 +10,7 @@ const features = [
     number: "01",
     title: "Un rituel qui tient dans la vraie vie",
     text: "Une question, une humeur, un petit défi. Quelques minutes suffisent pour créer un moment qui compte, sans transformer votre lien en liste de tâches.",
-    image: "/media/app-rituels.png",
+    image: "/media/app-rituels.jpg",
     alt: "Écran Rituels et jeux de l’application Nearly",
     className: "feature-card feature-card--lavender",
   },
@@ -18,7 +18,7 @@ const features = [
     number: "02",
     title: "Votre histoire, au même endroit",
     text: "Moments, souvenirs, capsules temporelles et carte partagée composent un album vivant que votre espace garde rien que pour vous.",
-    image: "/media/app-moments.png",
+    image: "/media/app-moments.jpg",
     alt: "Album de moments partagé dans Nearly",
     className: "feature-card feature-card--peach",
   },
@@ -26,7 +26,7 @@ const features = [
     number: "03",
     title: "Un compagnon qui grandit avec le lien",
     text: "Mochi évolue grâce à vos attentions partagées. Jamais de culpabilisation : seulement de petites raisons de revenir l’un vers l’autre.",
-    image: "/media/app-compagnon.png",
+    image: "/media/app-compagnon.jpg",
     alt: "Compagnon virtuel Mochi dans Nearly",
     className: "feature-card feature-card--violet",
   },
@@ -188,7 +188,7 @@ export default function Home() {
             <span className="float-icon">♥</span>
             <div><small>Prochaines retrouvailles</small><strong>dans 12 jours</strong></div>
           </div>
-          <IPhoneMockup className="phone phone--hero" src="/media/app-accueil.png" alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" eager />
+          <IPhoneMockup className="phone phone--hero" src="/media/app-accueil.jpg" alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" eager />
           <div className="companion-chip">
             <span>✦</span>
             <div><small>Mochi est fier</small><strong>+25 pour votre lien</strong></div>
@@ -256,9 +256,9 @@ export default function Home() {
           </ul>
         </div>
         <div className="phone-fan" aria-label="Galerie d’écrans Nearly">
-          <IPhoneMockup className="fan-phone fan-phone--left" src="/media/app-carte.png" alt="Carte des proches Nearly" />
-          <IPhoneMockup className="fan-phone fan-phone--center" src="/media/app-idees.png" alt="Idées personnalisées dans Nearly" />
-          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-party.png" alt="Party Lab de Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--left" src="/media/app-carte.jpg" alt="Carte des proches Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--center" src="/media/app-idees.jpg" alt="Idées personnalisées dans Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-party.jpg" alt="Accueil du Party Mode de Nearly" />
         </div>
       </section>
 
@@ -325,7 +325,7 @@ export default function Home() {
         </div>
         <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
           <figure className="party-device party-device--lab">
-            <IPhoneMockup className="party-screen" src="/media/app-party-lab.png" alt="Jeux et défis du Party Lab de Nearly" />
+            <IPhoneMockup className="party-screen" src="/media/app-party-lab.jpg" alt="Jeux et défis du Party Lab de Nearly" />
             <figcaption>Party Lab</figcaption>
           </figure>
           <figure className="party-device party-device--photos">
@@ -333,7 +333,7 @@ export default function Home() {
             <figcaption>Coffre photo</figcaption>
           </figure>
           <figure className="party-device party-device--expenses">
-            <IPhoneMockup className="party-screen" src="/media/app-party-expenses.png" alt="Répartition des frais partagés entre amis dans Nearly" />
+            <IPhoneMockup className="party-screen" src="/media/app-party-expenses.jpg" alt="Répartition des frais partagés entre amis dans Nearly" />
             <figcaption>Frais partagés</figcaption>
           </figure>
           <span className="party-chip">● Espace privé à la bande</span>
@@ -376,8 +376,8 @@ export default function Home() {
         </div>
         <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
           <div className="spicy-glow" />
-          <IPhoneMockup className="spicy-phone spicy-phone--vault" src="/media/app-spicy-vault.png" alt="Coffre privé du mode Spicy protégé par code secret" />
-          <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.png" alt="Accueil consenti du mode Spicy de Nearly" />
+          <IPhoneMockup className="spicy-phone spicy-phone--vault" src="/media/app-spicy-vault.jpg" alt="Coffre privé du mode Spicy protégé par code secret" />
+          <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.jpg" alt="Accueil consenti du mode Spicy de Nearly" />
           <span className="spicy-chip">✓ Privé · consenti · temporaire</span>
         </div>
       </section>

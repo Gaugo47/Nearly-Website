@@ -38,9 +38,11 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ### Captures de l’application
 
-Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Pour importer les sept captures réelles du 29 septembre (accueil, rituels, moments, compagnon, idées, carte, frais), utiliser `npm run screenshots:sync`. Le script lit par défaut `../Application-mobile-Nearly/docs/site-screenshots` ; un autre dossier peut être fourni avec `npm run screenshots:sync -- "chemin/vers/captures"`. Il met aussi à jour les versions de cache selon le contenu des douze images. Construire puis déployer le site après synchronisation.
+Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Les onze nouvelles captures réelles du 1er octobre sont prises depuis `localhost:8081` en JPEG natif de 393 × 758 pixels. La barre d’état (59 pixels) et l’indicateur d’accueil (34 pixels) complètent le format d’écran 393 × 852 dans le composant `IPhoneMockup`. Le cadre garde ce rapport largeur/hauteur ; les captures ne sont pas étirées.
 
-Les cinq visuels Party/Spicy restants proviennent encore des captures antérieures : aucune nouvelle capture de ces écrans n’était présente dans ce lot. Tous les visuels utilisent le composant `IPhoneMockup`, avec barre d’état et indicateur d’accueil séparés des captures.
+Pour importer ce lot, utiliser `npm run screenshots:sync`. Le script lit par défaut le dossier local `work/iphone-captures`, ignoré par Git ; un autre dossier peut être fourni avec `npm run screenshots:sync -- "chemin/vers/captures"`. Il vérifie le format des onze images avant copie et met à jour les versions de cache selon le contenu des douze visuels. Construire puis déployer le site après synchronisation.
+
+La capture `app-party-photos.png` est conservée à la demande du propriétaire. Elle garde son fichier original et s’affiche en entier, sans déformation, dans le même cadre. Aucun code secret n’est saisi ou affiché dans les captures du coffre Spicy verrouillé.
 
 Les frais, pseudonymes et questions tirées restent dans le stockage de session de l’onglet, sans base de données et sans empreinte IP créée par Nearly. Les limites de trois frais et quatre questions sont des limites de démonstration côté navigateur. Effacer la session permet un nouvel essai. Les navigateurs peuvent restaurer une session après fermeture.
 

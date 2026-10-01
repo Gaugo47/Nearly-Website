@@ -18,7 +18,7 @@ export default function IPhoneMockup({ src, alt, className, eager = false }: Pro
             <span className="iphone-battery"><span /><b>100</b></span>
           </span>
         </div>
-        <img src={`${sitePath(src)}?v=${screenshotVersions[src]}`} alt={alt} loading={eager ? "eager" : "lazy"} width={411} height={915} />
+        <img src={`${sitePath(src)}?v=${screenshotVersions[src]}`} alt={alt} loading={eager ? "eager" : "lazy"} width={393} height={758} />
         <div className="iphone-home" aria-hidden="true"><span /></div>
       </div>
     </div>

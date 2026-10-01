@@ -1131,17 +1131,20 @@ footer.legal-footer strong { color: white; }
   background: linear-gradient(110deg, #5e5965, #141219 12%, #09080d 87%, #514b58);
   box-shadow: 0 35px 75px rgba(12, 6, 23, .3), inset 0 0 0 2px #25212d;
 }
-.iphone-display { position: relative; overflow: hidden; border-radius: 12cqw; background: #0d0d13; }
+.iphone-display { position: relative; overflow: hidden; aspect-ratio: 393 / 852; display: flex; flex-direction: column; border-radius: 12cqw; background: #0d0d13; }
 .iphone-mockup .iphone-display > img {
   display: block;
   width: 100%;
   height: auto;
+  min-height: 0;
+  flex: 1;
   border-radius: 0;
   object-fit: contain;
 }
 .iphone-status {
   position: relative;
-  height: 16cqw;
+  height: 15.012723cqw;
+  flex: 0 0 15.012723cqw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1168,18 +1171,18 @@ footer.legal-footer strong { color: white; }
 .iphone-battery::after { content: ""; position: absolute; right: -.9cqw; top: .9cqw; width: .6cqw; height: 1.3cqw; border-radius: 0 .5cqw .5cqw 0; background: #aaa; }
 .iphone-battery > span { display: block; height: 100%; border-radius: .5cqw; background: #fff; }
 .iphone-battery b { position: absolute; inset: 0; display: grid; place-items: center; color: #15121a; font-size: 2.4cqw; font-weight: 800; }
-.iphone-home { height: 6cqw; display: grid; place-items: center; }
+.iphone-home { height: 8.651399cqw; flex: 0 0 8.651399cqw; display: grid; place-items: center; }
 .iphone-home > span { width: 34%; height: 1.1cqw; border-radius: 2cqw; background: #f5f4f8; }
 .iphone-button { position: absolute; width: 3px; background: linear-gradient(90deg, #35303e, #817989); border-radius: 2px; }
 .iphone-button--volume { left: -3px; top: 20%; height: 8%; box-shadow: 0 -35px 0 -1px #514b59; }
 .iphone-button--power { right: -3px; top: 27%; height: 11%; }
-.hero-visual { height: 800px; }
-.phone-fan { height: 740px; }
-.party-devices { height: 810px; }
-.spicy-visual { height: 780px; }
+.hero-visual { height: 735px; }
+.phone-fan { height: 680px; }
+.party-devices { height: 760px; }
+.spicy-visual { height: 720px; }
 @media (max-width: 760px) {
-  .hero-visual { height: 680px; }
-  .phone-fan { height: 620px; }
-  .party-devices { height: 690px; }
-  .spicy-visual { height: 640px; }
+  .hero-visual { height: 610px; }
+  .phone-fan { height: 570px; }
+  .party-devices { height: 650px; }
+  .spicy-visual { height: 590px; }
 }
