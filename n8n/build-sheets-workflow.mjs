@@ -43,6 +43,14 @@ export async function buildSheetsWorkflow({ spreadsheetId = 'REMPLACER_PAR_ID_DU
       respondWith: 'json', responseBody: '={{ $json.response }}',
       options: { ...nodes.find(node => node.name === 'Refuser la requête').parameters.options },
     }),
+    node('Préparer le remerciement', 'code', 2, [3180, 100], {
+      mode: 'runOnceForAllItems', jsCode: await readFile(here('./src/sheets-thank-you.js'), 'utf8'),
+    }),
+    node('Envoyer le remerciement', 'gmail', 2.2, [3400, 100], {
+      resource: 'message', operation: 'send', sendTo: '={{ $json.sendTo }}',
+      subject: '={{ $json.subject }}', emailType: 'text', message: '={{ $json.message }}',
+      options: { appendAttribution: false, senderName: 'Nearly' },
+    }, { onError: 'continueRegularOutput' }),
     node('Chaque nuit à 3 h', 'scheduleTrigger', 1.2, [1400, 480], { rule: { interval: [{field:'days',triggerAtHour:3}] } }),
     config('Configuration Sheets (purge)', [1620, 480]),
     read('Lire les inscriptions (purge)', 'Configuration Sheets (purge)', [1840, 480]),
@@ -57,8 +65,9 @@ export async function buildSheetsWorkflow({ spreadsheetId = 'REMPLACER_PAR_ID_DU
   connections['Données à effacer ?'] = main(['Effacer les données'], ['Répondre au site']);
   connections['Ajouter l’inscription'] = main(['Vérifier l’écriture']);
   chain(['Effacer les données', 'Vérifier l’écriture', 'Répondre au site']);
+  chain(['Répondre au site', 'Préparer le remerciement', 'Envoyer le remerciement']);
   chain(['Chaque nuit à 3 h','Configuration Sheets (purge)','Lire les inscriptions (purge)','Préparer la purge','Effacer les inscriptions expirées','Vérifier la purge']);
-  return { ...legacy, name:'Nearly – Liste d’attente (Google Sheets)', nodes, connections, settings:{...legacy.settings, saveExecutionProgress:false} };
+  return { ...legacy, name:'Nearly – Liste d’attente (Sheets + Gmail)', nodes, connections, settings:{...legacy.settings, saveExecutionProgress:false} };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   await writeFile(here('./nearly-waitlist.sheets.workflow.json'), JSON.stringify(await buildSheetsWorkflow(), null, 2)+'\n');

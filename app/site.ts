@@ -1,4 +1,3 @@
-import { legalReady } from "./legal";
 // These settings are public and embedded in the exported site.
 export const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://gaugo47.github.io/Nearly-Website").replace(/\/$/, "");
@@ -18,6 +17,6 @@ function publicEndpoint(value: string) {
     return url.protocol === "https:" && !url.username && !url.password && !url.search && !url.hash ? url.href : "";
   } catch { return ""; }
 }
-export const waitlistEndpoint = legalReady ? publicEndpoint(configuredEndpoint) : "";
+export const waitlistEndpoint = publicEndpoint(configuredEndpoint);
 export const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 export const waitlistReady = Boolean(waitlistEndpoint && turnstileSiteKey);

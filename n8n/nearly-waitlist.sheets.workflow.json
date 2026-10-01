@@ -1,5 +1,5 @@
 {
-  "name": "Nearly – Liste d’attente (Google Sheets)",
+  "name": "Nearly – Liste d’attente (Sheets + Gmail)",
   "nodes": [
     {
       "id": "a2fb80d5-1a23-4e11-a8c5-bb83be348bde",
@@ -451,6 +451,43 @@
       }
     },
     {
+      "name": "Préparer le remerciement",
+      "id": "d5fe94cb25506c78e9a3e01066cb0a4a",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3180,
+        100
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Après la réponse HTTP : seul un ajout réellement confirmé autorise un e-mail.\nconst result = $input.first().json;\nconst plan = $('Préparer la demande').first().json;\nif (result.statusCode !== 201 || result.response?.ok !== true || plan.operation !== 'append') return [];\nconst request = $('Valider la requête').first().json.request;\nconst email = typeof request?.email === 'string' ? request.email.trim().toLowerCase() : '';\nif (request?.action !== 'subscribe' || !/^[a-f0-9]{64}$/.test(request.managementToken || '') || !/^(?![=+\\-@])[^\\s@\"<>()[\\]\\\\,;:]+@[^\\s@\"<>()[\\]\\\\,;:]+\\.[a-z]{2,}$/i.test(email) || email.length > 254) return [];\nconst unsubscribeUrl = `https://hellonearly.com/confidentialite/#token=${request.managementToken}`;\nreturn [{ json: {\n  sendTo: email,\n  subject: 'Merci d’avoir rejoint Nearly 💜',\n  message: [\n    'Bonjour,', '',\n    'Merci d’avoir rejoint la liste d’attente de Nearly ! Votre inscription a bien été enregistrée.', '',\n    'Nous vous préviendrons dès que Nearly sera disponible.', '',\n    'Vous pouvez quitter la liste à tout moment avec votre lien personnel :',\n    unsubscribeUrl, '',\n    'À bientôt,', 'L’équipe Nearly', 'https://hellonearly.com/',\n  ].join('\\n'),\n} }];\n"
+      }
+    },
+    {
+      "name": "Envoyer le remerciement",
+      "id": "75e5a44183761391815d1bec77ffbf9d",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3400,
+        100
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json.sendTo }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.message }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Nearly"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
       "name": "Chaque nuit à 3 h",
       "id": "2c6ff905c792c3d11313e91142e87118",
       "type": "n8n-nodes-base.scheduleTrigger",
@@ -788,6 +825,28 @@
         [
           {
             "node": "Répondre au site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Répondre au site": {
+      "main": [
+        [
+          {
+            "node": "Préparer le remerciement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer le remerciement": {
+      "main": [
+        [
+          {
+            "node": "Envoyer le remerciement",
             "type": "main",
             "index": 0
           }

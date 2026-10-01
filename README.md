@@ -26,7 +26,7 @@ Le workflow vérifie automatiquement les modifications de `main` et les pull req
 3. Dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`.
 4. L’adresse par défaut est `https://gaugo47.github.io/Nearly-Website/`. Le workflow calcule le chemin à partir du nom du dépôt ; les images, liens, pages, sitemap et métadonnées utilisent ce chemin.
 
-La vitrine peut être publiée avec des informations d’éditeur incomplètes : les champs absents sont affichés comme non communiqués. La configuration de la liste d’attente conserve ses contrôles avant ouverture.
+Le site peut être publié avec des informations d’éditeur incomplètes : les champs absents sont affichés comme non communiqués. Le formulaire s’ouvre seulement lorsqu’une URL HTTPS valide et une clé publique Turnstile sont configurées.
 
 Le domaine final est `hellonearly.com`. Configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://hellonearly.com` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Suivre [les étapes OVH et GitHub](docs/publication-hellonearly.md) pour vérifier le domaine, configurer les DNS et le HTTPS. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
 
@@ -44,7 +44,7 @@ Les conversions de devises interrogent directement l’API publique Frankfurter.
 
 GitHub Pages ne peut pas recevoir ni conserver des inscriptions. Par défaut, le formulaire et la désinscription sont désactivés et aucune adresse n’est collectée.
 
-Les formulaires envoient directement leurs demandes au webhook public n8n : aucune passerelle ni serveur supplémentaire. Suivre [n8n/SHEETS.md](n8n/SHEETS.md), puis définir `WAITLIST_API_URL`, `TURNSTILE_SITE_KEY` (clé publique) et `WAITLIST_HOST`, en plus des informations légales. La collecte reste désactivée tant que cette configuration manque. La vérification anti-robots est obligatoire côté n8n.
+Les formulaires envoient directement leurs demandes au webhook public n8n : aucune passerelle ni serveur supplémentaire. Suivre [n8n/SHEETS.md](n8n/SHEETS.md), connecter Google Sheets et Gmail, puis définir `WAITLIST_API_URL` et `TURNSTILE_SITE_KEY` (clé publique). Renseigner les informations publiques disponibles, notamment `WAITLIST_HOST`. La collecte reste désactivée tant que l’URL ou la clé manque. La vérification anti-robots est obligatoire côté n8n. Un remerciement Gmail avec lien de désinscription suit chaque nouvel ajout confirmé ; les doublons ne déclenchent aucun envoi.
 
 Le stockage retenu est un tableau Google Sheets privé. La connexion Google et la clé secrète Turnstile restent uniquement dans les identifiants n8n. La désinscription exige un lien personnel ; une nouvelle demande publique ne remplace jamais les réponses ni le lien d’une adresse existante. Les secrets ne doivent jamais apparaître dans GitHub Pages, dans le navigateur ou dans une variable `NEXT_PUBLIC_*`. L’ancienne variante CSV reste documentée dans `n8n/README.md`.
 

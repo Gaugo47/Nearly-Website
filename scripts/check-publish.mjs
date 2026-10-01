@@ -2,7 +2,7 @@ const publisherFields = ["NEXT_PUBLIC_PUBLISHER_NAME", "NEXT_PUBLIC_PUBLISHER_ST
 const incompletePublisher = publisherFields.filter((name) => !process.env[name]?.trim());
 if (incompletePublisher.length) console.warn(`Publisher details not supplied: ${incompletePublisher.join(", ")}`);
 const required = [];
-if (process.env.NEXT_PUBLIC_WAITLIST_API_URL) required.push("NEXT_PUBLIC_WAITLIST_HOST", "NEXT_PUBLIC_TURNSTILE_SITE_KEY");
+if (process.env.NEXT_PUBLIC_WAITLIST_API_URL) required.push("NEXT_PUBLIC_TURNSTILE_SITE_KEY");
 const missing = required.filter((name) => !process.env[name]?.trim());
 if (missing.length) throw new Error(`Complete these public settings before publishing: ${missing.join(", ")}`);
 if (process.env.NEXT_PUBLIC_CONTACT_EMAIL && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.NEXT_PUBLIC_CONTACT_EMAIL)) throw new Error("Use a valid public contact email when one is supplied");

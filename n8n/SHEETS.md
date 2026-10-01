@@ -14,7 +14,8 @@ created_at, updated_at, email, reason, reason_label, expectations, consent_launc
 2. Sélectionner l’identifiant **Google Sheets OAuth2** dans les cinq nœuds de requête Google. Ces nœuds HTTP utilisent l’API Sheets avec la connexion n8n existante. Les jetons OAuth restent dans le coffre d’identifiants n8n.
 3. Sélectionner le **Custom Auth** contenant `body.secret` dans **Vérifier Turnstile**, comme dans la variante CSV. Aucun secret dans un nœud Code ni dans Git.
 4. Vérifier dans **Settings** : exécutions réussies, en erreur, manuelles et progression **Do not save**. Le collage du JSON dans le canevas ne configure pas ces paramètres automatiquement.
-5. Le domaine autorisé est `https://hellonearly.com`. Il doit aussi être autorisé dans Turnstile. Ne pas activer simultanément deux workflows ayant le chemin de webhook `nearly-waitlist-public`.
+5. Connecter le compte Gmail d’envoi au nœud **Envoyer le remerciement**. Le message est envoyé uniquement après un nouvel ajout confirmé par Google Sheets, après la réponse au site. Aucun envoi aux doublons, désinscriptions ou demandes refusées. Une panne Gmail conserve l’inscription et ne change pas le résultat du formulaire ; pas de relance automatique de l’envoi.
+6. Le domaine autorisé est `https://hellonearly.com`. Il doit aussi être autorisé dans Turnstile. Ne pas activer simultanément deux workflows ayant le chemin de webhook `nearly-waitlist-public`.
 
 ## Écritures et effacement
 
@@ -24,7 +25,7 @@ Une désinscription exige le jeton personnel de 64 caractères hexadécimaux. To
 
 **Ne pas trier, insérer ou supprimer physiquement les lignes de l’onglet alimenté par n8n.** Utiliser des vues filtrées et ignorer les lignes dont A vaut `deleted`. Un tableau modifié ou troué bloque les écritures. Le journal des versions Google et les sauvegardes peuvent conserver des versions antérieures : leur conservation doit être gérée séparément. L’effacement des cellules concerne le tableau courant, pas toutes ses anciennes versions.
 
-Chaque e-mail ultérieur doit inclure le lien individuel `https://hellonearly.com/confidentialite/#desinscription=JETON`. Le tableau contient ces jetons privés ; ne jamais partager son accès public. L’export CSV se fait directement depuis Google Sheets : cette variante n’expose aucun webhook d’export supplémentaire.
+Chaque e-mail doit inclure le lien individuel `https://hellonearly.com/confidentialite/#token=JETON`, comme le remerciement Gmail. Le tableau contient ces jetons privés ; ne jamais partager son accès public. L’export CSV se fait directement depuis Google Sheets : cette variante n’expose aucun webhook d’export supplémentaire. Les messages envoyés restent aussi dans Gmail : l’effacement de la ligne Sheets ne supprime pas les copies de l’expéditeur ou du destinataire.
 
 ## Concurrence et vérification avant ouverture
 

@@ -71,7 +71,7 @@ test('Sheets : purge de 36 mois sans toucher les inscriptions récentes',async()
 test('Sheets : graphe complet, stockage OAuth privé, aucune conservation des exécutions',async()=>{
   const workflow=await buildSheetsWorkflow();
   assert.deepEqual(JSON.parse(await readFile(new URL('./nearly-waitlist.sheets.workflow.json',import.meta.url),'utf8')),workflow);
-  assert.equal(workflow.active,false); assert.equal(workflow.nodes.length,24);
+  assert.equal(workflow.active,false); assert.equal(workflow.nodes.length,26);
   assert.equal(workflow.settings.saveExecutionProgress,false);
   assert.equal(workflow.settings.saveDataErrorExecution,'none'); assert.equal(workflow.settings.saveManualExecutions,false);
   assert.ok(!workflow.nodes.some(node=>['n8n-nodes-base.readWriteFile'].includes(node.type)));
@@ -84,4 +84,25 @@ test('Sheets : graphe complet, stockage OAuth privé, aucune conservation des ex
     assert.ok(names.has(source)); for(const output of connection.main) for(const edge of output) assert.ok(names.has(edge.node));
   }
   assert.deepEqual(workflow.connections['Anti-robots validé ?'].main[0].map(edge=>edge.node),['Configuration Sheets']);
+  assert.deepEqual(workflow.connections['Répondre au site'].main[0].map(edge=>edge.node),['Préparer le remerciement']);
+  const gmail=workflow.nodes.find(node=>node.type==='n8n-nodes-base.gmail');
+  assert.equal(gmail.parameters.operation,'send'); assert.equal(gmail.onError,'continueRegularOutput');
+  assert.equal(gmail.retryOnFail,undefined);
+});
+
+test('Sheets : remerciement uniquement après un nouvel ajout confirmé, jamais un doublon ou un refus',async()=>{
+  const source=await readFile(new URL('./src/sheets-thank-you.js',import.meta.url),'utf8');
+  const evaluate=async(data,plan,request=signup())=>new AsyncFunction('$input','$',source)(
+    {first:()=>({json:data})},name=>({first:()=>({json:name==='Valider la requête'?{request}:plan})}));
+  const success={statusCode:201,response:{ok:true}};
+  const [mail]=await evaluate(success,{operation:'append'});
+  assert.equal(mail.json.sendTo,'alice@example.invalid');
+  assert.match(mail.json.message,new RegExp('https://hellonearly.com/confidentialite/#token='+signup().managementToken));
+  assert.ok(!mail.json.message.includes(signup().expectations));
+  for(const data of [{statusCode:503,response:{ok:false}}, {statusCode:200,response:{ok:true}}, {statusCode:400,response:{ok:false}}])
+    assert.deepEqual(await evaluate(data,{operation:'append'}),[]);
+  assert.deepEqual(await evaluate(success,{operation:'none'}),[]);
+  assert.deepEqual(await evaluate(success,{operation:'erase'}),[]);
+  assert.deepEqual(await evaluate(success,{operation:'append'},signup({email:'alice@example.invalid,bob@example.invalid'})),[]);
+  assert.deepEqual(await evaluate(success,{operation:'append'},signup({managementToken:'short'})),[]);
 });

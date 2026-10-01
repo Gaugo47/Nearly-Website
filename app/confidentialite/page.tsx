@@ -92,7 +92,7 @@ export default function PrivacyPage() {
           Une désinscription efface les données de la ligne correspondante, et une tâche quotidienne efface automatiquement les inscriptions
           de plus de {legal.retentionMonths} mois.
         </p>
-        <p>Ces effacements concernent le tableau actif. Des versions antérieures peuvent subsister dans l’historique du prestataire ou les sauvegardes ; leur conservation est gérée séparément.</p>
+        <p>Ces effacements concernent le tableau actif. Des versions antérieures peuvent subsister dans l’historique du prestataire ou les sauvegardes ; leur conservation est gérée séparément. Le remerciement et son lien personnel sont également conservés dans les messageries de l’expéditeur et du destinataire ; la désinscription n’efface pas ces copies.</p>
       </section>
 
       <section>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           <li><strong>Automatisation</strong> : {legal.automationHost}</li>
           <li><strong>Stockage de la liste</strong> : Google Sheets (Google).</li>
           <li><strong>Protection anti-robots</strong> : Cloudflare Turnstile. La vérification reçoit des données techniques de connexion et un jeton temporaire ; les réponses du formulaire et votre e-mail ne sont pas transmis à Cloudflare par n8n.</li>
-          <li><strong>Envoi des e-mails</strong> : le prestataire d’envoi retenu au lancement sera ajouté ici avant tout envoi.</li>
+          <li><strong>E-mail de remerciement</strong> : Gmail (Google), via n8n, après une nouvelle inscription. Le message contient votre lien personnel de désinscription ; vos réponses au formulaire n’y figurent pas.</li>
         </ul>
         <p>
           Vos données ne sont jamais vendues, louées ni cédées à des fins commerciales. Si un prestataire est situé hors de l’Union européenne,

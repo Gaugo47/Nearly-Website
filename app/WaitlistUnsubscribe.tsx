@@ -28,7 +28,7 @@ export default function WaitlistUnsubscribe() {
   }
   if (!waitlistEndpoint) return <p>La liste d’attente n’est pas ouverte. Aucune inscription n’est collectée sur cette version du site.</p>;
   if (status === "done") return <p className="legal-unsubscribe__done" role="status">✓ Votre demande est traitée. Toute inscription associée à ce lien a été supprimée.</p>;
-  if (!token) return <p>Ouvrez votre lien personnel de désinscription, fourni lors de l’inscription ou dans nos e-mails. Si vous l’avez perdu, écrivez à <a href={`mailto:${legal.contactEmail}?subject=D%C3%A9sinscription%20Nearly`}>{legal.contactEmail}</a> depuis l’adresse inscrite.</p>;
+  if (!token) return <p>Ouvrez votre lien personnel de désinscription, fourni lors de l’inscription ou dans notre e-mail de remerciement. {process.env.NEXT_PUBLIC_CONTACT_EMAIL ? <>Si vous l’avez perdu, écrivez à <a href={`mailto:${legal.contactEmail}?subject=D%C3%A9sinscription%20Nearly`}>{legal.contactEmail}</a> depuis l’adresse inscrite.</> : <>Vous pouvez aussi le retrouver dans le navigateur utilisé lors de l’inscription, si le reçu y a été conservé.</>}</p>;
   return <form className="legal-unsubscribe" onSubmit={submit}>
     <p>Confirmez la suppression de votre inscription et des réponses associées.</p>
     <button type="submit" disabled={status === "sending"}>{status === "sending" ? "Suppression…" : "Me désinscrire"}</button>

@@ -9,7 +9,7 @@ export const legal = {
   publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Non communiqué",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Non communiqué",
   siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
-  automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || "Non activé",
+  automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || (process.env.NEXT_PUBLIC_WAITLIST_API_URL ? "n8n (prestataire non communiqué)" : "Non activé"),
   policyVersion: "2026-10-01",
   lastUpdated: "1er octobre 2026",
   retentionMonths: 36,
@@ -26,5 +26,3 @@ export const waitlistReasons = [
 export type WaitlistReason = (typeof waitlistReasons)[number]["value"];
 
 export const WAITLIST_EXPECTATIONS_MAX = 600;
-
-export const legalReady = Boolean(process.env.NEXT_PUBLIC_PUBLISHER_NAME && process.env.NEXT_PUBLIC_PUBLISHER_STATUS && process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS && process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR && process.env.NEXT_PUBLIC_CONTACT_EMAIL && process.env.NEXT_PUBLIC_WAITLIST_HOST);
