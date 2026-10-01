@@ -204,7 +204,6 @@ h1 em, h2 em { color: var(--coral); font-weight: 500; }
   transform: rotate(2.5deg);
 }
 .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 42px; }
-.phone-speaker { position: absolute; z-index: 4; top: 20px; left: 50%; transform: translateX(-50%); width: 88px; height: 25px; border-radius: 999px; background: #08060b; }
 .float-card, .companion-chip {
   position: absolute;
   z-index: 5;
@@ -992,7 +991,6 @@ footer.legal-footer strong { color: white; }
   .hero-visual::after { width: 385px; height: 385px; }
   .phone { width: 278px; height: 575px; border-radius: 43px; }
   .phone img { border-radius: 34px; }
-  .phone-speaker { top: 17px; }
   .float-card { transform: scale(.83); }
   .float-card--question { left: -42px; top: 115px; }
   .float-card--reunion { right: -45px; bottom: 120px; }
@@ -1116,4 +1114,72 @@ footer.legal-footer strong { color: white; }
   html { scroll-behavior: auto; }
   .game-match__question, .game-result { animation: none; }
   .expense-trial-loading > span { animation: none; opacity: .65; }
+}
+
+/* Device chrome stays separate from the real screenshots, with safe areas
+   above and below the app so no controls are hidden by the Dynamic Island. */
+.phone.iphone-mockup,
+.feature-card .feature-phone.iphone-mockup,
+.fan-phone.iphone-mockup,
+.party-device .party-screen.iphone-mockup,
+.spicy-phone.iphone-mockup {
+  height: auto;
+  padding: 7px;
+  overflow: visible;
+  container-type: inline-size;
+  border: 1px solid #66616f;
+  background: linear-gradient(110deg, #5e5965, #141219 12%, #09080d 87%, #514b58);
+  box-shadow: 0 35px 75px rgba(12, 6, 23, .3), inset 0 0 0 2px #25212d;
+}
+.iphone-display { position: relative; overflow: hidden; border-radius: 12cqw; background: #0d0d13; }
+.iphone-mockup .iphone-display > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  object-fit: contain;
+}
+.iphone-status {
+  position: relative;
+  height: 16cqw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2cqw 7cqw 0;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.iphone-time { font-size: 4.5cqw; font-weight: 700; letter-spacing: -.03em; }
+.iphone-island {
+  position: absolute;
+  top: 3.5cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 31cqw;
+  height: 8cqw;
+  border-radius: 8cqw;
+  background: #000;
+  box-shadow: inset 0 0 0 1px #19171f;
+}
+.iphone-island i { position: absolute; right: 3cqw; top: 2.5cqw; width: 3cqw; height: 3cqw; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #283552, #080a11 68%); }
+.iphone-indicators { display: flex; align-items: center; gap: 1.5cqw; }
+.iphone-indicators svg { width: 4.5cqw; height: 3.5cqw; fill: currentColor; }
+.iphone-battery { position: relative; width: 7.3cqw; height: 3.5cqw; border: 1px solid #aaa; border-radius: 1cqw; padding: .3cqw; }
+.iphone-battery::after { content: ""; position: absolute; right: -.9cqw; top: .9cqw; width: .6cqw; height: 1.3cqw; border-radius: 0 .5cqw .5cqw 0; background: #aaa; }
+.iphone-battery > span { display: block; height: 100%; border-radius: .5cqw; background: #fff; }
+.iphone-battery b { position: absolute; inset: 0; display: grid; place-items: center; color: #15121a; font-size: 2.4cqw; font-weight: 800; }
+.iphone-home { height: 6cqw; display: grid; place-items: center; }
+.iphone-home > span { width: 34%; height: 1.1cqw; border-radius: 2cqw; background: #f5f4f8; }
+.iphone-button { position: absolute; width: 3px; background: linear-gradient(90deg, #35303e, #817989); border-radius: 2px; }
+.iphone-button--volume { left: -3px; top: 20%; height: 8%; box-shadow: 0 -35px 0 -1px #514b59; }
+.iphone-button--power { right: -3px; top: 27%; height: 11%; }
+.hero-visual { height: 800px; }
+.phone-fan { height: 740px; }
+.party-devices { height: 810px; }
+.spicy-visual { height: 780px; }
+@media (max-width: 760px) {
+  .hero-visual { height: 680px; }
+  .phone-fan { height: 620px; }
+  .party-devices { height: 690px; }
+  .spicy-visual { height: 640px; }
 }

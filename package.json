@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "npm run build && node --test tests/*.test.mjs n8n/*.test.mjs",
     "check:public": "node scripts/check-public.mjs",
+    "screenshots:sync": "node scripts/sync-screenshots.mjs",
     "n8n:build": "node n8n/build-workflow.mjs && node n8n/build-sheets-workflow.mjs"
   },
   "dependencies": {

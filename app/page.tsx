@@ -3,6 +3,7 @@ import { sitePath, absoluteUrl } from "./site";
 import GameMatch from "./GameMatch";
 import ExpenseDemo from "./ExpenseDemo";
 import WaitlistForm from "./WaitlistForm";
+import IPhoneMockup from "./IPhoneMockup";
 
 const features = [
   {
@@ -187,10 +188,7 @@ export default function Home() {
             <span className="float-icon">♥</span>
             <div><small>Prochaines retrouvailles</small><strong>dans 12 jours</strong></div>
           </div>
-          <div className="phone phone--hero">
-            <span className="phone-speaker" />
-            <img src={sitePath("/media/app-accueil.png")} alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" />
-          </div>
+          <IPhoneMockup className="phone phone--hero" src="/media/app-accueil.png" alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" eager />
           <div className="companion-chip">
             <span>✦</span>
             <div><small>Mochi est fier</small><strong>+25 pour votre lien</strong></div>
@@ -240,9 +238,7 @@ export default function Home() {
                 <h3>{feature.title}</h3>
                 <p>{feature.text}</p>
               </div>
-              <div className="feature-phone">
-                <img src={sitePath(feature.image)} alt={feature.alt} loading="lazy" />
-              </div>
+              <IPhoneMockup className="feature-phone" src={feature.image} alt={feature.alt} />
             </article>
           ))}
         </div>
@@ -260,9 +256,9 @@ export default function Home() {
           </ul>
         </div>
         <div className="phone-fan" aria-label="Galerie d’écrans Nearly">
-          <div className="fan-phone fan-phone--left"><img src={sitePath("/media/app-carte.png")} alt="Carte des proches Nearly" loading="lazy" /></div>
-          <div className="fan-phone fan-phone--center"><img src={sitePath("/media/app-idees.png")} alt="Idées personnalisées dans Nearly" loading="lazy" /></div>
-          <div className="fan-phone fan-phone--right"><img src={sitePath("/media/app-party.png")} alt="Party Lab de Nearly" loading="lazy" /></div>
+          <IPhoneMockup className="fan-phone fan-phone--left" src="/media/app-carte.png" alt="Carte des proches Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--center" src="/media/app-idees.png" alt="Idées personnalisées dans Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-party.png" alt="Party Lab de Nearly" />
         </div>
       </section>
 
@@ -329,21 +325,15 @@ export default function Home() {
         </div>
         <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
           <figure className="party-device party-device--lab">
-            <div className="party-screen">
-              <img src={sitePath("/media/app-party-lab.png")} alt="Jeux et défis du Party Lab de Nearly" loading="lazy" />
-            </div>
+            <IPhoneMockup className="party-screen" src="/media/app-party-lab.png" alt="Jeux et défis du Party Lab de Nearly" />
             <figcaption>Party Lab</figcaption>
           </figure>
           <figure className="party-device party-device--photos">
-            <div className="party-screen">
-              <img src={sitePath("/media/app-party-photos.png")} alt="Coffre de photos privées d’une soirée entre amis dans Nearly" loading="lazy" />
-            </div>
+            <IPhoneMockup className="party-screen" src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" />
             <figcaption>Coffre photo</figcaption>
           </figure>
           <figure className="party-device party-device--expenses">
-            <div className="party-screen">
-              <img src={sitePath("/media/app-party-expenses.png")} alt="Répartition des frais partagés entre amis dans Nearly" loading="lazy" />
-            </div>
+            <IPhoneMockup className="party-screen" src="/media/app-party-expenses.png" alt="Répartition des frais partagés entre amis dans Nearly" />
             <figcaption>Frais partagés</figcaption>
           </figure>
           <span className="party-chip">● Espace privé à la bande</span>
@@ -386,12 +376,8 @@ export default function Home() {
         </div>
         <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
           <div className="spicy-glow" />
-          <div className="spicy-phone spicy-phone--vault">
-            <img src={sitePath("/media/app-spicy-vault.png")} alt="Coffre privé du mode Spicy protégé par code secret" loading="lazy" />
-          </div>
-          <div className="spicy-phone spicy-phone--home">
-            <img src={sitePath("/media/app-spicy-home.png")} alt="Accueil consenti du mode Spicy de Nearly" loading="lazy" />
-          </div>
+          <IPhoneMockup className="spicy-phone spicy-phone--vault" src="/media/app-spicy-vault.png" alt="Coffre privé du mode Spicy protégé par code secret" />
+          <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.png" alt="Accueil consenti du mode Spicy de Nearly" />
           <span className="spicy-chip">✓ Privé · consenti · temporaire</span>
         </div>
       </section>

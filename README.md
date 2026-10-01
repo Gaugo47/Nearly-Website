@@ -36,6 +36,12 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ## Démonstrations
 
+### Captures de l’application
+
+Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Pour importer les sept captures réelles du 29 septembre (accueil, rituels, moments, compagnon, idées, carte, frais), utiliser `npm run screenshots:sync`. Le script lit par défaut `../Application-mobile-Nearly/docs/site-screenshots` ; un autre dossier peut être fourni avec `npm run screenshots:sync -- "chemin/vers/captures"`. Il met aussi à jour les versions de cache selon le contenu des douze images. Construire puis déployer le site après synchronisation.
+
+Les cinq visuels Party/Spicy restants proviennent encore des captures antérieures : aucune nouvelle capture de ces écrans n’était présente dans ce lot. Tous les visuels utilisent le composant `IPhoneMockup`, avec barre d’état et indicateur d’accueil séparés des captures.
+
 Les frais, pseudonymes et questions tirées restent dans le stockage de session de l’onglet, sans base de données et sans empreinte IP créée par Nearly. Les limites de trois frais et quatre questions sont des limites de démonstration côté navigateur. Effacer la session permet un nouvel essai. Les navigateurs peuvent restaurer une session après fermeture.
 
 Les conversions de devises interrogent directement l’API publique Frankfurter. Aucun prénom ni montant n’est transmis à ce fournisseur. Le calcul en euros fonctionne sans service de taux ; une conversion indisponible affiche une erreur et ne substitue pas un taux fictif.
