@@ -1,5 +1,5 @@
 
-import { sitePath, absoluteUrl, waitlistEndpoint } from "./site";
+import { sitePath, absoluteUrl } from "./site";
 import GameMatch from "./GameMatch";
 import ExpenseDemo from "./ExpenseDemo";
 import WaitlistForm from "./WaitlistForm";

@@ -11,6 +11,8 @@ services:
       TZ: Europe/Paris
       # Le workflow ne lit et n'écrit que dans ce dossier.
       N8N_RESTRICT_FILE_ACCESS_TO: /home/node/.n8n-files
+      # Sérialiser les modifications du CSV pour éviter les écritures concurrentes.
+      N8N_CONCURRENCY_PRODUCTION_LIMIT: "1"
       # RGPD : les exécutions en erreur (qui contiennent des e-mails) sont effacées après 7 jours.
       EXECUTIONS_DATA_PRUNE: "true"
       EXECUTIONS_DATA_MAX_AGE: "168"

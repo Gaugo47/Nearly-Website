@@ -2,7 +2,7 @@ import { absoluteUrl } from "../site";
 import type { Metadata } from "next";
 import LegalLayout from "../LegalLayout";
 import WaitlistUnsubscribe from "../WaitlistUnsubscribe";
-import { waitlistEndpoint } from "../site";
+import { waitlistReady } from "../site";
 import { legal } from "../legal";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
       title={<>Politique de<br /><em>confidentialité.</em></>}
       intro="Nous collectons le strict nécessaire, nous l’utilisons uniquement pour ce que nous annonçons ici, et vous gardez la main à tout moment."
     >
-      {!waitlistEndpoint && <p className="legal-callout">La liste d’attente est actuellement désactivée. Les traitements d’inscription décrits ci-dessous ne seront activés qu’à son ouverture.</p>}
+      {!waitlistReady && <p className="legal-callout">La liste d’attente est actuellement désactivée. Les traitements d’inscription décrits ci-dessous ne seront activés qu’à son ouverture.</p>}
       <section className="legal-summary" aria-label="L’essentiel">
         <div><strong>Le strict minimum</strong><span>Un e-mail, votre motivation et, si vous le souhaitez, vos attentes.</span></div>
         <div><strong>Aucune revente</strong><span>Vos données ne sont ni vendues, ni louées, ni utilisées pour de la publicité.</span></div>
@@ -86,8 +86,8 @@ export default function PrivacyPage() {
       <section>
         <h2>3. Comment vos données circulent-elles ?</h2>
         <p>
-          Lorsque vous validez le formulaire, vos réponses sont transmises en connexion chiffrée (HTTPS) à un service externe de liste d’attente, qui les vérifie puis
-          les envoie à notre outil d’automatisation <strong>n8n</strong>, protégé par un jeton secret. n8n enregistre l’inscription dans un fichier
+          Lorsque vous validez le formulaire, vos réponses sont transmises en connexion chiffrée (HTTPS) directement à notre outil d’automatisation <strong>n8n</strong>.
+          Celui-ci vérifie les champs, les consentements et la preuve anti-robots avant toute inscription. n8n enregistre l’inscription dans un fichier
           CSV stocké sur un serveur privé, non accessible publiquement et consulté uniquement par l’équipe {legal.productName}.
           Une désinscription supprime la ligne correspondante de ce fichier, et une tâche quotidienne efface automatiquement les inscriptions
           de plus de {legal.retentionMonths} mois.
@@ -100,6 +100,7 @@ export default function PrivacyPage() {
         <ul>
           <li><strong>Hébergement du site</strong> : {legal.siteHost}</li>
           <li><strong>Automatisation et stockage de la liste</strong> : {legal.automationHost}</li>
+          <li><strong>Protection anti-robots</strong> : Cloudflare Turnstile. La vérification reçoit des données techniques de connexion et un jeton temporaire ; les réponses du formulaire et votre e-mail ne sont pas transmis à Cloudflare par n8n.</li>
           <li><strong>Envoi des e-mails</strong> : le prestataire d’envoi retenu au lancement sera ajouté ici avant tout envoi.</li>
         </ul>
         <p>
@@ -138,7 +139,7 @@ export default function PrivacyPage() {
 
       <section id="desinscription" className="legal-callout">
         <h2>Quitter la liste d’attente</h2>
-        <p>Indiquez l’adresse utilisée lors de l’inscription : elle sera supprimée de la liste avec toutes les réponses associées.</p>
+        <p>Utilisez votre lien personnel pour supprimer votre inscription et toutes les réponses associées. Une adresse e-mail seule ne permet pas de supprimer l’inscription d’un tiers.</p>
         <WaitlistUnsubscribe />
       </section>
 
@@ -147,7 +148,7 @@ export default function PrivacyPage() {
         <p>
           Le site n’utilise <strong>aucun cookie publicitaire ni outil de mesure d’audience</strong>. Les démonstrations utilisent le stockage de
           session de votre navigateur pour retrouver les données dans le même onglet. Elles ne sont pas envoyées à Nearly ; vous pouvez les
-          effacer depuis les réglages du navigateur. Pour une conversion de devises, le navigateur interroge <a href="https://frankfurter.dev/" target="_blank" rel="noopener noreferrer">Frankfurter</a> :
+          effacer depuis les réglages du navigateur. Après inscription, un reçu contenant votre adresse et votre lien personnel de désinscription peut être conservé localement pour retrouver ce lien. Il est effacé lors de la désinscription ; après 36 mois, il n’est plus utilisé et est effacé à la prochaine consultation. Vous pouvez aussi le supprimer depuis les réglages du navigateur. Cloudflare Turnstile est chargé uniquement lorsque le formulaire est activé pour vérifier les interactions humaines (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">politique Cloudflare</a>). Pour une conversion de devises, le navigateur interroge <a href="https://frankfurter.dev/" target="_blank" rel="noopener noreferrer">Frankfurter</a> :
           le fournisseur reçoit les codes de devises et les informations techniques de connexion, mais aucun prénom ni aucune dépense.
         </p>
       </section>

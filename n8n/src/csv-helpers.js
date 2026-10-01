@@ -13,6 +13,7 @@ const COLUMNS = [
   'policy_version',
   'consent_at',
   'source',
+  'management_token',
 ];
 
 function parseCsv(text) {

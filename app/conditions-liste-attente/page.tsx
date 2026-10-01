@@ -32,7 +32,7 @@ export default function WaitlistTermsPage() {
           <li>L’inscription est <strong>gratuite</strong> et <strong>sans engagement</strong> : elle ne vaut ni achat, ni abonnement, ni création de compte dans l’application.</li>
           <li>Elle est ouverte aux personnes âgées d’<strong>au moins 15 ans</strong>.</li>
           <li>Vous vous engagez à utiliser une adresse e-mail dont vous êtes titulaire et à ne pas inscrire un tiers sans son accord.</li>
-          <li>Une seule inscription par adresse : une nouvelle inscription avec la même adresse met à jour vos réponses précédentes.</li>
+          <li>Une seule inscription par adresse : une nouvelle demande avec la même adresse conserve vos réponses et votre lien personnel initial. Pour modifier vos réponses, contactez-nous depuis l’adresse inscrite.</li>
         </ul>
       </section>
 

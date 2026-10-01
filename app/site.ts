@@ -12,4 +12,12 @@ export function absoluteUrl(path: string) {
   return `${siteUrl}${path === "/" ? "/" : path}`;
 }
 const configuredEndpoint = process.env.NEXT_PUBLIC_WAITLIST_API_URL || "";
-export const waitlistEndpoint = legalReady && /^https:\/\//.test(configuredEndpoint) ? configuredEndpoint : "";
+function publicEndpoint(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password && !url.search && !url.hash ? url.href : "";
+  } catch { return ""; }
+}
+export const waitlistEndpoint = legalReady ? publicEndpoint(configuredEndpoint) : "";
+export const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+export const waitlistReady = Boolean(waitlistEndpoint && turnstileSiteKey);

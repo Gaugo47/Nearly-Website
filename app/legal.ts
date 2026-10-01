@@ -9,8 +9,8 @@ export const legal = {
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Contact à renseigner avant publication",
   siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
   automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || "Non activé",
-  policyVersion: "2026-09-30",
-  lastUpdated: "30 septembre 2026",
+  policyVersion: "2026-10-01",
+  lastUpdated: "1er octobre 2026",
   retentionMonths: 36,
 };
 

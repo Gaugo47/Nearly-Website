@@ -1,77 +1,65 @@
-# Liste d'attente Nearly → n8n → CSV
+# Formulaires GitHub Pages → n8n → CSV privé
 
-```
-Formulaire (#liste-attente)
-   │  POST HTTPS vers la passerelle externe (validation, anti-robots)
-   ▼
-Passerelle n8n/gateway.mjs ── POST + en-tête X-Nearly-Token ──▶ Webhook n8n « nearly-waitlist »
-                                                       │
-                                  Lire le CSV → Traiter la demande → Écrire le CSV → Réponse
-                                                       │
-                              /home/node/.n8n-files/nearly-waitlist.csv
-```
+Le navigateur appelle directement `POST /webhook/nearly-waitlist-public` sur l'instance n8n existante. Aucune passerelle ni hébergement supplémentaire.
 
-Le workflow [`nearly-waitlist.workflow.json`](nearly-waitlist.workflow.json) contient trois branches :
+Le workflow `nearly-waitlist.workflow.json` est importé **non publié**. Il comporte :
 
-| Branche | Déclencheur | Rôle |
-| --- | --- | --- |
-| Inscription / désinscription | `POST /webhook/nearly-waitlist` | Valide la requête, ajoute la ligne (ou la met à jour si l'e-mail existe déjà) ou la supprime (`action: "unsubscribe"`). |
-| Purge RGPD | Tous les jours à 3 h | Supprime les inscriptions dont la dernière mise à jour date de plus de 36 mois. |
-| Export | `GET /webhook/nearly-waitlist-export` | Télécharge le CSV (jeton d'export distinct). |
+- une validation stricte de l'origine, du format, de la taille, des champs et des consentements avant accès au CSV ;
+- une vérification Cloudflare Turnstile côté n8n (succès, hostname et action `waitlist`) pour les inscriptions ;
+- une désinscription par jeton personnel aléatoire de 256 bits, sans suppression par simple adresse e-mail ;
+- une purge quotidienne à 3 h, après 36 mois ;
+- un export CSV protégé par un identifiant Header Auth distinct. Aucune donnée n'est renvoyée par le webhook public.
 
-Colonnes du CSV (UTF-8 avec BOM, séparateur virgule) :
-`created_at, updated_at, email, reason, reason_label, expectations, consent_launch, consent_feedback, policy_version, consent_at, source`.
-Les cellules qui commencent par `= + - @` sont préfixées d'une apostrophe pour éviter l'injection de formules dans Excel / Sheets.
+## Configurer Turnstile
 
-## Mise en place
+Créer un widget **Managed** dans [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), pour le hostname `gaugo47.github.io` (sans chemin). Pour un domaine personnalisé, ajouter son hostname et reconstruire le workflow avec `WAITLIST_ALLOWED_ORIGIN=https://votre-domaine.fr node n8n/build-workflow.mjs`.
 
-Le workflow lit et écrit un fichier sur le disque : il faut une instance n8n **auto-hébergée** (n8n Cloud n'autorise pas l'accès au disque).
+1. La **site key**, publique, va dans la variable GitHub Actions `TURNSTILE_SITE_KEY`.
+2. La **secret key** reste dans n8n : créer un identifiant **Custom Auth**, nommé `Nearly – Turnstile`, avec ce JSON, en remplaçant la valeur directement dans n8n :
 
-1. Démarrer n8n (ou utiliser votre instance existante en montant un volume sur `/home/node/.n8n-files`) :
-   ```bash
-   docker compose -f n8n/docker-compose.yml up -d
+   ```json
+   { "body": { "secret": "REMPLACER_DANS_N8N_SEULEMENT" } }
    ```
-2. Dans n8n : **Workflows → Import from File** → `n8n/nearly-waitlist.workflow.json`.
-3. Créer deux identifiants **Header Auth** (Credentials → New → Header Auth) :
-   - `Nearly – jeton du site` : Name `X-Nearly-Token`, Value = un secret long (ex. `openssl rand -hex 32`) ;
-   - `Nearly – jeton d’export` : Name `X-Nearly-Token`, Value = un **autre** secret.
-   Les sélectionner dans les nœuds « Webhook inscription » et « Webhook export ».
-4. Activer le workflow et copier l'**URL de production** du nœud « Webhook inscription ».
-5. Héberger `n8n/gateway.mjs` sur un serveur Node.js séparé, derrière un reverse proxy HTTPS. Le serveur GitHub Pages ne peut pas exécuter cette passerelle.
-   Variables privées sur CE serveur (jamais des variables `NEXT_PUBLIC_*`, jamais dans le dépôt) :
-   ```
-   WAITLIST_ALLOWED_ORIGIN=https://gaugo47.github.io
-   N8N_WAITLIST_WEBHOOK_URL=https://n8n.votre-domaine.fr/webhook/nearly-waitlist
-   N8N_WAITLIST_TOKEN=<secret du jeton du site>
-   PORT=8787
-   ```
-   Démarrer avec `node n8n/gateway.mjs`. Le processus écoute uniquement sur `127.0.0.1`.
-   Le reverse proxy doit exposer `/waitlist` en HTTPS, limiter les requêtes et la taille des corps. La passerelle valide l’origine, les champs et les consentements ; son limiteur en mémoire est adapté à une seule instance. CORS ne remplace pas une protection anti-abus au niveau du proxy.
-6. Configurer la variable PUBLIQUE `WAITLIST_API_URL` dans GitHub Actions avec l’URL de cette passerelle, par exemple `https://inscriptions.votre-domaine.fr/waitlist`. Compléter toutes les variables d’éditeur et `WAITLIST_HOST` décrites dans le README principal, puis reconstruire le site.
-   Tant que cette configuration est absente, le site ne présente aucun champ de collecte.
 
-Le webhook d’export n’est jamais exposé via la passerelle. Les données CSV, identifiants n8n, sauvegardes et journaux restent hors du dépôt public.
+3. Associer cet identifiant au nœud **Vérifier Turnstile**. Si n8n propose une restriction de domaines, autoriser seulement `challenges.cloudflare.com` pour cet identifiant.
 
-Télécharger le CSV :
+Le navigateur transmet uniquement le jeton temporaire du challenge. n8n n'envoie à Cloudflare ni l'e-mail ni les réponses. Toute vérification absente, expirée, réutilisée ou erronée est refusée. Ne jamais publier la clé secrète dans le workflow JSON ou une variable `NEXT_PUBLIC_*`.
 
-```bash
-curl -H "X-Nearly-Token: <secret d'export>" -o nearly-waitlist.csv https://n8n.votre-domaine.fr/webhook/nearly-waitlist-export
-```
+Références : [validation serveur Turnstile](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/), [Custom Auth n8n](https://docs.n8n.io/integrations/builtin/credentials/httprequest/#using-custom-auth).
 
-## RGPD côté n8n
+## Installer le workflow
 
-- Les exécutions réussies ne sont pas enregistrées (`saveDataSuccessExecution: none`) : les e-mails ne s'accumulent pas dans la base n8n. Les exécutions en erreur sont gardées pour le débogage et effacées après 7 jours avec `EXECUTIONS_DATA_MAX_AGE=168`.
-- Le fichier CSV ne doit pas être servi publiquement ; sauvegardez le dossier `n8n/data/files` de façon chiffrée.
-- La durée de conservation (36 mois) est définie dans `src/purge-expired.js` et doit rester alignée sur `retentionMonths` dans `app/legal.ts`.
+1. Sauvegarder le workflow actuel et le CSV privé avant toute migration. Importer le nouveau JSON comme workflow distinct pour préparer le raccordement. Ne pas activer simultanément deux tâches de purge sur le même CSV.
+2. Associer l'identifiant Turnstile ci-dessus.
+3. Créer un identifiant **Header Auth** pour **Webhook export**, Name `X-Nearly-Token`, Value = un secret long, différent de la clé Turnstile. Ne jamais utiliser l'URL d'export dans le site.
+4. Vérifier un volume persistant, inscriptible, à `/home/node/.n8n-files`. Le CSV doit rester inaccessible depuis le Web. Le nœud de lecture version 1 accepte un fichier absent lors de la première inscription ; les autres erreurs de disque arrêtent le traitement.
+5. **Sérialiser les exécutions qui modifient le CSV.** Pour une instance n8n unique en mode standard, configurer `N8N_CONCURRENCY_PRODUCTION_LIMIT=1` côté hébergement avant activation. Cela s'applique à toute l'instance ; ne pas modifier une instance partagée sans accord de son administrateur. Ne pas lancer manuellement des écritures pendant les exécutions de production. Pour plusieurs workers ou une instance à forte activité, remplacer le CSV par un stockage transactionnel avant publication.
+6. Limiter au niveau du reverse proxy la taille des requêtes et leur fréquence. Turnstile et CORS ne limitent pas les connexions entrantes ni les exécutions rejetées ; les contrôles du workflow ne remplacent pas ces limites d'hébergement.
+7. Après configuration et vérification, publier le workflow, puis renseigner les variables publiques GitHub Actions : `WAITLIST_API_URL=https://n8n.votre-domaine.fr/webhook/nearly-waitlist-public`, `TURNSTILE_SITE_KEY`, `WAITLIST_HOST` (identité du prestataire), ainsi que les coordonnées d'éditeur décrites dans le README principal. Reconstruire le site.
 
-## Modifier le workflow
+Les journaux d'exécution réussie, en erreur et manuelle de ce workflow ne sont pas conservés, pour éviter de stocker les e-mails et liens personnels dans n8n. Les journaux du serveur et les sauvegardes restent à gérer côté hébergement.
 
-Le code des nœuds est dans `src/` (les helpers CSV sont injectés en tête de chaque nœud Code). Après modification :
+Référence pour la sérialisation : [contrôle de concurrence n8n](https://docs.n8n.io/deploy/host-n8n/configure-n8n/scaling/control-concurrency.md). Un collage dans le canevas importe les nœuds et connexions, mais pas tous les paramètres du workflow : vérifier explicitement **Settings → Save failed / successful / manual executions → Do not save**, puis sauvegarder.
 
-```bash
+## Contrat HTTP et désinscription
+
+Le site utilise un POST `application/x-www-form-urlencoded`, contenant un champ `payload` JSON. Ce format ne nécessite pas de requête CORS OPTIONS supplémentaire. L'origine permise est explicite, jamais `*`, y compris dans les réponses d'erreur.
+
+Inscription : `action: "subscribe"`, `email`, `reason`, `expectations`, `consentLaunch`, `consentFeedback`, `website` (piège robots vide), `startedAt`, `challengeToken`, `managementToken` (64 caractères hexadécimaux, générés par Web Crypto). Les libellés, dates et version de politique sont définis côté n8n. Réponse : `201 { "ok": true }`, identique pour une adresse déjà inscrite.
+
+Désinscription : `action: "unsubscribe"`, `managementToken`. Aucun e-mail seul ne donne accès à cette action. Réponse identique pour un lien absent du CSV ou déjà supprimé : `200 { "ok": true }`. La suppression ne se produit que pour la ligne possédant le jeton.
+
+Le lien personnel a la forme `https://gaugo47.github.io/Nearly-Website/confidentialite/#token=<management_token>`. Le fragment n'est pas envoyé à GitHub ni dans le Referer. L'ouverture du lien affiche un bouton de confirmation et ne supprime rien automatiquement. Un reçu local permet de retrouver ce lien dans le même navigateur ; le visiteur peut également conserver le lien ou demander une suppression par e-mail.
+
+**Chaque e-mail envoyé ultérieurement doit inclure ce lien individuel**, issu du CSV privé. Ne jamais exposer l'export ni les jetons publiquement. Une adresse existante conserve ses réponses et son jeton initial ; une demande publique ne permet pas de les remplacer.
+
+Le CSV comprend les colonnes historiques et une nouvelle colonne `management_token`. L'ancien en-tête est migré au premier ajout ou à la première purge qui réécrit le fichier, en préservant les lignes existantes. Une ancienne inscription sans jeton reste privée et se supprime sur demande adressée depuis l'e-mail inscrit ; ne pas lui attribuer un nouveau jeton sur simple demande publique.
+
+## Développement et vérification
+
+```sh
 node n8n/build-workflow.mjs
-```
-
-```bash
 node --test n8n/workflow.test.mjs
 ```
+
+Les tests couvrent les refus avant écriture, les vérifications Turnstile, les tentatives de modification d'une autre inscription, les jetons de désinscription, la migration CSV, la neutralisation des formules et la purge. Une configuration réelle des identifiants et du proxy est nécessaire pour valider l'intégration de production.

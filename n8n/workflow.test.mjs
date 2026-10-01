@@ -7,22 +7,21 @@ import { buildWorkflow, codeNodeSource } from "./build-workflow.mjs";
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
-async function runCodeNode(file, { csv = null, body = {} } = {}) {
+async function runCodeNode(file, { csv = null, body = {}, headers = { origin: 'https://gaugo47.github.io' }, result = {} } = {}) {
   const code = await codeNodeSource(file);
   const items = csv === null ? [{ json: {} }] : [{ json: {}, binary: { data: { data: Buffer.from(csv).toString("base64") } } }];
   const context = {
     helpers: { getBinaryDataBuffer: async (index, property) => Buffer.from(items[index].binary[property].data, "base64") },
   };
-  const $input = { all: () => items };
+  const $input = { all: () => items, first: () => ({ json: result }) };
   const $ = (name) => {
-    assert.equal(name, "Webhook inscription");
-    return { first: () => ({ json: { headers: {}, body } }) };
+    assert.ok(['Webhook inscription', 'Valider la requête'].includes(name));
+    return { first: () => ({ json: { headers, body, request: body } }) };
   };
   return new AsyncFunction("$input", "$", code).call(context, $input, $);
 }
 
 const fileText = (output) => Buffer.from(output.binary.data.data, "base64").toString("utf8");
-const withoutBom = (text) => text.replace(/^﻿/, "");
 
 const signup = (overrides = {}) => ({
   action: "subscribe",
@@ -35,6 +34,9 @@ const signup = (overrides = {}) => ({
   policyVersion: "2026-09-30",
   consentAt: "2026-09-30T10:00:00.000Z",
   source: "site-web",
+  managementToken: "a".repeat(64),
+  challengeToken: "test-challenge",
+  startedAt: Date.now() - 5000,
   ...overrides,
 });
 
@@ -50,36 +52,33 @@ test("crée le fichier avec l'en-tête à la première inscription", async () =>
 
 test("ajoute une nouvelle adresse en fin de fichier sans réécrire", async () => {
   const [first] = await runCodeNode("process-request.js", { body: signup() });
-  const [second] = await runCodeNode("process-request.js", { csv: fileText(first), body: signup({ email: "bob@exemple.fr", reason: "amis", reasonLabel: "Groupe d’amis", expectations: "" }) });
+  const [second] = await runCodeNode("process-request.js", { csv: fileText(first), body: signup({ email: "bob@exemple.fr", managementToken: "b".repeat(64), reason: "amis", reasonLabel: "Groupe d’amis", expectations: "" }) });
   assert.equal(second.json.statusCode, 201);
   assert.equal(second.json.append, true);
   assert.doesNotMatch(fileText(second), /created_at/);
   assert.match(fileText(second), /^[^,]+,[^,]+,bob@exemple\.fr,amis,Groupe d’amis,,oui,non,/);
 });
 
-test("met à jour une adresse déjà inscrite en conservant sa date d'inscription", async () => {
-  const csv = withoutBom(fileText((await runCodeNode("process-request.js", { body: signup() }))[0]))
-    .replace(/\n(\d{4}-[^,]+),[^,]+,alice/, "\n2025-01-01T00:00:00.000Z,2025-01-01T00:00:00.000Z,alice");
-  const [output] = await runCodeNode("process-request.js", { csv, body: signup({ reason: "famille", reasonLabel: "Famille", consentFeedback: true }) });
-  assert.equal(output.json.statusCode, 200);
-  assert.equal(output.json.append, false);
-  const lines = withoutBom(fileText(output)).trim().split("\r\n");
-  assert.equal(lines.length, 2);
-  assert.match(lines[1], /^2025-01-01T00:00:00\.000Z,20\d\d-.*,alice@exemple\.fr,famille,Famille,.*,oui,oui,/s);
+test("une inscription publique ne remplace pas les réponses ou le lien d'une autre personne", async () => {
+  const [first] = await runCodeNode("process-request.js", { body: signup() });
+  const [output] = await runCodeNode("process-request.js", { csv: fileText(first), body: signup({ reason: "famille", consentFeedback: true, managementToken: "c".repeat(64) }) });
+  assert.equal(output.json.statusCode, 201);
+  assert.equal(output.json.write, false);
+  assert.equal(output.binary, undefined);
 });
 
 test("désinscrit en supprimant la ligne et répond pareil pour une adresse inconnue", async () => {
   const [first] = await runCodeNode("process-request.js", { body: signup() });
-  const [second] = await runCodeNode("process-request.js", { csv: fileText(first), body: signup({ email: "bob@exemple.fr" }) });
+  const [second] = await runCodeNode("process-request.js", { csv: fileText(first), body: signup({ email: "bob@exemple.fr", managementToken: "b".repeat(64) }) });
   const csv = fileText(first) + fileText(second);
 
-  const [removed] = await runCodeNode("process-request.js", { csv, body: { action: "unsubscribe", email: "ALICE@exemple.fr" } });
+  const [removed] = await runCodeNode("process-request.js", { csv, body: { action: "unsubscribe", managementToken: "a".repeat(64) } });
   assert.deepEqual(removed.json.response, { ok: true });
   assert.equal(removed.json.append, false);
   assert.doesNotMatch(fileText(removed), /alice@/);
   assert.match(fileText(removed), /bob@exemple\.fr/);
 
-  const [unknown] = await runCodeNode("process-request.js", { csv, body: { action: "unsubscribe", email: "personne@exemple.fr" } });
+  const [unknown] = await runCodeNode("process-request.js", { csv, body: { action: "unsubscribe", managementToken: "c".repeat(64) } });
   assert.deepEqual(unknown.json, { statusCode: 200, response: { ok: true }, write: false });
 });
 
@@ -87,6 +86,8 @@ test("refuse les requêtes invalides sans toucher au fichier", async () => {
   for (const body of [
     {},
     signup({ action: "delete-all" }),
+    signup({ managementToken: "short" }),
+    { action: "unsubscribe", email: "alice@exemple.fr" },
     signup({ email: "pas-un-email" }),
     signup({ email: "=HYPERLINK(1)@x.fr" }),
     signup({ consentLaunch: false }),
@@ -134,4 +135,44 @@ test("le workflow exporté est à jour et correctement câblé", async () => {
     for (const target of main.flat()) assert.ok(names.has(target.node), target.node);
   }
   assert.equal(workflow.settings.saveDataSuccessExecution, "none");
+  assert.equal(workflow.settings.saveDataErrorExecution, "none");
+  assert.equal(workflow.active, false);
+  assert.equal(workflow.nodes.find((node) => node.name === 'Webhook inscription').parameters.authentication, 'none');
+  assert.equal(workflow.nodes.find((node) => node.name === 'Webhook export').parameters.authentication, 'headerAuth');
+});
+
+test('refuse les origines, pièges robots et champs invalides avant accès au CSV', async () => {
+  for (const [body, headers] of [
+    [{ payload: JSON.stringify(signup()) }, { origin: 'https://attacker.test' }],
+    [{ payload: '{' }], [{ payload: 'x'.repeat(8193) }],
+    ...[{ website: 'bot' }, { startedAt: Date.now() }, { startedAt: null }, { challengeToken: '' }, { consentLaunch: false }, { reason: 'unknown' }, { managementToken: '' }, { expectations: 'x'.repeat(601) }].map((override) => [{ payload: JSON.stringify(signup(override)) }]),
+  ]) {
+    const [output] = await runCodeNode('validate-request.js', { body, ...(headers ? { headers } : {}) });
+    assert.equal(output.json.allowed, false);
+    assert.equal(output.json.write, false);
+  }
+  const [accepted] = await runCodeNode('validate-request.js', { body: { payload: JSON.stringify(signup()) } });
+  assert.equal(accepted.json.verify, true);
+  assert.equal(accepted.json.request.email, 'alice@exemple.fr');
+  assert.equal(accepted.json.request.policyVersion, '2026-10-01');
+  const [unsubscribe] = await runCodeNode('validate-request.js', { body: { payload: JSON.stringify({ action: 'unsubscribe', managementToken: 'a'.repeat(64) }) } });
+  assert.equal(unsubscribe.json.allowed, true);
+  assert.equal(unsubscribe.json.verify, false);
+});
+
+test('Turnstile échoue fermé : succès, hostname et action doivent correspondre', async () => {
+  for (const result of [{}, { success: false }, { success: true, hostname: 'attacker.test', action: 'waitlist' }, { success: true, hostname: 'gaugo47.github.io', action: 'other' }]) {
+    const [output] = await runCodeNode('check-challenge.js', { result });
+    assert.equal(output.json.allowed, false);
+  }
+  const [output] = await runCodeNode('check-challenge.js', { body: signup(), result: { success: true, hostname: 'gaugo47.github.io', action: 'waitlist' } });
+  assert.equal(output.json.allowed, true);
+});
+
+test('migre un ancien CSV sans perdre les lignes ou mélanger les colonnes', async () => {
+  const old = 'created_at,updated_at,email,reason,reason_label,expectations,consent_launch,consent_feedback,policy_version,consent_at,source\r\n2025-01-01,2025-01-01,ancien@exemple.fr,amis,Amis,,oui,non,v1,2025-01-01,site-web\r\n';
+  const [output] = await runCodeNode('process-request.js', { csv: old, body: signup() });
+  assert.equal(output.json.append, false);
+  assert.match(fileText(output), /source,management_token/);
+  assert.match(fileText(output), /ancien@exemple.fr/);
 });
