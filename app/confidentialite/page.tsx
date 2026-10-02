@@ -2,7 +2,8 @@ import { absoluteUrl } from "../site";
 import type { Metadata } from "next";
 import LegalLayout from "../LegalLayout";
 import WaitlistUnsubscribe from "../WaitlistUnsubscribe";
-import { waitlistReady } from "../site";
+import { analyticsToken, waitlistReady } from "../site";
+import { AnalyticsSettingsButton } from "../AnalyticsConsent";
 import { legal } from "../legal";
 
 export const metadata: Metadata = {
@@ -145,10 +146,27 @@ export default function PrivacyPage() {
         <WaitlistUnsubscribe />
       </section>
 
-      <section>
+      <section id="statistiques">
         <h2>7. Cookies et traceurs</h2>
+        {analyticsToken ? <>
+          <p>
+            Avec votre <strong>consentement facultatif</strong>, Cloudflare Web Analytics mesure les visites, les pages consultées,
+            les sites d’origine du trafic et les performances techniques (base légale : art. 6.1.a RGPD).
+            Son script est chargé uniquement après « Accepter ». Il n’utilise pas de cookies publicitaires et ne suit pas votre navigation entre différents sites.
+            Aucun e-mail, aucune réponse au formulaire et aucun lien personnel de désinscription ne sont envoyés par Nearly à cet outil.
+            Les pages légales et les adresses contenant des paramètres sont exclues de cette mesure.
+          </p>
+          <p>
+            Cloudflare reçoit les informations techniques nécessaires à la requête et fournit des statistiques agrégées, consultables pendant six mois.
+            Les données ne sont pas rapprochées des inscriptions Google Sheets. Votre acceptation ou votre refus est mémorisé dans le stockage local du navigateur
+            pendant 180 jours, sans identifiant de visiteur. Vous pouvez le modifier à tout moment via « Choix des statistiques » en bas de page ;
+            le retrait arrête les mesures futures après rechargement. Refuser ne bloque aucune fonctionnalité du site.
+            {" "}<a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noopener noreferrer">À propos de Cloudflare Web Analytics</a>.
+          </p>
+          <AnalyticsSettingsButton />
+        </> : <p>La mesure d’audience est désactivée : aucun script de statistiques n’est chargé.</p>}
         <p>
-          Le site n’utilise <strong>aucun cookie publicitaire ni outil de mesure d’audience</strong>. Les démonstrations utilisent le stockage de
+          Le site n’utilise <strong>aucun cookie publicitaire</strong>. Les démonstrations utilisent le stockage de
           session de votre navigateur pour retrouver les données dans le même onglet. Elles ne sont pas envoyées à Nearly ; vous pouvez les
           effacer depuis les réglages du navigateur. Après inscription, un reçu contenant votre adresse et votre lien personnel de désinscription peut être conservé localement pour retrouver ce lien. Il est effacé lors de la désinscription ; après 36 mois, il n’est plus utilisé et est effacé à la prochaine consultation. Vous pouvez aussi le supprimer depuis les réglages du navigateur. Cloudflare Turnstile est chargé uniquement lorsque le formulaire est activé pour vérifier les interactions humaines (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">politique Cloudflare</a>). Pour une conversion de devises, le navigateur interroge <a href="https://frankfurter.dev/" target="_blank" rel="noopener noreferrer">Frankfurter</a> :
           le fournisseur reçoit les codes de devises et les informations techniques de connexion, mais aucun prénom ni aucune dépense.
@@ -167,7 +185,8 @@ export default function PrivacyPage() {
         <h2>9. Évolution de cette politique</h2>
         <p>
           Nous pouvons faire évoluer cette politique, par exemple lors du choix d’un prestataire d’envoi d’e-mails. La date de mise à jour figure en
-          haut de page et chaque inscription enregistre la version acceptée (version actuelle : {legal.policyVersion}). En cas de changement important,
+          haut de page. Chaque inscription enregistre la version du consentement à la liste d’attente (version actuelle : {legal.policyVersion}) ;
+          le choix relatif aux statistiques est distinct. En cas de changement important concernant la liste d’attente,
           vous serez informé·e par e-mail avant son application.
         </p>
       </section>

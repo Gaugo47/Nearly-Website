@@ -1,4 +1,5 @@
 import { sitePath } from "./site";
+import { AnalyticsSettingsButton } from "./AnalyticsConsent";
 
 export default function SiteFooter() {
   return (
@@ -13,6 +14,7 @@ export default function SiteFooter() {
         <a href={sitePath("/conditions-liste-attente")}>Conditions</a>
         <a href={sitePath("/confidentialite")}>Confidentialité</a>
         <a href={sitePath("/mentions-legales")}>Mentions légales</a>
+        <AnalyticsSettingsButton />
         <span>© 2026 Nearly</span>
       </div>
     </footer>

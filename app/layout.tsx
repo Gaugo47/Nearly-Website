@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { siteUrl, sitePath, absoluteUrl } from "./site";
 import "./globals.css";
+import AnalyticsConsent from "./AnalyticsConsent";
 
 export const metadata: Metadata = {
     metadataBase: new URL(`${siteUrl}/`),
@@ -68,7 +69,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body><AnalyticsConsent>{children}</AnalyticsConsent></body>
     </html>
   );
 }

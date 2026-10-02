@@ -2,6 +2,7 @@
 import { sitePath } from "./site";
 import type { ReactNode } from "react";
 import { legal } from "./legal";
+import { AnalyticsSettingsButton } from "./AnalyticsConsent";
 
 const legalLinks = [
   { href: "/conditions-liste-attente", label: "Conditions" },
@@ -41,6 +42,7 @@ export default function LegalLayout({ current, eyebrow, title, intro, children }
 
       <footer className="legal-footer">
         <a href={sitePath("/")}>← Retour à Nearly</a>
+        <AnalyticsSettingsButton />
         <span>Une question sur vos données ? <strong>{legal.contactEmail}</strong></span>
       </footer>
     </main>

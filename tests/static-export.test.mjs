@@ -36,6 +36,12 @@ test("exports public SEO and GitHub Pages assets", async () => {
   await stat(join(root, ".nojekyll"));
   await stat(join(root, "404.html"));
 });
+test("does not preload or execute the analytics beacon before visitor consent", async () => {
+  for (const page of pages) {
+    const html = await readFile(join(root, page, "index.html"), "utf8");
+    assert.doesNotMatch(html, /<(?:script|link)\b[^>]*(?:src|href)="https:\/\/static\.cloudflareinsights\.com\//);
+  }
+});
 test("does not export backend source, personal records or source maps", async () => {
   async function walk(dir) {
     for (const item of await readdir(dir, { withFileTypes: true })) {

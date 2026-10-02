@@ -11,7 +11,7 @@ export const legal = {
   siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
   automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || (process.env.NEXT_PUBLIC_WAITLIST_API_URL ? "n8n (prestataire non communiqué)" : "Non activé"),
   policyVersion: "2026-10-01",
-  lastUpdated: "1er octobre 2026",
+  lastUpdated: "2 octobre 2026",
   retentionMonths: 36,
 };
 

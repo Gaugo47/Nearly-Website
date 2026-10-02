@@ -20,3 +20,7 @@ function publicEndpoint(value: string) {
 export const waitlistEndpoint = publicEndpoint(configuredEndpoint);
 export const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 export const waitlistReady = Boolean(waitlistEndpoint && turnstileSiteKey);
+
+// Public beacon token, not a Cloudflare API key. Missing/invalid means disabled.
+const configuredAnalyticsToken = process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN || "";
+export const analyticsToken = /^[a-f0-9]{32}$/i.test(configuredAnalyticsToken) ? configuredAnalyticsToken : "";

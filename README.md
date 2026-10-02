@@ -52,6 +52,14 @@ Les frais, pseudonymes et questions tirées restent dans le stockage de session 
 
 Les conversions de devises interrogent directement l’API publique Frankfurter. Aucun prénom ni montant n’est transmis à ce fournisseur. Le calcul en euros fonctionne sans service de taux ; une conversion indisponible affiche une erreur et ne substitue pas un taux fictif.
 
+## Statistiques de visite (facultatives)
+
+Cloudflare Web Analytics est compatible avec cet export statique, sans changement DNS, serveur supplémentaire ni cookies publicitaires. Dans le compte Cloudflare, ouvrir **Web Analytics → Add a site**, ajouter `hellonearly.com` puis copier uniquement le token public de 32 caractères du script `data-cf-beacon`. Définir la variable Actions `CLOUDFLARE_ANALYTICS_TOKEN` (ou `NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` localement), reconstruire et publier. Ne pas activer une injection automatique en parallèle : le site contrôle lui-même le consentement.
+
+Le bandeau propose Accepter et Refuser avec le même poids visuel. Aucun beacon n’est chargé avant acceptation. Le choix est conservé 180 jours dans le stockage local, sans identifiant visiteur, et modifiable dans le pied de page. Retirer son accord recharge la page pour arrêter le script en cours ; les autres onglets appliquent aussi le changement. Les pages légales, les URL avec paramètres et les prévisualisations locales sont exclues. L’outil mesure les visites, pages, provenance et performances ; il ne mesure pas les clics personnalisés ni les conversions. Le nombre exact de nouvelles inscriptions se lit séparément dans le tableau Google Sheets privé, sans croiser les personnes avec les visites. Sans token valide, les statistiques et le bandeau sont désactivés.
+
+Références : [mise en place Cloudflare](https://developers.cloudflare.com/web-analytics/get-started/), [limites et données](https://developers.cloudflare.com/web-analytics/faq/), [CNIL : mesure d’audience et consentement](https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies-solutions-pour-les-outils-de-mesure-daudience).
+
 ## Liste d’attente (facultative)
 
 GitHub Pages ne peut pas recevoir ni conserver des inscriptions. Par défaut, le formulaire et la désinscription sont désactivés et aucune adresse n’est collectée.
