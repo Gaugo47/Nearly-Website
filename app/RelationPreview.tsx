@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import IPhoneMockup from "./IPhoneMockup";
 
 const spaces = [
@@ -7,19 +10,21 @@ const spaces = [
 ];
 
 export default function RelationPreview() {
+  const [selected, setSelected] = useState(0);
+  const space = spaces[selected];
   return (
-    <div className="relations-preview" aria-label="Trois espaces Nearly : amis, famille et couple">
-      <p className="relations-preview__note">Chacun son espace. Tous dans Nearly.</p>
-      <div className="relations-preview__cards">
-        {spaces.map(space => (
-          <figure className={`relation-preview relation-preview--${space.key}`} key={space.key}>
-            <figcaption><span>{space.name}</span><strong><i aria-hidden="true">{space.icon}</i>{space.space}</strong></figcaption>
-            <IPhoneMockup className="relation-phone" src={space.image} alt={space.alt} eager />
-            <p>{space.line}</p>
-          </figure>
-        ))}
+    <div className={`relationship-demo relationship-demo--${space.key}`}>
+      <div className="relationship-switch" role="group" aria-label="Explorer les espaces Nearly">
+        {spaces.map((item, index) => <button key={item.key} type="button" aria-pressed={selected === index} aria-controls="relationship-preview" onClick={() => setSelected(index)}><span aria-hidden="true">{item.icon}</span>{item.name}</button>)}
       </div>
-      <span className="relations-preview__spark" aria-hidden="true">✧</span>
+      <div className="relationship-stage" id="relationship-preview">
+        <div className="relationship-orbit" aria-hidden="true" />
+        <span className="relationship-star relationship-star--one" aria-hidden="true">✦</span>
+        <span className="relationship-star relationship-star--two" aria-hidden="true">✧</span>
+        <IPhoneMockup className="relationship-phone" src={space.image} alt={space.alt} eager />
+        <div className="relationship-caption" aria-live="polite"><span aria-hidden="true">{space.icon}</span><div><strong>{space.space}</strong><p>{space.line}</p></div></div>
+      </div>
+      <p className="relationship-note">Un espace privé pour chacun de vos liens.</p>
     </div>
   );
 }

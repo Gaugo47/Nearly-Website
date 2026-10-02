@@ -38,7 +38,7 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ### Parcours du site
 
-L’accueil présente les amis, la famille et le couple avec trois espaces de même importance, puis les fonctionnalités communes, la FAQ et l’inscription à la liste d’attente. Party et Spicy sont accessibles dans deux panneaux dépliables. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.
+L’accueil présente les amis, la famille et le couple avec trois espaces de même importance et un aperçu interactif de leurs captures réelles. Les fonctionnalités communes, Party, Spicy et la confidentialité ont chacun une section visible ; un sommaire permet d’y accéder directement. La FAQ et l’inscription suivent cette présentation. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.
 
 ### Captures de l’application
 

@@ -50,7 +50,7 @@ const structuredData = {
       operatingSystem: "iOS, Android",
       inLanguage: ["fr", "en"],
       description:
-        "Un espace privé pour chaque lien : amis, famille et couple. Nearly rapproche vos gens avec des questions, des rituels, des souvenirs et des moments partagés.",
+        "Un espace privé pour chaque lien : amis, famille et couple. Nearly rapproche vos proches avec des questions, des rituels, des souvenirs et des moments partagés.",
       image: absoluteUrl("/media/nearly-icon.png"),
       featureList: [
         "Question du jour",
@@ -63,7 +63,7 @@ const structuredData = {
         "Compagnon virtuel partagé",
         "Conversations et photos entièrement chiffrées",
         "Coffres-forts photo verrouillés dans les modes Party et Spicy",
-        "Filtre anti-screenshot dans les modes Party et Spicy",
+        "Protection des captures sur mobile compatible dans les modes Party et Spicy",
         "Party Mode entre amis avec jeux, photos privées et frais partagés",
         "Mode Spicy privé, consenti et protégé par code",
       ],
@@ -91,7 +91,7 @@ function ArrowIcon() {
 
 export default function Home() {
   return (
-    <main className="home-focused home-relations">
+    <main className="home-focused home-showcase">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -104,15 +104,18 @@ export default function Home() {
         <div className="hero-orb hero-orb--two" />
         <div className="hero-copy">
           <p className="eyebrow"><span /> Amis · Famille · Couple</p>
-          <h1>Vos gens.<br /><em>Tout près.</em></h1>
-          <p className="hero-lede"><strong>Votre bande, votre famille, votre moitié.</strong> Nearly donne à chacun de vos liens son espace privé, ses rituels et ses souvenirs. Même quand la vie vous éparpille.</p>
+          <h1>Les liens<br />qui comptent.<br /><em>Même de loin.</em></h1>
+          <p className="hero-lede">Vos amis, votre famille, votre couple. Un espace privé pour partager le quotidien, jouer et garder les moments qui vous rapprochent.</p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#vos-liens">Trouver votre « nous » <ArrowIcon /></a>
-            <span className="launch-note"><span className="pulse" /> Bientôt sur iOS &amp; Android</span>
+            <a className="button button--primary" href="#experience">Découvrir Nearly <ArrowIcon /></a>
+            <a className="hero-secondary" href="#liste-attente">Être prévenu au lancement <span aria-hidden="true">→</span></a>
           </div>
+          <p className="hero-availability"><span className="pulse" /> Bientôt sur iOS &amp; Android</p>
         </div>
         <RelationPreview />
       </section>
+
+      <nav className="showcase-index" aria-label="Explorer l’application"><span>Dans Nearly</span><a href="#vos-liens">Vos espaces</a><a href="#experience">Le quotidien</a><a href="#party-mode">Party</a><a href="#spicy">Spicy</a><a href="#securite">Confidentialité</a></nav>
 
       <section className="relation-stories" id="vos-liens" aria-labelledby="relations-title">
         <div className="relation-stories__heading"><p className="eyebrow"><span /> Tous ceux qui comptent</p><h2 id="relations-title">Trois façons d’être <em>nous.</em></h2></div>
@@ -153,16 +156,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mode-extras" aria-labelledby="modes-title">
-        <div className="mode-extras__heading"><p className="eyebrow"><span /> Les petits extras · 18+</p><h2 id="modes-title">Pour changer <em>d’ambiance.</em></h2><p>Deux modes à découvrir quand vous en avez envie.</p></div>
-        <details className="mode-fold mode-fold--party" id="party-mode">
-          <summary><span aria-hidden="true">✳</span><div><strong>Party Mode</strong><small>Des jeux, des souvenirs de soirée et les comptes de la bande.</small></div><i aria-hidden="true">+</i></summary>
-      <section className="party-showcase">
+      <section className="mode-intro" aria-labelledby="modes-title"><p className="eyebrow"><span /> Les sous-modes Nearly</p><h2 id="modes-title">À chaque moment,<br /><em>son ambiance.</em></h2><p>Le quotidien dans vos espaces. Les soirées dans Party. La complicité à deux dans Spicy.</p></section>
+
+      <section className="party-showcase" id="party-mode" aria-labelledby="party-title">
         <div className="party-copy">
-          <p className="eyebrow eyebrow--party"><span /> Entre amis · Party Mode</p>
-          <h2>Une soirée.<br /><em>Toute la bande.</em></h2>
+          <p className="eyebrow eyebrow--party"><span /> Entre amis · Party Mode · 18+</p>
+          <h2 id="party-title">Une soirée.<br /><em>Toute la bande.</em></h2>
           <p className="party-intro">Des jeux pour lancer l’ambiance, un coffre pour les photos et des comptes faciles à partager.</p>
-          <ul className="feature-summary"><li>Jeux et défis dans le Party Lab</li><li>Photos de soirée dans un coffre verrouillé</li><li id="frais-partages">Dépenses et remboursements entre amis</li></ul>
+          <div className="party-features"><div><span>01</span><strong>Party Lab</strong><p>Jeux et défis pour lancer la soirée avec votre groupe.</p></div><div><span>02</span><strong>Photos de soirée</strong><p>Un coffre verrouillé pour les souvenirs de la bande.</p></div><div id="frais-partages"><span>03</span><strong>Frais partagés</strong><p>Ajoutez les dépenses et retrouvez qui rembourse qui.</p></div></div>
         </div>
         <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
           <figure className="party-device party-device--lab"><IPhoneMockup className="party-screen" src="/media/app-party-lab.jpg" alt="Jeux et défis du Party Lab de Nearly" /><figcaption>Party Lab</figcaption></figure>
@@ -170,16 +171,13 @@ export default function Home() {
           <figure className="party-device party-device--expenses"><IPhoneMockup className="party-screen" src="/media/app-party-expenses.jpg" alt="Répartition des frais partagés entre amis dans Nearly" /><figcaption>Frais partagés</figcaption></figure>
         </div>
       </section>
-        </details>
 
-        <details className="mode-fold mode-fold--spicy" id="spicy">
-          <summary><span aria-hidden="true">♡</span><div><strong>Mode Spicy</strong><small>Un espace intime à deux, toujours consenti.</small></div><i aria-hidden="true">+</i></summary>
-      <section className="spicy">
+      <section className="spicy" id="spicy" aria-labelledby="spicy-title">
         <div className="spicy-copy">
           <p className="eyebrow eyebrow--spicy"><span /> À deux · Spicy · 18+</p>
-          <h2>Votre complicité.<br /><em>À votre rythme.</em></h2>
+          <h2 id="spicy-title">Votre complicité.<br /><em>À votre rythme.</em></h2>
           <p className="spicy-intro">Un espace intime qui s’ouvre lorsque vous êtes tous les deux d’accord. Vos photos restent dans un coffre protégé par code.</p>
-          <ul className="feature-summary"><li>Consentement partagé</li><li>Accès au coffre temporaire</li><li>Le droit de passer, toujours</li></ul>
+          <div className="spicy-principles"><div><span>01</span><strong>À deux, d’accord</strong><p>Un mode réservé aux adultes, activé avec un consentement partagé.</p></div><div><span>02</span><strong>Un coffre privé</strong><p>Vos photos restent protégées par code, avec un accès temporaire.</p></div><div><span>03</span><strong>Votre rythme</strong><p>Le droit de passer ou de quitter le mode, toujours.</p></div></div>
         </div>
         <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
           <div className="spicy-glow" />
@@ -187,12 +185,19 @@ export default function Home() {
           <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.jpg" alt="Accueil consenti du mode Spicy de Nearly" />
         </div>
       </section>
-        </details>
-      </section>
 
-      <section className="privacy-brief" id="securite" aria-labelledby="privacy-title">
-        <div><p className="eyebrow"><span /> Vos liens restent privés</p><h2 id="privacy-title">Votre espace.<br /><em>Vos règles.</em></h2></div>
-        <p>Chaque relation garde ses échanges et ses souvenirs dans son espace. Conversations chiffrées, coffres photo verrouillés et consentement partagé font partie de l’expérience.</p>
+      <section className="privacy" id="securite" aria-labelledby="privacy-title">
+        <div className="privacy-visual" aria-label="Chiffrement et coffres privés dans Nearly">
+          <div className="privacy-halo" aria-hidden="true" />
+          <div className="security-core"><span className="security-core__icon security-core__icon--lock" aria-hidden="true"><i /></span><small>Votre cercle, votre espace</small><strong>Votre espace<br />reste le vôtre.</strong><span className="security-core__status"><i aria-hidden="true" /> Confidentialité intégrée</span></div>
+          <div className="security-float security-float--messages"><span aria-hidden="true">✓</span><div><small>Conversations</small><strong>Échanges chiffrés</strong></div></div>
+          <div className="security-float security-float--photos"><span aria-hidden="true">◆</span><div><small>Party &amp; Spicy</small><strong>Coffres photo verrouillés</strong></div></div>
+          <div className="security-float security-float--capture"><span aria-hidden="true">⊘</span><div><small>Sur mobile compatible</small><strong>Protection des captures</strong></div></div>
+        </div>
+        <div className="privacy-copy"><p className="eyebrow eyebrow--light"><span /> La confidentialité dans Nearly</p><h2 id="privacy-title">Vos échanges.<br /><em>Votre cercle.</em></h2><p className="privacy-intro">Une conversation de famille, un souvenir de soirée, un moment à deux : chacun reste dans l’espace des personnes que vous avez choisies.</p>
+          <div className="privacy-points"><div><span className="privacy-number">01</span><strong>Échanges chiffrés</strong><span>Vos conversations et vos photos privées sont chiffrées.</span></div><div><span className="privacy-number">02</span><strong>Espaces distincts</strong><span>Votre famille, vos amis et votre couple gardent chacun leurs échanges et leurs souvenirs.</span></div><div><span className="privacy-number">03</span><strong>Coffres verrouillés</strong><span>Dans Party et Spicy, les photos du coffre s’affichent après déverrouillage.</span></div><div><span className="privacy-number">04</span><strong>Protection des captures</strong><span>Party et Spicy protègent les captures d’écran sur les mobiles compatibles.</span></div></div>
+          <a className="privacy-link" href={sitePath("/confidentialite/")}>Lire la politique de confidentialité <ArrowIcon /></a>
+        </div>
       </section>
 
       <aside className="try-aside" id="tester-un-jeu">
@@ -209,7 +214,7 @@ export default function Home() {
         <span id="telecharger" className="anchor-alias" aria-hidden="true" />
         <div className="waitlist-copy">
           <p className="eyebrow"><span /> Bientôt sur iOS &amp; Android</p>
-          <h2 id="liste-attente-titre">Gardez une place<br /><em>pour vos gens.</em></h2>
+          <h2 id="liste-attente-titre">La suite,<br /><em>avec vos proches.</em></h2>
           <p className="waitlist-intro">Rejoignez la liste d’attente pour être prévenu·e au lancement. Vos attentes nous aident à construire Nearly.</p>
           <p className="waitlist-reassurance">Des nouvelles de Nearly, une désinscription en un clic.</p>
         </div>

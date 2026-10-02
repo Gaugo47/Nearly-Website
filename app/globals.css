@@ -1119,7 +1119,7 @@ footer.legal-footer strong { color: white; }
 /* Device chrome stays separate from the real screenshots, with safe areas
    above and below the app so no controls are hidden by the Dynamic Island. */
 .phone.iphone-mockup,
-.relation-phone.iphone-mockup,
+.relationship-phone.iphone-mockup,
 .feature-card .feature-phone.iphone-mockup,
 .fan-phone.iphone-mockup,
 .party-device .party-screen.iphone-mockup,
@@ -1312,42 +1312,43 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .tool-breadcrumb { padding-top: 132px; }
 }
 
-/* Three equally important relationships, with their own little worlds. */
-.home-relations .hero {
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  gap: clamp(26px, 4vw, 65px);
-  min-height: 800px;
-  padding: 160px max(4vw, 24px) 85px;
-  background: radial-gradient(ellipse at 8% 15%, #f9e3d2 0, transparent 43%), radial-gradient(ellipse at 90% 85%, #e9e9da 0, transparent 45%), #fbf6ef;
-}
-.home-relations .hero-copy { padding-left: 0; }
-.home-relations .hero h1 { font-size: clamp(75px, 7.7vw, 128px); line-height: .91; letter-spacing: -.055em; }
-.home-relations .hero h1 em { position: relative; display: inline-block; color: #b74765; }
-.home-relations .hero h1 em::after { content: ""; position: absolute; bottom: -.12em; left: 0; width: 100%; height: .16em; border-top: 3px solid #b74765; border-radius: 50%; transform: rotate(-3deg); opacity: .6; }
-.home-relations .hero-lede { max-width: 435px; margin-top: 36px; font-size: 18px; line-height: 1.7; }
-.home-relations .hero-lede strong { display: block; margin-bottom: 9px; color: var(--ink); font-weight: 700; }
-.home-relations .hero-actions { gap: 18px; }
-.home-relations .hero .eyebrow { color: #76585b; }
-.relations-preview { position: relative; z-index: 2; min-width: 0; padding: 15px 0 25px; }
-.relations-preview__note { margin: 0 0 33px; text-align: center; color: #746269; font-family: "Segoe Print", "Bradley Hand", cursive; font-size: clamp(14px, 1.3vw, 20px); transform: rotate(-2deg); }
-.relations-preview__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.5vw, 24px); align-items: start; }
-.relation-preview { --relation-tint: #dae6fc; --relation-ink: #33548a; position: relative; min-width: 0; margin: 0; padding: 20px 12px 15px; border: 1px solid rgba(255,255,255,.8); border-radius: 25px; background: var(--relation-tint); box-shadow: 0 15px 35px #3f294a0b; }
-.relation-preview--friends { transform: rotate(-4deg) translateY(10px); }
-.relation-preview--family { --relation-tint: #dcedd9; --relation-ink: #486643; transform: rotate(1deg); }
-.relation-preview--couple { --relation-tint: #f4deeb; --relation-ink: #9b426a; transform: rotate(4deg) translateY(10px); }
-.relation-preview figcaption { display: grid; gap: 6px; margin: 0 0 17px; color: var(--relation-ink); }
-.relation-preview figcaption > span { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; }
-.relation-preview figcaption strong { display: flex; align-items: center; gap: 7px; font-family: var(--display); font-size: clamp(19px, 2vw, 30px); font-weight: 600; letter-spacing: -.04em; white-space: nowrap; }
-.relation-preview figcaption i { font-style: normal; font-size: 24px; }
-.relation-preview > p { min-height: 34px; margin: 15px 0 0; color: var(--relation-ink); font-size: 11px; line-height: 1.5; }
-.relation-preview .relation-phone { position: relative; width: 100%; border-radius: 18% / 8.5%; padding: 4px; box-shadow: 0 12px 20px #1b16252b, inset 0 0 0 1px #25212d; }
-.relation-phone .iphone-button { width: 2px; }
-.relation-phone .iphone-button--volume { left: -2px; box-shadow: none; }
-.relation-phone .iphone-button--power { right: -2px; }
-.relations-preview__spark { position: absolute; right: -18px; top: -25px; color: #b06f39; font-family: Georgia, serif; font-size: 76px; transform: rotate(15deg); }
+/* App presentation: visible modes and privacy, with one explorable hero. */
+.home-showcase .hero { min-height: 830px; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 50px; padding: 130px max(6vw, 24px) 55px; text-align: left; background: radial-gradient(ellipse at 90% 48%, #eee3f8 0, transparent 50%), radial-gradient(ellipse at 8% 90%, #fae5de 0, transparent 45%), #fcf8f3; }
+.home-showcase .hero::before { opacity: .12; }
+.home-showcase .hero-copy { max-width: 610px; padding: 0; margin: 0; }
+.home-showcase .hero h1 { font-size: clamp(62px, 6.2vw, 94px); line-height: .98; letter-spacing: -.055em; margin-bottom: 30px; }
+.home-showcase .hero h1 em { color: #a25395; }
+.home-showcase .hero-lede { max-width: 440px; font-size: 18px; line-height: 1.7; margin-bottom: 30px; }
+.home-showcase .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+.hero-secondary { font-size: 13px; font-weight: 700; color: #6f557d; display: inline-flex; gap: 12px; align-items: center; }
+.hero-secondary:hover { color: var(--ink); }
+.hero-availability { display: flex; align-items: center; gap: 10px; margin: 26px 0 0; font-size: 11px; color: #82748a; font-weight: 700; }
+.relationship-demo { --space-color: #4d79bc; --space-tint: #e1ecff; position: relative; z-index: 2; min-width: 0; width: 100%; max-width: 510px; justify-self: center; }
+.relationship-demo--family { --space-color: #588468; --space-tint: #e4f0e4; }
+.relationship-demo--couple { --space-color: #ae577e; --space-tint: #f8e7ef; }
+.relationship-switch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 405px; margin: 0 auto 12px; padding: 5px; border: 1px solid #e5dce9; border-radius: 999px; background: #ffffffab; }
+.relationship-switch button { min-height: 40px; border: 0; border-radius: 999px; color: #6d6175; background: transparent; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.relationship-switch button > span { margin-right: 6px; font-size: 16px; }
+.relationship-switch button[aria-pressed="true"] { background: var(--space-tint); color: var(--space-color); box-shadow: 0 2px 8px #29113708; }
+.relationship-switch button:hover { background: #f1ebf6; }
+.relationship-stage { position: relative; height: 600px; display: grid; place-items: center; }
+.relationship-orbit { position: absolute; top: 45%; left: 50%; width: min(480px, 105%); aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px solid #cbb8e34a; border-radius: 50%; background: radial-gradient(circle at 70% 23%, #f9d9e6 0, #e7d9f640 57%, transparent 75%); box-shadow: 0 0 0 34px #b29bda09, 0 0 0 68px #b29bda05; }
+.relationship-phone.iphone-mockup { position: absolute; top: 45%; left: 50%; width: 252px; transform: translate(-50%, -50%) rotate(-4deg); border-radius: 40px; box-shadow: 0 28px 50px #25123d30, inset 0 0 0 2px #25212d; }
+.relationship-star { position: absolute; font-family: Georgia, serif; color: #b780c1; line-height: 1; }
+.relationship-star--one { top: 80px; right: 35px; font-size: 32px; transform: rotate(12deg); }
+.relationship-star--two { bottom: 160px; left: 30px; font-size: 58px; color: #cd9c8c; }
+.relationship-caption { position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; width: max-content; max-width: 100%; padding: 14px 20px; border: 1px solid #fff; border-radius: 20px; background: #fffaf5ed; box-shadow: 0 8px 28px #33213d0c; }
+.relationship-caption > span { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; border-radius: 13px; background: var(--space-tint); color: var(--space-color); font-size: 25px; }
+.relationship-caption strong { font-size: 13px; }
+.relationship-caption p { margin: 4px 0 0; font-size: 11px; line-height: 1.4; color: var(--ink-soft); }
+.relationship-note { margin: 15px 0 0; text-align: center; font-size: 11px; color: #897b90; }
+.showcase-index { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 30px; padding: 23px 24px; border-block: 1px solid var(--line); background: #fffaf5; font-size: 12px; font-weight: 700; }
+.showcase-index > span { color: #9a879f; margin-right: 10px; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.showcase-index a { padding: 6px 0; }
+.showcase-index a:hover { color: var(--coral); }
 .relation-stories { padding: 75px max(6vw, 24px) 65px; background: #fffaf4; scroll-margin-top: 24px; }
 .relation-stories__heading { margin-bottom: 35px; }
-.relation-stories__heading h2, .mode-extras__heading h2 { font-family: var(--display); font-size: clamp(42px, 4.5vw, 66px); font-weight: 600; line-height: 1; letter-spacing: -.04em; margin-bottom: 0; }
+.relation-stories__heading h2, .mode-intro h2 { font-family: var(--display); font-size: clamp(42px, 4.5vw, 66px); font-weight: 600; line-height: 1; letter-spacing: -.04em; margin-bottom: 0; }
 .relation-stories__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .relation-story { --story-tint: #e5edfb; --story-ink: #33548a; position: relative; min-height: 280px; padding: 30px 32px; border-radius: 6px 28px 28px 28px; background: var(--story-tint); overflow: hidden; }
 .relation-story--family { --story-tint: #e7efdf; --story-ink: #486643; }
@@ -1357,85 +1358,99 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .relation-story p { position: relative; z-index: 1; max-width: 295px; margin-bottom: 0; color: #51495c; font-size: 14px; line-height: 1.7; }
 .relation-story__doodle { position: absolute; right: 16px; top: 36px; color: var(--story-ink); opacity: .17; font-size: 95px; line-height: 1; transform: rotate(12deg); }
 .relation-stories__footnote { margin: 28px 0 0; color: var(--ink-soft); text-align: center; font-size: 13px; }
-.home-relations .experience { padding-top: 70px; }
-.home-relations .section-heading h2 { font-size: clamp(44px, 4.7vw, 68px); }
-.mode-extras { padding: 65px max(6vw, 24px); background: #fffaf4; }
-.mode-extras__heading { margin-bottom: 30px; }
-.mode-extras__heading > p:last-child { margin: 16px 0 0; color: var(--ink-soft); font-size: 15px; }
-.mode-fold { border: 1px solid var(--line); border-radius: 22px; overflow: hidden; scroll-margin-top: 24px; }
-.mode-fold + .mode-fold { margin-top: 14px; }
-.mode-fold summary { display: flex; align-items: center; gap: 20px; padding: 23px 27px; cursor: pointer; list-style: none; }
-.mode-fold summary::-webkit-details-marker { display: none; }
-.mode-fold summary > span { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 16px; color: #446395; background: #e3ecfb; font-size: 30px; }
-.mode-fold--spicy summary > span { color: #a9446d; background: #f5e3ec; }
-.mode-fold summary > div { display: grid; gap: 5px; }
-.mode-fold summary strong { font-size: 18px; }
-.mode-fold summary small { color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
-.mode-fold summary > i { display: grid; place-items: center; flex: 0 0 30px; height: 30px; margin-left: auto; font-size: 25px; font-style: normal; font-weight: 400; transition: transform .2s; }
-.mode-fold[open] summary { border-bottom: 1px solid var(--line); }
-.mode-fold[open] summary > i { transform: rotate(45deg); }
-.home-relations .mode-fold .party-showcase, .home-relations .mode-fold .spicy { padding-inline: 35px; }
+.mode-intro { padding: 70px 24px; text-align: center; background: #fffaf4; }
+.mode-intro .eyebrow { justify-content: center; }
+.mode-intro > p:last-child { max-width: 530px; margin: 22px auto 0; font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+.home-showcase .party-showcase, .home-showcase .spicy, .home-showcase .privacy { padding: 70px max(6vw, 24px); scroll-margin-top: 0; }
+.home-showcase .party-showcase { gap: 40px; }
+.home-showcase .party-devices { height: 650px; }
+.home-showcase .party-device { width: 205px; }
+.home-showcase .party-device--photos { width: 220px; }
+.home-showcase .party-screen { border-radius: 35px; }
+.home-showcase .party-features, .home-showcase .spicy-principles { margin-top: 30px; }
+.home-showcase .party-features > div, .home-showcase .spicy-principles > div { grid-template-columns: 25px 1fr; gap: 6px 12px; padding: 17px 0; }
+.home-showcase .party-features p, .home-showcase .spicy-principles p { grid-column: 2; font-size: 13px; line-height: 1.65; }
+.home-showcase .spicy-visual { height: 650px; }
+.home-showcase .spicy-phone { width: 250px; }
+.home-showcase .privacy { min-height: 0; gap: 65px; }
+.home-showcase .privacy .security-float--photos { top: 70px; }
+.home-showcase .privacy-copy h2 { font-size: clamp(48px, 5.3vw, 76px); }
+.home-showcase .privacy-points { margin-top: 30px; }
+.home-showcase .privacy-points > div { grid-template-columns: 25px 1fr; gap: 8px 12px; padding: 17px 0; }
+.home-showcase .privacy-points > div > span:last-child { grid-column: 2; font-size: 13px; line-height: 1.6; }
+.privacy-link { display: inline-flex; align-items: center; gap: 14px; margin-top: 28px; border-bottom: 1px solid #75dfb655; padding-bottom: 8px; color: #b7f7dc; font-size: 12px; font-weight: 700; }
+.privacy-link:hover { color: white; }
 @media (max-width: 1100px) {
-  .home-relations .hero { min-height: 0; grid-template-columns: 1fr; gap: 40px; padding: 140px 6vw 60px; }
-  .home-relations .hero-copy { max-width: 720px; }
-  .home-relations .hero h1 { font-size: 100px; }
-  .home-relations .hero-lede { max-width: 560px; }
-  .relations-preview { max-width: 720px; width: 100%; margin: auto; }
-  .relations-preview__cards { gap: 25px; }
-  .relation-preview { padding: 22px 20px 18px; }
-  .relation-preview figcaption strong { font-size: 29px; }
-  .relation-preview > p { font-size: 12px; }
+  .home-showcase .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 25px; padding-inline: 5vw; }
+  .home-showcase .hero h1 { font-size: 65px; }
+  .relationship-switch button { font-size: 11px; }
+  .home-showcase .party-showcase, .home-showcase .spicy { grid-template-columns: 1fr; }
+  .home-showcase .party-devices { max-width: 700px; margin: 0 auto; }
+  .home-showcase .party-device { width: 245px; }
+  .home-showcase .party-device--photos { width: 260px; }
   .relation-story { padding: 27px 23px; }
   .relation-story h3 { font-size: 34px; }
-  .home-relations .mode-fold .party-showcase, .home-relations .mode-fold .spicy { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .home-showcase .hero { grid-template-columns: 1fr; gap: 45px; padding: 135px 30px 50px; text-align: center; }
+  .home-showcase .hero-copy { margin: 0 auto; }
+  .home-showcase .hero h1 { font-size: 78px; }
+  .home-showcase .hero-lede { max-width: 510px; margin-inline: auto; }
+  .home-showcase .hero-actions { align-items: center; }
+  .home-showcase .hero .eyebrow, .hero-availability { justify-content: center; }
+  .relationship-demo { max-width: 450px; }
 }
 @media (max-width: 760px) {
-  .home-relations .hero { padding: 125px 20px 42px; gap: 24px; }
-  .home-relations .hero h1 { font-size: clamp(73px, 19vw, 105px); }
-  .home-relations .hero-lede { margin: 28px 0; font-size: 16px; line-height: 1.65; }
-  .home-relations .hero-lede strong { margin-bottom: 6px; }
-  .home-relations .hero-actions { gap: 15px; }
-  .relations-preview { padding: 10px 0 15px; }
-  .relations-preview__note { margin-bottom: 20px; font-size: 13px; }
-  .relations-preview__cards { gap: 8px; }
-  .relation-preview { border-radius: 15px; padding: 13px 7px 12px; }
-  .relation-preview--friends { transform: rotate(-3deg) translateY(7px); }
-  .relation-preview--couple { transform: rotate(3deg) translateY(7px); }
-  .relation-preview figcaption { gap: 5px; margin-bottom: 12px; }
-  .relation-preview figcaption > span { font-size: 9px; letter-spacing: .04em; }
-  .relation-preview figcaption strong { gap: 3px; font-size: clamp(15px, 4.7vw, 24px); }
-  .relation-preview figcaption i { font-size: 16px; }
-  .relation-preview .relation-phone { padding: 3px; }
-  .relation-preview > p { min-height: 0; margin-top: 11px; font-size: 10px; line-height: 1.4; }
-  .relations-preview__spark { right: 0; top: -13px; font-size: 42px; }
-  .relation-stories { padding: 50px 20px; }
-  .relation-stories__heading h2, .mode-extras__heading h2 { font-size: 43px; }
+  .home-showcase .hero { padding: 125px 20px 40px; gap: 35px; }
+  .home-showcase .hero h1 { font-size: clamp(45px, 12vw, 68px); line-height: 1.02; margin-bottom: 24px; }
+  .home-showcase .hero-lede { font-size: 15px; line-height: 1.7; margin-bottom: 25px; }
+  .home-showcase .hero-actions { gap: 16px; }
+  .hero-availability { margin-top: 22px; }
+  .relationship-switch { gap: 2px; padding: 4px; }
+  .relationship-switch button { font-size: 10px; min-height: 39px; }
+  .relationship-switch button > span { font-size: 14px; margin-right: 3px; }
+  .relationship-stage { height: 555px; }
+  .relationship-phone.iphone-mockup { width: 230px; border-radius: 37px; }
+  .relationship-caption { padding: 12px 16px; gap: 10px; }
+  .relationship-caption > span { width: 33px; height: 33px; font-size: 22px; }
+  .relationship-caption p { font-size: 10px; }
+  .relationship-star--one { right: 2px; top: 50px; font-size: 23px; }
+  .relationship-star--two { left: 0; bottom: 100px; font-size: 37px; }
+  .showcase-index { padding: 18px 15px; gap: 6px 20px; font-size: 11px; }
+  .showcase-index > span { width: 100%; text-align: center; margin: 0 0 5px; }
+  .relation-stories { padding: 55px 20px; }
+  .relation-stories__heading h2, .mode-intro h2 { font-size: 43px; }
   .relation-stories__grid { grid-template-columns: 1fr; gap: 14px; }
   .relation-story { min-height: 0; padding: 25px 27px; }
   .relation-story h3 { margin-block: 16px; font-size: 36px; }
   .relation-story p { max-width: 420px; }
   .relation-story__doodle { top: 34px; right: 25px; }
   .relation-stories__footnote { font-size: 12px; }
-  .home-relations .section-heading h2 { font-size: 45px; }
-  .mode-extras { padding: 50px 20px; }
-  .mode-fold summary { gap: 13px; padding: 20px 16px; }
-  .mode-fold summary > span { flex-basis: 36px; height: 36px; border-radius: 12px; font-size: 25px; }
-  .mode-fold summary strong { font-size: 16px; }
-  .mode-fold summary small { font-size: 12px; }
-  .mode-fold summary > i { flex-basis: 22px; }
-  .home-relations .mode-fold .party-showcase, .home-relations .mode-fold .spicy { padding-inline: 15px; }
-  .home-relations .mode-fold .party-devices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; height: auto; transform: none; margin: 10px 0 30px; }
-  .home-relations .mode-fold .party-device { position: relative; top: auto; left: auto; width: auto; transform: none; opacity: 1; }
-  .home-relations .mode-fold .party-device .party-screen { width: 100%; padding: 3px; border-radius: 18% / 8.5%; }
-  .home-relations .mode-fold .party-device figcaption { margin-top: 10px; font-size: 8px; letter-spacing: .03em; }
-  .home-relations .mode-fold .spicy-visual { transform: scale(.7); height: 500px; margin-bottom: -90px; }
+  .mode-intro { padding: 55px 20px; }
+  .home-showcase .party-showcase, .home-showcase .spicy, .home-showcase .privacy { padding: 60px 20px; }
+  .home-showcase .party-devices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; height: auto; transform: none; margin: 10px 0 0; }
+  .home-showcase .party-device { position: relative; top: auto; left: auto; width: auto; transform: none; opacity: 1; }
+  .home-showcase .party-device .party-screen { width: 100%; padding: 3px; border-radius: 18% / 8.5%; }
+  .home-showcase .party-device figcaption { margin-top: 13px; padding: 7px 5px; font-size: 8px; letter-spacing: .02em; }
+  .home-showcase .spicy-visual { height: 490px; transform: none; margin: 0; }
+  .home-showcase .spicy-phone { width: min(210px, 50vw); border-radius: 34px; }
+  .home-showcase .spicy-phone--home { transform: translate(-30%, -50%) rotate(5deg); }
+  .home-showcase .spicy-phone--vault { transform: translate(-85%, -46%) rotate(-6deg); }
+  .home-showcase .privacy { gap: 25px; }
+  .home-showcase .privacy-copy h2 { font-size: 49px; }
+  .home-showcase .privacy-visual { height: 460px; }
+  .home-showcase .privacy .security-core { width: 225px; }
+  .home-showcase .privacy .security-core > strong { font-size: 30px; }
+  .home-showcase .privacy .security-float { min-width: 155px; padding: 10px; }
+  .home-showcase .privacy .security-float--messages { top: 35px; left: 0; }
+  .home-showcase .privacy .security-float--photos { top: 80px; right: 0; }
+  .home-showcase .privacy .security-float--capture { bottom: 30px; left: 0; }
 }
 @media (max-width: 380px) {
-  .home-relations .hero { padding-top: 150px; }
-  .home-relations .hero h1 { font-size: clamp(60px, 19vw, 73px); }
-  .relations-preview__cards { gap: 6px; }
-  .relation-preview { padding-inline: 5px; }
-  .relation-preview figcaption strong { font-size: 16px; }
-  .relation-preview figcaption i { font-size: 14px; }
-  .relation-preview > p { font-size: 9px; }
+  .home-showcase .hero { padding-top: 145px; }
+  .home-showcase .hero h1 { font-size: clamp(43px, 12vw, 48px); }
+  .relationship-switch button { font-size: 10px; }
+  .relationship-switch button > span { display: none; }
+  .home-showcase .party-devices { gap: 8px; }
+  .home-showcase .party-device figcaption { font-size: 7px; }
 }
