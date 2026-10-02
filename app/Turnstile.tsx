@@ -15,7 +15,8 @@ export default function Turnstile({ onToken, attempt }: { onToken: (token: strin
     if (!loaded || !container.current || !window.turnstile) return;
     const api = window.turnstile;
     const widget = api.render(container.current, {
-      sitekey: turnstileSiteKey, action: "waitlist", language: "fr", theme: "light", size: "flexible",
+      // Compact stays usable inside the form on narrow phones (flexible has a 300px minimum).
+      sitekey: turnstileSiteKey, action: "waitlist", language: "fr", theme: "light", size: "compact",
       callback: (token: string) => { setFailed(false); onToken(token); },
       "expired-callback": () => onToken(""),
       "error-callback": () => { onToken(""); setFailed(true); },

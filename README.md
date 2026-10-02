@@ -38,13 +38,13 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ### Parcours du site
 
-L’accueil présente l’application et ses fonctionnalités, puis la FAQ et l’inscription à la liste d’attente. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.
+L’accueil présente les amis, la famille et le couple avec trois espaces de même importance, puis les fonctionnalités communes, la FAQ et l’inscription à la liste d’attente. Party et Spicy sont accessibles dans deux panneaux dépliables. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.
 
 ### Captures de l’application
 
-Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Les onze nouvelles captures réelles du 1er octobre sont prises depuis `localhost:8081` en JPEG natif de 393 × 758 pixels. La barre d’état (59 pixels) et l’indicateur d’accueil (34 pixels) complètent le format d’écran 393 × 852 dans le composant `IPhoneMockup`. Le cadre garde ce rapport largeur/hauteur ; les captures ne sont pas étirées.
+Les images du site sont des fichiers copiés dans `public/media`, indépendants du dépôt de l’application. Les onze captures réelles du 1er octobre et les deux accueils amis et famille du 2 octobre sont pris depuis `localhost:8081` en JPEG natif de 393 × 758 pixels. La barre d’état (59 pixels) et l’indicateur d’accueil (34 pixels) complètent le format d’écran 393 × 852 dans le composant `IPhoneMockup`. Le cadre garde ce rapport largeur/hauteur ; les captures ne sont pas étirées.
 
-Pour importer ce lot, utiliser `npm run screenshots:sync`. Le script lit par défaut le dossier local `work/iphone-captures`, ignoré par Git ; un autre dossier peut être fourni avec `npm run screenshots:sync -- "chemin/vers/captures"`. Il vérifie le format des onze images avant copie et met à jour les versions de cache selon le contenu des douze visuels. Construire puis déployer le site après synchronisation.
+Pour importer ce lot, utiliser `npm run screenshots:sync`. Le script lit par défaut le dossier local `work/iphone-captures`, ignoré par Git ; un autre dossier peut être fourni avec `npm run screenshots:sync -- "chemin/vers/captures"`. Il vérifie le format des treize images avant copie et met à jour les versions de cache selon le contenu des quatorze visuels. Construire puis déployer le site après synchronisation.
 
 La capture `app-party-photos.png` est conservée à la demande du propriétaire. Elle garde son fichier original et s’affiche en entier, sans déformation, dans le même cadre. Aucun code secret n’est saisi ou affiché dans les captures du coffre Spicy verrouillé.
 

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
       template: "%s | Nearly",
     },
     description:
-      "Nearly est le hub relationnel privé des couples, amis et familles pour se sentir proches malgré la distance : rituels, souvenirs, jeux et moments partagés.",
+      "Vos amis, votre famille, votre couple : un espace privé pour chaque lien. Nearly rapproche vos gens avec des rituels, des souvenirs et des moments partagés.",
     applicationName: "Nearly",
     keywords: [
       "application couple à distance",
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "rester proche à distance",
       "application couple",
       "application amis",
+      "application famille",
       "party mode amis",
       "application soirée entre amis",
       "souvenirs partagés",
@@ -41,14 +42,14 @@ export const metadata: Metadata = {
       siteName: "Nearly",
       title: "Nearly — Proches, même à distance",
       description:
-        "Le hub privé qui réunit votre couple, vos meilleurs amis et votre famille pour rester proches malgré la distance.",
+        "Vos gens. Tout près. Un espace privé pour vos amis, votre famille et votre couple, avec des rituels et des souvenirs à partager.",
       images: [{ url: absoluteUrl("/og.png"), width: 1536, height: 902, alt: "Nearly — Proches, même à distance" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "Nearly — Proches, même à distance",
       description:
-        "Un seul hub privé pour prendre soin de votre couple, de vos amis et de votre famille, où que vous soyez.",
+        "Votre bande, votre famille, votre moitié. Un espace pour chaque lien, où que la vie vous emmène.",
       images: [absoluteUrl("/og.png")],
     },
     icons: {

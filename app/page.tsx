@@ -4,20 +4,21 @@ import SiteNav from "./SiteNav";
 import SiteFooter from "./SiteFooter";
 import WaitlistForm from "./WaitlistForm";
 import IPhoneMockup from "./IPhoneMockup";
+import RelationPreview from "./RelationPreview";
 
 const features = [
   {
     number: "01",
-    title: "Vos petits rituels",
-    text: "Une question, une humeur ou un défi pour garder le lien au quotidien.",
+    title: "Les rituels qui rapprochent",
+    text: "Un « ça va ? » qui devient une vraie réponse. Une question, une humeur, un petit défi à partager.",
     image: "/media/app-rituels.jpg",
     alt: "Écran Rituels et jeux de l’application Nearly",
     className: "feature-card feature-card--lavender",
   },
   {
     number: "02",
-    title: "Vos souvenirs partagés",
-    text: "Photos, moments et capsules temporelles : votre histoire se construit au même endroit.",
+    title: "Les souvenirs qu’on ressort",
+    text: "La photo floue, le fou rire, la journée ensemble. Gardez les moments qui vous ressemblent.",
     image: "/media/app-moments.jpg",
     alt: "Album de moments partagé dans Nearly",
     className: "feature-card feature-card--peach",
@@ -25,7 +26,7 @@ const features = [
   {
     number: "03",
     title: "Votre compagnon Mochi",
-    text: "Mochi grandit grâce à vos petites attentions et à vos moments partagés.",
+    text: "Un drôle de compagnon adopté par votre petit monde. Mochi grandit au fil de vos attentions partagées.",
     image: "/media/app-compagnon.jpg",
     alt: "Compagnon virtuel Mochi dans Nearly",
     className: "feature-card feature-card--violet",
@@ -33,7 +34,7 @@ const features = [
 ];
 
 const faqs = [
-  { question: "Pour qui est Nearly ?", answer: "Pour les couples, les amis et les familles. Chaque relation a son propre espace, à distance ou sous le même toit." },
+  { question: "Pour qui est Nearly ?", answer: "Pour les amis, les familles et les couples, avec la même place pour chaque lien. Vous pouvez avoir plusieurs espaces : votre bande, votre famille, votre couple. À distance ou sous le même toit." },
   { question: "Quand pourrai-je télécharger l’application ?", answer: "Nearly arrive bientôt sur iOS et Android. Inscrivez-vous à la liste d’attente pour recevoir un e-mail au lancement." },
   { question: "Les outils du site nécessitent-ils un compte ?", answer: "Non. Les questions, le test de jeu et le calculateur s’essaient gratuitement sur le site, sans compte Nearly." },
   { question: "Comment fonctionnent les espaces privés ?", answer: "Chaque relation garde ses échanges et ses souvenirs dans son espace. Party et Spicy disposent de coffres photo verrouillés. Le mode Spicy est réservé aux adultes et s’active avec un consentement partagé." },
@@ -49,7 +50,7 @@ const structuredData = {
       operatingSystem: "iOS, Android",
       inLanguage: ["fr", "en"],
       description:
-        "Hub relationnel privé qui réunit les couples, amis et familles pour rester proches malgré la distance grâce aux questions, rituels, souvenirs, jeux et moments partagés.",
+        "Un espace privé pour chaque lien : amis, famille et couple. Nearly rapproche vos gens avec des questions, des rituels, des souvenirs et des moments partagés.",
       image: absoluteUrl("/media/nearly-icon.png"),
       featureList: [
         "Question du jour",
@@ -90,7 +91,7 @@ function ArrowIcon() {
 
 export default function Home() {
   return (
-    <main className="home-focused">
+    <main className="home-focused home-relations">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -102,26 +103,32 @@ export default function Home() {
         <div className="hero-orb hero-orb--one" />
         <div className="hero-orb hero-orb--two" />
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Couple · Amis · Famille</p>
-          <h1>Tous ceux qui comptent.<em> Toujours plus proches.</em></h1>
-          <p className="hero-lede">Un espace privé pour chaque relation. Des rituels, des souvenirs et des jeux pour rester proches, même à distance.</p>
+          <p className="eyebrow"><span /> Amis · Famille · Couple</p>
+          <h1>Vos gens.<br /><em>Tout près.</em></h1>
+          <p className="hero-lede"><strong>Votre bande, votre famille, votre moitié.</strong> Nearly donne à chacun de vos liens son espace privé, ses rituels et ses souvenirs. Même quand la vie vous éparpille.</p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#experience">Découvrir les fonctionnalités <ArrowIcon /></a>
+            <a className="button button--primary" href="#vos-liens">Trouver votre « nous » <ArrowIcon /></a>
             <span className="launch-note"><span className="pulse" /> Bientôt sur iOS &amp; Android</span>
           </div>
         </div>
-        <div className="hero-visual" aria-label="Aperçu de l’application Nearly">
-          <div className="float-card float-card--question"><span className="float-icon">“</span><div><small>Question du jour</small><strong>Alice a répondu</strong></div></div>
-          <IPhoneMockup className="phone phone--hero" src="/media/app-accueil.jpg" alt="Accueil de l’application Nearly avec espace partagé, rituels et humeur" eager />
-          <div className="companion-chip"><span>✦</span><div><small>Votre compagnon</small><strong>Mochi grandit avec vous</strong></div></div>
+        <RelationPreview />
+      </section>
+
+      <section className="relation-stories" id="vos-liens" aria-labelledby="relations-title">
+        <div className="relation-stories__heading"><p className="eyebrow"><span /> Tous ceux qui comptent</p><h2 id="relations-title">Trois façons d’être <em>nous.</em></h2></div>
+        <div className="relation-stories__grid">
+          <article className="relation-story relation-story--friends"><span className="relation-story__label">Entre amis</span><h3>« On se fait<br />un truc ? »</h3><p>Un défi pour rire, les souvenirs de la bande et une idée pour votre prochaine sortie.</p><span className="relation-story__doodle" aria-hidden="true">✳</span></article>
+          <article className="relation-story relation-story--family"><span className="relation-story__label">En famille</span><h3>« T’es bien<br />arrivé ? »</h3><p>La photo du dimanche, les nouvelles de chacun et les prochains moments ensemble.</p><span className="relation-story__doodle" aria-hidden="true">⌂</span></article>
+          <article className="relation-story relation-story--couple"><span className="relation-story__label">En couple</span><h3>« Encore cinq<br />petites minutes. »</h3><p>Les questions à deux, les petites attentions et le compte à rebours avant les retrouvailles.</p><span className="relation-story__doodle" aria-hidden="true">♡</span></article>
         </div>
+        <p className="relation-stories__footnote">Un même Nearly. Un espace à part pour chaque lien.</p>
       </section>
 
       <section className="experience section" id="experience">
         <div className="section-heading">
-          <p className="eyebrow"><span /> Le quotidien, ensemble</p>
-          <h2>De petites attentions.<br /><em>Un lien qui grandit.</em></h2>
-          <p>Trois façons de partager un moment, même quand vos journées vous éloignent.</p>
+          <p className="eyebrow"><span /> Dans chacun de vos espaces</p>
+          <h2>Les petits riens<br /><em>font les grands liens.</em></h2>
+          <p>Questions, souvenirs et attentions partagées : les mêmes petites habitudes pour vos amis, votre famille et votre couple.</p>
         </div>
         <div className="feature-grid">
           {features.map(feature => (
@@ -136,17 +143,21 @@ export default function Home() {
       <section className="gallery-band">
         <div className="gallery-copy">
           <p className="eyebrow eyebrow--light"><span /> Les moments à venir</p>
-          <h2>Des idées pour<br /><em>se retrouver.</em></h2>
-          <p className="gallery-intro">Préparez votre prochain rendez-vous, trouvez une activité et gardez vos lieux préférés sur une carte partagée.</p>
+          <h2>« On se fait<br /><em>un truc ? »</em></h2>
+          <p className="gallery-intro">Un dîner à deux, un week-end en bande, un déjeuner en famille. Trouvez une idée, préparez les retrouvailles et gardez vos lieux préférés.</p>
         </div>
         <div className="phone-fan" aria-label="Galerie d’écrans Nearly">
           <IPhoneMockup className="fan-phone fan-phone--left" src="/media/app-carte.jpg" alt="Carte des proches Nearly" />
           <IPhoneMockup className="fan-phone fan-phone--center" src="/media/app-idees.jpg" alt="Idées personnalisées dans Nearly" />
-          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-party.jpg" alt="Accueil du Party Mode de Nearly" />
+          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-amis.jpg" alt="Accueil de l’espace amis La bande dans Nearly" />
         </div>
       </section>
 
-      <section className="party-showcase" id="party-mode">
+      <section className="mode-extras" aria-labelledby="modes-title">
+        <div className="mode-extras__heading"><p className="eyebrow"><span /> Les petits extras · 18+</p><h2 id="modes-title">Pour changer <em>d’ambiance.</em></h2><p>Deux modes à découvrir quand vous en avez envie.</p></div>
+        <details className="mode-fold mode-fold--party" id="party-mode">
+          <summary><span aria-hidden="true">✳</span><div><strong>Party Mode</strong><small>Des jeux, des souvenirs de soirée et les comptes de la bande.</small></div><i aria-hidden="true">+</i></summary>
+      <section className="party-showcase">
         <div className="party-copy">
           <p className="eyebrow eyebrow--party"><span /> Entre amis · Party Mode</p>
           <h2>Une soirée.<br /><em>Toute la bande.</em></h2>
@@ -159,8 +170,11 @@ export default function Home() {
           <figure className="party-device party-device--expenses"><IPhoneMockup className="party-screen" src="/media/app-party-expenses.jpg" alt="Répartition des frais partagés entre amis dans Nearly" /><figcaption>Frais partagés</figcaption></figure>
         </div>
       </section>
+        </details>
 
-      <section className="spicy" id="spicy">
+        <details className="mode-fold mode-fold--spicy" id="spicy">
+          <summary><span aria-hidden="true">♡</span><div><strong>Mode Spicy</strong><small>Un espace intime à deux, toujours consenti.</small></div><i aria-hidden="true">+</i></summary>
+      <section className="spicy">
         <div className="spicy-copy">
           <p className="eyebrow eyebrow--spicy"><span /> À deux · Spicy · 18+</p>
           <h2>Votre complicité.<br /><em>À votre rythme.</em></h2>
@@ -172,6 +186,8 @@ export default function Home() {
           <IPhoneMockup className="spicy-phone spicy-phone--vault" src="/media/app-spicy-vault.jpg" alt="Coffre privé du mode Spicy protégé par code secret" />
           <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.jpg" alt="Accueil consenti du mode Spicy de Nearly" />
         </div>
+      </section>
+        </details>
       </section>
 
       <section className="privacy-brief" id="securite" aria-labelledby="privacy-title">
@@ -193,7 +209,7 @@ export default function Home() {
         <span id="telecharger" className="anchor-alias" aria-hidden="true" />
         <div className="waitlist-copy">
           <p className="eyebrow"><span /> Bientôt sur iOS &amp; Android</p>
-          <h2 id="liste-attente-titre">La suite,<br /><em>avec vous.</em></h2>
+          <h2 id="liste-attente-titre">Gardez une place<br /><em>pour vos gens.</em></h2>
           <p className="waitlist-intro">Rejoignez la liste d’attente pour être prévenu·e au lancement. Vos attentes nous aident à construire Nearly.</p>
           <p className="waitlist-reassurance">Des nouvelles de Nearly, une désinscription en un clic.</p>
         </div>

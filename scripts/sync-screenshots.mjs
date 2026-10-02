@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 
 const source = resolve(process.argv[2] || "work/iphone-captures");
-const screens = ["accueil", "carte", "compagnon", "idees", "moments", "party-expenses", "rituels", "party", "party-lab", "party-photos", "spicy-home", "spicy-vault"];
+const screens = ["accueil", "amis", "famille", "carte", "compagnon", "idees", "moments", "party-expenses", "rituels", "party", "party-lab", "party-photos", "spicy-home", "spicy-vault"];
 const refreshed = screens.filter(screen => screen !== "party-photos");
 function imageSize(bytes) {
   if (bytes.readUInt16BE(0) !== 0xffd8) throw new Error("Expected a native JPEG capture");
