@@ -1320,6 +1320,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .home-showcase .hero h1 em { color: #a25395; }
 .home-showcase .hero-lede { max-width: 440px; font-size: 18px; line-height: 1.7; margin-bottom: 30px; }
 .home-showcase .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
+.home-showcase .hero-actions .hero-waitlist { min-height: 64px; padding-inline: 30px; font-size: 16px; box-shadow: 0 10px 28px #43215e24; }
 .hero-secondary { font-size: 13px; font-weight: 700; color: #6f557d; display: inline-flex; gap: 12px; align-items: center; }
 .hero-secondary:hover { color: var(--ink); }
 .hero-availability { display: flex; align-items: center; gap: 10px; margin: 26px 0 0; font-size: 11px; color: #82748a; font-weight: 700; }
@@ -1405,6 +1406,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .home-showcase .hero h1 { font-size: clamp(45px, 12vw, 68px); line-height: 1.02; margin-bottom: 24px; }
   .home-showcase .hero-lede { font-size: 15px; line-height: 1.7; margin-bottom: 25px; }
   .home-showcase .hero-actions { gap: 16px; }
+  .home-showcase .hero-actions .hero-waitlist { width: 100%; max-width: 340px; min-height: 60px; padding-inline: 18px; font-size: 14px; }
   .hero-availability { margin-top: 22px; }
   .relationship-switch { gap: 2px; padding: 4px; }
   .relationship-switch button { font-size: 10px; min-height: 39px; }

@@ -107,8 +107,8 @@ export default function Home() {
           <h1>Les liens<br />qui comptent.<br /><em>Même de loin.</em></h1>
           <p className="hero-lede">Vos amis, votre famille, votre couple. Un espace privé pour partager le quotidien, jouer et garder les moments qui vous rapprochent.</p>
           <div className="hero-actions">
-            <a className="button button--primary" href="#experience">Découvrir Nearly <ArrowIcon /></a>
-            <a className="hero-secondary" href="#liste-attente">Être prévenu au lancement <span aria-hidden="true">→</span></a>
+            <a className="button button--primary hero-waitlist" href="#liste-attente">Rejoindre la liste d’attente <ArrowIcon /></a>
+            <a className="hero-secondary" href="#experience">Découvrir Nearly <span aria-hidden="true">→</span></a>
           </div>
           <p className="hero-availability"><span className="pulse" /> Bientôt sur iOS &amp; Android</p>
         </div>
