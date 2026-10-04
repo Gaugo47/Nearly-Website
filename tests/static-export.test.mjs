@@ -5,7 +5,7 @@ import test from "node:test";
 const root = resolve("out");
 const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 const origin = (process.env.NEXT_PUBLIC_SITE_URL || "https://gaugo47.github.io/Nearly-Website").replace(/\/$/, "");
-const pages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "confidentialite", "conditions-liste-attente", "mentions-legales"];
+const pages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app"];
 test("exports all pages and usable local links/assets under the configured base path", async () => {
   for (const page of pages) {
     const html = await readFile(join(root, page, "index.html"), "utf8");

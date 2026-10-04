@@ -14,6 +14,8 @@ export default function SiteFooter() {
         <a href={sitePath("/conditions-liste-attente")}>Conditions</a>
         <a href={sitePath("/confidentialite")}>Confidentialité</a>
         <a href={sitePath("/mentions-legales")}>Mentions légales</a>
+        <a href={sitePath("/cgu/")}>CGU de l’app</a>
+        <a href={sitePath("/confidentialite-app/")}>Données de l’app</a>
         <AnalyticsSettingsButton />
         <span>© 2026 Nearly</span>
       </div>

@@ -8,6 +8,8 @@ const legalLinks = [
   { href: "/conditions-liste-attente", label: "Conditions" },
   { href: "/confidentialite", label: "Confidentialité" },
   { href: "/mentions-legales", label: "Mentions légales" },
+  { href: "/cgu", label: "CGU app" },
+  { href: "/confidentialite-app", label: "Données app" },
 ];
 
 type LegalLayoutProps = {
@@ -16,9 +18,11 @@ type LegalLayoutProps = {
   title: ReactNode;
   intro: ReactNode;
   children: ReactNode;
+  /** The app's pages carry their own date: the version members accept in the app. */
+  updated?: string;
 };
 
-export default function LegalLayout({ current, eyebrow, title, intro, children }: LegalLayoutProps) {
+export default function LegalLayout({ current, eyebrow, title, intro, children, updated }: LegalLayoutProps) {
   return (
     <main className="tool-page legal-page">
       <nav className="tool-nav" aria-label="Navigation Nearly">
@@ -35,7 +39,7 @@ export default function LegalLayout({ current, eyebrow, title, intro, children }
         <p className="eyebrow"><span /> {eyebrow}</p>
         <h1>{title}</h1>
         <p>{intro}</p>
-        <small>Dernière mise à jour : {legal.lastUpdated}</small>
+        <small>Dernière mise à jour : {updated ?? legal.lastUpdated}</small>
       </header>
 
       <article className="legal-body">{children}</article>

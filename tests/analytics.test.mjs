@@ -22,6 +22,7 @@ test("analytics excludes private URLs, legal pages, previews and other origins",
   for (const url of [
     `${site}/confidentialite/`, `${site}/confidentialite/#token=private`, `${site}/?email=private`,
     `${site}/#token=private`, `${site}/mentions-legales/`, `${site}/conditions-liste-attente/`,
+    `${site}/cgu/`, `${site}/confidentialite-app/`,
     "http://localhost:3000/", "https://preview.example/", "http://hellonearly.com/", "not-a-url",
   ]) assert.equal(analyticsPageAllowed(url, site), false, url);
   assert.equal(analyticsPageAllowed("https://gaugo47.github.io/Nearly-Website/outils/", "https://gaugo47.github.io/Nearly-Website", "/Nearly-Website"), true);
