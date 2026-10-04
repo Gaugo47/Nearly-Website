@@ -34,6 +34,8 @@ test("exports public SEO and GitHub Pages assets", async () => {
   for (const page of pages) assert.ok(sitemap.includes(`${origin}${page ? `/${page}` : ""}`));
   assert.ok((await readFile(join(root, "robots.txt"), "utf8")).includes(`${origin}/sitemap.xml`));
   await stat(join(root, ".nojekyll"));
+  // AdMob reads this from the developer website listed in the stores.
+  assert.match(await readFile(join(root, "app-ads.txt"), "utf8"), /^google\.com, pub-7432159492130512, DIRECT, f08c47fec0942fa0$/m);
   await stat(join(root, "404.html"));
 });
 test("does not preload or execute the analytics beacon before visitor consent", async () => {
