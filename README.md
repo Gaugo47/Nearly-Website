@@ -17,13 +17,13 @@ npm run check:public
 
 `npm run build` produit `out/`. `npm start` sert cet export sur `http://localhost:3000`. Pour prévisualiser exactement GitHub Pages, copier `.env.example` en `.env.local` avant de construire et définir aussi `NEXT_PUBLIC_BASE_PATH=/Nearly-Website` dans le terminal de prévisualisation. `.env.local` est ignoré.
 
-Le workflow vérifie automatiquement les modifications de `main` et les pull requests. **La publication est manuelle** : aucun push ne met le site en ligne.
+Le workflow vérifie automatiquement les modifications de `main` et les pull requests. **Chaque push sur `main` publie automatiquement le site**, après réussite des contrôles de configuration publique, de confidentialité, du lint, de la compilation, des tests et de TypeScript. Les pull requests exécutent les vérifications sans publier.
 
 ## Publier sur GitHub Pages
 
 1. Compléter les informations publiques de l’éditeur dans **Settings → Secrets and variables → Actions → Variables** : `PUBLISHER_NAME`, `PUBLISHER_STATUS`, `PUBLISHER_ADDRESS`, `PUBLICATION_DIRECTOR`, `CONTACT_EMAIL`. Ces valeurs apparaîtront sur le site et dans les artefacts ; utiliser les coordonnées professionnelles destinées à être publiques. Les obligations applicables à l’éditeur restent à vérifier avant publication.
 2. Dans **Settings → Pages → Build and deployment → Source**, sélectionner **GitHub Actions**.
-3. Dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`.
+3. Pousser les modifications sur `main` pour lancer les vérifications et la publication automatique. Pour republier manuellement, dans **Actions → Verify and publish GitHub Pages → Run workflow**, choisir `main` et cocher `publish`. Sans cette case, le lancement manuel effectue uniquement les vérifications ; la publication reste réservée à `main`.
 4. L’adresse par défaut est `https://gaugo47.github.io/Nearly-Website/`. Le workflow calcule le chemin à partir du nom du dépôt ; les images, liens, pages, sitemap et métadonnées utilisent ce chemin.
 
 Le site peut être publié avec des informations d’éditeur incomplètes : les champs absents sont affichés comme non communiqués. Le formulaire s’ouvre seulement lorsqu’une URL HTTPS valide et une clé publique Turnstile sont configurées.

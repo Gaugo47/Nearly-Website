@@ -38,7 +38,7 @@ Le CNAME ne comporte ni protocole ni nom de dépôt. Un workflow GitHub Actions 
 
 ## Activer et vérifier
 
-Dans **Actions → Verify and publish GitHub Pages → Run workflow**, sélectionner `main` et `publish=true`. Après propagation DNS et émission du certificat, activer **Enforce HTTPS** dans Pages.
+Chaque push sur `main` lance les vérifications puis publie automatiquement le site si elles réussissent. Pour republier manuellement, dans **Actions → Verify and publish GitHub Pages → Run workflow**, sélectionner `main` et `publish=true`. Après propagation DNS et émission du certificat, activer **Enforce HTTPS** dans Pages.
 
 Vérifier le HTTPS, la redirection de `www`, les six pages, leurs images, liens et métadonnées, puis les démonstrations. Si la collecte est activée, tester une inscription et sa désinscription, ainsi que le refus d'un challenge invalide. Ne pas confondre un build réussi avec une intégration n8n validée.
 
