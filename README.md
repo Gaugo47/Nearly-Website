@@ -2,6 +2,10 @@
 
 Site français de présentation de Nearly, avec questions de couple, calculateur de frais et pages légales. L’export Next.js est entièrement statique et compatible avec GitHub Pages, y compris sous `/Nearly-Website/`.
 
+Le sélecteur FR/EN est disponible dans la navigation de chaque page. Le français conserve ses URL existantes ; les pages anglaises utilisent le préfixe `/en/` (par exemple `/en/contact/`). Les liens restent dans la langue choisie et le sélecteur conserve la page et son ancre. Chaque version possède la bonne langue HTML, une URL canonique et des liens `hreflang` ; les deux langues sont incluses dans le sitemap.
+
+Les versions anglaises sont générées avant `npm run dev` et `npm run build` à partir des sources françaises et du catalogue `translations/en.json`. Les composants interactifs partagent ainsi leur logique et les mêmes données locales dans les deux langues. Après une modification de texte, compléter le catalogue et lancer `npm run translations:sync` ; la génération signale les traductions manquantes. Les conditions et la confidentialité de l’application utilisent la version anglaise existante de `app/app-legal-content.ts`. Les captures d’écran de l’application sont conservées dans leur langue d’origine.
+
 ## Développement et vérification
 
 Node.js 22.13 ou supérieur, npm :

@@ -1,7 +1,8 @@
+import { pageAlternates } from "../language";
 import type { Metadata, Viewport } from "next";
-import { siteUrl, sitePath, absoluteUrl } from "./site";
-import "./globals.css";
-import AnalyticsConsent from "./AnalyticsConsent";
+import { siteUrl, sitePath, absoluteUrl } from "../site";
+import "../globals.css";
+import AnalyticsConsent from "../AnalyticsConsent";
 
 export const metadata: Metadata = {
     metadataBase: new URL(`${siteUrl}/`),
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     creator: "Nearly",
     publisher: "Nearly",
     category: "Lifestyle",
-    alternates: { canonical: `${siteUrl}/` },
+    alternates: pageAlternates("/"),
     openGraph: {
       type: "website",
       url: `${siteUrl}/`,

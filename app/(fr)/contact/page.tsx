@@ -1,7 +1,8 @@
+import { pageAlternates } from "../../language";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import { legal } from "../legal";
-import { absoluteUrl, sitePath } from "../site";
+import LegalLayout from "../../LegalLayout";
+import { legal } from "../../legal";
+import { absoluteUrl, sitePath } from "../../site";
 
 const title = "Contact et assistance";
 const description = "Contactez le support Nearly pour une question sur l’application, votre compte, un problème technique ou vos données personnelles.";
@@ -9,7 +10,7 @@ const description = "Contactez le support Nearly pour une question sur l’appli
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: absoluteUrl("/contact/") },
+  alternates: pageAlternates("/contact/"),
   robots: { index: true, follow: true },
   openGraph: {
     title: `${title} | Nearly`,

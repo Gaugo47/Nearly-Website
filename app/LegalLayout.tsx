@@ -3,6 +3,7 @@ import { sitePath } from "./site";
 import type { ReactNode } from "react";
 import { legal } from "./legal";
 import { AnalyticsSettingsButton } from "./AnalyticsConsent";
+import LanguageSwitch from "./LanguageSwitch";
 
 const legalLinks = [
   { href: "/contact", label: "Contact" },
@@ -33,7 +34,7 @@ export default function LegalLayout({ current, eyebrow, title, intro, children, 
             <a key={link.href} href={sitePath(link.href)} aria-current={link.href === current ? "page" : undefined}>{link.label}</a>
           ))}
         </div>
-        <a className="tool-nav__back" href={sitePath("/#liste-attente")}>Liste d’attente <span aria-hidden="true">↗</span></a>
+        <div className="legal-nav-actions"><LanguageSwitch language="fr" /><a className="tool-nav__back" href={sitePath("/#liste-attente")}>Liste d’attente <span aria-hidden="true">↗</span></a></div>
       </nav>
 
       <header className="legal-hero">

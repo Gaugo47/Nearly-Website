@@ -1,13 +1,14 @@
+import { pageAlternates } from "../../language";
 
-import { absoluteUrl, sitePath } from "../site";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import { legal } from "../legal";
+import LegalLayout from "../../LegalLayout";
+import { legal } from "../../legal";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Éditeur, hébergement et propriété intellectuelle du site Nearly.",
-  alternates: { canonical: absoluteUrl("/mentions-legales/") },
+  alternates: pageAlternates("/mentions-legales/"),
 };
 
 export default function LegalNoticePage() {

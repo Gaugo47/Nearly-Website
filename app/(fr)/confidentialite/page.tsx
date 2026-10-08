@@ -1,15 +1,15 @@
-import { absoluteUrl } from "../site";
+import { pageAlternates } from "../../language";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import WaitlistUnsubscribe from "../WaitlistUnsubscribe";
-import { analyticsToken, waitlistReady } from "../site";
-import { AnalyticsSettingsButton } from "../AnalyticsConsent";
-import { legal } from "../legal";
+import LegalLayout from "../../LegalLayout";
+import WaitlistUnsubscribe from "../../WaitlistUnsubscribe";
+import { analyticsToken, waitlistReady } from "../../site";
+import { AnalyticsSettingsButton } from "../../AnalyticsConsent";
+import { legal } from "../../legal";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: "Comment Nearly collecte, utilise et protège les données de la liste d’attente et du site, conformément au RGPD.",
-  alternates: { canonical: absoluteUrl("/confidentialite/") },
+  alternates: pageAlternates("/confidentialite/"),
 };
 
 const retentionYears = legal.retentionMonths / 12;

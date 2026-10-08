@@ -5,11 +5,12 @@ import test from "node:test";
 const root = resolve("out");
 const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 const origin = (process.env.NEXT_PUBLIC_SITE_URL || "https://gaugo47.github.io/Nearly-Website").replace(/\/$/, "");
-const pages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app"];
+const frenchPages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app"];
+const pages = [...frenchPages, ...frenchPages.map(page => `en${page ? `/${page}` : ""}`)];
 test("exports all pages and usable local links/assets under the configured base path", async () => {
   for (const page of pages) {
     const html = await readFile(join(root, page, "index.html"), "utf8");
-    assert.match(html, /<html lang="fr"/);
+    assert.ok(html.includes(`<html lang="${page === "en" || page.startsWith("en/") ? "en" : "fr"}"`));
     assert.doesNotMatch(html, /chatgpt\.site|oai-authenticated|\/api\/expense-trial|\/api\/couple-questions/);
     for (const [, raw] of html.matchAll(/(?:href|src)="([^"<>]+)"/g)) {
       if (!raw.startsWith("/") || raw.startsWith("//")) continue;
@@ -24,6 +25,27 @@ test("exports all pages and usable local links/assets under the configured base 
       }
     }
   }
+});
+test("both languages expose matching pages, canonical URLs and alternate language links", async () => {
+  for (const page of frenchPages) {
+    const path = page ? `/${page}/` : "/";
+    for (const language of ["fr", "en"]) {
+      const local = language === "en" ? `en/${page}` : page;
+      const html = await readFile(join(root, local, "index.html"), "utf8");
+      const canonical = `${origin}${language === "en" ? "/en" : ""}${path}`;
+      assert.ok(html.includes(`rel="canonical" href="${canonical}"`), `${local}: canonical`);
+      for (const [lang, prefix] of [["fr", ""], ["en", "/en"], ["x-default", ""]]) {
+        assert.ok(html.includes(`hrefLang="${lang}" href="${origin}${prefix}${path}"`), `${local}: alternate ${lang}`);
+      }
+      assert.ok(html.includes('aria-label="English"') && html.includes('aria-label="Français"'));
+    }
+  }
+  const contact = await readFile(join(root, "en/contact/index.html"), "utf8");
+  assert.match(contact, /Contact Nearly support/);
+  assert.match(contact, /href="mailto:support@hellonearly.com"/);
+  const terms = await readFile(join(root, "en/cgu/index.html"), "utf8");
+  assert.match(terms, /Publisher and contact/);
+  assert.doesNotMatch(terms, /Éditeur et contact/);
 });
 test("exports public SEO and GitHub Pages assets", async () => {
   const html = await readFile(join(root, "index.html"), "utf8");

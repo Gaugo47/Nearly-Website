@@ -1,14 +1,15 @@
+import { pageAlternates } from "../../language";
 
-import { absoluteUrl, sitePath } from "../site";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import SiteNav from "../SiteNav";
-import SiteFooter from "../SiteFooter";
-import CoupleQuestions from "../CoupleQuestions";
+import SiteNav from "../../SiteNav";
+import SiteFooter from "../../SiteFooter";
+import CoupleQuestions from "../../CoupleQuestions";
 
 export const metadata: Metadata = {
   title: "Questions à se poser en couple",
   description: "Des questions à se poser en couple pour rire, se redécouvrir, se rapprocher et nourrir la complicité, même à distance.",
-  alternates: { canonical: absoluteUrl("/questions-couple/") },
+  alternates: pageAlternates("/questions-couple/"),
 };
 
 export default function QuestionsCouplePage() {

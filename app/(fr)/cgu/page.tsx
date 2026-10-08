@@ -1,13 +1,14 @@
-import { absoluteUrl, sitePath } from "../site";
+import { pageAlternates } from "../../language";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import AppLegalSections, { appSections, appTermsDate } from "../AppLegalSections";
-import { APP_TERMS_VERSION } from "../app-legal-content";
+import LegalLayout from "../../LegalLayout";
+import AppLegalSections, { appSections, appTermsDate } from "../../AppLegalSections";
+import { APP_TERMS_VERSION } from "../../app-legal-content";
 
 export const metadata: Metadata = {
   title: "Conditions générales d’utilisation de l’application",
   description: "Les conditions d’utilisation de l’application Nearly : compte, espaces privés, abonnements, données personnelles et vos droits.",
-  alternates: { canonical: absoluteUrl("/cgu/") },
+  alternates: pageAlternates("/cgu/"),
 };
 
 export default function AppTermsPage() {

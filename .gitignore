@@ -17,6 +17,9 @@
 /.next/
 /.vinext/
 /out/
+# English routes are generated from the shared French sources and translation catalog.
+/app/(en)/
+/work-translation-inventory.json
 
 # misc
 .DS_Store

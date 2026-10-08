@@ -1,12 +1,13 @@
+import { pageAlternates } from "../../language";
 import type { Metadata } from "next";
-import { absoluteUrl, sitePath } from "../site";
-import SiteNav from "../SiteNav";
-import SiteFooter from "../SiteFooter";
+import { sitePath } from "../../site";
+import SiteNav from "../../SiteNav";
+import SiteFooter from "../../SiteFooter";
 
 export const metadata: Metadata = {
   title: "Outils et activités à essayer",
   description: "Une question à partager, un jeu à découvrir ou des frais à répartir : essayez les outils Nearly gratuitement, sans compte.",
-  alternates: { canonical: absoluteUrl("/outils/") },
+  alternates: pageAlternates("/outils/"),
 };
 
 const tools = [

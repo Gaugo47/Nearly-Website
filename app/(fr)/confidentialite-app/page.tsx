@@ -1,13 +1,14 @@
-import { absoluteUrl, sitePath } from "../site";
+import { pageAlternates } from "../../language";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import AppLegalSections, { appSections, appTermsDate } from "../AppLegalSections";
-import { APP_TERMS_VERSION } from "../app-legal-content";
+import LegalLayout from "../../LegalLayout";
+import AppLegalSections, { appSections, appTermsDate } from "../../AppLegalSections";
+import { APP_TERMS_VERSION } from "../../app-legal-content";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité de l’application",
   description: "Quelles données l’application Nearly traite, pourquoi, avec quels prestataires, combien de temps, et comment exercer vos droits.",
-  alternates: { canonical: absoluteUrl("/confidentialite-app/") },
+  alternates: pageAlternates("/confidentialite-app/"),
 };
 
 /** Publisher, personal data, retention, rights and deletion: the privacy part of the app's terms. */

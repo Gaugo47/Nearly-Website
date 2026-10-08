@@ -1,14 +1,15 @@
+import { pageAlternates } from "../../language";
 
-import { absoluteUrl, sitePath } from "../site";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import SiteNav from "../SiteNav";
-import SiteFooter from "../SiteFooter";
-import ExpenseDemo from "../ExpenseDemo";
+import SiteNav from "../../SiteNav";
+import SiteFooter from "../../SiteFooter";
+import ExpenseDemo from "../../ExpenseDemo";
 
 export const metadata: Metadata = {
   title: "Calculateur de remboursement entre amis",
   description: "Calculez gratuitement qui doit rembourser qui après une sortie, un week-end ou des vacances. Ajoutez vos frais et obtenez les remboursements à faire.",
-  alternates: { canonical: absoluteUrl("/calculateur-remboursement/") },
+  alternates: pageAlternates("/calculateur-remboursement/"),
 };
 
 export default function CalculateurRemboursementPage() {

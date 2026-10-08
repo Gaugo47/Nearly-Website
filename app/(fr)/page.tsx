@@ -1,10 +1,10 @@
 
-import { sitePath, absoluteUrl } from "./site";
-import SiteNav from "./SiteNav";
-import SiteFooter from "./SiteFooter";
-import WaitlistForm from "./WaitlistForm";
-import IPhoneMockup from "./IPhoneMockup";
-import RelationPreview from "./RelationPreview";
+import { sitePath, absoluteUrl } from "../site";
+import SiteNav from "../SiteNav";
+import SiteFooter from "../SiteFooter";
+import WaitlistForm from "../WaitlistForm";
+import IPhoneMockup from "../IPhoneMockup";
+import RelationPreview from "../RelationPreview";
 
 const features = [
   {

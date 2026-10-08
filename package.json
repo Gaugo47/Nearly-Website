@@ -6,8 +6,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build --webpack",
+    "dev": "node scripts/generate-english.mjs && next dev",
+    "build": "node scripts/generate-english.mjs && next build --webpack",
+    "translations:sync": "node scripts/generate-english.mjs",
     "start": "node scripts/preview.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

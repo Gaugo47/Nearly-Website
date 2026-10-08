@@ -1,10 +1,11 @@
 import { siteUrl } from "./site";
+import { publicPages, pageAlternates } from "./language";
 import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const french: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
       lastModified: new Date("2026-10-01"),
@@ -48,4 +49,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     })),
   ];
+  return french.flatMap(entry => {
+    const page = entry.url.slice(siteUrl.length).replace(/^\//, "").replace(/\/$/, "");
+    if (!publicPages.some(path => path === page)) return [entry];
+    const path = page ? `/${page}/` : "/";
+    const alternates = { languages: pageAlternates(path).languages };
+    return [
+      { ...entry, alternates },
+      { ...entry, url: `${siteUrl}/en${path}`, lastModified: new Date("2026-10-08"), alternates },
+    ];
+  });
 }

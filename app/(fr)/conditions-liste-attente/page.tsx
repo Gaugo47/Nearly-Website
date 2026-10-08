@@ -1,13 +1,14 @@
+import { pageAlternates } from "../../language";
 
-import { absoluteUrl, sitePath } from "../site";
+import { sitePath } from "../../site";
 import type { Metadata } from "next";
-import LegalLayout from "../LegalLayout";
-import { legal } from "../legal";
+import LegalLayout from "../../LegalLayout";
+import { legal } from "../../legal";
 
 export const metadata: Metadata = {
   title: "Conditions de la liste d’attente",
   description: "Les règles simples de la liste d’attente Nearly : inscription gratuite, sans engagement, désinscription à tout moment.",
-  alternates: { canonical: absoluteUrl("/conditions-liste-attente/") },
+  alternates: pageAlternates("/conditions-liste-attente/"),
 };
 
 export default function WaitlistTermsPage() {
