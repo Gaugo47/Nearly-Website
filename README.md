@@ -28,6 +28,8 @@ Le workflow vérifie automatiquement les modifications de `main` et les pull req
 
 Le site peut être publié avec des informations d’éditeur incomplètes : les champs absents sont affichés comme non communiqués. Le formulaire s’ouvre seulement lorsqu’une URL HTTPS valide et une clé publique Turnstile sont configurées.
 
+Le contact public par défaut est `support@hellonearly.com` et le directeur de la publication est Gauthier DEFOY. Les variables `CONTACT_EMAIL` et `PUBLICATION_DIRECTOR` permettent de les remplacer. La page `/contact/` est accessible sans connexion, liée depuis le pied de page et incluse dans le sitemap. Après publication sur le domaine final, l’URL d’assistance à renseigner dans App Store Connect est `https://hellonearly.com/contact/`. La page autorise l’indexation ; son apparition dans les moteurs dépend de leur exploration du site.
+
 Le domaine final est `hellonearly.com`. Configurer le domaine dans Settings → Pages et ajouter `SITE_URL=https://hellonearly.com` aux variables Actions. Le workflow en déduit automatiquement un chemin vide. Suivre [les étapes OVH et GitHub](docs/publication-hellonearly.md) pour vérifier le domaine, configurer les DNS et le HTTPS. Reconstruire après tout changement d’adresse. Ne pas ajouter un fichier CNAME contenant un domaine dont vous n’êtes pas propriétaire.
 
 Le numéro SIRET public de l'éditeur peut être renseigné dans `PUBLISHER_SIRET` ; il est affiché dans les mentions légales. Les identifiants administratifs personnels et les secrets restent hors du site.

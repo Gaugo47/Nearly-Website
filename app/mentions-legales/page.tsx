@@ -25,9 +25,9 @@ export default function LegalNoticePage() {
           {legal.controllerStatus}<br />
           {legal.controllerSiret && <>SIRET : {legal.controllerSiret}<br /></>}
           {legal.controllerAddress}<br />
-          Contact : <strong>{legal.contactEmail}</strong>
+          Contact : <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a>
         </p>
-        <p>Directeur ou directrice de la publication : {legal.publicationDirector}.</p>
+        <p>Directeur de la publication : {legal.publicationDirector}.</p>
       </section>
 
       <section>

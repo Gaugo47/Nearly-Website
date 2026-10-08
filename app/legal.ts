@@ -6,12 +6,12 @@ export const legal = {
   controllerStatus: process.env.NEXT_PUBLIC_PUBLISHER_STATUS || "Non communiqué",
   controllerSiret: process.env.NEXT_PUBLIC_PUBLISHER_SIRET || "",
   controllerAddress: process.env.NEXT_PUBLIC_PUBLISHER_ADDRESS || "Adresse non communiquée",
-  publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Non communiqué",
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "Non communiqué",
+  publicationDirector: process.env.NEXT_PUBLIC_PUBLICATION_DIRECTOR || "Gauthier DEFOY",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "support@hellonearly.com",
   siteHost: "GitHub Pages — GitHub, Inc. (https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement)",
   automationHost: process.env.NEXT_PUBLIC_WAITLIST_HOST || (process.env.NEXT_PUBLIC_WAITLIST_API_URL ? "n8n (prestataire non communiqué)" : "Non activé"),
   policyVersion: "2026-10-01",
-  lastUpdated: "2 octobre 2026",
+  lastUpdated: "8 octobre 2026",
   retentionMonths: 36,
 };
 

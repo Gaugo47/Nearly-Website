@@ -11,6 +11,7 @@ export default function SiteFooter() {
       <div>
         <a href={sitePath("/outils/")}>Outils &amp; activités</a>
         <a href={sitePath("/#faq")}>FAQ</a>
+        <a href={sitePath("/contact/")}>Contact &amp; assistance</a>
         <a href={sitePath("/conditions-liste-attente")}>Conditions</a>
         <a href={sitePath("/confidentialite")}>Confidentialité</a>
         <a href={sitePath("/mentions-legales")}>Mentions légales</a>

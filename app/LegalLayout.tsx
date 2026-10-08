@@ -5,6 +5,7 @@ import { legal } from "./legal";
 import { AnalyticsSettingsButton } from "./AnalyticsConsent";
 
 const legalLinks = [
+  { href: "/contact", label: "Contact" },
   { href: "/conditions-liste-attente", label: "Conditions" },
   { href: "/confidentialite", label: "Confidentialité" },
   { href: "/mentions-legales", label: "Mentions légales" },
@@ -47,7 +48,7 @@ export default function LegalLayout({ current, eyebrow, title, intro, children, 
       <footer className="legal-footer">
         <a href={sitePath("/")}>← Retour à Nearly</a>
         <AnalyticsSettingsButton />
-        <span>Une question sur vos données ? <strong>{legal.contactEmail}</strong></span>
+        <span>Une question ? <a href={`mailto:${legal.contactEmail}`}><strong>{legal.contactEmail}</strong></a></span>
       </footer>
     </main>
   );
