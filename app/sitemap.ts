@@ -1,11 +1,19 @@
 import { siteUrl } from "./site";
 import { publicPages, pageAlternates } from "./language";
 import type { MetadataRoute } from "next";
+import { getBlogArticles } from "./blog-content";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const french: MetadataRoute.Sitemap = [
+    { url: `${siteUrl}/blog/`, lastModified: new Date("2026-10-14"), changeFrequency: "weekly", priority: 0.8 },
+    ...getBlogArticles("fr").map(article => ({
+      url: `${siteUrl}/blog/${article.slug}/`,
+      lastModified: new Date(article.updated),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     {
       url: siteUrl,
       lastModified: new Date("2026-10-01"),
@@ -56,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const alternates = { languages: pageAlternates(path).languages };
     return [
       { ...entry, alternates },
-      { ...entry, url: `${siteUrl}/en${path}`, lastModified: new Date("2026-10-08"), alternates },
+      { ...entry, url: `${siteUrl}/en${path}`, lastModified: page.startsWith("blog") ? entry.lastModified : new Date("2026-10-08"), alternates },
     ];
   });
 }

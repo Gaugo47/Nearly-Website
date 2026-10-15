@@ -205,6 +205,11 @@ export default function Home() {
         <a className="button button--primary" href={sitePath("/outils/")}>Outils &amp; activités <ArrowIcon /></a>
       </aside>
 
+      <aside className="try-aside">
+        <div><p className="eyebrow"><span /> Le journal Nearly</p><h2>Les liens, au fil des jours.</h2><p>Des conseils pour la distance, des idées pour le quotidien et nos sélections d’applications pour vos proches.</p></div>
+        <a className="button button--primary" href={sitePath("/blog/")}>Explorer le blog <ArrowIcon /></a>
+      </aside>
+
       <section className="faq section" id="faq">
         <div className="section-heading"><p className="eyebrow"><span /> En quelques mots</p><h2>Vos <em>questions.</em></h2></div>
         <div className="faq-list">{faqs.map((faq, index) => <details key={faq.question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{faq.question}<i aria-hidden="true">+</i></summary><p>{faq.answer}</p></details>)}</div>

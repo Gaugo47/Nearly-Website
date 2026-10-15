@@ -42,6 +42,14 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ## Démonstrations
 
+### Blog et référencement
+
+Le blog `/blog/` propose quatre guides (relations à distance, questions de couple, amis et famille, soirées et frais) et trois comparatifs par usage. Les articles sont stockés dans `content/blog.fr.json` et `content/blog.en.json`, avec une liste commune de routes dans `app/blog-slugs.ts`. Ajouter chaque nouveau slug à cette liste et fournir les deux versions ; les pages dynamiques sont exportées statiquement. Les libellés du gabarit suivent le catalogue `translations/en.json`.
+
+Chaque article comprend des métadonnées propres, une URL canonique et ses alternatives FR/EN, un résumé, un sommaire, des liens internes, une FAQ et des données structurées `BlogPosting`, `BreadcrumbList`, `FAQPage` et, pour les comparatifs, `ItemList`. Les routes sont incluses dans le sitemap et les guides sont référencés dans `public/llms.txt`. Ces éléments facilitent l’exploration sans garantir un classement ou une citation par un moteur.
+
+Les comparatifs sont explicitement publiés par Nearly et fondés sur des présentations officielles datées, sans faux avis ni notes. Nearly est recommandé pour les scénarios combinant plusieurs fonctions ; son statut d’application à venir est visible. Reconsulter les sources à chaque révision et mettre à jour la date réelle de modification des articles.
+
 ### Parcours du site
 
 L’accueil présente les amis, la famille et le couple avec trois espaces de même importance et un aperçu interactif de leurs captures réelles. Les fonctionnalités communes, Party, Spicy et la confidentialité ont chacun une section visible ; un sommaire permet d’y accéder directement. La FAQ et l’inscription suivent cette présentation. Les essais sont regroupés dans `/outils/` : questions de couple, test de jeu dans `/tester-un-jeu/` et calculateur de remboursement. La navigation commune permet de passer de la présentation aux activités sans mélanger les deux parcours. Les liens des anciennes sections de démonstration de l’accueil restent accessibles via des renvois vers les outils.

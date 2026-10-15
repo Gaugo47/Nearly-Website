@@ -1,0 +1,188 @@
+[
+  {
+    "slug": "relation-a-distance-conseils",
+    "category": "Long-distance couples",
+    "kind": "guide",
+    "title": "Long-distance relationships: 7 habits to feel closer every day",
+    "description": "Seven practical ideas for a long-distance relationship: rituals, questions, shared moments and planning reunions, without pressure.",
+    "summary": "To feel closer at a distance, choose a realistic small ritual, share ordinary moments and plan your next reunion together. Regular contact should remain an invitation: everyone can need time to themselves.",
+    "readTime": 5,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "sections": [
+      { "id": "rythme", "title": "1. Find a rhythm that works for both of you", "paragraphs": ["An internship abroad, studying in different cities or mismatched schedules can change when you connect. Start by explaining when you are available instead of expecting an immediate reply.", "Try a ten-minute catch-up two or three evenings a week. After a week, adjust: does it feel enjoyable or like another obligation? A helpful habit leaves room for unexpected changes."] },
+      { "id": "questions", "title": "2. Replace an automatic question with real curiosity", "paragraphs": ["‘How are you?’ is sometimes enough, but may not open much conversation. Try ‘Which moment today would you have liked to share with me?’ Answer it yourself too, and listen without immediately trying to solve a problem."] },
+      { "id": "quotidien", "title": "3. Share something ordinary", "paragraphs": ["A photo of lunch, a song from your bus ride or a small win at work gives you something to talk about beyond big updates. Pick a detail you want to share without turning your day into a report."] },
+      { "id": "rendez-vous", "title": "4. Plan a date at a distance", "paragraphs": ["Cook the same recipe, watch an episode together or play a short game. Agree on a start time and approximate length. Afterwards, ask what you would like to do again: a good activity is one you both enjoy."] },
+      { "id": "retrouvailles", "title": "5. Make your next reunion tangible", "paragraphs": ["Where possible, note the next visit date and choose something simple to do together. If your budget or schedule gets in the way, agree when to revisit the plan. A countdown can make waiting enjoyable without promising something you cannot deliver."] },
+      { "id": "espace", "title": "6. Keep a space for your memories", "paragraphs": ["Gather a few moments in a shared album with a sentence about what they mean. When conversation runs dry, choose a memory and say what you would like to experience again. Ask before sharing an image outside your space."] },
+      { "id": "liberte", "title": "7. Leave room for a pause", "paragraphs": ["A late reply alone does not explain how your partner feels. Agree on a simple way to say ‘Busy day, I’ll catch up tomorrow.’ Questions, location sharing and activities should remain choices, never proof someone has to provide.", "Nearly is designed to bring questions, moods, memories, a calendar and a reunion countdown into a private couple space. The app is coming soon to iOS and Android; you can already try couple questions on the website without an account."] }
+    ],
+    "faqs": [
+      { "question": "Do long-distance couples need to talk every day?", "answer": "There is no single right frequency. Agree on a rhythm that fits your schedules and adjust if either person feels overlooked or pressured." },
+      { "question": "What can we do when we run out of conversation topics?", "answer": "Start with a memory, try an open question or suggest a short activity such as cooking the same recipe. A call can also feel good without constant conversation." }
+    ],
+    "sources": [{ "label": "Nearly: spaces, rituals and reunions", "href": "/#experience" }],
+    "related": ["rituels-questions-couple", "meilleures-applications-couple-distance", "garder-le-lien-amis-distance"],
+    "tool": { "label": "Try a question together", "href": "/questions-couple/" }
+  },
+  {
+    "slug": "rituels-questions-couple",
+    "category": "Connection & rituals",
+    "kind": "guide",
+    "title": "Couple questions: a five-minute ritual you will want to keep",
+    "description": "A simple ritual and ten couple questions to move beyond ‘How are you?’, listen and share a moment, far apart or under the same roof.",
+    "summary": "A couple ritual can take five minutes: one open question, an answer from each person and a small gesture afterwards. Choose a calm moment and always leave room to skip a question.",
+    "readTime": 4,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "sections": [
+      { "id": "format", "title": "A simple format to try tonight", "paragraphs": ["Choose a question before you start. One person answers and the other listens, then swap. Finish by naming something you appreciated about the exchange. The aim is to discover a detail, not complete a list.", "Try it out loud, on a walk or in writing if your schedules differ. Avoid a sensitive question when someone has to leave. If five minutes is not enough, suggest returning to it later."] },
+      { "id": "questions", "title": "10 questions to start without pressure", "paragraphs": ["Choose according to your mood: not every conversation needs to be deep. A light question can be a good start after a long day."], "bullets": ["What made you smile today?", "What little moment would you like us to share this week?", "Which song reminds you of us?", "Which memory of us would you describe as a film scene?", "What are you proud of at the moment?", "What small gesture would make you happy this week?", "What would you like to learn with me?", "What would our ideal Sunday look like?", "When do you feel most listened to?", "What small adventure could we plan together?"] },
+      { "id": "ecouter", "title": "Listen before responding", "paragraphs": ["An answer unlike yours is not a bad result. Ask ‘Would you like to tell me more?’ instead of comparing straight away. If your partner describes a difficulty, ask whether they want an idea or just someone to listen.", "Agree that either person can skip a question. Avoid saving an answer to use as an argument later: the ritual works better when the exchange feels trustworthy."] },
+      { "id": "nearly", "title": "Continue with Nearly", "paragraphs": ["Nearly plans a daily question, themed questions with a shared reveal and shared moods. These offer a starting point in your private space alongside memories and upcoming moments.", "To start now, the website’s couple questions demo is free and needs no account. It is a limited preview; the full app is still coming soon. Try a question, then keep only the rhythm that suits you."] }
+    ],
+    "faqs": [
+      { "question": "What questions can I ask my partner at a distance?", "answer": "Choose questions about daily life, memories or the next reunion. ‘Which moment would you have liked to share with me?’ is a simple starting point." },
+      { "question": "Can I try Nearly questions without an account?", "answer": "Yes. The couple questions demo on the website is free and available without an account. It previews activities planned for the app." }
+    ],
+    "sources": [{ "label": "Free Nearly questions demo", "href": "/questions-couple/" }],
+    "related": ["relation-a-distance-conseils", "meilleures-applications-couple-distance"],
+    "tool": { "label": "Pick a question", "href": "/questions-couple/" }
+  },
+  {
+    "slug": "garder-le-lien-amis-distance",
+    "category": "Friends & family",
+    "kind": "guide",
+    "title": "Stay connected with friends and family when you live far apart",
+    "description": "Easy ideas to stay close to friends and family at a distance: updates, private memories, games and relaxed catch-ups.",
+    "summary": "To stay connected with loved ones, alternate small updates, memories and realistic catch-ups. A shared space helps you find those moments again; what matters is choosing habits everyone can access.",
+    "readTime": 4,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "sections": [
+      { "id": "nouvelles", "title": "Give updates a starting point", "paragraphs": ["After a move, a group chat can fall silent without the friendships becoming less important. Suggest a relaxed habit: a Sunday photo or one good thing from the week. Explain that taking part is optional.", "With family, choose a format that works for those less familiar with apps. A photo with one sentence can provide more context than a stream of pictures. Individual calls still have a place alongside the group."] },
+      { "id": "activites", "title": "Do something together, even briefly", "paragraphs": ["With friends, a quiz, a photo challenge or a short game can restart the conversation. With family, tell the story of an object, share a recipe or ask about a favourite holiday memory.", "Offer a window rather than demanding an instant response: everyone could contribute over the weekend. For live games, confirm the time zone and duration so nobody has to miss sleep."] },
+      { "id": "souvenirs", "title": "Keep memories in the right circle", "paragraphs": ["A group album is easier to revisit than a photo buried in a conversation. Add a date, place or anecdote. Before inviting a new member or reposting a photo, ask the people concerned.", "Keep family memories and your friends’ moments separate: the circles may not want to share the same things. Nearly is designed around distinct relationship spaces accessible to invited members."] },
+      { "id": "retrouver", "title": "Turn ‘We should meet up’ into a next step", "paragraphs": ["Suggest two dates and a simple activity instead of waiting for the perfect weekend. If meeting is impossible, choose the next call or a remote game night. A modest, achievable date can be more useful than a big plan that never happens.", "Nearly’s concept brings together friends and family spaces, questions, moments, games and a calendar. The app is announced for iOS and Android; the website’s game quiz already helps you discover an activity for your group."] }
+    ],
+    "faqs": [
+      { "question": "How can I reconnect with a friend after months without contact?", "answer": "Send a simple message with a specific memory and an invitation that is easy to decline or reschedule. You can acknowledge the time apart without asking them to justify their silence." },
+      { "question": "Is Nearly only for couples?", "answer": "No. Nearly is designed for couples, friends and families, with a distinct private space for each connection." }
+    ],
+    "sources": [{ "label": "Nearly: friends, family and couple spaces", "href": "/#vos-liens" }],
+    "related": ["meilleures-applications-famille", "meilleures-applications-amis", "organiser-soiree-frais-amis"],
+    "tool": { "label": "Find an activity to share", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "organiser-soiree-frais-amis",
+    "category": "Moments with friends",
+    "kind": "guide",
+    "title": "A night with friends: games, photos and shared expenses made simple",
+    "description": "Plan a night with friends in four steps: choose a game, keep photos private and work out who owes whom with a practical example.",
+    "summary": "An easier evening starts with an agreed budget and an activity that suits the group. Keep photos in a chosen circle and record expenses as you go so repayments are clear.",
+    "readTime": 4,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "sections": [
+      { "id": "avant", "title": "Before the evening: agree on the basics", "paragraphs": ["Confirm the place, time and approximate budget. Decide whether groceries are shared by everyone or just those using them. Agreeing before a purchase avoids charging someone for an expense they did not expect.", "Plan an appropriate journey home for everyone and offer alcohol-free drinks. A good evening does not require drinking or joining every game."] },
+      { "id": "jeux", "title": "Choose a game everyone can join", "paragraphs": ["Start with a short activity and explain the rules in a minute. A group quiz or light questions can include people who know one another less well. Allow people to pass and avoid challenges that expose private information.", "Nearly’s game quiz suggests an activity based on your answers. It can help you prepare; the app’s adult-only Party Mode is still coming soon."] },
+      { "id": "photos", "title": "Decide where the photos go", "paragraphs": ["Ask before photographing, then before publishing. Share the album only with the agreed people and accept requests to remove a picture. A private space does not replace consent.", "Nearly plans a locked photo vault in Party. You can explore its presentation on the site, but do not assume that a tool makes every possible copy of an image impossible."] },
+      { "id": "frais", "title": "Split the expenses: an example with three people", "paragraphs": ["Alice pays €60 for groceries, Bilal pays €30 for pizza and Chloé pays nothing upfront. If the €90 is shared equally, each person owes €30. Alice has paid €30 too much, Bilal is even and Chloé owes €30: Chloé repays Alice.", "Record expenses before you forget who paid and check the participants for each purchase. Nearly’s calculator is available without an account for a trial limited to three expenses. It calculates repayments; it does not make bank transfers."] }
+    ],
+    "faqs": [
+      { "question": "How do you split expenses for an evening with friends?", "answer": "Add up shared expenses, define each person’s share and subtract what they have already paid. If a purchase concerns only part of the group, divide it among those participants." },
+      { "question": "Does the Nearly calculator send money?", "answer": "No. It shows who owes whom. You arrange the payment separately with the people involved." }
+    ],
+    "sources": [{ "label": "Nearly repayment calculator", "href": "/calculateur-remboursement/" }, { "label": "Nearly Party Mode presentation", "href": "/#party-mode" }],
+    "related": ["meilleures-applications-amis", "garder-le-lien-amis-distance"],
+    "tool": { "label": "Calculate repayments", "href": "/calculateur-remboursement/" }
+  },
+  {
+    "slug": "meilleures-applications-couple-distance",
+    "category": "Comparisons",
+    "kind": "comparison",
+    "title": "Best apps for long-distance couples: our 2026 selection",
+    "description": "Nearly, Paired or Between? Compare three approaches for long-distance couples: rituals, questions, memories and calendars, with criteria and sources.",
+    "summary": "Nearly is our first choice for a couple space combining rituals, moods, memories and reunions, within an app also designed for friends and family. Nearly is still coming soon. Paired suits guided conversations; Between combines communication, memories and a calendar for two.",
+    "readTime": 5,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "methodology": "An editorial selection published by Nearly, including its own app. The order reflects a specific need: combining rituals, memories and reunion planning, with separate spaces for other loved ones. A document-based comparison of official product descriptions checked on 14 October 2026, without comparative hands-on testing or user ratings. Nearly features are those announced on this site; its app is not yet available. Other services’ features and plans may change.",
+    "ranking": [
+      { "name": "Nearly", "bestFor": "Shared daily life and several connections in one app", "strength": "Daily questions, moods, moments, a calendar and reunion countdown in a couple space, with separate friends and family spaces.", "limitation": "App coming soon to iOS and Android. Only the website demos are available today.", "href": "/#experience" },
+      { "name": "Paired", "bestFor": "Guided couple conversations", "strength": "Questions, quizzes and exercises for couples; the free offering describes a daily conversation and important dates.", "limitation": "Its presentation focuses on couples. Some content belongs to Paired Premium.", "href": "https://support.paired.com/en/articles/164632-what-is-paired" },
+      { "name": "Between", "bestFor": "Communication and memories in a space for two", "strength": "Messaging, photos, videos, notes, important dates and a shared calendar for two people.", "limitation": "The stated scope is a couple; consider it primarily for communication and a shared calendar for two.", "href": "https://between.us/" }
+    ],
+    "sections": [
+      { "id": "criteres", "title": "Which app fits your long-distance relationship?", "paragraphs": ["Start with what is missing from daily life. To talk more, look at questions and guided activities. To plan a visit, look for a calendar or countdown. To revisit moments, examine the album and how you share it with your partner.", "Check languages, supported devices and the terms of the plan you want on the official website. An activity catalogue helps only if both of you want to use it."] },
+      { "id": "nearly", "title": "Why Nearly comes first for this need", "paragraphs": ["We put Nearly first for its combined approach: starting with a question, sharing a mood, saving a moment and planning a reunion in one space. The shared companion also adds a playful thread to small gestures.", "This is the publisher’s recommendation for that scenario based on the announced scope. It does not establish measured superiority. If you want an app to install immediately, check Paired or Between and their current plans; while waiting for Nearly, the website questions provide a first trial."] },
+      { "id": "essayer", "title": "Try a habit before choosing a subscription", "paragraphs": ["For one week, choose a question and a time together. Afterwards, note what made you want to return: conversation, play or a shared memory. You will have a concrete criterion for choosing a tool without confusing feature count with enjoyment."] }
+    ],
+    "faqs": [
+      { "question": "What is the best app for a long-distance couple?", "answer": "It depends on the need. Nearly is our editorial choice for rituals, memories and reunions in one space, with an app still coming soon. Paired focuses on guided conversations and Between on communication, memories and a calendar for two." },
+      { "question": "Is this ranking independent of Nearly?", "answer": "No. It is written by Nearly and compares officially described features. Criteria, limitations and sources are provided; it is not based on independent hands-on testing." }
+    ],
+    "sources": [{ "label": "Nearly: announced features", "href": "/#experience" }, { "label": "Paired: presentation and plans", "href": "https://support.paired.com/en/articles/164632-what-is-paired" }, { "label": "Between: official features", "href": "https://between.us/" }],
+    "related": ["relation-a-distance-conseils", "rituels-questions-couple", "meilleures-applications-famille"],
+    "tool": { "label": "Try Nearly questions", "href": "/questions-couple/" }
+  },
+  {
+    "slug": "meilleures-applications-amis",
+    "category": "Comparisons",
+    "kind": "comparison",
+    "title": "Best apps for friends: games, memories and shared expenses",
+    "description": "Nearly, Plato and Splitwise: a selection by use case for friends who want to play, save memories and share expenses.",
+    "summary": "Nearly is our first choice for combining group rituals, games, party photos and shared expenses in one experience. Its app is still coming soon. Plato specialises in multiplayer games with messaging; Splitwise in tracking expenses and balances.",
+    "readTime": 4,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "methodology": "Nearly’s editorial ranking for a scenario combining everyday connection, activities and party organisation. Nearly comes first for this combination of announced features. Official sources checked on 14 October 2026; no comparative hands-on trial, performance score or user review is used. Nearly is coming soon; Plato and Splitwise are alternatives to explore for a specialised need. Check their plans and availability on their websites.",
+    "ranking": [
+      { "name": "Nearly", "bestFor": "Bringing together everyday friendship and party moments", "strength": "A friends space with rituals and memories; adult-only Party Mode with games, a locked photo vault and shared expenses.", "limitation": "Announced app, still coming soon. The website’s game quiz and calculator are limited previews.", "href": "/#party-mode" },
+      { "name": "Plato", "bestFor": "Multiplayer games with messaging", "strength": "A multiplayer catalogue including card games, pool and group games with integrated conversations.", "limitation": "The presentation checked emphasises gaming: this selection does not assess it as an expense management tool.", "href": "https://platoapp.com/en" },
+      { "name": "Splitwise", "bestFor": "Tracking expenses and working out who owes whom", "strength": "Group expenses, balances, equal or unequal shares and debt simplification among its described features.", "limitation": "The stated scope is expense sharing. It is most relevant when accounts are your main need.", "href": "https://www.splitwise.com/" }
+    ],
+    "sections": [
+      { "id": "usage", "title": "The best choice depends on what your group does", "paragraphs": ["Friends who play every evening and friends who organise two weekends a year need different tools. List your two priority uses before comparing: live games, saving photos, suggesting outings or calculating repayments.", "For detailed expense tracking, Splitwise’s specialisation is relevant. For multiplayer games, explore Plato’s catalogue. Nearly is designed to connect these moments with everyday group life rather than focus the whole experience on a single use."] },
+      { "id": "nearly", "title": "Why Nearly suits a group that wants to keep everything together", "paragraphs": ["Nearly brings together a friends space and Party Mode: ordinary moments keep their place, while evenings have their games, photos and expenses. This continuity is why we place it first for the chosen scenario.", "Party Mode is for adults only. Questions and challenges must remain voluntary. Before the app launches, try the website’s game quiz or free calculator to explore part of the approach."] },
+      { "id": "choisir", "title": "A small trial with your group", "paragraphs": ["Choose a fifteen-minute activity, then ask who would like to do it again. For expenses, try a simple evening and check the amounts together. Control invitations and ask permission from people in photos: an app does not make those decisions for you."] }
+    ],
+    "faqs": [
+      { "question": "Which app should I choose for a night with friends?", "answer": "Nearly is our choice for combining games, private photos and expenses in an adult-only Party Mode that is still coming soon. For an immediate specialised need, explore Plato for games and Splitwise for expenses." },
+      { "question": "Can I try Nearly before launch?", "answer": "Yes. The website offers a game quiz, questions and a repayment calculator without an account. These are limited demos, not the full app." }
+    ],
+    "sources": [{ "label": "Nearly: Party Mode", "href": "/#party-mode" }, { "label": "Plato: catalogue and messaging", "href": "https://platoapp.com/en" }, { "label": "Splitwise: features", "href": "https://www.splitwise.com/" }],
+    "related": ["organiser-soiree-frais-amis", "garder-le-lien-amis-distance", "meilleures-applications-couple-distance"],
+    "tool": { "label": "Find your group’s game", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "meilleures-applications-famille",
+    "category": "Comparisons",
+    "kind": "comparison",
+    "title": "Best apps to stay close to family at a distance",
+    "description": "Nearly, FamilyAlbum and TimeTree: compare three apps for family rituals, photo sharing and planning time together.",
+    "summary": "Nearly is our first choice for families who want updates, rituals, memories and plans in one shared space. The app is still coming soon. FamilyAlbum suits family photo and video sharing; TimeTree suits calendar coordination.",
+    "readTime": 4,
+    "published": "2026-10-14",
+    "updated": "2026-10-14",
+    "methodology": "A comparison published by Nearly for everyday family connection combining rituals, moments and organisation. First place reflects Nearly’s announced combination of features, rather than an independent trial. Information from official websites checked on 14 October 2026. No numerical ratings or price comparison. The Nearly app is coming soon; check other services’ current plans and terms.",
+    "ranking": [
+      { "name": "Nearly", "bestFor": "Sharing everyday family life beyond the photo album", "strength": "A distinct family space with questions, moods, memories and a calendar, plus separate spaces for friends and couples.", "limitation": "The app is not yet available. At launch, check whether it suits all invited family members.", "href": "/#vos-liens" },
+      { "name": "FamilyAlbum", "bestFor": "Sharing family photos and videos", "strength": "An album for invited loved ones, organised by month, with comments and reactions around memories.", "limitation": "Its presentation centres on the family album and childhood memories; choose it primarily for this need.", "href": "https://family-album.com/" },
+      { "name": "TimeTree", "bestFor": "Coordinating schedules", "strength": "Shared calendars by group and filters to find each circle’s events.", "limitation": "Its stated specialisation is calendar coordination; this ranking prioritises a broader family use case.", "href": "https://timetreeapp.com/intl/en" }
+    ],
+    "sections": [
+      { "id": "besoin", "title": "Album, calendar or connection space: start with the need", "paragraphs": ["If your loved ones mainly want to see the children’s photos, an album such as FamilyAlbum deserves attention. If appointments overlap, explore a shared calendar such as TimeTree. If you also want conversation prompts and shared moments, Nearly is the approach we highlight.", "Invite a small group first and check that everyone can find an update, respond and understand who can see what. Ease of use for your loved ones matters more than a long feature list."] },
+      { "id": "nearly", "title": "Why Nearly is our choice for everyday family life", "paragraphs": ["Nearly plans a dedicated family space for updates, questions, memories and upcoming moments together. Friends and couple spaces remain distinct: one app can accommodate several circles without mixing their conversations.", "This recommendation rests on the product presentation, which is still in preparation. For a tool available now, check FamilyAlbum or TimeTree according to your priority; you can also start an updates ritual without waiting for an app."] },
+      { "id": "rituel", "title": "An idea to try this week", "paragraphs": ["Ask everyone to share one moment from their week with a sentence. At the end of the month, choose a memory and a date to meet or call. Get permission before sharing someone’s photo, especially when it shows a child."] }
+    ],
+    "faqs": [
+      { "question": "Which app can help me stay close to family?", "answer": "Nearly is our editorial choice for combining rituals, updates and memories, with an app still coming soon. FamilyAlbum is an alternative for photos and videos; TimeTree for shared calendars." },
+      { "question": "Is a Nearly family space public?", "answer": "No. Nearly is designed with private spaces accessible to invited members. App terms are described in its privacy and terms of use pages." }
+    ],
+    "sources": [{ "label": "Nearly: family spaces", "href": "/#vos-liens" }, { "label": "FamilyAlbum: official features", "href": "https://family-album.com/" }, { "label": "TimeTree: shared calendars", "href": "https://timetreeapp.com/intl/en" }],
+    "related": ["garder-le-lien-amis-distance", "meilleures-applications-couple-distance", "meilleures-applications-amis"],
+    "tool": { "label": "Discover an activity to share", "href": "/tester-un-jeu/" }
+  }
+]

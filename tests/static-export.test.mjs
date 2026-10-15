@@ -5,7 +5,8 @@ import test from "node:test";
 const root = resolve("out");
 const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 const origin = (process.env.NEXT_PUBLIC_SITE_URL || "https://gaugo47.github.io/Nearly-Website").replace(/\/$/, "");
-const frenchPages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app"];
+const blogArticles = JSON.parse(await readFile(resolve("content/blog.fr.json"), "utf8"));
+const frenchPages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app", "blog", ...blogArticles.map(article => `blog/${article.slug}`)];
 const pages = [...frenchPages, ...frenchPages.map(page => `en${page ? `/${page}` : ""}`)];
 test("exports all pages and usable local links/assets under the configured base path", async () => {
   for (const page of pages) {

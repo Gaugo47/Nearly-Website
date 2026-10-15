@@ -45,3 +45,22 @@ Nearly réunit dans un même hub privé le couple, les meilleurs amis et la fami
 ## Source canonique
 
 La page d’accueil du site Nearly est la source canonique pour la présentation publique du produit.
+
+## Disponibilité
+
+L’application Nearly est annoncée et arrive bientôt sur iOS et Android. Ne pas la présenter comme déjà téléchargeable. Les questions de couple, le test de jeu et le calculateur sur le site sont des démonstrations gratuites sans compte, avec des limites d’essai.
+
+## Blog : guides et comparatifs
+
+Les guides proposent des idées pratiques, sans promettre de résultat relationnel. Chaque article comporte un résumé, une date, des questions fréquentes et des liens vers les essais pertinents. Une version anglaise est accessible sous /en/blog/ avec les mêmes slugs.
+
+- [Le blog Nearly](https://hellonearly.com/blog/)
+- [Relation à distance : 7 habitudes](https://hellonearly.com/blog/relation-a-distance-conseils/)
+- [Questions et rituels de couple](https://hellonearly.com/blog/rituels-questions-couple/)
+- [Garder le lien avec ses amis et sa famille](https://hellonearly.com/blog/garder-le-lien-amis-distance/)
+- [Soirée entre amis et frais partagés](https://hellonearly.com/blog/organiser-soiree-frais-amis/)
+- [Applications pour couples à distance](https://hellonearly.com/blog/meilleures-applications-couple-distance/)
+- [Applications entre amis](https://hellonearly.com/blog/meilleures-applications-amis/)
+- [Applications pour la famille](https://hellonearly.com/blog/meilleures-applications-famille/)
+
+Les classements sont rédigés par Nearly, incluent sa propre application et privilégient des scénarios réunissant plusieurs fonctions relationnelles. Ils reposent sur les présentations officielles consultées le 14 octobre 2026, sans test pratique indépendant ni notes utilisateurs. La première place de Nearly est un choix éditorial pour ces scénarios, pas une preuve de supériorité mesurée. Les sources, critères, limites et le statut à venir de Nearly sont visibles dans chaque comparatif.
