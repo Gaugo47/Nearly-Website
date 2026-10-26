@@ -6,7 +6,7 @@ import { dirname, relative, resolve } from "node:path";
 
 const root = resolve(".");
 const outputRoot = "app/(en)";
-const components = ["SiteNav", "SiteFooter", "LegalLayout", "RelationPreview", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard"];
+const components = ["SiteNav", "SiteFooter", "LegalLayout", "StoreRail", "HeroPhone", "FeatureTour", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard"];
 const pages = ["", "outils", "questions-couple", "tester-un-jeu", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", "blog/[slug]"];
 const targets = new Map([
   ["app/(fr)/layout.tsx", `${outputRoot}/layout.tsx`],
@@ -74,7 +74,7 @@ for (const [source, destination] of targets) {
     return `${prefix}${JSON.stringify(path)}`;
   });
   generated = generated.replaceAll('<LanguageSwitch language="fr"', '<LanguageSwitch language="en"')
-    .replaceAll('<html lang="fr">', '<html lang="en">')
+    .replaceAll('<html lang="fr"', '<html lang="en"')
     .replaceAll('"fr-FR"', '"en-GB"').replaceAll('"fr_FR"', '"en_GB"')
     .replaceAll('language: "fr"', 'language: "en"');
   if (source === "app/AppLegalSections.tsx") generated = generated.replaceAll("APP_TERMS.fr", "APP_TERMS.en");

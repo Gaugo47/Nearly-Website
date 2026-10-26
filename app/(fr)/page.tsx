@@ -4,33 +4,70 @@ import SiteNav from "../SiteNav";
 import SiteFooter from "../SiteFooter";
 import WaitlistForm from "../WaitlistForm";
 import IPhoneMockup from "../IPhoneMockup";
-import RelationPreview from "../RelationPreview";
+import StoreRail from "../StoreRail";
+import HeroPhone from "../HeroPhone";
+import FeatureTour from "../FeatureTour";
 
-const features = [
+
+// The English generator switches this to "en", so each page shows the store visuals in its own language.
+const store = { language: "fr" } as const;
+const storeVisual = (number: string) => sitePath(`/media/store/${store.language}/${number}.webp`);
+
+const tour = (file: string) => sitePath(`/media/tour/${store.language}/${file}.webp`);
+
+const tourSteps = [
   {
-    number: "01",
-    title: "Les rituels qui rapprochent",
+    key: "rituals",
+    label: "Rituels & jeux",
+    title: "Les rituels",
+    accent: "qui rapprochent.",
     text: "Un « ça va ? » qui devient une vraie réponse. Une question, une humeur, un petit défi à partager.",
-    image: "/media/app-rituels.jpg",
-    alt: "Écran Rituels et jeux de l’application Nearly",
-    className: "feature-card feature-card--lavender",
+    points: ["Une question du jour, chacun son tour", "Des questions pour aller plus loin", "Un calendrier partagé pour vos rendez-vous"],
+    screen: tour("rituals"),
+    screenAlt: "Écran Rituels & jeux de Nearly : mini-jeux, question du jour, questions et activité surprise",
+    pops: [
+      { src: tour("pop-daily"), alt: "Carte Question du jour de l’accueil : tout le monde a répondu, voir les réponses", className: "tour-pop--daily", width: 690, height: 500 },
+      { src: tour("pop-bucket"), alt: "Tuile Bucket list : vos projets à deux", className: "tour-pop--bucket", width: 332, height: 312 },
+    ],
   },
   {
-    number: "02",
-    title: "Les souvenirs qu’on ressort",
+    key: "moments",
+    label: "Moments",
+    title: "Les souvenirs",
+    accent: "qu’on ressort.",
     text: "La photo floue, le fou rire, la journée ensemble. Gardez les moments qui vous ressemblent.",
-    image: "/media/app-moments.jpg",
-    alt: "Album de moments partagé dans Nearly",
-    className: "feature-card feature-card--peach",
+    points: ["Un moment par jour, en double photo", "Vos souvenirs posés sur une carte", "Des réactions et des mots doux entre vous"],
+    screen: tour("moments"),
+    screenAlt: "Écran Moment du jour de Nearly : la carte des souvenirs et le journal des moments partagés",
+    pops: [
+      { src: tour("pop-flowers"), alt: "Moment double photo d’Alice à Paris : un bouquet de pivoines et son selfie", className: "tour-pop--flowers", width: 594, height: 976 },
+    ],
   },
   {
-    number: "03",
-    title: "Votre compagnon Mochi",
+    key: "mochi",
+    label: "Compagnon",
+    title: "Mochi grandit",
+    accent: "avec votre lien.",
     text: "Un drôle de compagnon adopté par votre petit monde. Mochi grandit au fil de vos attentions partagées.",
-    image: "/media/app-compagnon.jpg",
-    alt: "Compagnon virtuel Mochi dans Nearly",
-    className: "feature-card feature-card--violet",
+    points: ["Il gagne de l’XP à chaque attention", "Nourrir, câliner, débloquer des tenues", "Des objectifs doux, jamais des obligations"],
+    screen: tour("companion"),
+    screenAlt: "Écran Mochi de Nearly : le compagnon, son niveau et ses jauges",
+    pops: [
+      { src: tour("pop-checklist"), alt: "Carte Aujourd’hui pour Mochi : 3 attentions sur 4, encore une à faire", className: "tour-pop--checklist", width: 690, height: 716 },
+    ],
   },
+];
+
+const railVisuals = [
+  { src: storeVisual("02"), alt: "Tes proches, en direct : les proches posés sur un globe avec leur ville" },
+  { src: storeVisual("03"), alt: "Couple, amis, famille : un espace pour chacun, avec ses couleurs, ses rituels et ses membres" },
+  { src: storeVisual("04"), alt: "Widgets pour le couple, les amis et la famille sur l’écran d’accueil" },
+  { src: storeVisual("05"), alt: "Mochi grandit avec votre lien : le compagnon virtuel et ses jauges" },
+  { src: storeVisual("06"), alt: "Jouez ensemble, même à 1 000 km : la ludothèque des mini-jeux de Nearly" },
+  { src: storeVisual("07"), alt: "Party Mode, soirées légendaires : défis, « Je n’ai jamais » et statistiques de soirée" },
+  { src: storeVisual("08"), alt: "Spicy Mode, votre jardin secret : un espace privé pour le couple, toujours consenti" },
+  { src: storeVisual("09"), alt: "Tous vos plans au même endroit : le calendrier partagé et ses rappels" },
+  { src: storeVisual("10"), alt: "Vos moments sur la carte : les souvenirs posés sur un globe" },
 ];
 
 const faqs = [
@@ -99,48 +136,41 @@ export default function Home() {
 
       <SiteNav />
 
-      <section className="hero" id="top">
-        <div className="hero-orb hero-orb--one" />
-        <div className="hero-orb hero-orb--two" />
-        <div className="hero-copy">
-          <p className="eyebrow"><span /> Amis · Famille · Couple</p>
-          <h1>Les liens<br />qui comptent.<br /><em>Même de loin.</em></h1>
-          <p className="hero-lede">Vos amis, votre famille, votre couple. Un espace privé pour partager le quotidien, jouer et garder les moments qui vous rapprochent.</p>
-          <div className="hero-actions">
-            <a className="button button--primary hero-waitlist" href="#liste-attente">Rejoindre la liste d’attente <ArrowIcon /></a>
-            <a className="hero-secondary" href="#experience">Découvrir Nearly <span aria-hidden="true">→</span></a>
+      <section className="store-hero" id="top">
+        <div className="store-hero__copy">
+          <p className="store-chip"><span className="store-chip__dot" aria-hidden="true" /> Bientôt sur iOS &amp; Android</p>
+          <h1>Proches,<br /><span className="store-pill">même à distance.</span></h1>
+          <p className="store-hero__lede">Vos amis, votre famille, votre couple. Un espace privé pour partager le quotidien, jouer et garder les moments qui vous rapprochent.</p>
+          <div className="store-hero__actions">
+            <a className="store-button" href="#liste-attente">Rejoindre la liste d’attente <ArrowIcon /></a>
+            <a className="store-link" href="#vos-liens">Voir l’app <span aria-hidden="true">→</span></a>
           </div>
-          <p className="hero-availability"><span className="pulse" /> Bientôt sur iOS &amp; Android</p>
+          <ul className="store-spaces" aria-label="Les espaces Nearly">
+            <li className="store-spaces__couple">Couple</li>
+            <li className="store-spaces__friends">Amis</li>
+            <li className="store-spaces__family">Famille</li>
+          </ul>
         </div>
-        <RelationPreview />
+        <HeroPhone screen={sitePath(`/media/store/home-screen-${store.language}.webp`)} alt="Accueil couple de Nearly : Alice et Bob, niveau 5, compte à rebours des retrouvailles et question du jour" />
       </section>
 
       <nav className="showcase-index" aria-label="Explorer l’application"><span>Dans Nearly</span><a href="#vos-liens">Vos espaces</a><a href="#experience">Le quotidien</a><a href="#party-mode">Party</a><a href="#spicy">Spicy</a><a href="#securite">Confidentialité</a></nav>
 
-      <section className="relation-stories" id="vos-liens" aria-labelledby="relations-title">
-        <div className="relation-stories__heading"><p className="eyebrow"><span /> Tous ceux qui comptent</p><h2 id="relations-title">Trois façons d’être <em>nous.</em></h2></div>
-        <div className="relation-stories__grid">
-          <article className="relation-story relation-story--friends"><span className="relation-story__label">Entre amis</span><h3>« On se fait<br />un truc ? »</h3><p>Un défi pour rire, les souvenirs de la bande et une idée pour votre prochaine sortie.</p><span className="relation-story__doodle" aria-hidden="true">✳</span></article>
-          <article className="relation-story relation-story--family"><span className="relation-story__label">En famille</span><h3>« T’es bien<br />arrivé ? »</h3><p>La photo du dimanche, les nouvelles de chacun et les prochains moments ensemble.</p><span className="relation-story__doodle" aria-hidden="true">⌂</span></article>
-          <article className="relation-story relation-story--couple"><span className="relation-story__label">En couple</span><h3>« Encore cinq<br />petites minutes. »</h3><p>Les questions à deux, les petites attentions et le compte à rebours avant les retrouvailles.</p><span className="relation-story__doodle" aria-hidden="true">♡</span></article>
+      <section className="store-gallery" id="vos-liens" aria-labelledby="store-gallery-title">
+        <div className="store-gallery__heading">
+          <h2 id="store-gallery-title">Une app,<br /><span className="store-pill">tous vos liens.</span></h2>
+          <p>Couple, amis, famille : chaque espace a ses couleurs, ses jeux et ses souvenirs. Faites défiler pour découvrir Nearly.</p>
         </div>
-        <p className="relation-stories__footnote">Un même Nearly. Un espace à part pour chaque lien.</p>
+        <StoreRail visuals={railVisuals} />
       </section>
 
-      <section className="experience section" id="experience">
-        <div className="section-heading">
-          <p className="eyebrow"><span /> Dans chacun de vos espaces</p>
-          <h2>Les petits riens<br /><em>font les grands liens.</em></h2>
+      <section className="experience-tour" id="experience" aria-labelledby="experience-title">
+        <div className="experience-tour__heading">
+          <p className="store-chip store-chip--light"><span className="store-chip__dot" aria-hidden="true" /> Dans chacun de vos espaces</p>
+          <h2 id="experience-title">Les petits riens<br /><span className="store-pill">font les grands liens.</span></h2>
           <p>Questions, souvenirs et attentions partagées : les mêmes petites habitudes pour vos amis, votre famille et votre couple.</p>
         </div>
-        <div className="feature-grid">
-          {features.map(feature => (
-            <article className={feature.className} key={feature.title}>
-              <div className="feature-copy"><span className="feature-number">{feature.number}</span><h3>{feature.title}</h3><p>{feature.text}</p></div>
-              <IPhoneMockup className="feature-phone" src={feature.image} alt={feature.alt} />
-            </article>
-          ))}
-        </div>
+        <FeatureTour steps={tourSteps} />
       </section>
 
       <section className="gallery-band">

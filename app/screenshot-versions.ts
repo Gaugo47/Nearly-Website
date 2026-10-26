@@ -7,10 +7,10 @@ export const screenshotVersions: Record<string, string> = {
   "/media/app-compagnon.jpg": "d5731d988ac7",
   "/media/app-idees.jpg": "7b1bf94ce50d",
   "/media/app-moments.jpg": "e859a885642e",
-  "/media/app-party-expenses.jpg": "b3c99059314b",
+  "/media/app-party-expenses.jpg": "1857e3fdaece",
   "/media/app-rituels.jpg": "e8ef29363629",
   "/media/app-party.jpg": "910c7e0ac77d",
-  "/media/app-party-lab.jpg": "b74c6d47ee42",
+  "/media/app-party-lab.jpg": "3b7fb271cfbb",
   "/media/app-party-photos.png": "6fefbb4a8e3b",
   "/media/app-spicy-home.jpg": "0515066982ca",
   "/media/app-spicy-vault.jpg": "2a886a3f7ab3"

@@ -1,8 +1,13 @@
 import { pageAlternates } from "../language";
 import type { Metadata, Viewport } from "next";
+import { Caveat, Inter } from "next/font/google";
 import { siteUrl, sitePath, absoluteUrl } from "../site";
 import "../globals.css";
 import AnalyticsConsent from "../AnalyticsConsent";
+
+// Same typefaces as the App Store visuals, self-hosted at build time.
+const inter = Inter({ subsets: ["latin"], weight: ["500", "600", "700", "800", "900"], variable: "--font-inter", display: "swap" });
+const caveat = Caveat({ subsets: ["latin"], weight: ["600"], variable: "--font-caveat", display: "swap" });
 
 export const metadata: Metadata = {
     metadataBase: new URL(`${siteUrl}/`),
@@ -69,7 +74,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${inter.variable} ${caveat.variable}`}>
       <body><AnalyticsConsent>{children}</AnalyticsConsent></body>
     </html>
   );

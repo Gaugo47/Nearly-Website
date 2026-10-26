@@ -50,7 +50,7 @@ test("both languages expose matching pages, canonical URLs and alternate languag
 });
 test("exports public SEO and GitHub Pages assets", async () => {
   const html = await readFile(join(root, "index.html"), "utf8");
-  assert.match(html, /Tous ceux qui comptent/);
+  assert.match(html, /<h1>Proches,<br\/><span class="store-pill">même à distance\.<\/span><\/h1>/);
   assert.match(html, /SoftwareApplication/);
   assert.ok(html.includes(`${origin}/og.png`));
   const sitemap = await readFile(join(root, "sitemap.xml"), "utf8");
