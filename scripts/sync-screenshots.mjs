@@ -3,8 +3,9 @@ import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 
 const source = resolve(process.argv[2] || "work/iphone-captures");
-const screens = ["accueil", "amis", "famille", "carte", "compagnon", "idees", "moments", "party-expenses", "rituels", "party", "party-lab", "party-photos", "spicy-home", "spicy-vault"];
-const refreshed = screens.filter(screen => screen !== "party-photos");
+const screens = ["accueil", "amis", "famille", "carte", "compagnon", "idees", "moments", "party-expenses", "rituels", "party", "party-lab", "party-photos", "spicy-home", "spicy-vault", "spicy-games"];
+// Not native captures: party-photos is a reworked capture, spicy-games is rendered from the store visuals.
+const refreshed = screens.filter(screen => screen !== "party-photos" && screen !== "spicy-games");
 function imageSize(bytes) {
   if (bytes.readUInt16BE(0) !== 0xffd8) throw new Error("Expected a native JPEG capture");
   let offset = 2;

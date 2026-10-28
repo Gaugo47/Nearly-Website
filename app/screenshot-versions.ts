@@ -3,7 +3,7 @@ export const screenshotVersions: Record<string, string> = {
   "/media/app-accueil.jpg": "66d1253e91ae",
   "/media/app-amis.jpg": "d98eab8ae834",
   "/media/app-famille.jpg": "0a7c1b381bd2",
-  "/media/app-carte.jpg": "2b54f5abd92d",
+  "/media/app-carte.jpg": "909b176312ea",
   "/media/app-compagnon.jpg": "d5731d988ac7",
   "/media/app-idees.jpg": "7b1bf94ce50d",
   "/media/app-moments.jpg": "e859a885642e",
@@ -11,7 +11,8 @@ export const screenshotVersions: Record<string, string> = {
   "/media/app-rituels.jpg": "e8ef29363629",
   "/media/app-party.jpg": "910c7e0ac77d",
   "/media/app-party-lab.jpg": "3b7fb271cfbb",
-  "/media/app-party-photos.png": "6fefbb4a8e3b",
+  "/media/app-party-photos.png": "0e4d8992eddd",
   "/media/app-spicy-home.jpg": "0515066982ca",
-  "/media/app-spicy-vault.jpg": "2a886a3f7ab3"
+  "/media/app-spicy-vault.jpg": "2a886a3f7ab3",
+  "/media/app-spicy-games.jpg": "c6e638291a4c"
 };

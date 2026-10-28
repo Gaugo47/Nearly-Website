@@ -3,7 +3,7 @@ import { sitePath, absoluteUrl } from "../site";
 import SiteNav from "../SiteNav";
 import SiteFooter from "../SiteFooter";
 import WaitlistForm from "../WaitlistForm";
-import IPhoneMockup from "../IPhoneMockup";
+import PhoneShowcase from "../PhoneShowcase";
 import StoreRail from "../StoreRail";
 import HeroPhone from "../HeroPhone";
 import FeatureTour from "../FeatureTour";
@@ -68,6 +68,25 @@ const railVisuals = [
   { src: storeVisual("08"), alt: "Spicy Mode, votre jardin secret : un espace privé pour le couple, toujours consenti" },
   { src: storeVisual("09"), alt: "Tous vos plans au même endroit : le calendrier partagé et ses rappels" },
   { src: storeVisual("10"), alt: "Vos moments sur la carte : les souvenirs posés sur un globe" },
+];
+
+// The two-player games of Spicy, as the app's rituals name them. Suggestive, never explicit: the
+// positions wheel stays in the app.
+const spicyIcons = {
+  flame: <path d="M12 3c1 3.6 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2.2 1.1-3.6 2.3-4.5.1 1.8.9 2.7 1.8 3.1C11 9 11 6 12 3z" />,
+  swap: <path d="M7 7h11l-3-3M17 17H6l3 3" />,
+  chat: <path d="M5 5h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM19.5 9.5A2 2 0 0 1 21 11.4V16a2 2 0 0 1-2 2v2.5l-3-2.5h-4" />,
+  bookmark: <path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z" />,
+  list: <path d="M9 7h11M9 12h11M9 17h11M4 7l1 1 2-2M4 12l1 1 2-2M4 17h2" />,
+  hourglass: <path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9" />,
+};
+const spicyGames = [
+  { icon: spicyIcons.flame, title: "Question sans filtre", text: "Une réponse chacun, révélée seulement quand vous avez répondu tous les deux." },
+  { icon: spicyIcons.swap, title: "Défi ou confidence", text: "Oser ou se livrer, en trois intensités. Un joker permet toujours de passer." },
+  { icon: spicyIcons.chat, title: "Confidences épicées", text: "Vingt questions pour vous découvrir autrement, toujours consenties." },
+  { icon: spicyIcons.bookmark, title: "Ce qui fait craquer", text: "Vos envies, vos limites et les petits détails à ne pas oublier." },
+  { icon: spicyIcons.list, title: "Liste des envies", text: "Oui, peut-être, pas maintenant : chacun avance à son rythme." },
+  { icon: spicyIcons.hourglass, title: "Message à ouvrir plus tard", text: "Un mot glissé pour plus tard, pour faire durer le suspense." },
 ];
 
 const faqs = [
@@ -179,11 +198,20 @@ export default function Home() {
           <h2>« On se fait<br /><em>un truc ? »</em></h2>
           <p className="gallery-intro">Un dîner à deux, un week-end en bande, un déjeuner en famille. Trouvez une idée, préparez les retrouvailles et gardez vos lieux préférés.</p>
         </div>
-        <div className="phone-fan" aria-label="Galerie d’écrans Nearly">
-          <IPhoneMockup className="fan-phone fan-phone--left" src="/media/app-carte.jpg" alt="Carte des proches Nearly" />
-          <IPhoneMockup className="fan-phone fan-phone--center" src="/media/app-idees.jpg" alt="Idées personnalisées dans Nearly" />
-          <IPhoneMockup className="fan-phone fan-phone--right" src="/media/app-amis.jpg" alt="Accueil de l’espace amis La bande dans Nearly" />
-        </div>
+        <PhoneShowcase label="Galerie d’écrans Nearly" screens={[
+          { src: "/media/app-carte.jpg", alt: "Carte des proches Nearly", label: "En direct", card: { label: "Maya · en direct", lead: "/media/store/card-maya.webp", round: true, route: ["work", "home"], steps: [
+            { title: "En route vers la maison", detail: "32 km/h · depuis le travail", progress: .58 },
+            { title: "Arrivée à la maison", detail: "Partagé avec La bande", progress: 1 },
+          ] } },
+          { src: "/media/app-idees.jpg", alt: "Idées personnalisées dans Nearly", label: "Idées", card: { label: "Alice & Bob · agenda", lead: "/media/store/nearly-icon-96.webp", people: ["/media/store/card-alice.webp", "/media/store/card-bob.webp"], steps: [
+            { title: "Alice propose « Votre série à vous »", detail: "Samedi à 21:00 · en attente de Bob", marks: ["✓", "…"] },
+            { title: "Bob a accepté", detail: "Ajouté à votre agenda partagé", marks: ["✓", "✓"] },
+          ] } },
+          { src: "/media/app-amis.jpg", alt: "Accueil de l’espace amis La bande dans Nearly", label: "La bande", card: { label: "Question du jour", lead: "/media/store/nearly-icon-96.webp", people: ["/media/store/card-maya.webp", "/media/store/card-camille.webp", "/media/store/card-leo.webp", "/media/store/card-alice.webp"], steps: [
+            { title: "2 réponses sur 4", detail: "Réponds pour découvrir les leurs", marks: ["✓", "✓", "", ""] },
+            { title: "Léo vient de répondre", detail: "Il ne manque plus que toi", marks: ["✓", "✓", "✓", ""] },
+          ] } },
+        ]} />
       </section>
 
       <section className="mode-intro" aria-labelledby="modes-title"><p className="eyebrow"><span /> Les sous-modes Nearly</p><h2 id="modes-title">À chaque moment,<br /><em>son ambiance.</em></h2><p>Le quotidien dans vos espaces. Les soirées dans Party. La complicité à deux dans Spicy.</p></section>
@@ -195,11 +223,20 @@ export default function Home() {
           <p className="party-intro">Des jeux pour lancer l’ambiance, un coffre pour les photos et des comptes faciles à partager.</p>
           <div className="party-features"><div><span>01</span><strong>Party Lab</strong><p>Jeux et défis pour lancer la soirée avec votre groupe.</p></div><div><span>02</span><strong>Photos de soirée</strong><p>Un coffre verrouillé pour les souvenirs de la bande.</p></div><div id="frais-partages"><span>03</span><strong>Frais partagés</strong><p>Ajoutez les dépenses et retrouvez qui rembourse qui.</p></div></div>
         </div>
-        <div className="party-devices" aria-label="Aperçu du Party Mode de Nearly pour les groupes d’amis">
-          <figure className="party-device party-device--lab"><IPhoneMockup className="party-screen" src="/media/app-party-lab.jpg" alt="Jeux et défis du Party Lab de Nearly" /><figcaption>Party Lab</figcaption></figure>
-          <figure className="party-device party-device--photos"><IPhoneMockup className="party-screen" src="/media/app-party-photos.png" alt="Coffre de photos privées d’une soirée entre amis dans Nearly" /><figcaption>Coffre photo</figcaption></figure>
-          <figure className="party-device party-device--expenses"><IPhoneMockup className="party-screen" src="/media/app-party-expenses.jpg" alt="Répartition des frais partagés entre amis dans Nearly" /><figcaption>Frais partagés</figcaption></figure>
-        </div>
+        <PhoneShowcase label="Aperçu du Party Mode de Nearly pour les groupes d’amis" screens={[
+          { src: "/media/app-party-lab.jpg", alt: "Jeux et défis du Party Lab de Nearly", label: "Party Lab", card: { label: "Party Lab · classement", lead: "/media/store/nearly-icon-96.webp", people: ["/media/store/card-maya.webp", "/media/store/card-camille.webp", "/media/store/card-leo.webp", "/media/store/card-alice.webp"], steps: [
+            { title: "Léo prend 1 point", detail: "Il l’a déjà fait, évidemment", marks: ["2", "1", "3", "1"] },
+            { title: "Léo mène la soirée", detail: "Maya et Camille le talonnent", marks: ["3", "2", "4", "1"] },
+          ] } },
+          { src: "/media/app-party-photos.png", alt: "Coffre de photos privées d’une soirée entre amis dans Nearly", label: "Coffre photo", card: { label: "Coffre de soirée", lead: "/media/store/card-leo.webp", round: true, photos: ["/media/store/vault-1.webp", "/media/store/vault-2.webp", "/media/store/vault-3.webp"], steps: [
+            { title: "Léo a ajouté 12 photos", detail: "Visibles après déverrouillage", locked: true },
+            { title: "Coffre déverrouillé", detail: "Les souvenirs d’hier soir s’affichent", locked: false },
+          ] } },
+          { src: "/media/app-party-expenses.jpg", alt: "Répartition des frais partagés entre amis dans Nearly", label: "Frais partagés", card: { label: "Frais · 120,00 €", lead: "/media/store/card-camille.webp", round: true, route: ["coins", "check"], steps: [
+            { title: "Camille t’a remboursé", detail: "40,00 € · reste 80,00 €", progress: .34 },
+            { title: "Léo t’a remboursé", detail: "40,00 € · reste 40,00 €", progress: .67 },
+          ] } },
+        ]} />
       </section>
 
       <section className="spicy" id="spicy" aria-labelledby="spicy-title">
@@ -209,10 +246,34 @@ export default function Home() {
           <p className="spicy-intro">Un espace intime qui s’ouvre lorsque vous êtes tous les deux d’accord. Vos photos restent dans un coffre protégé par code.</p>
           <div className="spicy-principles"><div><span>01</span><strong>À deux, d’accord</strong><p>Un mode réservé aux adultes, activé avec un consentement partagé.</p></div><div><span>02</span><strong>Un coffre privé</strong><p>Vos photos restent protégées par code, avec un accès temporaire.</p></div><div><span>03</span><strong>Votre rythme</strong><p>Le droit de passer ou de quitter le mode, toujours.</p></div></div>
         </div>
-        <div className="spicy-visual" aria-label="Aperçu du mode Spicy privé de Nearly">
-          <div className="spicy-glow" />
-          <IPhoneMockup className="spicy-phone spicy-phone--vault" src="/media/app-spicy-vault.jpg" alt="Coffre privé du mode Spicy protégé par code secret" />
-          <IPhoneMockup className="spicy-phone spicy-phone--home" src="/media/app-spicy-home.jpg" alt="Accueil consenti du mode Spicy de Nearly" />
+        <PhoneShowcase label="Aperçu du mode Spicy privé de Nearly" screens={[
+          { src: "/media/app-spicy-home.jpg", alt: "Accueil consenti du mode Spicy de Nearly", label: "Votre antre", card: { label: "Spicy · tension du jour", lead: "/media/store/nearly-icon-96.webp", people: ["/media/store/card-alice.webp", "/media/store/card-bob.webp"], steps: [
+            { title: "Bob a choisi son emoji", detail: "Choisis le tien pour voir le sien", marks: ["…", "🔒"] },
+            { title: "Réponses révélées", detail: "Vous l’avez choisi tous les deux", marks: ["🔥", "🔥"] },
+          ] } },
+          { src: "/media/app-spicy-games.jpg", alt: "Jeux à deux du mode Spicy : question sans filtre, confidences et défis", label: "Jeux", card: { label: "Défi ou confidence", lead: "/media/store/nearly-icon-96.webp", people: ["/media/store/card-alice.webp", "/media/store/card-bob.webp"], steps: [
+            { title: "Bob a choisi d’oser", detail: "Intensité franche · à ton tour", marks: ["…", "✓"] },
+            { title: "Défi relevé à deux", detail: "Il vous reste un joker chacun", marks: ["✓", "✓"] },
+          ] } },
+          { src: "/media/app-spicy-vault.jpg", alt: "Coffre privé du mode Spicy protégé par code secret", label: "Coffre privé", card: { label: "Spicy · coffre privé", lead: "/media/store/nearly-icon-96.webp", route: ["unlock", "lock"], steps: [
+            { title: "Coffre ouvert", detail: "Il se referme seul au bout de 5 minutes", progress: .3 },
+            { title: "Coffre refermé", detail: "Le code est de nouveau demandé", progress: 1 },
+          ] } },
+        ]} />
+        <div className="spicy-games">
+          <div className="spicy-games__heading">
+            <h3 id="spicy-games-title">Dans votre antre</h3>
+            <p>Des jeux à deux pour faire monter la tension, sans jamais rien forcer.</p>
+          </div>
+          <ul>
+            {spicyGames.map(game => (
+              <li key={game.title}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">{game.icon}</svg>
+                <strong>{game.title}</strong>
+                <p>{game.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

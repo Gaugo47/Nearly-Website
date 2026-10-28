@@ -6,7 +6,7 @@ import { dirname, relative, resolve } from "node:path";
 
 const root = resolve(".");
 const outputRoot = "app/(en)";
-const components = ["SiteNav", "SiteFooter", "LegalLayout", "StoreRail", "HeroPhone", "FeatureTour", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard"];
+const components = ["SiteNav", "SiteFooter", "LegalLayout", "StoreRail", "HeroPhone", "FeatureTour", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard", "PhoneShowcase"];
 const pages = ["", "outils", "questions-couple", "tester-un-jeu", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", "blog/[slug]"];
 const targets = new Map([
   ["app/(fr)/layout.tsx", `${outputRoot}/layout.tsx`],
