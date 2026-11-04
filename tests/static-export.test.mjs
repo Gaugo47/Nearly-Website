@@ -59,6 +59,11 @@ test("exports public SEO and GitHub Pages assets", async () => {
   await stat(join(root, ".nojekyll"));
   // AdMob reads this from the developer website listed in the stores.
   assert.match(await readFile(join(root, "app-ads.txt"), "utf8"), /^google\.com, pub-7432159492130512, DIRECT, f08c47fec0942fa0$/m);
+  // iOS and Android read these to open invite links straight in the app.
+  const aasa = JSON.parse(await readFile(join(root, ".well-known", "apple-app-site-association"), "utf8"));
+  assert.deepEqual(aasa.applinks.details[0].appIDs, ["APCGNQNUQS.com.nearlyapp.nearlyapp"]);
+  const assetLinks = JSON.parse(await readFile(join(root, ".well-known", "assetlinks.json"), "utf8"));
+  assert.equal(assetLinks[0].target.package_name, "com.nearlyapp.nearlyapp");
   await stat(join(root, "404.html"));
 });
 test("does not preload or execute the analytics beacon before visitor consent", async () => {

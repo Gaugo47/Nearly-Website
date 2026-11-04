@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.nearlyapp.nearlyapp",
+      "sha256_cert_fingerprints": ["59:67:37:6F:97:BF:5A:4C:21:35:81:FE:EB:62:6C:67:D2:20:4C:50:F6:03:16:97:C1:EF:5B:15:38:7B:0A:DD"]
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["APCGNQNUQS.com.nearlyapp.nearlyapp"],
+        "components": [
+          { "/": "/rejoindre", "comment": "Invite link, French" },
+          { "/": "/rejoindre/*" },
+          { "/": "/en/rejoindre", "comment": "Invite link, English" },
+          { "/": "/en/rejoindre/*" }
+        ]
+      }
+    ]
+  }
+}
