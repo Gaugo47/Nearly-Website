@@ -44,7 +44,7 @@ Références : [export statique Next.js](https://nextjs.org/docs/app/guides/stat
 
 ### Blog et référencement
 
-Le blog `/blog/` propose quatre guides (relations à distance, questions de couple, amis et famille, soirées et frais) et trois comparatifs par usage. Les articles sont stockés dans `content/blog.fr.json` et `content/blog.en.json`, avec une liste commune de routes dans `app/blog-slugs.ts`. Ajouter chaque nouveau slug à cette liste et fournir les deux versions ; les pages dynamiques sont exportées statiquement. Les libellés du gabarit suivent le catalogue `translations/en.json`.
+Le blog `/blog/` propose des guides sur les relations à distance, les moments à partager et les frais entre amis, ainsi que trois comparatifs par usage. Les articles sont stockés dans `content/blog.fr.json` et `content/blog.en.json`, avec une liste commune de routes dans `app/blog-slugs.ts`. Ajouter chaque nouveau slug à cette liste et fournir les deux versions. Les pages dynamiques sont exportées statiquement. Les libellés du gabarit suivent le catalogue `translations/en.json`.
 
 Chaque article comprend des métadonnées propres, une URL canonique et ses alternatives FR/EN, un résumé, un sommaire, des liens internes, une FAQ et des données structurées `BlogPosting`, `BreadcrumbList`, `FAQPage` et, pour les comparatifs, `ItemList`. Les routes sont incluses dans le sitemap et les guides sont référencés dans `public/llms.txt`. Ces éléments facilitent l’exploration sans garantir un classement ou une citation par un moteur.
 

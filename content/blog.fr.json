@@ -23,7 +23,7 @@
       { "question": "Que faire ensemble quand on manque de sujets de conversation ?", "answer": "Partez d’un souvenir, essayez une question ouverte ou proposez une activité courte, comme cuisiner la même recette. Un appel peut aussi être agréable sans conversation permanente." }
     ],
     "sources": [{ "label": "Nearly : espaces, rituels et retrouvailles", "href": "/#experience" }],
-    "related": ["rituels-questions-couple", "meilleures-applications-couple-distance", "garder-le-lien-amis-distance"],
+    "related": ["rituels-questions-couple", "meilleures-applications-couple-distance", "idees-rendez-vous-couple-distance"],
     "tool": { "label": "Essayer une question à deux", "href": "/questions-couple/" }
   },
   {
@@ -71,7 +71,7 @@
       { "question": "Nearly s’adresse-t-il uniquement aux couples ?", "answer": "Non. Nearly est conçu pour les couples, les amis et les familles, avec un espace privé distinct pour chaque lien." }
     ],
     "sources": [{ "label": "Nearly : espaces amis, famille et couple", "href": "/#vos-liens" }],
-    "related": ["meilleures-applications-famille", "meilleures-applications-amis", "organiser-soiree-frais-amis"],
+    "related": ["meilleures-applications-famille", "jeux-a-distance-entre-amis", "album-photo-famille-prive"],
     "tool": { "label": "Trouver une activité à partager", "href": "/tester-un-jeu/" }
   },
   {
@@ -95,7 +95,7 @@
       { "question": "Le calculateur Nearly envoie-t-il de l’argent ?", "answer": "Non. Il indique qui rembourse qui. Vous organisez ensuite le paiement séparément avec les personnes concernées." }
     ],
     "sources": [{ "label": "Calculateur de remboursement Nearly", "href": "/calculateur-remboursement/" }, { "label": "Présentation du Party Mode Nearly", "href": "/#party-mode" }],
-    "related": ["meilleures-applications-amis", "garder-le-lien-amis-distance"],
+    "related": ["meilleures-applications-amis", "garder-le-lien-amis-distance", "partager-frais-week-end-entre-amis"],
     "tool": { "label": "Calculer les remboursements", "href": "/calculateur-remboursement/" }
   },
   {
@@ -184,5 +184,164 @@
     "sources": [{ "label": "Nearly : espaces familiaux", "href": "/#vos-liens" }, { "label": "FamilyAlbum : fonctionnalités officielles", "href": "https://family-album.com/" }, { "label": "TimeTree : calendriers partagés", "href": "https://timetreeapp.com/intl/en" }],
     "related": ["garder-le-lien-amis-distance", "meilleures-applications-couple-distance", "meilleures-applications-amis"],
     "tool": { "label": "Découvrir une activité à partager", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "idees-rendez-vous-couple-distance",
+    "category": "Couple à distance",
+    "kind": "guide",
+    "title": "6 idées de rendez-vous à distance à faire en couple",
+    "description": "Choisissez une activité à deux selon votre temps et votre énergie : quiz photo, balade audio, dîner, mini-film ou rendez-vous en différé.",
+    "summary": "Pour un rendez-vous à distance, choisissez une activité et une durée avant de vous appeler. En 15 minutes, essayez un quiz photo ou une question à deux. Si vos horaires se croisent peu, échangez des messages vocaux autour du même thème et répondez quand vous êtes disponibles.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "quinze-minutes",
+        "title": "Deux rendez-vous de 15 minutes pour un soir de semaine",
+        "paragraphs": ["Un soir où vous avez peu de temps, convenez d’une heure de fin et choisissez une activité que vous pouvez lancer depuis votre téléphone."],
+        "bullets": ["Le quiz des trois photos. Chacun choisit trois images prises dans la semaine. L’autre essaie de deviner où elles ont été prises ou ce qui s’est passé juste après. Gardez la dernière pour raconter une anecdote.", "Une question et une relance. Demandez « Quel détail de ta journée tu aurais aimé que je voie ? » Chacun répond, puis l’autre pose une question sur un détail du récit. Vous pouvez terminer en choisissant la prochaine question."]
+      },
+      {
+        "id": "trente-minutes",
+        "title": "Deux idées de rendez-vous d’une demi-heure",
+        "paragraphs": ["Choisissez le thème à l’avance et gardez la préparation légère. Un dîner peut commencer avec ce qui est déjà dans le placard."],
+        "bullets": ["Le dîner à ingrédient commun. Choisissez un ingrédient que vous avez tous les deux, cuisinez chacun quelque chose de différent et retrouvez-vous en visio pour goûter. Montrez vos assiettes et échangez une idée pour la prochaine fois.", "Le mini-ciné. Choisissez un court métrage d’une dizaine de minutes que vous pouvez tous les deux regarder. Lancez-le après un compte à rebours, puis comparez la scène que chacun a retenue."]
+      },
+      {
+        "id": "en-differe",
+        "title": "Deux activités en différé quand vos horaires se croisent peu",
+        "paragraphs": ["Fixez un délai qui vous convient à tous les deux, par exemple dimanche soir. Chacun peut participer à son rythme."],
+        "bullets": ["La balade audio. Pendant une sortie, enregistrez trente secondes d’ambiance et racontez ce qui se passe autour de vous. L’autre répond depuis un lieu de son choix.", "La carte postale de demain. Envoyez une photo et une phrase à lire au réveil. Donnez-vous un thème, comme « un endroit où j’aimerais t’emmener », et découvrez les deux réponses le lendemain."]
+      },
+      {
+        "id": "invitation",
+        "title": "Une invitation à envoyer pour passer à l’action",
+        "paragraphs": ["« Ça te dit un quiz photo jeudi à 20 h chez toi ? On se garde 15 minutes et chacun apporte trois photos de sa semaine. Si jeudi est trop chargé, on se les envoie samedi. »", "Si vous vivez dans deux fuseaux différents, écrivez les deux heures locales dans l’invitation. Lors du prochain rendez-vous, laissez l’autre choisir l’activité."]
+      }
+    ],
+    "faqs": [
+      { "question": "Que faire en couple à distance sans télécharger d’application ?", "answer": "Essayez le quiz des trois photos ou le dîner à ingrédient commun avec votre messagerie habituelle. Le site Nearly propose aussi des questions à deux accessibles gratuitement dans un navigateur." },
+      { "question": "Quel rendez-vous à distance organiser avec un décalage horaire ?", "answer": "Si vos disponibilités se croisent peu, choisissez une balade audio ou une carte postale en photo à partager avant une date commune. Chacun répond au moment qui lui convient." }
+    ],
+    "sources": [{ "label": "Nearly — Le générateur de questions de couple", "href": "/questions-couple/" }],
+    "related": ["relation-a-distance-conseils", "rituels-questions-couple"],
+    "tool": { "label": "Piocher une question pour votre prochain rendez-vous", "href": "/questions-couple/" }
+  },
+  {
+    "slug": "jeux-a-distance-entre-amis",
+    "category": "Entre amis",
+    "kind": "guide",
+    "title": "5 jeux à distance entre amis, en visio ou par messages",
+    "description": "Des règles prêtes à jouer pour lancer une soirée à distance entre amis, avec trois jeux en appel et deux activités à faire dans la conversation du groupe.",
+    "summary": "Pour jouer à distance entre amis, lancez un mot interdit, un dessin à deviner ou une chasse aux objets pendant un appel. Si le groupe est disponible à des heures différentes, faites un quiz photo ou inventez des légendes dans votre conversation. Les cinq formats se jouent sans installer de jeu.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "en-appel",
+        "title": "Trois jeux à lancer pendant un appel",
+        "paragraphs": ["Pour un groupe de trois à six, faites un tour d’essai pour que chacun comprenne la règle. Ensuite, comptez les points si la bande en a envie."],
+        "bullets": ["Mot interdit · 10 minutes. Faites deviner « parapluie » en trente secondes sans dire « pluie », « ouvrir » ni « manche ». Celui qui trouve propose le mot suivant. Ce jeu fonctionne aussi en audio.", "Dessin minute · 15 minutes. Dessinez « un chat dans une valise » sur une feuille et montrez-la à la caméra. Les autres ont une minute pour deviner. Si vous êtes nombreux, notez vos réponses dans le chat et envoyez-les au signal.", "Chasse aux objets · 15 minutes. Donnez un thème comme « un objet qui a déjà voyagé ». Laissez une minute pour le trouver, puis trente secondes à chacun pour expliquer son choix. On peut aussi le décrire de mémoire."]
+      },
+      {
+        "id": "par-messages",
+        "title": "Deux jeux à faire dans le groupe de discussion",
+        "paragraphs": ["Prévoyez une heure de révélation, par exemple dimanche à 18 h, pour que les personnes qui découvrent la consigne plus tard puissent aussi jouer."],
+        "bullets": ["Le détail mystère. Postez un gros plan d’un objet courant. Chacun envoie une hypothèse en privé à la personne qui a pris la photo. À l’heure prévue, elle publie l’image entière et révèle les bonnes réponses.", "La légende improvisée. Partagez une photo d’objet, de paysage ou d’animal. Chacun propose une légende en une ligne. Au moment de la révélation, lisez-les à la suite et votez pour celle que vous aimeriez voir sous la photo."]
+      },
+      {
+        "id": "programme",
+        "title": "Un programme de 25 minutes pour une première soirée",
+        "paragraphs": ["Commencez par cinq minutes pour accueillir tout le monde. Faites ensuite dix minutes de mot interdit, puis dix minutes de dessin. Donnez dès le départ l’heure de fin, surtout si plusieurs personnes travaillent le lendemain.", "Si la connexion coupe souvent, gardez l’audio et utilisez le chat pour les indices. À la fin, lancez un détail mystère pour que les absents puissent rejoindre la partie dans la semaine."]
+      }
+    ],
+    "faqs": [
+      { "question": "À quel jeu jouer entre amis à distance sans caméra ?", "answer": "Essayez le mot interdit en appel audio. Une personne décrit un mot sans prononcer trois termes associés et les autres ont trente secondes pour le deviner." },
+      { "question": "Quel jeu lancer dans un groupe qui répond à des heures différentes ?", "answer": "Publiez un détail mystère. Donnez à chacun jusqu’au lendemain pour envoyer une réponse en privé, puis publiez la solution dans le groupe." }
+    ],
+    "sources": [{ "label": "Nearly — Le test pour trouver un jeu à deux ou en groupe", "href": "/tester-un-jeu/" }],
+    "related": ["garder-le-lien-amis-distance", "organiser-soiree-frais-amis", "meilleures-applications-amis"],
+    "tool": { "label": "Trouver un autre jeu pour votre groupe", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "album-photo-famille-prive",
+    "category": "En famille",
+    "kind": "guide",
+    "title": "Créer un album photo de famille privé et facile à retrouver",
+    "description": "Choisissez qui peut voir et ajouter des photos, trouvez un classement simple et lancez un album familial que chacun saura ouvrir.",
+    "summary": "Pour créer un album photo de famille privé, choisissez un espace accessible sur invitation et vérifiez ses réglages depuis un compte invité. Commencez par dix photos légendées, puis gardez un classement simple par mois ou événement. Convenez ensemble des règles de partage, surtout pour les photos d’enfants.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "acces",
+        "title": "Choisir qui peut ouvrir l’album et ajouter des photos",
+        "paragraphs": ["Commencez avec quelques proches. Désignez une personne qui gère les invitations et décidez qui peut contribuer. Si l’outil le permet, préférez des invitations nominatives à un lien accessible à quiconque le reçoit.", "Faites le test avec une photo sans enjeu. Demandez à un proche d’ouvrir l’album depuis son téléphone et de vous dire ce qu’il peut voir, ajouter ou télécharger. Essayez aussi le lien depuis un navigateur sans compte connecté pour vérifier si un visiteur peut y accéder."]
+      },
+      {
+        "id": "classement",
+        "title": "Un classement qui marche avec dix ou cent photos",
+        "paragraphs": ["Si vous partagez des scènes du quotidien, regroupez-les par mois, par exemple « Novembre 2026 ». Pour des retrouvailles, choisissez plutôt le nom du moment, comme « Déjeuner chez Mamie ». Gardez un seul mode de classement principal.", "Ajoutez une phrase qu’un proche absent pourrait comprendre. « Le premier gâteau de Léa » situe mieux le souvenir que le nom de fichier de la photo. Avant d’ajouter une rafale de dix images, gardez-en une ou deux qui racontent le moment."]
+      },
+      {
+        "id": "photos-enfants",
+        "title": "Poser les règles avant de partager des photos d’enfants",
+        "paragraphs": ["La CNIL recommande de privilégier les échanges privés pour les photos d’enfants et de demander l’accord de l’enfant et de l’autre parent avant une publication sur les réseaux sociaux. Dans l’album familial, convenez que les photos restent dans le cercle et demandez aux proches de solliciter votre accord avant de les retransmettre.", "Si une photo gêne quelqu’un, donnez-lui un moyen simple de demander son retrait. Vérifiez aussi ce que montre l’arrière-plan, comme une adresse ou le nom de l’école, avant d’ajouter une image."]
+      },
+      {
+        "id": "premiere-semaine",
+        "title": "Lancer l’album en une semaine",
+        "paragraphs": ["Le premier jour, ajoutez une dizaine de photos et invitez deux proches. Demandez à la personne la moins à l’aise avec l’outil de retrouver une image et de vous dire où elle a hésité. Corrigez le classement ou envoyez une consigne courte avant d’inviter le reste de la famille.", "À la fin de la semaine, proposez à chacun d’ajouter une photo avec une phrase. Si une personne préfère vous envoyer sa photo en privé, demandez-lui si elle souhaite que vous l’ajoutiez pour elle. Pour les images auxquelles vous tenez le plus, gardez une copie en dehors de l’album partagé."]
+      }
+    ],
+    "faqs": [
+      { "question": "Comment partager des photos de famille sans les rendre publiques ?", "answer": "Créez un album réservé aux personnes invitées, désactivez le lien public si l’outil le propose et vérifiez les accès depuis une session déconnectée. Demandez aux membres de vous consulter avant de retransmettre une photo." },
+      { "question": "Comment aider les grands-parents à retrouver les photos de famille ?", "answer": "Testez l’ouverture sur leur appareil et aidez-les à enregistrer l’accès à l’album. Utilisez un classement par mois ou événement et ajoutez une courte légende aux photos importantes." }
+    ],
+    "sources": [
+      { "label": "CNIL — Partage de photos et vidéos de votre enfant sur les réseaux sociaux", "href": "https://www.cnil.fr/fr/partage-de-photos-et-videos-de-votre-enfant-sur-les-reseaux-sociaux-quels-sont-les-risques" },
+      { "label": "Nearly — Les espaces pour la famille, les amis et le couple", "href": "/#vos-liens" }
+    ],
+    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille"],
+    "tool": { "label": "Découvrir les outils gratuits de Nearly", "href": "/outils/" }
+  },
+  {
+    "slug": "partager-frais-week-end-entre-amis",
+    "category": "Entre amis",
+    "kind": "guide",
+    "title": "Comment partager les frais d’un week-end entre amis ?",
+    "description": "Un exemple à quatre pour répartir le logement, les courses et une activité réservée à deux personnes, puis calculer les remboursements.",
+    "summary": "Pour partager les frais d’un week-end, notez chaque montant, la personne qui l’a avancé et les personnes concernées. Divisez chaque dépense entre ses participants, puis comparez ce que chacun a payé à ce qu’il doit. Les personnes qui ont avancé moins que leur part remboursent celles qui ont avancé davantage.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "accord",
+        "title": "Se mettre d’accord avant de réserver",
+        "paragraphs": ["Annoncez le coût du logement par personne et demandez à chacun de confirmer avant de verser un acompte. Décidez aussi si le logement sera réparti à parts égales ou selon le nombre de nuits. Le bon moment pour en parler, c’est quand tout le monde peut encore adapter ses plans.", "Pour les courses, les trajets et les activités, notez les participants dépense par dépense. Un billet de musée réservé à deux se partage entre ces deux personnes. Si certains produits sont personnels, demandez un ticket séparé ou soustrayez ces lignes du montant commun."]
+      },
+      {
+        "id": "exemple",
+        "title": "Un exemple chiffré à quatre avec une activité à deux",
+        "paragraphs": ["Camille avance 240 € de logement et Sam paie 60 € de courses. Ces deux dépenses concernent Camille, Sam, Lou et Noa. Lou avance en plus 36 € pour une activité à laquelle seules Lou et Noa participent."],
+        "bullets": ["Logement et courses : 300 € ÷ 4 = 75 € par personne.", "Activité : 36 € ÷ 2 = 18 € pour Lou et 18 € pour Noa.", "Parts finales : Camille et Sam doivent chacun 75 €. Lou et Noa doivent chacune 93 €.", "Remboursements : Sam verse 15 € à Camille, Lou lui verse 57 € et Noa lui verse 93 €. Camille récupère ainsi les 165 € qu’elle a avancés au-delà de sa part."]
+      },
+      {
+        "id": "depenses",
+        "title": "Reproduire l’exemple dans le calculateur Nearly",
+        "paragraphs": ["L’essai sur le site accepte trois dépenses. Créez les quatre participants et ajoutez les lignes « Logement », « Courses » et « Activité ». Pour chacune, indiquez le montant, la personne qui a payé et les participants. Cochez uniquement Lou et Noa pour l’activité.", "Si le logement coûte 240 € au total et que vous avez déjà versé un acompte de 80 €, comptez soit le total payé par la même personne, soit l’acompte de 80 € et le solde de 160 € avec leurs payeurs respectifs. Relisez ensemble les montants et les participants avant les virements."]
+      }
+    ],
+    "faqs": [
+      { "question": "Comment répartir une dépense si seulement deux amis en ont profité ?", "answer": "Divisez le montant entre les deux personnes concernées. Dans le calculateur Nearly, indiquez qui a payé, puis sélectionnez uniquement les deux participants pour cette dépense." },
+      { "question": "Comment calculer qui rembourse qui quand plusieurs personnes ont payé ?", "answer": "Pour chaque personne, soustrayez sa part totale de ses avances. Un solde positif correspond à la somme qu’elle doit recevoir. Un solde négatif correspond à la somme qu’elle doit verser." }
+    ],
+    "sources": [{ "label": "Nearly — Le calculateur de remboursement entre amis", "href": "/calculateur-remboursement/" }],
+    "related": ["organiser-soiree-frais-amis", "meilleures-applications-amis"],
+    "tool": { "label": "Calculer les remboursements de votre week-end", "href": "/calculateur-remboursement/" }
   }
 ]

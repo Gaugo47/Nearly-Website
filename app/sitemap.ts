@@ -6,9 +6,11 @@ import { getBlogArticles } from "./blog-content";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const articles = getBlogArticles("fr");
+  const blogLastModified = new Date(Math.max(...articles.map(article => Date.parse(article.updated))));
   const french: MetadataRoute.Sitemap = [
-    { url: `${siteUrl}/blog/`, lastModified: new Date("2026-10-14"), changeFrequency: "weekly", priority: 0.8 },
-    ...getBlogArticles("fr").map(article => ({
+    { url: `${siteUrl}/blog/`, lastModified: blogLastModified, changeFrequency: "weekly", priority: 0.8 },
+    ...articles.map(article => ({
       url: `${siteUrl}/blog/${article.slug}/`,
       lastModified: new Date(article.updated),
       changeFrequency: "monthly" as const,

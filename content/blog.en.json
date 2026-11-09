@@ -23,7 +23,7 @@
       { "question": "What can we do when we run out of conversation topics?", "answer": "Start with a memory, try an open question or suggest a short activity such as cooking the same recipe. A call can also feel good without constant conversation." }
     ],
     "sources": [{ "label": "Nearly: spaces, rituals and reunions", "href": "/#experience" }],
-    "related": ["rituels-questions-couple", "meilleures-applications-couple-distance", "garder-le-lien-amis-distance"],
+    "related": ["rituels-questions-couple", "meilleures-applications-couple-distance", "idees-rendez-vous-couple-distance"],
     "tool": { "label": "Try a question together", "href": "/questions-couple/" }
   },
   {
@@ -71,7 +71,7 @@
       { "question": "Is Nearly only for couples?", "answer": "No. Nearly is designed for couples, friends and families, with a distinct private space for each connection." }
     ],
     "sources": [{ "label": "Nearly: friends, family and couple spaces", "href": "/#vos-liens" }],
-    "related": ["meilleures-applications-famille", "meilleures-applications-amis", "organiser-soiree-frais-amis"],
+    "related": ["meilleures-applications-famille", "jeux-a-distance-entre-amis", "album-photo-famille-prive"],
     "tool": { "label": "Find an activity to share", "href": "/tester-un-jeu/" }
   },
   {
@@ -95,7 +95,7 @@
       { "question": "Does the Nearly calculator send money?", "answer": "No. It shows who owes whom. You arrange the payment separately with the people involved." }
     ],
     "sources": [{ "label": "Nearly repayment calculator", "href": "/calculateur-remboursement/" }, { "label": "Nearly Party Mode presentation", "href": "/#party-mode" }],
-    "related": ["meilleures-applications-amis", "garder-le-lien-amis-distance"],
+    "related": ["meilleures-applications-amis", "garder-le-lien-amis-distance", "partager-frais-week-end-entre-amis"],
     "tool": { "label": "Calculate repayments", "href": "/calculateur-remboursement/" }
   },
   {
@@ -184,5 +184,164 @@
     "sources": [{ "label": "Nearly: family spaces", "href": "/#vos-liens" }, { "label": "FamilyAlbum: official features", "href": "https://family-album.com/" }, { "label": "TimeTree: shared calendars", "href": "https://timetreeapp.com/intl/en" }],
     "related": ["garder-le-lien-amis-distance", "meilleures-applications-couple-distance", "meilleures-applications-amis"],
     "tool": { "label": "Discover an activity to share", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "idees-rendez-vous-couple-distance",
+    "category": "Long-distance couples",
+    "kind": "guide",
+    "title": "6 long-distance date ideas for couples",
+    "description": "Find a date idea that fits your time and energy, from a photo quiz or dinner on video to a voice note walk you can do on your own schedule.",
+    "summary": "For a long-distance date, pick one activity and agree how long you’ll spend on it before you call. Try a photo quiz or a conversation prompt if you have 15 minutes. If your schedules rarely overlap, exchange voice notes on the same theme and reply when you’re free.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "quinze-minutes",
+        "title": "Two 15-minute dates for a weeknight",
+        "paragraphs": ["On a busy night, agree when you’ll wrap up and pick something you can start straight from your phone."],
+        "bullets": ["The three-photo quiz. Each choose three pictures from your week. Try to guess where your partner took theirs or what happened right after. Save the last photo for a story.", "One question and a follow-up. Ask ‘What’s one detail from your day you wish I’d seen?’ Take turns answering and ask a follow-up about something in your partner’s story. End by picking a question for next time."]
+      },
+      {
+        "id": "trente-minutes",
+        "title": "Two date ideas for when you have half an hour",
+        "paragraphs": ["Pick a theme ahead of time and keep the prep light. A dinner date can start with whatever’s already in the cupboard."],
+        "bullets": ["Same ingredient, different dinner. Choose an ingredient you both have, cook something different with it and meet on video to eat. Show each other what you made and swap an idea for next time.", "A short-film night. Pick a film of around ten minutes that you can both access. Count down to press play together, then compare the scenes that stayed with you."]
+      },
+      {
+        "id": "en-differe",
+        "title": "Two dates for when your schedules barely overlap",
+        "paragraphs": ["Agree a deadline that works for both of you, such as Sunday evening. Each person can take part when it suits them."],
+        "bullets": ["A voice note walk. While you’re out, record thirty seconds of the sounds around you and describe what’s happening. Your partner replies from a place of their choice.", "A postcard for tomorrow. Send a photo and a line to read the next morning. Pick a theme such as ‘somewhere I’d take you’ and open your postcards when you wake up."]
+      },
+      {
+        "id": "invitation",
+        "title": "An invitation you can send today",
+        "paragraphs": ["‘Fancy a photo quiz on Thursday at 8 pm your time? Let’s do 15 minutes and bring three photos each from our week. If Thursday gets busy, we can send them on Saturday.’", "If you live in different time zones, put both local times in the invitation. Let the other person choose what you do on the next date."]
+      }
+    ],
+    "faqs": [
+      { "question": "What can long-distance couples do without downloading an app?", "answer": "Try the three-photo quiz or the shared-ingredient dinner with the messaging app you already use. The Nearly website also has free questions for couples you can open in your browser." },
+      { "question": "How do you plan a long-distance date across time zones?", "answer": "If you’re rarely free at the same time, arrange a voice note walk or swap photo postcards before an agreed deadline. Each person can reply when they’re available." }
+    ],
+    "sources": [{ "label": "Nearly — The couples’ question generator", "href": "/questions-couple/" }],
+    "related": ["relation-a-distance-conseils", "rituels-questions-couple"],
+    "tool": { "label": "Pick a question for your next date", "href": "/questions-couple/" }
+  },
+  {
+    "slug": "jeux-a-distance-entre-amis",
+    "category": "Friends",
+    "kind": "guide",
+    "title": "5 games to play with friends on a call or in a group chat",
+    "description": "Get a remote games night going with three ready-to-play games for a call and two more for friends who dip into the group chat at different times.",
+    "summary": "To play with friends remotely, try forbidden words, a quick drawing round or an object hunt on a call. If friends are free at different times, run a close-up photo quiz or a caption contest in the group chat. All five games work without a separate download.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "en-appel",
+        "title": "Three games to start on a call",
+        "paragraphs": ["For three to six friends, start with a practice round so everyone gets the rules. Keep score if the group feels like it."],
+        "bullets": ["Forbidden words · 10 minutes. Get someone to guess ‘umbrella’ in thirty seconds without saying ‘rain’, ‘open’ or ‘handle’. Whoever guesses it picks the next word. This works on an audio call too.", "One-minute sketch · 15 minutes. Draw ‘a cat in a suitcase’ on paper and hold it up to the camera. Give the others one minute to guess. In a bigger group, have everyone type their answer in the chat and send it on cue.", "Object hunt · 15 minutes. Give everyone a prompt such as ‘something that’s been on a trip’. Allow a minute to find it and thirty seconds each to explain their choice. Anyone can describe an object from memory instead."]
+      },
+      {
+        "id": "par-messages",
+        "title": "Two games for the group chat",
+        "paragraphs": ["Set a reveal time, such as Sunday at 6 pm, so friends who see the prompt later can join in."],
+        "bullets": ["Mystery close-up. Post a close-up of an everyday object. Everyone sends a private guess to the person who took the photo. At the agreed time, the photographer posts the full picture and reveals the correct guesses.", "Caption contest. Share a photo of an object, a landscape or an animal. Everyone writes a one-line caption. At the reveal, read them all and vote for the one you’d actually put under the photo."]
+      },
+      {
+        "id": "programme",
+        "title": "A 25-minute plan for your first games night",
+        "paragraphs": ["Spend five minutes welcoming everyone, then play forbidden words for ten minutes and do a ten-minute sketch round. Share the finish time upfront, especially if people are working the next day.", "If the connection keeps dropping, switch to audio and put clues in the chat. Finish by posting a mystery close-up so friends who missed the call can play during the week."]
+      }
+    ],
+    "faqs": [
+      { "question": "What game can friends play remotely with their cameras off?", "answer": "Try forbidden words on an audio call. One person describes a word without using three related terms, and the others have thirty seconds to guess it." },
+      { "question": "What game works in a group chat when people reply at different times?", "answer": "Post a mystery close-up. Give everyone until the next day to send a private guess, then share the full photo in the group chat." }
+    ],
+    "sources": [{ "label": "Nearly — The quiz for finding a game for two or a group", "href": "/tester-un-jeu/" }],
+    "related": ["garder-le-lien-amis-distance", "organiser-soiree-frais-amis", "meilleures-applications-amis"],
+    "tool": { "label": "Find another game for your group", "href": "/tester-un-jeu/" }
+  },
+  {
+    "slug": "album-photo-famille-prive",
+    "category": "Family",
+    "kind": "guide",
+    "title": "How to create a private family photo album",
+    "description": "Decide who can see and add photos, pick an easy way to organise them and set up a family album everyone can open.",
+    "summary": "To create a private family photo album, pick an invitation-only space and check its settings from an invited account. Start with ten captioned photos, then organise new ones by month or event. Agree on how photos can be passed on, especially pictures of children.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "acces",
+        "title": "Decide who can open the album and add photos",
+        "paragraphs": ["Start with a few relatives. Pick one person to manage invitations and decide who can contribute. If the service allows it, choose individual invitations over a link that anyone who receives it can open.", "Use a low-stakes photo for the first test. Ask a relative to open the album on their phone and tell you what they can see, add or download. Try the link in a browser where you’re signed out to check whether a visitor can get in."]
+      },
+      {
+        "id": "classement",
+        "title": "Organise the album so it works for ten photos or a hundred",
+        "paragraphs": ["For everyday photos, group them by month, such as ‘November 2026’. For gatherings, use the name of the event, like ‘Lunch at Gran’s’. Stick to one main way of sorting photos.", "Add one line that a relative who wasn’t there would understand. ‘Lea’s first cake’ tells more of the story than a filename. Before uploading ten shots in a row, pick the one or two that capture the moment."]
+      },
+      {
+        "id": "photos-enfants",
+        "title": "Set ground rules before sharing photos of children",
+        "paragraphs": ["France’s data protection authority, the CNIL, recommends sharing children’s photos privately and getting the child’s and the other parent’s agreement before posting them on social media. For your family album, agree to keep photos within the group and ask relatives to check with you before forwarding them.", "Give people a simple way to ask for a picture to be taken down if they feel uncomfortable. Before adding it, check what’s visible in the background, such as an address or the name of a school."]
+      },
+      {
+        "id": "premiere-semaine",
+        "title": "Get the album going in a week",
+        "paragraphs": ["On day one, add around ten photos and invite two relatives. Ask whoever is least comfortable with the service to find a picture and tell you where they got stuck. Fix the layout or send a short instruction before inviting the rest of the family.", "At the end of the week, ask each person to add one photo and a line about it. If someone prefers to send their photo privately, ask whether they’d like you to add it for them. Keep a copy outside the shared album of the pictures that matter most to you."]
+      }
+    ],
+    "faqs": [
+      { "question": "How can I share family photos without making them public?", "answer": "Use an invitation-only album, turn off the public link if the service has one and check access from a signed-out browser. Ask members to check with you before forwarding a photo." },
+      { "question": "How can I help grandparents find family photos?", "answer": "Test the album on their own device and help them save a shortcut. Sort pictures by month or event and add a short caption to the ones you most want them to find." }
+    ],
+    "sources": [
+      { "label": "CNIL — Sharing photos and videos of your child on social networks", "href": "https://www.cnil.fr/en/sharing-photos-and-videos-your-child-social-networks-what-risks" },
+      { "label": "Nearly — Spaces for family, friends and couples", "href": "/#vos-liens" }
+    ],
+    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille"],
+    "tool": { "label": "Explore Nearly’s free tools", "href": "/outils/" }
+  },
+  {
+    "slug": "partager-frais-week-end-entre-amis",
+    "category": "Friends",
+    "kind": "guide",
+    "title": "How to split the cost of a weekend trip with friends",
+    "description": "A worked example for four friends splitting accommodation, groceries and an activity only two people joined, with the repayments calculated.",
+    "summary": "To split the cost of a weekend trip, record each amount, who paid it and who took part. Divide each expense among its participants, then compare what each person paid with their total share. Those who paid less than their share repay those who covered more.",
+    "readTime": 3,
+    "published": "2026-11-09",
+    "updated": "2026-11-09",
+    "sections": [
+      {
+        "id": "accord",
+        "title": "Agree how to split costs before you book",
+        "paragraphs": ["Share the cost of the accommodation per person and ask everyone to confirm before putting down a deposit. Decide whether to split accommodation equally or by the number of nights each person stays. Bring it up while everyone can still adjust their plans.", "For groceries, transport and activities, record who took part in each expense. A museum booking for two is split between those two people. For personal purchases, ask for a separate receipt or take those items off the shared total."]
+      },
+      {
+        "id": "exemple",
+        "title": "A worked example with four friends and an activity for two",
+        "paragraphs": ["Camille pays €240 for accommodation and Sam pays €60 for groceries. Both expenses cover Camille, Sam, Lou and Noa. Lou also pays €36 for an activity that only Lou and Noa attend."],
+        "bullets": ["Accommodation and groceries: €300 ÷ 4 = €75 each.", "Activity: €36 ÷ 2 = €18 each for Lou and Noa.", "Final shares: Camille and Sam owe €75 each. Lou and Noa owe €93 each.", "Repayments: Sam sends Camille €15, Lou sends her €57 and Noa sends her €93. Camille gets back the €165 she paid above her share."]
+      },
+      {
+        "id": "depenses",
+        "title": "Try the worked example in the Nearly calculator",
+        "paragraphs": ["The website demo takes three expenses. Add all four friends and create rows for ‘Accommodation’, ‘Groceries’ and ‘Activity’. Enter the amount, who paid it and who took part for each one. Select only Lou and Noa for the activity.", "If accommodation costs €240 in total and you already put down an €80 deposit, count either the full amount paid by one person or the €80 deposit and the €160 balance with their respective payers. Check the amounts and participants together before sending any money."]
+      }
+    ],
+    "faqs": [
+      { "question": "How do you split an expense when only two friends took part?", "answer": "Divide it between the two friends who took part. In the Nearly calculator, enter who paid and select just those two people as participants for that expense." },
+      { "question": "How do you work out who owes whom when several friends paid?", "answer": "For each person, subtract their total share from what they paid upfront. A positive balance is what they should receive. A negative balance is what they need to repay." }
+    ],
+    "sources": [{ "label": "Nearly — The expense-splitting calculator", "href": "/calculateur-remboursement/" }],
+    "related": ["organiser-soiree-frais-amis", "meilleures-applications-amis"],
+    "tool": { "label": "Calculate repayments for your weekend trip", "href": "/calculateur-remboursement/" }
   }
 ]

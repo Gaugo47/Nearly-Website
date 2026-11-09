@@ -7,4 +7,8 @@ export const blogSlugs = [
   "meilleures-applications-couple-distance",
   "meilleures-applications-amis",
   "meilleures-applications-famille",
+  "idees-rendez-vous-couple-distance",
+  "jeux-a-distance-entre-amis",
+  "album-photo-famille-prive",
+  "partager-frais-week-end-entre-amis",
 ] as const;
