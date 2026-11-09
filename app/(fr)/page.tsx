@@ -7,6 +7,7 @@ import PhoneShowcase from "../PhoneShowcase";
 import StoreRail from "../StoreRail";
 import HeroPhone from "../HeroPhone";
 import FeatureTour from "../FeatureTour";
+import AppComparison from "../AppComparison";
 
 
 // The English generator switches this to "en", so each page shows the store visuals in its own language.
@@ -173,7 +174,7 @@ export default function Home() {
         <HeroPhone screen={sitePath(`/media/store/home-screen-${store.language}.webp`)} alt="Accueil couple de Nearly : Alice et Bob, niveau 5, compte à rebours des retrouvailles et question du jour" />
       </section>
 
-      <nav className="showcase-index" aria-label="Explorer l’application"><span>Dans Nearly</span><a href="#vos-liens">Vos espaces</a><a href="#experience">Le quotidien</a><a href="#party-mode">Party</a><a href="#spicy">Spicy</a><a href="#securite">Confidentialité</a></nav>
+      <nav className="showcase-index" aria-label="Explorer l’application"><span>Dans Nearly</span><a href="#vos-liens">Vos espaces</a><a href="#experience">Le quotidien</a><a href="#party-mode">Party</a><a href="#spicy">Spicy</a><a href="#securite">Confidentialité</a><a href="#comparatif">Comparatif</a></nav>
 
       <section className="store-gallery" id="vos-liens" aria-labelledby="store-gallery-title">
         <div className="store-gallery__heading">
@@ -290,6 +291,8 @@ export default function Home() {
           <a className="privacy-link" href={sitePath("/confidentialite/")}>Lire la politique de confidentialité <ArrowIcon /></a>
         </div>
       </section>
+
+      <AppComparison />
 
       <aside className="try-aside" id="tester-un-jeu">
         <div><p className="eyebrow"><span /> Envie de passer à l’action ?</p><h2>Essayez un peu de Nearly.</h2><p>Questions à partager, test de jeu et calculateur : choisissez votre activité.</p></div>
