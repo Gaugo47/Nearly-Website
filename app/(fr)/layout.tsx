@@ -4,6 +4,7 @@ import { Caveat, Inter } from "next/font/google";
 import { siteUrl, sitePath, absoluteUrl } from "../site";
 import "../globals.css";
 import AnalyticsConsent from "../AnalyticsConsent";
+import { shareTitle, shareDescription, shareImage } from "../social-preview";
 
 // Same typefaces as the App Store visuals, self-hosted at build time.
 const inter = Inter({ subsets: ["latin"], weight: ["500", "600", "700", "800", "900"], variable: "--font-inter", display: "swap" });
@@ -45,19 +46,17 @@ export const metadata: Metadata = {
     openGraph: {
       type: "website",
       url: `${siteUrl}/`,
-      locale: "fr_FR",
+      locale: "en_GB",
       siteName: "Nearly",
-      title: "Nearly — Proches, même à distance",
-      description:
-        "Les liens qui comptent. Même de loin. Un espace privé pour vos amis, votre famille et votre couple, avec des rituels et des souvenirs à partager.",
-      images: [{ url: absoluteUrl("/og.png"), width: 1536, height: 902, alt: "Nearly — Proches, même à distance" }],
+      title: shareTitle,
+      description: shareDescription,
+      images: [{ url: absoluteUrl(shareImage), width: 1200, height: 630, alt: shareTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Nearly — Proches, même à distance",
-      description:
-        "Votre bande, votre famille, votre moitié. Un espace pour chaque lien, où que la vie vous emmène.",
-      images: [absoluteUrl("/og.png")],
+      title: shareTitle,
+      description: shareDescription,
+      images: [absoluteUrl(shareImage)],
     },
     icons: {
       icon: sitePath("/media/nearly-icon.png"),

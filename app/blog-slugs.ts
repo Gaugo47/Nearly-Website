@@ -11,4 +11,7 @@ export const blogSlugs = [
   "jeux-a-distance-entre-amis",
   "album-photo-famille-prive",
   "partager-frais-week-end-entre-amis",
+  "questions-couple-a-distance",
+  "decalage-horaire-couple-distance",
+  "rester-proche-grands-parents-distance",
 ] as const;

@@ -9,6 +9,7 @@ export default function SiteFooter() {
       </a>
       <p>Proches, même à distance.</p>
       <div>
+        <a href={sitePath("/")}>L’application</a>
         <a href={sitePath("/outils/")}>Outils &amp; activités</a>
         <a href={sitePath("/blog/")}>Blog</a>
         <a href={sitePath("/#faq")}>FAQ</a>

@@ -15,7 +15,7 @@ export function analyticsPageAllowed(href, publicSiteUrl, basePath = "") {
   try {
     const url = new URL(href);
     const site = new URL(publicSiteUrl);
-    const pages = ["/", "/outils/", "/tester-un-jeu/", "/calculateur-remboursement/", "/questions-couple/"];
+    const pages = ["/", "/outils/", "/tester-un-jeu/", "/devine-la-couleur/", "/test-langage-amour/", "/calculateur-remboursement/", "/questions-couple/"];
     // Exclude legal/unsubscribe pages and URLs with potentially private parameters.
     return url.origin === site.origin && url.protocol === "https:" && !url.search && !url.hash.includes("=")
       && pages.some((page) => url.pathname === `${basePath}${page}` || url.pathname === `${basePath}/en${page}`);

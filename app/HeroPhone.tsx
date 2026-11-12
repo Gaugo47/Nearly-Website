@@ -133,18 +133,20 @@ export default function HeroPhone({ screen, alt }: { screen: string; alt: string
   const [index, setIndex] = useState(cards.length + start);
   const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
+  const [stopped, setStopped] = useState(false);
 
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (paused || stopped) return;
     const timer = window.setInterval(() => {
       // A hidden tab runs no transition, so no transitionend would bring the track back.
-      if (document.hidden) return;
+      if (document.hidden || motion.matches) return;
       setAnimate(true);
       // Past the last copy means a transitionend was missed: the next slide leaves from the middle copy.
       setIndex(value => (value >= cards.length * 2 ? value - cards.length : value) + 1);
     }, 2800);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, stopped]);
 
   const settle = (event: TransitionEvent<HTMLUListElement>) => {
     if (event.target !== event.currentTarget || index < cards.length * 2) return;
@@ -178,7 +180,10 @@ export default function HeroPhone({ screen, alt }: { screen: string; alt: string
           )))}
         </ul>
       </div>
-      <p className="hero-phone__note" aria-hidden="true">choisis ta carte ↑</p>
+      <p className="hero-phone__note" aria-hidden="true">vos petits moments</p>
+      <button className="hero-phone__pause" type="button" aria-pressed={stopped} onClick={() => setStopped(value => !value)}>
+        <span aria-hidden="true">{stopped ? "▷" : "Ⅱ"}</span> {stopped ? "Reprendre l’aperçu" : "Mettre l’aperçu en pause"}
+      </button>
     </div>
   );
 }

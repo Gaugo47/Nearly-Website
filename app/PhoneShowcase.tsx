@@ -32,7 +32,7 @@ function Card({ card, step, shown, quiet }: { card: FloatCard; step: number; sho
       <div className="showcase__card-text">
         <small><i />{card.label}</small>
         {card.steps.map((item, index) => (
-          <p key={item.title} className={index === step ? "is-current" : undefined}><b>{item.title}</b>{item.detail}</p>
+          <p key={item.title} className={index === step ? "is-current" : undefined} aria-hidden={index !== step}><b>{item.title}</b>{item.detail}</p>
         ))}
       </div>
       {card.route && (
@@ -69,21 +69,43 @@ export default function PhoneShowcase({ screens, label }: { screens: ShowcaseScr
   const [active, setActive] = useState(0);
   const [auto, setAuto] = useState(true);
   const [step, setStep] = useState(0);
-  const steps = screens[active].card?.steps.length ?? 0;
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const steps = screens[active]?.card?.steps.length ?? 0;
+  const playing = auto && !hovered && !focused && !reducedMotion && visible;
 
   useEffect(() => {
-    if (!auto || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => { if (!document.hidden) setActive(value => (value + 1) % screens.length); }, 5200);
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReducedMotion(preference.matches);
+    const updateVisibility = () => setVisible(!document.hidden);
+    updatePreference();
+    updateVisibility();
+    preference.addEventListener("change", updatePreference);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => {
+      preference.removeEventListener("change", updatePreference);
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!playing || screens.length < 2) return;
+    const timer = window.setInterval(() => setActive(value => (value + 1) % screens.length), 5200);
     return () => window.clearInterval(timer);
-  }, [auto, screens.length]);
+  }, [playing, screens.length]);
 
   // The card starts over each time its screen comes to the front.
   useEffect(() => {
     setStep(0);
-    if (steps < 2) return;
-    const timer = window.setInterval(() => setStep(value => Math.min(value + 1, steps - 1)), 2400);
-    return () => window.clearInterval(timer);
-  }, [active, steps]);
+  }, [active]);
+
+  useEffect(() => {
+    if (!playing || step >= steps - 1) return;
+    const timer = window.setTimeout(() => setStep(value => Math.min(value + 1, steps - 1)), 2400);
+    return () => window.clearTimeout(timer);
+  }, [active, playing, step, steps]);
 
   const choose = (index: number) => { setActive(index); setAuto(false); };
   const slot = (index: number) => {
@@ -91,8 +113,17 @@ export default function PhoneShowcase({ screens, label }: { screens: ShowcaseScr
     return place === 0 ? "front" : place === 1 && screens.length > 2 ? "right" : "left";
   };
 
+  if (!screens.length) return null;
+
   return (
-    <div className="showcase">
+    <div
+      className="showcase"
+      data-paused={!playing}
+      onPointerEnter={event => { if (event.pointerType !== "touch") setHovered(true); }}
+      onPointerLeave={() => setHovered(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}
+    >
       <div className="showcase__stage" role="group" aria-label={label}>
         {screens.map((screen, index) => (
           <div key={screen.src} className={`showcase__phone showcase__phone--${slot(index)}`} aria-hidden={index !== active} onClick={() => choose(index)}>
@@ -100,15 +131,25 @@ export default function PhoneShowcase({ screens, label }: { screens: ShowcaseScr
           </div>
         ))}
         {/* Every card stays mounted, so the one leaving fades out while the next one comes in. */}
-        {screens.map((screen, index) => screen.card && (
+        {screens.map((screen, index) => screen.card && screen.card.steps.length > 0 && (
           <Card key={screen.src} card={screen.card} step={index === active ? step : 0} shown={index === active} quiet={auto} />
         ))}
       </div>
-      <div className="showcase__tabs" role="tablist">
+      <div className="showcase__tabs" role="group" aria-label={label}>
         {screens.map((screen, index) => (
-          <button key={screen.src} type="button" role="tab" aria-selected={index === active} onClick={() => choose(index)}>{screen.label}</button>
+          <button key={screen.src} type="button" aria-pressed={index === active} onClick={() => choose(index)}>{screen.label}</button>
         ))}
       </div>
+      {screens.length > 1 && (
+        <div className="showcase__playback">
+          {reducedMotion ? <span>Défilement manuel</span> : (
+            <button type="button" className="showcase__pause" onClick={() => setAuto(value => !value)}>
+              <span aria-hidden="true">{auto ? "Ⅱ" : "▷"}</span>
+              {auto ? "Mettre en pause" : "Reprendre le défilement"}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import { sitePath } from "./site";
 import LanguageSwitch from "./LanguageSwitch";
 
-export default function SiteNav({ current = "application" }: { current?: "application" | "tools" | "blog" }) {
+export default function SiteNav({ current = "application" }: { current?: "application" | "tools" | "blog" | "none" }) {
   return (
     <nav className="site-nav site-nav--simple" aria-label="Navigation principale">
-      <a className="brand" href={sitePath("/")} aria-label="Nearly, accueil">
-        <img src={sitePath("/media/nearly-logo.png")} alt="Nearly" />
+      <a className="brand brand--app" href={sitePath("/")} aria-label="Nearly, accueil">
+        <img src={sitePath("/media/store/nearly-icon-96.webp")} alt="Nearly" width={48} height={48} />
       </a>
       <div className="nav-links">
         <a href={sitePath("/")} aria-current={current === "application" ? "page" : undefined}>L’application</a>

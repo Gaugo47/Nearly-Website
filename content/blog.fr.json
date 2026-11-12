@@ -47,7 +47,7 @@
       { "question": "Les questions Nearly sont-elles accessibles sans compte ?", "answer": "Oui, la démonstration de questions de couple sur le site est accessible gratuitement sans compte. Elle donne un aperçu des activités prévues dans l’application." }
     ],
     "sources": [{ "label": "Essai gratuit des questions Nearly", "href": "/questions-couple/" }],
-    "related": ["relation-a-distance-conseils", "meilleures-applications-couple-distance"],
+    "related": ["relation-a-distance-conseils", "meilleures-applications-couple-distance", "questions-couple-a-distance"],
     "tool": { "label": "Piocher une question", "href": "/questions-couple/" }
   },
   {
@@ -225,7 +225,7 @@
       { "question": "Quel rendez-vous à distance organiser avec un décalage horaire ?", "answer": "Si vos disponibilités se croisent peu, choisissez une balade audio ou une carte postale en photo à partager avant une date commune. Chacun répond au moment qui lui convient." }
     ],
     "sources": [{ "label": "Nearly — Le générateur de questions de couple", "href": "/questions-couple/" }],
-    "related": ["relation-a-distance-conseils", "rituels-questions-couple"],
+    "related": ["relation-a-distance-conseils", "rituels-questions-couple", "decalage-horaire-couple-distance"],
     "tool": { "label": "Piocher une question pour votre prochain rendez-vous", "href": "/questions-couple/" }
   },
   {
@@ -305,7 +305,7 @@
       { "label": "CNIL — Partage de photos et vidéos de votre enfant sur les réseaux sociaux", "href": "https://www.cnil.fr/fr/partage-de-photos-et-videos-de-votre-enfant-sur-les-reseaux-sociaux-quels-sont-les-risques" },
       { "label": "Nearly — Les espaces pour la famille, les amis et le couple", "href": "/#vos-liens" }
     ],
-    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille"],
+    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille", "rester-proche-grands-parents-distance"],
     "tool": { "label": "Découvrir les outils gratuits de Nearly", "href": "/outils/" }
   },
   {
@@ -343,5 +343,315 @@
     "sources": [{ "label": "Nearly — Le calculateur de remboursement entre amis", "href": "/calculateur-remboursement/" }],
     "related": ["organiser-soiree-frais-amis", "meilleures-applications-amis"],
     "tool": { "label": "Calculer les remboursements de votre week-end", "href": "/calculateur-remboursement/" }
+  },
+  {
+    "slug": "questions-couple-a-distance",
+    "category": "Couple à distance",
+    "kind": "guide",
+    "title": "40 questions à se poser en couple à distance, par thème",
+    "description": "Quarante questions classées par thème pour vos appels et vos messages : quotidien, souvenirs, projets, complicité et retrouvailles.",
+    "summary": "Pour relancer la conversation à distance, choisissez un thème plutôt qu’une liste entière : le quotidien, les souvenirs, les projets, la complicité ou les retrouvailles. Posez deux ou trois questions par appel, répondez chacun votre tour et gardez les autres pour la semaine. Une question qui demande un détail concret est plus facile à raconter qu’un « ça va ? ».",
+    "readTime": 5,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "quotidien",
+        "title": "8 questions pour se raconter sa journée",
+        "paragraphs": [
+          "À distance, on perd les petits détails : le trajet, le déjeuner, la tête du collègue. Ces questions les font revenir dans la conversation."
+        ],
+        "bullets": [
+          "Quel moment de ta journée aurais-tu aimé que je voie ?",
+          "Qu’est-ce que tu as mangé de meilleur cette semaine ?",
+          "Qui t’a fait rire aujourd’hui, et pourquoi ?",
+          "Quelle est la dernière chose que tu as prise en photo ?",
+          "Qu’est-ce qui t’a pris plus d’énergie que prévu aujourd’hui ?",
+          "Quelle chanson tourne en boucle chez toi en ce moment ?",
+          "Qu’est-ce que tu vois par ta fenêtre, là, maintenant ?",
+          "Quel petit plaisir t’es-tu offert cette semaine ?"
+        ]
+      },
+      {
+        "id": "souvenirs",
+        "title": "8 questions sur vos souvenirs communs",
+        "paragraphs": [
+          "Revenir sur ce que vous avez vécu ensemble rappelle que votre histoire ne se limite pas aux appels."
+        ],
+        "bullets": [
+          "Quel souvenir de nous te revient le plus souvent ?",
+          "Quel est le premier détail que tu as remarqué chez moi ?",
+          "Quelle journée passée ensemble aimerais-tu revivre à l’identique ?",
+          "Quel fou rire de nous deux te fait encore sourire ?",
+          "Quelle photo de nous préfères-tu, et où étions-nous ?",
+          "Quel repas partagé t’a le plus marqué ?",
+          "Quel moment t’a fait penser « là, on est bien » ?",
+          "Quelle petite habitude à nous te manque le plus ?"
+        ]
+      },
+      {
+        "id": "projets",
+        "title": "8 questions pour parler de vos projets",
+        "paragraphs": [
+          "Les projets donnent une direction à l’attente. Gardez ces questions pour un moment calme, sans chercher à tout décider le soir même."
+        ],
+        "bullets": [
+          "Où aimerais-tu que l’on parte lors de nos prochaines vacances ?",
+          "À quoi ressemble un dimanche idéal quand nous vivrons au même endroit ?",
+          "Quelle ville aimerais-tu me faire découvrir ?",
+          "Quelle activité aimerais-tu que l’on apprenne ensemble ?",
+          "Qu’aimerais-tu que l’on ait fait d’ici un an ?",
+          "Quelle tradition aimerais-tu que l’on invente pour nous deux ?",
+          "Quel projet personnel aimerais-tu que je t’aide à tenir ?",
+          "Qu’est-ce qui te ferait dire que cette période à distance valait le coup ?"
+        ]
+      },
+      {
+        "id": "complicite",
+        "title": "8 questions légères pour rire ensemble",
+        "paragraphs": [
+          "Tout n’a pas besoin d’être profond. Ces questions se posent très bien par message, entre deux réunions."
+        ],
+        "bullets": [
+          "Quel serait notre nom d’équipe dans un jeu télé ?",
+          "Quel plat suis-je, selon toi, incapable de réussir ?",
+          "Quelle règle absurde instaurerais-tu chez nous ?",
+          "Quel film pourrais-tu me faire regarder dix fois ?",
+          "Quel emoji me ressemble le plus ?",
+          "Qui de nous deux survivrait le plus longtemps sans téléphone ?",
+          "Quel surnom n’oserais-tu jamais m’appeler en public ?",
+          "Quelle est ma manie la plus attachante ?"
+        ]
+      },
+      {
+        "id": "retrouvailles",
+        "title": "8 questions pour préparer les retrouvailles",
+        "paragraphs": [
+          "Parler des retrouvailles évite d’arriver avec deux programmes différents : l’un rêve de sorties, l’autre d’un week-end sans rien prévoir."
+        ],
+        "bullets": [
+          "Que veux-tu que l’on fasse en premier quand on se retrouve ?",
+          "Préfères-tu un programme rempli ou des journées sans horaires ?",
+          "Quel plat aimerais-tu que l’on cuisine ensemble ?",
+          "Quel endroit veux-tu absolument me montrer ?",
+          "De quoi as-tu besoin le premier soir : sortir ou rester au calme ?",
+          "Qui aimerais-tu que l’on voie ensemble ?",
+          "Quel moment à deux veux-tu protéger, quoi qu’il arrive ?",
+          "Comment aimerais-tu que l’on se dise au revoir cette fois-ci ?"
+        ]
+      },
+      {
+        "id": "mode-d-emploi",
+        "title": "Comment utiliser cette liste sans en faire un interrogatoire",
+        "paragraphs": [
+          "Choisissez un seul thème par appel et limitez-vous à deux ou trois questions. Celui qui pose la question y répond aussi : la conversation reste un échange.",
+          "Si vos horaires se croisent peu, envoyez une question le matin et répondez chacun par message vocal dans la journée. Chacun peut passer une question sans avoir à se justifier."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Quelles questions poser à son copain ou à sa copine à distance ?",
+        "answer": "Privilégiez les questions qui demandent un détail concret, comme « Quel moment de ta journée aurais-tu aimé que je voie ? » ou « Que veux-tu que l’on fasse en premier quand on se retrouve ? ». Elles sont plus faciles à raconter qu’une question générale."
+      },
+      {
+        "question": "Combien de questions poser pendant un appel ?",
+        "answer": "Deux ou trois suffisent. L’objectif est de lancer la conversation, pas de parcourir la liste. Gardez les autres pour les prochains appels."
+      },
+      {
+        "question": "Où trouver une nouvelle question chaque jour ?",
+        "answer": "Le site Nearly propose un tirage gratuit de questions à deux, sans compte. L’application Nearly, à venir sur iOS et Android, prévoit une question du jour dans chaque espace."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — Le tirage de questions de couple",
+        "href": "/questions-couple/"
+      }
+    ],
+    "related": [
+      "rituels-questions-couple",
+      "idees-rendez-vous-couple-distance",
+      "relation-a-distance-conseils"
+    ],
+    "tool": {
+      "label": "Piocher une question au hasard",
+      "href": "/questions-couple/"
+    }
+  },
+  {
+    "slug": "decalage-horaire-couple-distance",
+    "category": "Couple à distance",
+    "kind": "guide",
+    "title": "Couple à distance et décalage horaire : comment s’organiser",
+    "description": "Trouver vos créneaux communs, alterner les horaires et garder le lien en différé : une méthode simple pour les couples sur deux fuseaux.",
+    "summary": "Avec un décalage horaire, commencez par repérer les heures où vous êtes tous les deux éveillés et disponibles, puis fixez un ou deux rendez-vous par semaine dans ce créneau. Alternez la personne qui se lève tôt ou se couche tard. Le reste du temps, échangez en différé : un message vocal, une photo ou une question à laquelle chacun répond à son heure.",
+    "readTime": 4,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "creneaux",
+        "title": "Repérer vos heures communes",
+        "paragraphs": [
+          "Écrivez vos deux journées côte à côte, heure par heure, et entourez les moments où vous êtes tous les deux éveillés et libres. Entre Paris et Montréal, par exemple, il y a six heures d’écart : quand il est 20 h à Paris, il est 14 h à Montréal. Le créneau commun se situe plutôt en soirée à Paris, soit l’après-midi à Montréal, ou le week-end.",
+          "Les dates de changement d’heure ne sont pas les mêmes partout. L’écart peut varier d’une heure pendant quelques semaines au printemps et à l’automne : vérifiez-le à ces périodes."
+        ]
+      },
+      {
+        "id": "rendez-vous",
+        "title": "Fixer peu de rendez-vous, et les tenir",
+        "paragraphs": [
+          "Un ou deux rendez-vous par semaine, placés dans votre créneau commun, sont plus faciles à tenir qu’un appel quotidien qui tombe mal. Donnez-leur une durée et un contenu simple."
+        ],
+        "bullets": [
+          "Un appel court en semaine, de quinze à vingt minutes, pour se raconter la journée.",
+          "Un rendez-vous plus long le week-end : un repas, un film lancé en même temps ou un jeu.",
+          "Une heure de fin annoncée dès le début, pour que personne ne raccroche avec l’impression d’écourter."
+        ]
+      },
+      {
+        "id": "alterner",
+        "title": "Alterner l’effort",
+        "paragraphs": [
+          "Si l’un de vous veille toujours tard ou se lève toujours tôt, la fatigue finit par peser sur les appels. Alternez : une semaine l’un s’adapte, la semaine suivante l’autre.",
+          "Prévenez quand un rendez-vous doit sauter et proposez tout de suite un autre créneau. Un report annoncé se vit mieux qu’un appel manqué."
+        ]
+      },
+      {
+        "id": "differe",
+        "title": "Garder le lien en différé",
+        "paragraphs": [
+          "Entre deux appels, les échanges qui n’exigent pas de réponse immédiate prennent le relais."
+        ],
+        "bullets": [
+          "Le message vocal du matin, à écouter au réveil de l’autre.",
+          "La photo du jour : un détail de votre journée, sans commentaire obligatoire.",
+          "La question à deux : chacun répond à son heure, puis vous découvrez les deux réponses.",
+          "La liste partagée : films à voir, lieux à visiter, plats à cuisiner aux retrouvailles."
+        ]
+      },
+      {
+        "id": "deux-heures",
+        "title": "Écrire les deux heures locales",
+        "paragraphs": [
+          "Dans vos messages comme dans votre calendrier, notez toujours les deux heures : « samedi, 21 h pour moi, 15 h pour toi ». Cette habitude évite la plupart des rendez-vous manqués. Ajoutez la date des prochaines retrouvailles : un compte à rebours commun donne un horizon à l’attente."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Comment se parler avec neuf heures de décalage ou plus ?",
+        "answer": "Les créneaux communs se trouvent souvent tôt le matin pour l’un et en soirée pour l’autre, ou le week-end. Fixez un rendez-vous long le week-end et comptez sur les messages vocaux et les photos en semaine."
+      },
+      {
+        "question": "Faut-il s’appeler tous les jours quand on vit sur deux fuseaux ?",
+        "answer": "Il n’y a pas de règle. Un ou deux rendez-vous tenus par semaine, complétés par des échanges en différé, conviennent à beaucoup de couples. Choisissez le rythme que vous pouvez tenir tous les deux sans fatigue."
+      },
+      {
+        "question": "Comment éviter de se tromper d’heure ?",
+        "answer": "Écrivez les deux heures locales dans chaque invitation et vérifiez l’écart lors des changements d’heure, qui n’ont pas lieu aux mêmes dates dans tous les pays."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — Calendrier partagé et compteur de retrouvailles",
+        "href": "/#experience"
+      }
+    ],
+    "related": [
+      "relation-a-distance-conseils",
+      "idees-rendez-vous-couple-distance",
+      "questions-couple-a-distance"
+    ],
+    "tool": {
+      "label": "Piocher une question à laquelle répondre chacun à son heure",
+      "href": "/questions-couple/"
+    }
+  },
+  {
+    "slug": "rester-proche-grands-parents-distance",
+    "category": "En famille",
+    "kind": "guide",
+    "title": "Rester proche de ses grands-parents à distance : 8 rituels simples",
+    "description": "Appel à heure fixe, photo de la semaine, recette transmise ou carte postale : huit rituels faciles à tenir pour garder le lien entre générations.",
+    "summary": "Pour rester proche de ses grands-parents à distance, misez sur des rituels courts et réguliers plutôt que sur de longs appels occasionnels : un appel à heure fixe, une photo par semaine, une recette ou une histoire de famille à transmettre. Choisissez un outil qu’ils utilisent déjà et gardez le même rendez-vous d’une semaine à l’autre.",
+    "readTime": 4,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "rendez-vous-reguliers",
+        "title": "Quatre rendez-vous réguliers, faciles à tenir",
+        "paragraphs": [
+          "Un rituel fonctionne quand il est prévisible. Choisissez un jour et une heure qui conviennent à tout le monde, et gardez-les."
+        ],
+        "bullets": [
+          "L’appel du dimanche. Dix à quinze minutes à heure fixe, avec une question à préparer : « Qu’est-ce qui t’a fait plaisir cette semaine ? »",
+          "La photo de la semaine. Une image par semaine, avec une phrase pour la raconter. Mieux vaut une photo expliquée que vingt sans légende.",
+          "Le message vocal. Plus chaleureux qu’un texte, il s’écoute et se réécoute au moment choisi.",
+          "La carte postale. Une carte par mois, écrite à la main ou dessinée par les enfants, à garder sur le réfrigérateur."
+        ]
+      },
+      {
+        "id": "avec-les-enfants",
+        "title": "Deux idées pour les petits-enfants",
+        "paragraphs": [
+          "Les jeunes enfants tiennent rarement une conversation au téléphone. Donnez-leur quelque chose à faire pendant l’appel."
+        ],
+        "bullets": [
+          "L’histoire du soir. Le grand-parent lit quelques pages en visio pendant que l’enfant suit les images du même livre.",
+          "Le « montre-moi ». L’enfant présente un dessin, un jouet ou une dent tombée. Cinq minutes suffisent."
+        ]
+      },
+      {
+        "id": "transmettre",
+        "title": "Deux rituels pour transmettre",
+        "paragraphs": [
+          "Les grands-parents ont des histoires que personne d’autre ne peut raconter. Un rendez-vous dédié leur donne une place."
+        ],
+        "bullets": [
+          "La recette du mois. Cuisinez le même plat chacun chez soi, en suivant leurs indications, puis comparez les résultats en photo.",
+          "La question de famille. Une question par appel : « Comment était ta chambre quand tu étais enfant ? », « Quel métier voulais-tu faire ? ». Notez les réponses dans un carnet commun."
+        ]
+      },
+      {
+        "id": "outil",
+        "title": "Choisir un outil qu’ils utilisent déjà",
+        "paragraphs": [
+          "Le meilleur outil est celui que vos grands-parents savent ouvrir seuls : le téléphone, la messagerie déjà installée ou une application familiale si elle leur convient. Réglez l’appareil avec eux une fois, puis écrivez les étapes sur une fiche posée près du téléphone.",
+          "Pour les photos de famille, préférez un espace privé réservé aux proches à une publication sur un réseau social, et demandez l’accord des personnes photographiées."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "À quelle fréquence appeler ses grands-parents ?",
+        "answer": "Un rendez-vous hebdomadaire à heure fixe est un bon point de départ. La régularité compte plus que la durée : dix minutes chaque dimanche sont plus faciles à tenir qu’un long appel de temps en temps."
+      },
+      {
+        "question": "Que faire si mes grands-parents ne sont pas à l’aise avec le numérique ?",
+        "answer": "Gardez le téléphone pour la voix et ajoutez le courrier : une carte postale ou des photos imprimées. Si vous installez un outil, choisissez-en un seul et laissez une fiche avec les étapes."
+      },
+      {
+        "question": "Comment impliquer de jeunes enfants dans les appels ?",
+        "answer": "Proposez une activité courte plutôt qu’une conversation : une histoire lue en visio, un dessin à montrer ou une chanson. Quelques minutes suffisent."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — Un espace pour la famille",
+        "href": "/#vos-liens"
+      }
+    ],
+    "related": [
+      "album-photo-famille-prive",
+      "garder-le-lien-amis-distance",
+      "meilleures-applications-famille"
+    ],
+    "tool": {
+      "label": "Essayer une activité à partager en famille",
+      "href": "/outils/"
+    }
   }
 ]

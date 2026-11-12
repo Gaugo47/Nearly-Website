@@ -16,7 +16,7 @@ test("analytics requires a valid unexpired explicit choice, including refusals",
 
 test("analytics excludes private URLs, legal pages, previews and other origins", () => {
   const site = "https://hellonearly.com";
-  for (const path of ["/", "/outils/", "/tester-un-jeu/", "/calculateur-remboursement/", "/questions-couple/", "/#experience"]) {
+  for (const path of ["/", "/outils/", "/tester-un-jeu/", "/devine-la-couleur/", "/test-langage-amour/", "/calculateur-remboursement/", "/questions-couple/", "/#experience"]) {
     assert.equal(analyticsPageAllowed(`${site}${path}`, site), true, path);
     assert.equal(analyticsPageAllowed(`${site}/en${path}`, site), true, `en${path}`);
   }

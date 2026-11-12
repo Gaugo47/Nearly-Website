@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "node scripts/generate-english.mjs && next dev",
-    "build": "node scripts/generate-english.mjs && next build --webpack",
+    "build": "node scripts/generate-social-preview.mjs && node scripts/generate-english.mjs && next build --webpack",
+    "social:preview": "node scripts/generate-social-preview.mjs",
     "translations:sync": "node scripts/generate-english.mjs",
     "start": "node scripts/preview.mjs",
     "lint": "eslint .",

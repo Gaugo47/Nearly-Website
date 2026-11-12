@@ -33,7 +33,7 @@ function Phone({ src, alt, lazy }: { src: string; alt: string; lazy?: boolean })
 
 function Visual({ step, active, lazy }: { step: TourStep; active: boolean; lazy?: boolean }) {
   return (
-    <div className={`tour-visual tour-visual--${step.key}${active ? " is-active" : ""}`}>
+    <div className={`tour-visual tour-visual--${step.key}${active ? " is-active" : ""}`} aria-hidden={!active}>
       <Phone src={step.screen} alt={step.screenAlt} lazy={lazy} />
       {step.pops.map(pop => (
         <img key={pop.src} className={`tour-pop ${pop.className}`} src={pop.src} alt={pop.alt} width={pop.width} height={pop.height} loading={lazy ? "lazy" : undefined} decoding="async" />
@@ -47,15 +47,18 @@ export default function FeatureTour({ steps }: { steps: TourStep[] }) {
   const refs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) setActive(Number((entry.target as HTMLElement).dataset.index));
     }, { rootMargin: "-45% 0px -45% 0px" });
     refs.current.forEach(node => node && observer.observe(node));
     return () => observer.disconnect();
-  }, []);
+  }, [steps.length]);
+
+  if (!steps.length) return null;
 
   return (
-    <div className="tour" data-step={steps[active].key}>
+    <div className="tour" data-step={(steps[active] ?? steps[0]).key}>
       <ol className="tour__steps">
         {steps.map((step, index) => (
           <li key={step.key} className={`tour-step${index === active ? " is-active" : ""}`} data-index={index} ref={node => { refs.current[index] = node; }}>
@@ -67,7 +70,7 @@ export default function FeatureTour({ steps }: { steps: TourStep[] }) {
           </li>
         ))}
       </ol>
-      <div className="tour__stage">
+      <div className="tour__stage" aria-hidden="true">
         <div className="tour__glow" aria-hidden="true" />
         {steps.map((step, index) => <Visual key={step.key} step={step} active={index === active} lazy={index > 0} />)}
         <div className="tour__dots" aria-hidden="true">{steps.map((step, index) => <span key={step.key} className={index === active ? "is-active" : undefined} />)}</div>

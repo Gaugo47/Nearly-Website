@@ -6,6 +6,7 @@ import SiteNav from "../../SiteNav";
 import SiteFooter from "../../SiteFooter";
 import BlogVisual from "../../BlogVisual";
 import BlogCard from "../../BlogCard";
+import { organizationId, breadcrumbList, feedAlternate } from "../../seo";
 
 const language = { language: "fr" as const }.language;
 const articles = getBlogArticles(language);
@@ -13,7 +14,7 @@ const articles = getBlogArticles(language);
 export const metadata: Metadata = {
   title: "Blog : relations à distance, amis, famille et comparatifs d’applications",
   description: "Conseils pour rester proches à distance, idées de rituels et comparatifs d’applications pour le couple, les amis et la famille. Le blog Nearly.",
-  alternates: pageAlternates("/blog/"),
+  alternates: { ...pageAlternates("/blog/"), types: feedAlternate(absoluteUrl("/blog/")) },
   openGraph: {
     type: "website", url: absoluteUrl("/blog/"), locale: "fr_FR",
     title: "Le blog Nearly — Les liens se cultivent",
@@ -28,15 +29,22 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const featured = articles[0];
+  // The most recent article leads the page; the collections below keep the editorial order.
+  const featured = articles.reduce((latest, article) => article.published > latest.published ? article : latest);
   const schema = {
-    "@context": "https://schema.org", "@type": "Blog",
-    name: "Le blog Nearly", url: absoluteUrl("/blog/"), inLanguage: language,
-    publisher: { "@type": "Organization", name: "Nearly", url: absoluteUrl("/") },
-    blogPost: articles.map(article => ({
-      "@type": "BlogPosting", headline: article.title, description: article.description,
-      url: absoluteUrl(`/blog/${article.slug}/`), datePublished: article.published, dateModified: article.updated,
-    })),
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog", "@id": `${absoluteUrl("/blog/")}#blog`,
+        name: "Le blog Nearly", url: absoluteUrl("/blog/"), inLanguage: language,
+        publisher: { "@type": "Organization", "@id": organizationId, name: "Nearly", url: absoluteUrl("/") },
+        blogPost: articles.map(article => ({
+          "@type": "BlogPosting", headline: article.title, description: article.description,
+          url: absoluteUrl(`/blog/${article.slug}/`), datePublished: article.published, dateModified: article.updated,
+        })),
+      },
+      breadcrumbList([{ name: "Accueil", path: "/" }, { name: "Blog", path: "/blog/" }]),
+    ],
   };
   return (
     <main className="blog-hub">

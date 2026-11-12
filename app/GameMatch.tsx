@@ -41,13 +41,16 @@ const questions: Array<{ kicker: string; title: string; answers: Answer[] }> = [
   },
 ];
 
-const games: Record<GameKey, { label: string; title: string; description: string; prompt: string; tag: string }> = {
+// Each result also points to something playable on the site right now, so the quiz is a way in
+// to the other activities instead of a second question game.
+const games: Record<GameKey, { label: string; title: string; description: string; prompt: string; tag: string; play: { label: string; href: string } }> = {
   questions: {
     label: "Questions du jour",
     title: "Entre nous",
     description: "Des questions inattendues pour ouvrir les discussions qu’on repousse toujours et créer un vrai moment de proximité.",
     prompt: "Quel souvenir de nous te fait sourire instantanément ?",
     tag: "À deux · 5 min · Connexion",
+    play: { label: "Piocher une question maintenant", href: "/questions-couple/" },
   },
   duo: {
     label: "Quiz de complicité",
@@ -55,6 +58,7 @@ const games: Record<GameKey, { label: string; title: string; description: string
     description: "Répondez chacun de votre côté, comparez vos réponses et découvrez qui connaît vraiment l’autre sur le bout des doigts.",
     prompt: "Mon plan parfait pour un dimanche pluvieux, c’est…",
     tag: "À deux · 10 min · Challenge",
+    play: { label: "Comparer vos langages de l’amour", href: "/test-langage-amour/" },
   },
   party: {
     label: "Party Lab",
@@ -62,6 +66,7 @@ const games: Record<GameKey, { label: string; title: string; description: string
     description: "Des votes, des révélations et juste ce qu’il faut de chaos pour lancer une soirée et faire parler toute la bande.",
     prompt: "Qui pourrait disparaître 48 h pour partir sur un coup de tête ?",
     tag: "3+ joueurs · 15 min · Ambiance",
+    play: { label: "Lancer un duel de couleurs", href: "/devine-la-couleur/" },
   },
 };
 
@@ -130,7 +135,8 @@ export default function GameMatch() {
             <h3>{result.title}</h3>
             <p>{result.description}</p>
             <div className="game-result__actions">
-              <a className="button button--primary" href={sitePath("/#liste-attente")}>Rejoindre Nearly <span aria-hidden="true">↗</span></a>
+              <a className="button button--primary" href={sitePath(result.play.href)}>{result.play.label} <span aria-hidden="true">↗</span></a>
+              <a className="game-result__waitlist" href={sitePath("/#liste-attente")}>Rejoindre la liste d’attente</a>
               <button type="button" onClick={restart}>Refaire le test</button>
             </div>
           </div>

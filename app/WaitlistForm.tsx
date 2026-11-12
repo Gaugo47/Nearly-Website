@@ -2,7 +2,7 @@
 
 import { sitePath, waitlistReady, waitlistEndpoint } from "./site";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { waitlistReasons, WAITLIST_EXPECTATIONS_MAX } from "./legal";
 import Turnstile from "./Turnstile";
 import { newManagementToken, readReceipt, saveReceipt, sendWaitlist } from "./waitlist-client";
@@ -19,6 +19,11 @@ export default function WaitlistForm() {
   const [challengeToken, setChallengeToken] = useState("");
   const [attempt, setAttempt] = useState(0);
   const [managementToken, setManagementToken] = useState("");
+  const confirmation = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "joined") confirmation.current?.focus();
+  }, [status]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +62,7 @@ export default function WaitlistForm() {
 
   if (status === "joined") {
     return (
-      <div className="waitlist-card waitlist-card--done" role="status">
+      <div className="waitlist-card waitlist-card--done" role="status" tabIndex={-1} ref={confirmation}>
         <span className="waitlist-done-mark" aria-hidden="true">✓</span>
         <h3>Vous êtes sur la liste.</h3>
         <p>Merci ! Nous vous écrirons dès que Nearly ouvre ses portes.</p>
@@ -68,6 +73,7 @@ export default function WaitlistForm() {
 
   return (
     <form className="waitlist-card" onSubmit={submit} onFocusCapture={() => { startedAt.current ||= Date.now(); }}>
+      <div className="waitlist-card__intro"><h3>On vous garde une place.</h3><p>Votre e-mail, ce qui vous rapproche. On s’occupe de la suite.</p></div>
       <div className="waitlist-field">
         <label htmlFor="waitlist-email">Votre e-mail</label>
         <input

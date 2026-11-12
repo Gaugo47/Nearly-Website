@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import { readFile, readdir, stat } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import test from "node:test";
-const root = resolve("out");
+const root = resolve(process.env.NEARLY_BUILD_DIR || "out");
 const base = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 const origin = (process.env.NEXT_PUBLIC_SITE_URL || "https://gaugo47.github.io/Nearly-Website").replace(/\/$/, "");
 const blogArticles = JSON.parse(await readFile(resolve("content/blog.fr.json"), "utf8"));
-const frenchPages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app", "blog", ...blogArticles.map(article => `blog/${article.slug}`)];
+const frenchPages = ["", "calculateur-remboursement", "questions-couple", "outils", "tester-un-jeu", "devine-la-couleur", "test-langage-amour", "contact", "confidentialite", "conditions-liste-attente", "mentions-legales", "cgu", "confidentialite-app", "blog", ...blogArticles.map(article => `blog/${article.slug}`)];
 const pages = [...frenchPages, ...frenchPages.map(page => `en${page ? `/${page}` : ""}`)];
 test("exports all pages and usable local links/assets under the configured base path", async () => {
   for (const page of pages) {
@@ -52,7 +52,11 @@ test("exports public SEO and GitHub Pages assets", async () => {
   const html = await readFile(join(root, "index.html"), "utf8");
   assert.match(html, /<h1>Proches,<br\/><span class="store-pill">même à distance\.<\/span><\/h1>/);
   assert.match(html, /SoftwareApplication/);
-  assert.ok(html.includes(`${origin}/og.png`));
+  assert.ok(html.includes(`${origin}/media/nearly-social-en-v7.png`));
+  assert.match(html, /property="og:title" content="Nearly — Close, even far apart\."/);
+  assert.match(html, /name="twitter:title" content="Nearly — Close, even far apart\."/);
+  assert.match(html, /property="og:image:width" content="1200"/);
+  assert.match(html, /property="og:image:height" content="630"/);
   const sitemap = await readFile(join(root, "sitemap.xml"), "utf8");
   for (const page of pages) assert.ok(sitemap.includes(`${origin}${page ? `/${page}` : ""}`));
   assert.ok((await readFile(join(root, "robots.txt"), "utf8")).includes(`${origin}/sitemap.xml`));
@@ -65,6 +69,43 @@ test("exports public SEO and GitHub Pages assets", async () => {
   const assetLinks = JSON.parse(await readFile(join(root, ".well-known", "assetlinks.json"), "utf8"));
   assert.equal(assetLinks[0].target.package_name, "com.nearlyapp.nearlyapp");
   await stat(join(root, "404.html"));
+});
+test("each tool page is shared and described as itself, not as the home page", async () => {
+  for (const [prefix, language] of [["", "fr"], ["/en", "en"]]) {
+    for (const page of ["questions-couple", "calculateur-remboursement", "tester-un-jeu", "devine-la-couleur", "test-langage-amour", "outils"]) {
+      const path = `${prefix}/${page}/`;
+      const html = await readFile(join(root, path, "index.html"), "utf8");
+      assert.ok(html.includes(`property="og:url" content="${origin}${path}"`), `${path}: og:url`);
+      assert.match(html, /property="og:image" content="[^"]+\/og\.png"/);
+      const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])["@graph"];
+      assert.ok(graph.some(item => item["@type"] === "BreadcrumbList"), `${path}: breadcrumb`);
+      if (page === "outils") continue;
+      assert.equal(graph.find(item => item["@type"] === "WebApplication").inLanguage, language);
+      // Structured answers must be the ones a visitor can read on the page.
+      for (const item of graph.find(item => item["@type"] === "FAQPage").mainEntity) {
+        assert.ok(html.includes(item.name.replaceAll("&", "&amp;").replaceAll("'", "&#x27;")), `${path}: ${item.name}`);
+      }
+    }
+  }
+  const legal = await readFile(join(root, "mentions-legales/index.html"), "utf8");
+  assert.match(legal, /aria-label="Navigation principale"/);
+  assert.ok(legal.includes(`href="${base}/blog/"`), "legal pages link back to the rest of the site");
+});
+test("llms.txt and the RSS feeds list every article at the configured address", async () => {
+  const llms = await readFile(join(root, "llms.txt"), "utf8");
+  const full = await readFile(join(root, "llms-full.txt"), "utf8");
+  const feeds = { fr: await readFile(join(root, "feed.xml"), "utf8"), en: await readFile(join(root, "en/feed.xml"), "utf8") };
+  assert.match(llms, /^# Nearly\n/);
+  assert.match(llms, /pas encore téléchargeable/);
+  for (const article of blogArticles) {
+    assert.ok(llms.includes(`${origin}/blog/${article.slug}/`), `llms.txt: ${article.slug}`);
+    assert.ok(llms.includes(`${origin}/en/blog/${article.slug}/`), `llms.txt (en): ${article.slug}`);
+    assert.ok(full.includes(article.summary), `llms-full.txt: ${article.slug}`);
+    assert.ok(feeds.fr.includes(`<link>${origin}/blog/${article.slug}/</link>`), `feed.xml: ${article.slug}`);
+    assert.ok(feeds.en.includes(`<link>${origin}/en/blog/${article.slug}/</link>`), `en/feed.xml: ${article.slug}`);
+  }
+  const blog = await readFile(join(root, "en/blog/index.html"), "utf8");
+  assert.ok(blog.includes(`type="application/rss+xml" href="${origin}/en/feed.xml"`));
 });
 test("does not preload or execute the analytics beacon before visitor consent", async () => {
   for (const page of pages) {

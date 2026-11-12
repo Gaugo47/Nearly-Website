@@ -1,9 +1,8 @@
-
 import { sitePath } from "./site";
 import type { ReactNode } from "react";
 import { legal } from "./legal";
-import { AnalyticsSettingsButton } from "./AnalyticsConsent";
-import LanguageSwitch from "./LanguageSwitch";
+import SiteNav from "./SiteNav";
+import SiteFooter from "./SiteFooter";
 
 const legalLinks = [
   { href: "/contact", label: "Contact" },
@@ -27,15 +26,8 @@ type LegalLayoutProps = {
 export default function LegalLayout({ current, eyebrow, title, intro, children, updated }: LegalLayoutProps) {
   return (
     <main className="tool-page legal-page">
-      <nav className="tool-nav" aria-label="Navigation Nearly">
-        <a className="tool-nav__brand" href={sitePath("/")} aria-label="Nearly, accueil"><img src={sitePath("/media/nearly-app-icon-liquid-glass-v2.png")} alt="Nearly" /></a>
-        <div>
-          {legalLinks.map((link) => (
-            <a key={link.href} href={sitePath(link.href)} aria-current={link.href === current ? "page" : undefined}>{link.label}</a>
-          ))}
-        </div>
-        <div className="legal-nav-actions"><LanguageSwitch language="fr" /><a className="tool-nav__back" href={sitePath("/#liste-attente")}>Liste d’attente <span aria-hidden="true">↗</span></a></div>
-      </nav>
+      {/* Same navigation and footer as the rest of the site: a reader of the terms can go back to the app, the tools or the blog. */}
+      <SiteNav current="none" />
 
       <header className="legal-hero">
         <p className="eyebrow"><span /> {eyebrow}</p>
@@ -44,13 +36,16 @@ export default function LegalLayout({ current, eyebrow, title, intro, children, 
         <small>Dernière mise à jour : {updated ?? legal.lastUpdated}</small>
       </header>
 
+      <nav className="legal-tabs" aria-label="Pages légales et assistance">
+        {legalLinks.map((link) => (
+          <a key={link.href} href={sitePath(link.href)} aria-current={link.href === current ? "page" : undefined}>{link.label}</a>
+        ))}
+      </nav>
+
       <article className="legal-body">{children}</article>
 
-      <footer className="legal-footer">
-        <a href={sitePath("/")}>← Retour à Nearly</a>
-        <AnalyticsSettingsButton />
-        <span>Une question ? <a href={`mailto:${legal.contactEmail}`}><strong>{legal.contactEmail}</strong></a></span>
-      </footer>
+      <p className="legal-contact">Une question ? <a href={`mailto:${legal.contactEmail}`}>{legal.contactEmail}</a></p>
+      <SiteFooter />
     </main>
   );
 }

@@ -6,8 +6,8 @@ import { dirname, relative, resolve } from "node:path";
 
 const root = resolve(".");
 const outputRoot = "app/(en)";
-const components = ["SiteNav", "SiteFooter", "LegalLayout", "StoreRail", "HeroPhone", "FeatureTour", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard", "PhoneShowcase", "AppComparison"];
-const pages = ["", "outils", "questions-couple", "tester-un-jeu", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", "blog/[slug]"];
+const components = ["SiteNav", "SiteFooter", "LegalLayout", "StoreRail", "HeroPhone", "FeatureTour", "WaitlistForm", "WaitlistUnsubscribe", "Turnstile", "AnalyticsConsent", "CoupleQuestions", "GameMatch", "ExpenseDemo", "AppLegalSections", "BlogVisual", "BlogCard", "PhoneShowcase", "JoinInvite", "AppComparison", "ToolGuide", "ColorGuess", "LoveLanguageTest"];
+const pages = ["", "outils", "questions-couple", "tester-un-jeu", "devine-la-couleur", "test-langage-amour", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", "blog/[slug]", "rejoindre"];
 const targets = new Map([
   ["app/(fr)/layout.tsx", `${outputRoot}/layout.tsx`],
   ...pages.map(page => [`app/(fr)/${page ? `${page}/` : ""}page.tsx`, `${outputRoot}/en/${page ? `${page}/` : ""}page.tsx`]),

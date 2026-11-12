@@ -1,5 +1,6 @@
 
 import { sitePath, absoluteUrl } from "../site";
+import { organization, organizationId, websiteId, jsonLd } from "../seo";
 import SiteNav from "../SiteNav";
 import SiteFooter from "../SiteFooter";
 import WaitlistForm from "../WaitlistForm";
@@ -94,15 +95,23 @@ const faqs = [
   { question: "Pour qui est Nearly ?", answer: "Pour les amis, les familles et les couples, avec la même place pour chaque lien. Vous pouvez avoir plusieurs espaces : votre bande, votre famille, votre couple. À distance ou sous le même toit." },
   { question: "Quand pourrai-je télécharger l’application ?", answer: "Nearly arrive bientôt sur iOS et Android. Inscrivez-vous à la liste d’attente pour recevoir un e-mail au lancement." },
   { question: "Les outils du site nécessitent-ils un compte ?", answer: "Non. Les questions, le test de jeu et le calculateur s’essaient gratuitement sur le site, sans compte Nearly." },
+  { question: "Nearly est-il gratuit ?", answer: "Oui, l’accès est gratuit : le calendrier partagé, la carte des souvenirs, les capsules temporelles, le compagnon et les jeux à deux font partie de l’offre gratuite. Un abonnement Premium optionnel, à 9,99 € par mois ou 59,99 € par an, débloque des fonctionnalités supplémentaires." },
+  { question: "Quelle différence avec une messagerie ou un réseau social ?", answer: "Nearly ne remplace pas votre messagerie et n’a ni fil public ni abonnés. Chaque espace est réservé aux personnes que vous invitez et s’organise autour de petits rituels : une question du jour, un moment en photo, un jeu, un souvenir à garder." },
+  { question: "Nearly est-il réservé aux relations à distance ?", answer: "Non. Le compteur de retrouvailles, la carte et les questions à révélation commune aident quand on vit loin, mais les rituels, le calendrier partagé et les souvenirs servent aussi sous le même toit." },
+  { question: "Sur quels appareils et dans quelles langues ?", answer: "Nearly est prévu sur iPhone et sur Android, en français et en anglais. Le site et ses outils gratuits sont déjà disponibles dans les deux langues." },
   { question: "Comment fonctionnent les espaces privés ?", answer: "Chaque relation garde ses échanges et ses souvenirs dans son espace. Party et Spicy disposent de coffres photo verrouillés. Le mode Spicy est réservé aux adultes et s’active avec un consentement partagé." },
 ];
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
+    organization,
+    { "@type": "WebSite", "@id": websiteId, name: "Nearly", url: absoluteUrl("/"), inLanguage: store.language, publisher: { "@id": organizationId } },
     {
       "@type": "SoftwareApplication",
       name: "Nearly",
+      url: absoluteUrl("/"),
+      publisher: { "@id": organizationId },
       applicationCategory: "LifestyleApplication",
       operatingSystem: "iOS, Android",
       inLanguage: ["fr", "en"],
@@ -151,7 +160,7 @@ export default function Home() {
     <main className="home-focused home-showcase">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
 
       <SiteNav />
@@ -160,11 +169,12 @@ export default function Home() {
         <div className="store-hero__copy">
           <p className="store-chip"><span className="store-chip__dot" aria-hidden="true" /> Bientôt sur iOS &amp; Android</p>
           <h1>Proches,<br /><span className="store-pill">même à distance.</span></h1>
-          <p className="store-hero__lede">Vos amis, votre famille, votre couple. Un espace privé pour partager le quotidien, jouer et garder les moments qui vous rapprochent.</p>
+          <p className="store-hero__lede">Un « bien rentré ? », une photo un peu floue, votre prochain fou rire. Un espace privé pour garder vos amis, votre famille et votre moitié tout près.</p>
           <div className="store-hero__actions">
             <a className="store-button" href="#liste-attente">Rejoindre la liste d’attente <ArrowIcon /></a>
             <a className="store-link" href="#vos-liens">Voir l’app <span aria-hidden="true">→</span></a>
           </div>
+          <p className="store-hero__reassurance">On vous écrit quand l’app est prête. Tout simplement.</p>
           <ul className="store-spaces" aria-label="Les espaces Nearly">
             <li className="store-spaces__couple">Couple</li>
             <li className="store-spaces__friends">Amis</li>
@@ -215,7 +225,7 @@ export default function Home() {
         ]} />
       </section>
 
-      <section className="mode-intro" aria-labelledby="modes-title"><p className="eyebrow"><span /> Les sous-modes Nearly</p><h2 id="modes-title">À chaque moment,<br /><em>son ambiance.</em></h2><p>Le quotidien dans vos espaces. Les soirées dans Party. La complicité à deux dans Spicy.</p></section>
+      <section className="mode-intro" aria-labelledby="modes-title"><p className="eyebrow"><span /> Et quand vous êtes ensemble</p><h2 id="modes-title">À chaque moment,<br /><em>son ambiance.</em></h2><p>Le quotidien dans vos espaces. Les soirées dans Party. La complicité à deux dans Spicy.</p></section>
 
       <section className="party-showcase" id="party-mode" aria-labelledby="party-title">
         <div className="party-copy">
@@ -294,18 +304,18 @@ export default function Home() {
 
       <AppComparison />
 
-      <aside className="try-aside" id="tester-un-jeu">
-        <div><p className="eyebrow"><span /> Envie de passer à l’action ?</p><h2>Essayez un peu de Nearly.</h2><p>Questions à partager, test de jeu et calculateur : choisissez votre activité.</p></div>
+      <aside className="try-aside try-aside--activities" id="tester-un-jeu">
+        <div><p className="eyebrow"><span /> Pas besoin d’attendre</p><h2>Et si on commençait par une question ?</h2><p>À deux ou avec la bande : une conversation à lancer, un jeu à choisir, des frais à partager. Sans compte.</p></div>
         <a className="button button--primary" href={sitePath("/outils/")}>Outils &amp; activités <ArrowIcon /></a>
       </aside>
 
-      <aside className="try-aside">
+      <aside className="try-aside try-aside--journal">
         <div><p className="eyebrow"><span /> Le journal Nearly</p><h2>Les liens, au fil des jours.</h2><p>Des conseils pour la distance, des idées pour le quotidien et nos sélections d’applications pour vos proches.</p></div>
         <a className="button button--primary" href={sitePath("/blog/")}>Explorer le blog <ArrowIcon /></a>
       </aside>
 
       <section className="faq section" id="faq">
-        <div className="section-heading"><p className="eyebrow"><span /> En quelques mots</p><h2>Vos <em>questions.</em></h2></div>
+        <div className="section-heading"><p className="eyebrow"><span /> On vous répond</p><h2>Vos <em>questions.</em></h2><p className="faq-intro">Un détail vous manque ? <a href={sitePath("/contact/")}>Écrivez-nous <ArrowIcon /></a></p></div>
         <div className="faq-list">{faqs.map((faq, index) => <details key={faq.question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{faq.question}<i aria-hidden="true">+</i></summary><p>{faq.answer}</p></details>)}</div>
       </section>
 

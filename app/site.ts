@@ -21,6 +21,17 @@ export const waitlistEndpoint = publicEndpoint(configuredEndpoint);
 export const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 export const waitlistReady = Boolean(waitlistEndpoint && turnstileSiteKey);
 
+// Public store listings. Empty until each store is open to everyone: the
+// invite page then says the app is coming instead of linking to nowhere.
+function storeUrl(value: string, host: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === host ? url.href : "";
+  } catch { return ""; }
+}
+export const appStoreUrl = storeUrl(process.env.NEXT_PUBLIC_APP_STORE_URL || "", "apps.apple.com");
+export const playStoreUrl = storeUrl(process.env.NEXT_PUBLIC_PLAY_STORE_URL || "", "play.google.com");
+
 // Public beacon token, not a Cloudflare API key. Missing/invalid means disabled.
 const configuredAnalyticsToken = process.env.NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN || "";
 export const analyticsToken = /^[a-f0-9]{32}$/i.test(configuredAnalyticsToken) ? configuredAnalyticsToken : "";

@@ -5,68 +5,44 @@ import { getBlogArticles } from "./blog-content";
 
 export const dynamic = "force-static";
 
+type Frequency = "weekly" | "monthly" | "yearly";
+// Paths match each page's canonical URL, trailing slash included. Dates are the last real content change.
+const pages: [path: string, lastModified: string, changeFrequency: Frequency, priority: number][] = [
+  ["/", "2026-11-12", "weekly", 1],
+  ["/outils/", "2026-11-12", "monthly", 0.8],
+  ["/questions-couple/", "2026-11-12", "monthly", 0.9],
+  ["/calculateur-remboursement/", "2026-11-12", "monthly", 0.9],
+  ["/devine-la-couleur/", "2026-11-12", "monthly", 0.9],
+  ["/test-langage-amour/", "2026-11-12", "monthly", 0.9],
+  ["/tester-un-jeu/", "2026-11-12", "monthly", 0.6],
+  ["/contact/", "2026-10-08", "yearly", 0.5],
+  ["/cgu/", "2026-10-04", "monthly", 0.4],
+  ["/confidentialite-app/", "2026-10-04", "monthly", 0.4],
+  ["/conditions-liste-attente/", "2026-09-30", "yearly", 0.3],
+  ["/confidentialite/", "2026-09-30", "yearly", 0.3],
+  ["/mentions-legales/", "2026-09-30", "yearly", 0.3],
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = getBlogArticles("fr");
   const blogLastModified = new Date(Math.max(...articles.map(article => Date.parse(article.updated))));
-  const french: MetadataRoute.Sitemap = [
-    { url: `${siteUrl}/blog/`, lastModified: blogLastModified, changeFrequency: "weekly", priority: 0.8 },
+  const french: (MetadataRoute.Sitemap[number] & { path: string })[] = [
+    ...pages.map(([path, lastModified, changeFrequency, priority]) => ({ path, url: `${siteUrl}${path}`, lastModified: new Date(lastModified), changeFrequency, priority })),
+    { path: "/blog/", url: `${siteUrl}/blog/`, lastModified: blogLastModified, changeFrequency: "weekly", priority: 0.8 },
     ...articles.map(article => ({
+      path: `/blog/${article.slug}/`,
       url: `${siteUrl}/blog/${article.slug}/`,
       lastModified: new Date(article.updated),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    {
-      url: siteUrl,
-      lastModified: new Date("2026-10-01"),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/calculateur-remboursement`,
-      lastModified: new Date("2026-08-09"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/questions-couple`,
-      lastModified: new Date("2026-08-09"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    ...["/outils/", "/tester-un-jeu/"].map(path => ({
-      url: `${siteUrl}${path}`,
-      lastModified: new Date("2026-10-01"),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
-    ...["/cgu", "/confidentialite-app"].map((path) => ({
-      url: `${siteUrl}${path}`,
-      lastModified: new Date("2026-10-04"),
-      changeFrequency: "monthly" as const,
-      priority: 0.4,
-    })),
-    {
-      url: `${siteUrl}/contact/`,
-      lastModified: new Date("2026-10-08"),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    ...["/conditions-liste-attente", "/confidentialite", "/mentions-legales"].map((path) => ({
-      url: `${siteUrl}${path}`,
-      lastModified: new Date("2026-09-30"),
-      changeFrequency: "yearly" as const,
-      priority: 0.3,
-    })),
   ];
-  return french.flatMap(entry => {
-    const page = entry.url.slice(siteUrl.length).replace(/^\//, "").replace(/\/$/, "");
-    if (!publicPages.some(path => path === page)) return [entry];
-    const path = page ? `/${page}/` : "/";
+  return french.flatMap(({ path, ...entry }) => {
+    if (!publicPages.some(page => (page ? `/${page}/` : "/") === path)) return [entry];
     const alternates = { languages: pageAlternates(path).languages };
     return [
       { ...entry, alternates },
-      { ...entry, url: `${siteUrl}/en${path}`, lastModified: page.startsWith("blog") ? entry.lastModified : new Date("2026-10-08"), alternates },
+      { ...entry, url: `${siteUrl}/en${path}`, alternates },
     ];
   });
 }

@@ -7,6 +7,7 @@ import SiteNav from "../../../SiteNav";
 import SiteFooter from "../../../SiteFooter";
 import BlogVisual from "../../../BlogVisual";
 import BlogCard from "../../../BlogCard";
+import { organizationId, feedAlternate } from "../../../seo";
 
 const language = { language: "fr" as const }.language;
 export const dynamicParams = false;
@@ -22,13 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) notFound();
   return {
     title: article.title, description: article.description,
-    alternates: pageAlternates(`/blog/${article.slug}/`),
+    alternates: { ...pageAlternates(`/blog/${article.slug}/`), types: feedAlternate(absoluteUrl("/blog/")) },
     authors: [{ name: "Nearly", url: absoluteUrl("/blog/") }],
     openGraph: {
       type: "article", url: absoluteUrl(`/blog/${article.slug}/`), locale: "fr_FR",
       title: article.title, description: article.description,
       publishedTime: article.published, modifiedTime: article.updated, authors: ["Nearly"],
-      images: [{ url: absoluteUrl("/og.png"), width: 1536, height: 902, alt: article.title }],
+      images: [{ url: absoluteUrl("/og.png"), width: 1200, height: 630, alt: article.title }],
     },
     twitter: { card: "summary_large_image", title: article.title, description: article.description, images: [absoluteUrl("/og.png")] },
   };
@@ -50,8 +51,10 @@ export default async function ArticlePage({ params }: Props) {
         headline: article.title, description: article.description, abstract: article.summary,
         inLanguage: language, articleSection: article.category,
         datePublished: article.published, dateModified: article.updated,
-        author: { "@type": "Organization", name: "Nearly", url: absoluteUrl("/blog/") },
-        publisher: { "@type": "Organization", name: "Nearly", url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/media/nearly-icon.png") } },
+        wordCount: [article.summary, ...article.sections.flatMap(section => [...section.paragraphs, ...(section.bullets || [])])].join(" ").split(" ").length,
+        isPartOf: { "@type": "Blog", "@id": `${absoluteUrl("/blog/")}#blog` },
+        author: { "@type": "Organization", "@id": organizationId, name: "Nearly", url: absoluteUrl("/blog/") },
+        publisher: { "@type": "Organization", "@id": organizationId, name: "Nearly", url: absoluteUrl("/"), logo: { "@type": "ImageObject", url: absoluteUrl("/media/nearly-icon.png") } },
         image: absoluteUrl("/og.png"), citation: article.sources.map(source => source.href.startsWith("/") ? absoluteUrl(source.href) : source.href),
       },
       { "@type": "BreadcrumbList", itemListElement: [

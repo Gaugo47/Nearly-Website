@@ -3,7 +3,7 @@ import { blogSlugs } from "./blog-slugs";
 
 export type Language = "fr" | "en";
 
-export const publicPages = ["", "outils", "questions-couple", "tester-un-jeu", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", ...blogSlugs.map(slug => `blog/${slug}`)];
+export const publicPages = ["", "outils", "questions-couple", "tester-un-jeu", "devine-la-couleur", "test-langage-amour", "calculateur-remboursement", "contact", "mentions-legales", "confidentialite", "conditions-liste-attente", "cgu", "confidentialite-app", "blog", ...blogSlugs.map(slug => `blog/${slug}`)];
 
 export function languagePath(path: string, language: Language) {
   // Media files stay shared; only pages receive a language prefix.

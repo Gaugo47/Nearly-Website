@@ -47,7 +47,7 @@
       { "question": "Can I try Nearly questions without an account?", "answer": "Yes. The couple questions demo on the website is free and available without an account. It previews activities planned for the app." }
     ],
     "sources": [{ "label": "Free Nearly questions demo", "href": "/questions-couple/" }],
-    "related": ["relation-a-distance-conseils", "meilleures-applications-couple-distance"],
+    "related": ["relation-a-distance-conseils", "meilleures-applications-couple-distance", "questions-couple-a-distance"],
     "tool": { "label": "Pick a question", "href": "/questions-couple/" }
   },
   {
@@ -225,7 +225,7 @@
       { "question": "How do you plan a long-distance date across time zones?", "answer": "If you’re rarely free at the same time, arrange a voice note walk or swap photo postcards before an agreed deadline. Each person can reply when they’re available." }
     ],
     "sources": [{ "label": "Nearly — The couples’ question generator", "href": "/questions-couple/" }],
-    "related": ["relation-a-distance-conseils", "rituels-questions-couple"],
+    "related": ["relation-a-distance-conseils", "rituels-questions-couple", "decalage-horaire-couple-distance"],
     "tool": { "label": "Pick a question for your next date", "href": "/questions-couple/" }
   },
   {
@@ -305,7 +305,7 @@
       { "label": "CNIL — Sharing photos and videos of your child on social networks", "href": "https://www.cnil.fr/en/sharing-photos-and-videos-your-child-social-networks-what-risks" },
       { "label": "Nearly — Spaces for family, friends and couples", "href": "/#vos-liens" }
     ],
-    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille"],
+    "related": ["garder-le-lien-amis-distance", "meilleures-applications-famille", "rester-proche-grands-parents-distance"],
     "tool": { "label": "Explore Nearly’s free tools", "href": "/outils/" }
   },
   {
@@ -343,5 +343,315 @@
     "sources": [{ "label": "Nearly — The expense-splitting calculator", "href": "/calculateur-remboursement/" }],
     "related": ["organiser-soiree-frais-amis", "meilleures-applications-amis"],
     "tool": { "label": "Calculate repayments for your weekend trip", "href": "/calculateur-remboursement/" }
+  },
+  {
+    "slug": "questions-couple-a-distance",
+    "category": "Long-distance couples",
+    "kind": "guide",
+    "title": "40 questions for long-distance couples, sorted by theme",
+    "description": "Forty questions sorted by theme for your calls and messages: everyday life, memories, plans, playfulness and your next reunion.",
+    "summary": "To restart a long-distance conversation, pick one theme rather than a whole list: everyday life, memories, plans, playfulness or your next reunion. Ask two or three questions per call, take turns answering and keep the rest for later in the week. A question that asks for one concrete detail is easier to answer than “how are you?”.",
+    "readTime": 5,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "quotidien",
+        "title": "8 questions to share your day",
+        "paragraphs": [
+          "At a distance you lose the small details: the commute, the lunch, the look on a colleague’s face. These questions bring them back into the conversation."
+        ],
+        "bullets": [
+          "Which moment of your day do you wish I had seen?",
+          "What was the best thing you ate this week?",
+          "Who made you laugh today, and why?",
+          "What is the last thing you took a photo of?",
+          "What took more energy than you expected today?",
+          "Which song is on repeat for you right now?",
+          "What can you see from your window right now?",
+          "What small treat did you give yourself this week?"
+        ]
+      },
+      {
+        "id": "souvenirs",
+        "title": "8 questions about your shared memories",
+        "paragraphs": [
+          "Going back over what you have lived together is a reminder that your story is more than a series of calls."
+        ],
+        "bullets": [
+          "Which memory of us comes back to you most often?",
+          "What is the first detail you noticed about me?",
+          "Which day together would you relive exactly as it was?",
+          "Which fit of laughter of ours still makes you smile?",
+          "Which photo of us is your favourite, and where were we?",
+          "Which meal together has stayed with you?",
+          "Which moment made you think “this is good”?",
+          "Which little habit of ours do you miss most?"
+        ]
+      },
+      {
+        "id": "projets",
+        "title": "8 questions to talk about your plans",
+        "paragraphs": [
+          "Plans give the waiting a direction. Keep these questions for a quiet moment, without trying to decide everything that evening."
+        ],
+        "bullets": [
+          "Where would you like us to go on our next holiday?",
+          "What does an ideal Sunday look like once we live in the same place?",
+          "Which city would you like to show me?",
+          "What would you like us to learn together?",
+          "What would you like us to have done a year from now?",
+          "Which tradition would you like us to invent for the two of us?",
+          "Which personal project would you like me to help you stick to?",
+          "What would make you say this time apart was worth it?"
+        ]
+      },
+      {
+        "id": "complicite",
+        "title": "8 light questions to laugh together",
+        "paragraphs": [
+          "Not everything has to be deep. These questions work very well by message, between two meetings."
+        ],
+        "bullets": [
+          "What would our team name be on a game show?",
+          "Which dish do you think I could never get right?",
+          "Which absurd rule would you introduce at home?",
+          "Which film could you make me watch ten times?",
+          "Which emoji looks most like me?",
+          "Which of us would last longer without a phone?",
+          "Which nickname would you never dare call me in public?",
+          "What is my most endearing quirk?"
+        ]
+      },
+      {
+        "id": "retrouvailles",
+        "title": "8 questions to plan your reunion",
+        "paragraphs": [
+          "Talking about the reunion avoids arriving with two different plans: one of you dreaming of outings, the other of a weekend with nothing booked."
+        ],
+        "bullets": [
+          "What do you want us to do first when we see each other?",
+          "Do you prefer a full programme or days with no schedule?",
+          "Which dish would you like us to cook together?",
+          "Which place do you absolutely want to show me?",
+          "What do you need on the first evening: going out or staying in?",
+          "Who would you like us to see together?",
+          "Which moment for just the two of us do you want to protect, whatever happens?",
+          "How would you like us to say goodbye this time?"
+        ]
+      },
+      {
+        "id": "mode-d-emploi",
+        "title": "How to use this list without turning it into an interview",
+        "paragraphs": [
+          "Pick a single theme per call and stick to two or three questions. Whoever asks the question answers it too, so the conversation stays an exchange.",
+          "If your schedules rarely overlap, send one question in the morning and each reply with a voice note during the day. Either of you can skip a question without having to explain."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What questions should I ask my long-distance boyfriend or girlfriend?",
+        "answer": "Choose questions that ask for a concrete detail, such as “Which moment of your day do you wish I had seen?” or “What do you want us to do first when we see each other?”. They are easier to answer than a general question."
+      },
+      {
+        "question": "How many questions should we ask during a call?",
+        "answer": "Two or three are enough. The aim is to start the conversation, not to get through the list. Keep the others for your next calls."
+      },
+      {
+        "question": "Where can we find a new question every day?",
+        "answer": "The Nearly website offers a free question draw for two, with no account. The Nearly app, coming soon to iOS and Android, plans a daily question in each space."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — The couples’ question draw",
+        "href": "/questions-couple/"
+      }
+    ],
+    "related": [
+      "rituels-questions-couple",
+      "idees-rendez-vous-couple-distance",
+      "relation-a-distance-conseils"
+    ],
+    "tool": {
+      "label": "Draw a question at random",
+      "href": "/questions-couple/"
+    }
+  },
+  {
+    "slug": "decalage-horaire-couple-distance",
+    "category": "Long-distance couples",
+    "kind": "guide",
+    "title": "Long-distance couples and time zones: how to get organised",
+    "description": "Find the hours you share, take turns with awkward times and stay in touch between calls: a simple method for couples in two time zones.",
+    "summary": "With a time difference, start by spotting the hours when you are both awake and free, then set one or two dates a week within that window. Take turns being the one who gets up early or stays up late. The rest of the time, keep in touch asynchronously: a voice note, a photo or a question each of you answers in your own time.",
+    "readTime": 4,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "creneaux",
+        "title": "Spot the hours you share",
+        "paragraphs": [
+          "Write your two days side by side, hour by hour, and circle the moments when you are both awake and free. Between Paris and Montreal, for example, there is a six-hour difference: when it is 8 pm in Paris, it is 2 pm in Montreal. The shared window tends to fall in the evening in Paris, which is the afternoon in Montreal, or at the weekend.",
+          "Clocks do not change on the same dates everywhere. The gap can shift by an hour for a few weeks in spring and autumn, so check it at those times."
+        ]
+      },
+      {
+        "id": "rendez-vous",
+        "title": "Set few dates, and keep them",
+        "paragraphs": [
+          "One or two dates a week, placed in your shared window, are easier to keep than a daily call at a bad time. Give them a length and a simple plan."
+        ],
+        "bullets": [
+          "A short weekday call, fifteen to twenty minutes, to tell each other about the day.",
+          "A longer date at the weekend: a meal, a film started at the same moment or a game.",
+          "An end time agreed at the start, so nobody hangs up feeling the call was cut short."
+        ]
+      },
+      {
+        "id": "alterner",
+        "title": "Share the effort",
+        "paragraphs": [
+          "If one of you always stays up late or always gets up early, tiredness ends up weighing on the calls. Take turns: one week one of you adapts, the next week the other does.",
+          "Say so when a date has to be skipped and suggest another slot straight away. A postponement you announce is easier to live with than a missed call."
+        ]
+      },
+      {
+        "id": "differe",
+        "title": "Stay in touch between calls",
+        "paragraphs": [
+          "Between two calls, exchanges that need no immediate reply take over."
+        ],
+        "bullets": [
+          "The morning voice note, to listen to when the other wakes up.",
+          "The photo of the day: one detail of your day, with no comment required.",
+          "The question for two: each answers in their own time, then you discover both answers.",
+          "The shared list: films to watch, places to visit, dishes to cook when you are together again."
+        ]
+      },
+      {
+        "id": "deux-heures",
+        "title": "Write both local times",
+        "paragraphs": [
+          "In your messages and in your calendar, always note both times: “Saturday, 9 pm for me, 3 pm for you”. This habit prevents most missed dates. Add the date of your next reunion: a shared countdown gives the waiting a horizon."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do you talk with a time difference of nine hours or more?",
+        "answer": "The shared slots are often early in the morning for one of you and in the evening for the other, or at the weekend. Set a long date at the weekend and rely on voice notes and photos during the week."
+      },
+      {
+        "question": "Do you have to call every day when you live in two time zones?",
+        "answer": "There is no rule. One or two dates kept each week, plus exchanges in between, suit many couples. Choose a rhythm you can both keep up without getting tired."
+      },
+      {
+        "question": "How do you avoid getting the time wrong?",
+        "answer": "Write both local times in every invitation and check the gap when the clocks change, which does not happen on the same dates in every country."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — Shared calendar and reunion countdown",
+        "href": "/#experience"
+      }
+    ],
+    "related": [
+      "relation-a-distance-conseils",
+      "idees-rendez-vous-couple-distance",
+      "questions-couple-a-distance"
+    ],
+    "tool": {
+      "label": "Draw a question you can each answer in your own time",
+      "href": "/questions-couple/"
+    }
+  },
+  {
+    "slug": "rester-proche-grands-parents-distance",
+    "category": "Family",
+    "kind": "guide",
+    "title": "Staying close to grandparents at a distance: 8 simple rituals",
+    "description": "A call at a set time, a photo of the week, a recipe handed down or a postcard: eight easy rituals to keep generations close.",
+    "summary": "To stay close to grandparents at a distance, rely on short, regular rituals rather than long occasional calls: a call at a set time, one photo a week, a recipe or a family story to hand down. Choose a tool they already use and keep the same date from one week to the next.",
+    "readTime": 4,
+    "published": "2026-11-12",
+    "updated": "2026-11-12",
+    "sections": [
+      {
+        "id": "rendez-vous-reguliers",
+        "title": "Four regular dates that are easy to keep",
+        "paragraphs": [
+          "A ritual works when it is predictable. Choose a day and a time that suit everyone, and keep them."
+        ],
+        "bullets": [
+          "The Sunday call. Ten to fifteen minutes at a set time, with one question prepared: “What made you happy this week?”",
+          "The photo of the week. One picture a week, with a sentence to tell its story. One explained photo is better than twenty without a caption.",
+          "The voice note. Warmer than a text, and it can be played again whenever they like.",
+          "The postcard. One card a month, handwritten or drawn by the children, to keep on the fridge."
+        ]
+      },
+      {
+        "id": "avec-les-enfants",
+        "title": "Two ideas for grandchildren",
+        "paragraphs": [
+          "Young children rarely hold a conversation on the phone. Give them something to do during the call."
+        ],
+        "bullets": [
+          "The bedtime story. The grandparent reads a few pages on a video call while the child follows the pictures in the same book.",
+          "“Show me”. The child presents a drawing, a toy or a lost tooth. Five minutes are enough."
+        ]
+      },
+      {
+        "id": "transmettre",
+        "title": "Two rituals for handing things down",
+        "paragraphs": [
+          "Grandparents have stories nobody else can tell. A dedicated date gives those stories a place."
+        ],
+        "bullets": [
+          "The recipe of the month. Cook the same dish in your own kitchens, following their instructions, then compare the results in photos.",
+          "The family question. One question per call: “What was your bedroom like as a child?”, “What job did you want to do?”. Write the answers down in a shared notebook."
+        ]
+      },
+      {
+        "id": "outil",
+        "title": "Choose a tool they already use",
+        "paragraphs": [
+          "The best tool is the one your grandparents can open on their own: the phone, the messaging app already installed, or a family app if it suits them. Set up the device with them once, then write the steps on a card kept near the phone.",
+          "For family photos, prefer a private space reserved for relatives to a post on a social network, and ask the people in the photos for their agreement."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should you call your grandparents?",
+        "answer": "A weekly date at a set time is a good starting point. Regularity matters more than length: ten minutes every Sunday are easier to keep up than a long call now and then."
+      },
+      {
+        "question": "What if my grandparents are not comfortable with technology?",
+        "answer": "Keep the phone for voice and add the post: a postcard or printed photos. If you install a tool, choose only one and leave a card with the steps."
+      },
+      {
+        "question": "How do you involve young children in calls?",
+        "answer": "Suggest a short activity rather than a conversation: a story read on a video call, a drawing to show or a song. A few minutes are enough."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Nearly — A space for family",
+        "href": "/#vos-liens"
+      }
+    ],
+    "related": [
+      "album-photo-famille-prive",
+      "garder-le-lien-amis-distance",
+      "meilleures-applications-famille"
+    ],
+    "tool": {
+      "label": "Try an activity to share as a family",
+      "href": "/outils/"
+    }
   }
 ]
